@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid } from '@material-ui/core';
 import WithoutAutomation from './WithoutAutomation';
 import WithAutomation from './WithAutomation';
@@ -10,12 +9,8 @@ import ComparisonChartCard from './ComparisonChartCard';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(theme => ({
-    root: {}
-}));
 
 function CostsComparison() {
-    const classes = useStyles();
 
     return (
         <Container maxWidth="xl">

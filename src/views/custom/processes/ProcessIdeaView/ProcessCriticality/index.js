@@ -1,6 +1,5 @@
 import React from 'react';
 import ColumnSingleChart from './ColumnSingleChart';
-import { makeStyles } from '@material-ui/core/styles';
 import {
     Card,
     CardHeader,
@@ -10,18 +9,7 @@ import {
 
 // ----------------------------------------------------------------------
 
-const useStyles = makeStyles(theme => ({
-    root: {},
-    content: {
-        height: 420,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-}));
-
 function ProcessCriticality() {
-    const classes = useStyles();
 
     return (
         <Card>

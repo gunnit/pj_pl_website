@@ -1,19 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid, Box, Typography } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import StepperBox from './StepperBox';
 import Welcome from './Welcome';
 import GenericBoxInfoDetails from './GenericBoxInfoDetails';
 import ProcessDescription from './ProcessDescription';
-import ProjectInfo from './ProjectInfo';
 
-const useStyles = makeStyles(theme => ({
-    root: {}
-}));
 
 function Details() {
-    const classes = useStyles();
-
 
     return (
         <Container maxWidth="xl">

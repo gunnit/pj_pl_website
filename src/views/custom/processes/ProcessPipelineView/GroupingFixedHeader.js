@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -66,7 +66,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function GroupingFixedHeader() {
   const classes = useStyles();
-  const [page, setPage] = useState(0);
 
   return (
     <div className={classes.root}>
