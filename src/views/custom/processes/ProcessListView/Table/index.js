@@ -124,7 +124,10 @@ function applySortFilter(array, comparator, query) {
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  sortSpan: visuallyHidden
+  sortSpan: visuallyHidden,
+  routerLink: {
+    textDecoration: 'none'
+  }
 }));
 
 
@@ -318,7 +321,7 @@ function ProductListView() {
             open={Boolean(isOpen)}
           >
             {['View details', 'Update', 'Delete'].map(option => (
-              <RouterLink to={PATH_APP.processes.details}>
+              <RouterLink to={PATH_APP.processes.details} className={classes.routerLink}>
                 <MenuItem key={option} onClick={handleClose}>
                   {option}
                 </MenuItem>
