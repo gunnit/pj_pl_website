@@ -1,0 +1,52 @@
+Things to add:
+
+User redux
+
+Automation potential bottom pictures
+
+Text colors on detail boxes
+
+Accordion controlled or simple
+
+Description formatting on Process Criticality and Nature of Process graphs on Process Ideas page 
+
+Quarterly projections table on Process Pipeline view 
+
+Need a page for when there are no processes in a particular stage
+
+Console errors on New Process form
+
+Telephone number input formatting
+
+Display correct dashboard after login - works for me, check
+
+Add dollar signs to money inputs
+
+Sorting by high, medium, and low in table doesn't work currently
+
+Three dot icon on side of table
+
+Helper text or other indicator on fields in case user is color blind
+
+Test views at different screen sizes
+
+Change "Alignment" to "Objective Alignment" everywhere maybe
+
+Accessibility
+
+See if Recharts axes can be fixed
+
+"Made by processlenz.com"
+
+
+
+
+
+
+Ideas for later:
+
+Make heat map clickable
+
+Kanban type view at some point maybe?
+
+Maybe change colors of items in light vs dark mode

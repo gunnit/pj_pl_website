@@ -130,21 +130,6 @@ const routes = [
   },
   {
     exact: true,
-    path: '/500',
-    component: lazy(() => import('views/errors/Page500View'))
-  },
-  {
-    exact: true,
-    path: PATH_PAGE.comingSoon,
-    component: lazy(() => import('views/pages/ComingSoonView'))
-  },
-  {
-    exact: true,
-    path: PATH_PAGE.maintenance,
-    component: lazy(() => import('views/pages/MaintenanceView'))
-  },
-  {
-    exact: true,
     path: PATH_PAGE.auth.root,
     component: () => <Redirect to={PATH_PAGE.auth.login} />
   },

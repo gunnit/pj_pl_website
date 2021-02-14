@@ -2,9 +2,6 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormikProvider } from 'formik';
-import { LoadingButton } from '@material-ui/lab';
-import { QuillEditor } from 'components/Editor';
-import { UploadSingleFile } from 'components/Upload';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box,

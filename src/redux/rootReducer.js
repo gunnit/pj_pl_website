@@ -4,13 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 import darkModeReducer from './slices/dark-mode';
-import calendarReducer from './slices/calendar';
-import mailReducer from './slices/mail';
-import chatReducer from './slices/chat';
-import blogReducer from './slices/blog';
-import productReducer from './slices/product';
-import userReducer from './slices/user';
-import notificationsReducer from './slices/notifications';
+// import userReducer from './slices/user';
 
 // ----------------------------------------------------------------------
 

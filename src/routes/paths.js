@@ -71,3 +71,7 @@ export const PATH_APP = {
 export const PATH_WIKI = {
   developVisionAndStrategy: path(ROOTS.wiki, '/develop-vision-and-strategy'),
 }
+
+export const PATH_DOCS = {
+  root: ROOTS.docs,
+}

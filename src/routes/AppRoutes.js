@@ -112,41 +112,6 @@ const AppRoutes = {
       component: () => <Redirect to={PATH_APP.main.root} />
     },
 
-
-
-    // MANAGEMENT : USER
-    // ----------------------------------------------------------------------
-    {
-      exact: true,
-      path: PATH_APP.management.user.profile,
-      component: lazy(() => import('views/user/ProfileView'))
-    },
-    {
-      exact: true,
-      path: PATH_APP.management.user.cards,
-      component: lazy(() => import('views/user/UserCardsView'))
-    },
-    {
-      exact: true,
-      path: PATH_APP.management.user.list,
-      component: lazy(() => import('views/user/UserListView'))
-    },
-    {
-      exact: true,
-      path: PATH_APP.management.user.account,
-      component: lazy(() => import('views/user/AccountView'))
-    },
-    {
-      exact: true,
-      path: PATH_APP.management.user.root,
-      component: () => <Redirect to={PATH_APP.management.user.profile} />
-    },
-    {
-      exact: true,
-      path: PATH_APP.management.root,
-      component: () => <Redirect to={PATH_APP.management.user.profile} />
-    },
-
     // ----------------------------------------------------------------------
     {
       component: () => <Redirect to="/404" />
