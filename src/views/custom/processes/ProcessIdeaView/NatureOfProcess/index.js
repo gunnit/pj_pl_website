@@ -33,7 +33,8 @@ function NatureOfProcess() {
                 <Typography>
                     Are the majority of the steps in the process repetitive in nature or are there many business rules that result in different paths for the execution of the process.
                     <br /><br />
-                    Entirely repetitive are processes with no deviation from the standard path of execution while not repetitive adresses proceeses that are always done differently.</Typography>
+                    Entirely repetitive are processes with no deviation from the standard path of execution while not repetitive adresses proceeses that are always done differently.
+                </Typography>
             </CardContent>
         </Card>
     );

@@ -12,18 +12,18 @@ import CostsComparison from './CostsComparison';
 import BreakEven from './BreakEven';
 import Progress from './Progress';
 import { Link as RouterLink } from 'react-router-dom';
-
-
-
+import EditIcon from '@material-ui/icons/Edit';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
 const SIMPLE_TAB = [
-    { value: '1', icon: <PhoneIcon />, label: 'Details', disabled: false },
-    { value: '2', icon: <FavoriteIcon />, label: 'Automation Potential', disabled: false },
-    { value: '3', icon: <PersonPinIcon />, label: 'Costs Comparison', disabled: true },
-    { value: '4', icon: <PersonPinIcon />, label: 'Break-even', disabled: true },
-    { value: '5', icon: <PersonPinIcon />, label: 'Progress', disabled: true }
+    { value: '1', icon: <PhoneIcon />, label: 'Details' },
+    { value: '2', icon: <FavoriteIcon />, label: 'Automation Potential' },
+    { value: '3', icon: <PersonPinIcon />, label: 'Costs Comparison' },
+    { value: '4', icon: <PersonPinIcon />, label: 'Break-even' },
+    { value: '5', icon: <PersonPinIcon />, label: 'Progress' }
 ];
 
 
@@ -58,13 +58,14 @@ function ProcessDetailView() {
                                 />
                             ))}
                         </TabList>
-                        {/* <MButton variant='contained'>Update Process</MButton> */}
                         <ButtonGroup variant='contained'>
-                            <Button variant="contained" component={RouterLink}>
-                                Update Process
+                            <Button variant="contained" color='info' component={RouterLink} to={PATH_APP.processes.update}>
+                                <EditIcon />
+                                {/* Update Process */}
                             </Button>
-                            <Button color='inherit' variant="contained" component={RouterLink}>
-                                Archive Process
+                            <Button color='inherit' variant="contained" component={RouterLink} to={''}>
+                                <ArchiveIcon />
+                                {/* Archive Process */}
                             </Button>
                         </ButtonGroup>
                     </Box>

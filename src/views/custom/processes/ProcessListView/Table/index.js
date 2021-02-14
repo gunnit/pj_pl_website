@@ -124,7 +124,10 @@ function applySortFilter(array, comparator, query) {
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  sortSpan: visuallyHidden
+  sortSpan: visuallyHidden,
+  routerLink: {
+    textDecoration: 'none'
+  }
 }));
 
 
@@ -317,10 +320,12 @@ function ProductListView() {
             onClose={handleClose}
             open={Boolean(isOpen)}
           >
-            {['View details', 'Update', 'Delete'].map(option => (
-              <RouterLink to={PATH_APP.processes.details}>
-                <MenuItem key={option} onClick={handleClose}>
-                  {option}
+            {[{ text: 'View details', path: PATH_APP.processes.details },
+            { text: 'Update', path: PATH_APP.processes.update },
+            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+              <RouterLink to={option.path} className={classes.routerLink}>
+                <MenuItem key={option.text} onClick={handleClose}>
+                  {option.text}
                 </MenuItem>
               </RouterLink>
             ))}

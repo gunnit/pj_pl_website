@@ -2,7 +2,11 @@ import { merge } from 'lodash';
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ApexChartsOption } from 'components/Charts/Apexcharts';
-
+import {
+  Card,
+  CardHeader,
+  CardContent,
+} from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 const CHART_DATA = [
@@ -37,12 +41,17 @@ function BarChart() {
   });
 
   return (
-    <ReactApexChart
-      type="bar"
-      height={320}
-      series={CHART_DATA}
-      options={chartOptions}
-    />
+    <Card>
+      <CardHeader title="Bar" />
+      <CardContent>
+        <ReactApexChart
+          type="bar"
+          height={320}
+          series={CHART_DATA}
+          options={chartOptions}
+        />
+      </CardContent>
+    </Card>
   );
 }
 

@@ -48,6 +48,7 @@ export const PATH_APP = {
     list: path(ROOTS.app, '/processes/list'),
     // Will have specific process IDs
     details: path(ROOTS.app, '/processes/details'),
+    update: path(ROOTS.app, '/processes/update')
   },
   coe: {
     vision: path(ROOTS.app, '/coe/vision'),
