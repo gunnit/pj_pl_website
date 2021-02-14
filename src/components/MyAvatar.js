@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import createAvatar from '~/utils/createAvatar';
-import { MAvatar } from '~/@material-extend';
+import createAvatar from 'utils/createAvatar';
+import { MAvatar } from '@material-extend';
 
 // ----------------------------------------------------------------------
 

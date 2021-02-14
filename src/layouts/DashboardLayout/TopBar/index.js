@@ -4,7 +4,6 @@ import Search from './Search';
 import Account from './Account';
 import DarkMode from './DarkMode';
 import PropTypes from 'prop-types';
-import Languages from './Languages';
 import { Icon } from '@iconify/react';
 import Notifications from './Notifications';
 import menu2Fill from '@iconify-icons/eva/menu-2-fill';
@@ -76,8 +75,6 @@ function TopBar({ onOpenNav, className }) {
             }
           }}
         >
-          {/* <Languages /> */}
-          {/* <Notifications /> */}
           <DarkMode />
           <Account />
         </Box>

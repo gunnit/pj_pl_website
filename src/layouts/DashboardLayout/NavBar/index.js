@@ -207,7 +207,7 @@ function NavBar({ isOpenNav, onCloseNav }) {
           <Button
             fullWidth
             variant="contained"
-            component={RouterLink}
+          // component={RouterLink}
           >
             Documentation
           </Button>

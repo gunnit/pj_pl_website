@@ -8,7 +8,6 @@ import { useSnackbar } from 'notistack';
 import { PATH_APP } from 'routes/paths';
 import { PATH_PAGE } from 'routes/paths';
 import VerifyCodeForm from './VerifyCodeForm';
-import fakeRequest from 'utils/fakeRequest';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import arrowIosBackFill from '@iconify-icons/eva/arrow-ios-back-fill';
 import { makeStyles } from '@material-ui/core/styles';
@@ -62,7 +61,7 @@ function VerifyCodeView() {
     },
     validationSchema: VerifyCodeSchema,
     onSubmit: async values => {
-      await fakeRequest(500);
+      // await fakeRequest(500);
       enqueueSnackbar('Verify success', { variant: 'success' });
       history.push(PATH_APP.root);
     }

@@ -2,15 +2,12 @@ import clsx from 'clsx';
 import { Icon } from '@iconify/react';
 import { useSnackbar } from 'notistack';
 import { useSelector } from 'react-redux';
-import { PATH_APP } from 'routes/paths';
 import MyAvatar from 'components/MyAvatar';
 import React, { useRef, useState } from 'react';
 import { useFirebase } from 'react-redux-firebase';
 import PopoverMenu from 'components/PopoverMenu';
 import useIsMountedRef from 'hooks/useIsMountedRef';
 import homeFill from '@iconify-icons/eva/home-fill';
-import personFill from '@iconify-icons/eva/person-fill';
-import settingsFill from '@iconify-icons/eva/settings-fill';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography } from '@material-ui/core';
@@ -24,16 +21,6 @@ const MENU_OPTIONS = [
     icon: homeFill,
     linkTo: '/'
   },
-  {
-    label: 'Profile',
-    icon: personFill,
-    linkTo: PATH_APP.management.user.profile
-  },
-  {
-    label: 'Settings',
-    icon: settingsFill,
-    linkTo: PATH_APP.management.user.account
-  }
 ];
 
 const useStyles = makeStyles(theme => ({

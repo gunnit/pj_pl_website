@@ -27,13 +27,6 @@ const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   theme: darkModeReducer,
-  calendar: calendarReducer,
-  mail: mailReducer,
-  chat: chatReducer,
-  blog: blogReducer,
-  product: persistReducer(productPersistConfig, productReducer),
-  user: userReducer,
-  notifications: notificationsReducer
 });
 
 export { rootPersistConfig, rootReducer };

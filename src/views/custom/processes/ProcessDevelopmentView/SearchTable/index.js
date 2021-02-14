@@ -2,6 +2,7 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
+import Scrollbars from 'components/Scrollbars'
 import React, { useState } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import { useDispatch } from 'react-redux';
@@ -12,12 +13,9 @@ import {
   Card,
   Table,
   TableRow,
-  Checkbox,
   TableBody,
   TableCell,
   Container,
-  IconButton,
-  Typography,
   TableContainer,
   TablePagination
 } from '@material-ui/core';
@@ -215,8 +213,6 @@ function ProductListView() {
   return (
     <Page title="Process Ideas" className={classes.root}>
       <Container>
-
-
         <Card className={classes.card}>
           <ToolbarTable
             numSelected={selected.length}

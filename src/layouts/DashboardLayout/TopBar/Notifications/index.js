@@ -7,7 +7,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useRef, useState, useEffect } from 'react';
 import doneAllFill from '@iconify-icons/eva/done-all-fill';
-import { markAllAsRead, getNotifications } from 'redux/slices/notifications';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -45,13 +44,7 @@ function Notifications() {
   const totalUnRead = notifications.filter(item => item.isUnRead === true)
     .length;
 
-  useEffect(() => {
-    dispatch(getNotifications());
-  }, [dispatch]);
 
-  const handleMarkAllAsRead = () => {
-    dispatch(markAllAsRead());
-  };
 
   return (
     <>
@@ -81,7 +74,7 @@ function Notifications() {
 
           {totalUnRead > 0 && (
             <Tooltip title="Mark all as read">
-              <MIconButton color={'primary'} onClick={handleMarkAllAsRead}>
+              <MIconButton color={'primary'}>
                 <Icon icon={doneAllFill} width={20} height={20} />
               </MIconButton>
             </Tooltip>
