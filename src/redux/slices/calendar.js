@@ -1,5 +1,5 @@
 import { map, reject } from 'lodash';
-import axios from '~/utils/axios';
+import axios from 'utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 // ----------------------------------------------------------------------

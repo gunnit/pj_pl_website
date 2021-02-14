@@ -1,5 +1,4 @@
 import React from 'react';
-import faker from 'faker';
 import Accordion from './Accordion';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
@@ -12,7 +11,7 @@ const ACCORDIONS = [...Array(4)].map((accordion, index) => {
         value: `panel${setIndex}`,
         heading: `Accordion${setIndex}`,
         subHeading: Math.random() * 10,
-        text: faker.lorem.lines()
+        text: 'placeholder text'
     };
 });
 

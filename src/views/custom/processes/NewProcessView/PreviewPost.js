@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from '~/components/Markdown';
+import Markdown from 'components/Markdown';
 import { LoadingButton } from '@material-ui/lab';
-import Scrollbars from '~/components/Scrollbars';
-import EmptyContent from '~/components/EmptyContent';
-import { DialogAnimate } from '~/components/Animate';
+import Scrollbars from 'components/Scrollbars';
+import EmptyContent from 'components/EmptyContent';
+import { DialogAnimate } from 'components/Animate';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -117,8 +117,8 @@ function PreviewPost({ formik, openPreview, onClosePreview, className }) {
           </Container>
         </Scrollbars>
       ) : (
-        <EmptyContent title="Empty content" />
-      )}
+          <EmptyContent title="Empty content" />
+        )}
     </DialogAnimate>
   );
 }

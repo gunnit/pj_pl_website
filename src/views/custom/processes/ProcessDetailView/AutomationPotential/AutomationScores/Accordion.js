@@ -8,7 +8,7 @@ import {
   AccordionSummary,
   AccordionDetails
 } from '@material-ui/core';
-import { MLabel } from '~/@material-extend';
+import { MLabel } from '../../../../../../@material-extend';
 
 // ----------------------------------------------------------------------
 

@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
-import { fNumber } from '~/utils/formatNumber';
-import { ApexChartsOption } from '~/components/Charts/Apexcharts';
+import { fNumber } from 'utils/formatNumber';
+import { ApexChartsOption } from 'components/Charts/Apexcharts';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Card, CardHeader } from '@material-ui/core';
 
@@ -55,7 +55,7 @@ function AreaVisits({ className, ...other }) {
       y: {
         formatter: seriesName => fNumber(seriesName),
         title: {
-          formatter: function(seriesName) {
+          formatter: function (seriesName) {
             return '';
           }
         }

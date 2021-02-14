@@ -4,7 +4,7 @@ import { Icon, InlineIcon } from '@iconify/react';
 import rocketIcon from '@iconify-icons/fxemoji/rocket';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import SearchTable from './SearchTable'
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import GenericBoxInfoDevelopment from './GenericBoxInfoDevelopment';
 
 const useStyles = makeStyles(theme => ({

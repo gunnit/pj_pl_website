@@ -6,7 +6,7 @@ import {
     CardContent,
     Typography,
 } from '@material-ui/core';
-import { MLabel } from '~/@material-extend';
+import { MLabel } from '../../../../../@material-extend';
 
 // ----------------------------------------------------------------------
 

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import { fShortenNumber } from '~/utils/formatNumber';
+import { fShortenNumber } from 'utils/formatNumber';
 import windowsFilled from '@iconify-icons/ant-design/windows-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';

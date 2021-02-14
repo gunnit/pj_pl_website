@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
-import faker from 'faker';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { formatDistance } from 'date-fns';
-import { getImgCover } from '~/utils/getImages';
-import Scrollbars from '~/components/Scrollbars';
+import { getImgCover } from 'utils/getImages';
+import Scrollbars from 'components/Scrollbars';
 import { Link as RouterLink } from 'react-router-dom';
 import arrowIosForwardFill from '@iconify-icons/eva/arrow-ios-forward-fill';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,10 +24,10 @@ import {
 const NEWS = [...Array(5)].map((item, index) => {
   const setIndex = index + 1;
   return {
-    title: faker.name.title(),
-    description: faker.lorem.paragraphs(),
+    title: 'title',
+    description: 'description',
     image: getImgCover(128, setIndex),
-    postedAt: faker.date.soon()
+    postedAt: 'date'
   };
 });
 

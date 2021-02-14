@@ -5,7 +5,7 @@ import {
   YAxisRecharts,
   TooltipRecharts,
   CartesianGridRecharts
-} from '~/components/Charts/Recharts';
+} from 'components/Charts/Recharts';
 import { useTheme } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------------

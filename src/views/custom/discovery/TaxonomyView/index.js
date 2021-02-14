@@ -1,9 +1,9 @@
 import React from 'react';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Typography, Box } from '@material-ui/core';
 import GenericBoxInfo from './GenericBoxInfo';
-import { PATH_WIKI } from '~/routes/paths';
+import { PATH_WIKI } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({

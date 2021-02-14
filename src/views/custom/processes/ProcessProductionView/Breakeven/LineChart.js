@@ -1,7 +1,7 @@
 import React from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
-import { ApexChartsOption } from '~/components/Charts/Apexcharts';
+import { ApexChartsOption } from 'components/Charts/Apexcharts';
 
 // ----------------------------------------------------------------------
 

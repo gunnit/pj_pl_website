@@ -3,7 +3,7 @@ import React from 'react';
 import faker from 'faker';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import { fShortenNumber } from '~/utils/formatNumber';
+import { fShortenNumber } from 'utils/formatNumber';
 import googleFill from '@iconify-icons/eva/google-fill';
 import twitterFill from '@iconify-icons/eva/twitter-fill';
 import facebookFill from '@iconify-icons/eva/facebook-fill';

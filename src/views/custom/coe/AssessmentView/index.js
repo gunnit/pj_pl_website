@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import fakeRequest from '~/utils/fakeRequest';
+import fakeRequest from 'utils/fakeRequest';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
     Container,

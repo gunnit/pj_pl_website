@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Container, Box, Button, ButtonGroup } from '@material-ui/core';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -11,7 +11,6 @@ import AutomationPotential from './AutomationPotential';
 import CostsComparison from './CostsComparison';
 import BreakEven from './BreakEven';
 import Progress from './Progress';
-import { MButtonGroup } from '~/@material-extend';
 import { Link as RouterLink } from 'react-router-dom';
 
 

@@ -1,17 +1,9 @@
 import React from 'react';
-import Tasks from './Tasks';
 import NewUsers from './NewUsers';
 import ItemOrders from './ItemOrders';
 import ListProduction from './ListProduction';
-import NewsUpdate from './NewsUpdate';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import WeeklySales from './WeeklySales';
-import WebsiteVisits from './WebsiteVisits';
-import CurrentVisits from './CurrentVisits';
-import OrderTimeline from './OrderTimeline';
-import TrafficBySite from './TrafficBySite';
-import CurrentSubject from './CurrentSubject';
-import ConversionRates from './ConversionRates';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'

@@ -2,8 +2,8 @@ import NProgress from 'nprogress';
 import AppRoutes from './AppRoutes';
 import { PATH_PAGE } from './paths';
 import HomeRoutes from './HomeRoutes';
-import LoadingScreen from '~/components/LoadingScreen';
-import GuestProtect from '~/components/Auth/GuestProtect';
+import LoadingScreen from 'components/LoadingScreen';
+import GuestProtect from 'components/Auth/GuestProtect';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { Suspense, Fragment, lazy, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -95,53 +95,53 @@ const routes = [
     exact: true,
     guard: GuestProtect,
     path: PATH_PAGE.auth.login,
-    component: lazy(() => import('~/views/auth/LoginView'))
+    component: lazy(() => import('views/auth/LoginView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.loginUnprotected,
-    component: lazy(() => import('~/views/auth/LoginView'))
+    component: lazy(() => import('views/auth/LoginView'))
   },
   {
     exact: true,
     guard: GuestProtect,
     path: PATH_PAGE.auth.register,
-    component: lazy(() => import('~/views/auth/RegisterView'))
+    component: lazy(() => import('views/auth/RegisterView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.registerUnprotected,
-    component: lazy(() => import('~/views/auth/RegisterView'))
+    component: lazy(() => import('views/auth/RegisterView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.resetPassword,
-    component: lazy(() => import('~/views/auth/ResetPasswordView'))
+    component: lazy(() => import('views/auth/ResetPasswordView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.verify,
-    component: lazy(() => import('~/views/auth/VerifyCodeView'))
+    component: lazy(() => import('views/auth/VerifyCodeView'))
   },
   {
     exact: true,
     path: '/404',
-    component: lazy(() => import('~/views/errors/Page404View'))
+    component: lazy(() => import('views/errors/Page404View'))
   },
   {
     exact: true,
     path: '/500',
-    component: lazy(() => import('~/views/errors/Page500View'))
+    component: lazy(() => import('views/errors/Page500View'))
   },
   {
     exact: true,
     path: PATH_PAGE.comingSoon,
-    component: lazy(() => import('~/views/pages/ComingSoonView'))
+    component: lazy(() => import('views/pages/ComingSoonView'))
   },
   {
     exact: true,
     path: PATH_PAGE.maintenance,
-    component: lazy(() => import('~/views/pages/MaintenanceView'))
+    component: lazy(() => import('views/pages/MaintenanceView'))
   },
   {
     exact: true,

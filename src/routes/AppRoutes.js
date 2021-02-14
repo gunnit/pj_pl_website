@@ -1,8 +1,8 @@
 import { PATH_APP } from './paths';
 import React, { lazy } from 'react';
 import { Redirect } from 'react-router-dom';
-import AuthProtect from '~/components/Auth/AuthProtect';
-import DashboardLayout from '~/layouts/DashboardLayout';
+import AuthProtect from 'components/Auth/AuthProtect';
+import DashboardLayout from 'layouts/DashboardLayout';
 
 // ----------------------------------------------------------------------
 
@@ -22,31 +22,31 @@ const AppRoutes = {
       exact: true,
       path: PATH_APP.processes.dashboard,
       // Component JSX is in ProcessDashboardView/index.js, and index.js imports its components from the other files in the ProcessDashboardView folder
-      component: lazy(() => import('~/views/custom/processes/ProcessDashboardView'))
+      component: lazy(() => import('views/custom/processes/ProcessDashboardView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.idea,
       // Component JSX is in ProcessIdeaView/index.js, and index.js imports its components from the other files in the ProcessIdeaView folder
-      component: lazy(() => import('~/views/custom/processes/ProcessIdeaView'))
+      component: lazy(() => import('views/custom/processes/ProcessIdeaView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.pipeline,
       // Component JSX is in ProcesssPipelineView/index.js, and index.js imports its components from the other files in the ProcessPipelineView folder
-      component: lazy(() => import('~/views/custom/processes/ProcessPipelineView'))
+      component: lazy(() => import('views/custom/processes/ProcessPipelineView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.development,
       // Component JSX is in ProcessDevelopmentView/index.js, and index.js imports its components from the other files in the ProcessDevelopmentView folder
-      component: lazy(() => import('~/views/custom/processes/ProcessDevelopmentView'))
+      component: lazy(() => import('views/custom/processes/ProcessDevelopmentView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.production,
       // Component JSX is in ProcessProductionView/index.js, and index.js imports its components from the other files in the ProcessProduction folder
-      component: lazy(() => import('~/views/custom/processes/ProcessProductionView'))
+      component: lazy(() => import('views/custom/processes/ProcessProductionView'))
     },
     {
       exact: true,
@@ -119,22 +119,22 @@ const AppRoutes = {
     {
       exact: true,
       path: PATH_APP.management.user.profile,
-      component: lazy(() => import('~/views/user/ProfileView'))
+      component: lazy(() => import('views/user/ProfileView'))
     },
     {
       exact: true,
       path: PATH_APP.management.user.cards,
-      component: lazy(() => import('~/views/user/UserCardsView'))
+      component: lazy(() => import('views/user/UserCardsView'))
     },
     {
       exact: true,
       path: PATH_APP.management.user.list,
-      component: lazy(() => import('~/views/user/UserListView'))
+      component: lazy(() => import('views/user/UserListView'))
     },
     {
       exact: true,
       path: PATH_APP.management.user.account,
-      component: lazy(() => import('~/views/user/AccountView'))
+      component: lazy(() => import('views/user/AccountView'))
     },
     {
       exact: true,

@@ -4,8 +4,8 @@ import { merge } from 'lodash';
 // import _ from 'lodash';
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
-import { fNumber } from '~/utils/formatNumber';
-import { ApexChartsOption } from '~/components/Charts/Apexcharts';
+import { fNumber } from 'utils/formatNumber';
+import { ApexChartsOption } from 'components/Charts/Apexcharts';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader } from '@material-ui/core';
 

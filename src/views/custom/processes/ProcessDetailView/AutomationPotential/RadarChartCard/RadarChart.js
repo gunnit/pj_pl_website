@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import ReactApexChart from 'react-apexcharts';
-import { ApexChartsOption } from '~/components/Charts/Apexcharts';
+import { ApexChartsOption } from 'components/Charts/Apexcharts';
 
 // ----------------------------------------------------------------------
 

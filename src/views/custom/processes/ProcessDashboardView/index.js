@@ -1,6 +1,6 @@
 import React from 'react';
 import Welcome from './Welcome';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import { useSelector } from 'react-redux';
 import BubbleChart from './BubbleChart';
 import { makeStyles, useTheme } from '@material-ui/core/styles';

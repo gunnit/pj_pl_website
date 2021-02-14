@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import Widgets1 from './Widgets1';
 import Widgets2 from './Widgets2';
 import Widgets3 from './Widgets3';

@@ -1,7 +1,7 @@
 // import 'lazysizes';
-// import '~/_mock_api_';
-// import '~/utils/i18n';
-// import '~/utils/highlight';
+// import '_mock_api_';
+// import 'utils/i18n';
+// import 'utils/highlight';
 // import 'intersection-observer';
 // import 'simplebar/src/simplebar.css';
 // import 'mapbox-gl/dist/mapbox-gl.css';

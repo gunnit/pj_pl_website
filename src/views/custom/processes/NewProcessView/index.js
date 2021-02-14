@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import PreviewPost from './PreviewPost';
 import React, { useState } from 'react';
 import clsx from 'clsx';
@@ -8,10 +8,10 @@ import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
 import NewProcessFormDetails from './NewProcessFormDetails';
 import { useSnackbar } from 'notistack';
-import { PATH_APP } from '~/routes/paths';
-import { fData } from '~/utils/formatNumber';
-import fakeRequest from '~/utils/fakeRequest';
-import HeaderDashboard from '~/components/HeaderDashboard';
+import { PATH_APP } from 'routes/paths';
+import { fData } from 'utils/formatNumber';
+import fakeRequest from 'utils/fakeRequest';
+import HeaderDashboard from 'components/HeaderDashboard';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Container,

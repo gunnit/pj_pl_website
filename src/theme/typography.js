@@ -1,4 +1,4 @@
-import { pxToRem, responsiveFontSizes } from '~/utils/formatFontSize';
+import { pxToRem, responsiveFontSizes } from 'utils/formatFontSize';
 
 // ----------------------------------------------------------------------
 

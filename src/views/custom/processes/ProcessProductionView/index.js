@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography, Card, CardHeader, CardContent } from '@material-ui/core';
 import SearchTable from './SearchTable'
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import Breakeven from './Breakeven';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import GenericBoxInfoProduction from './GenericBoxInfoProduction';

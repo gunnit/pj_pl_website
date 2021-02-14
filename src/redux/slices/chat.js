@@ -1,6 +1,6 @@
-import axios from '~/utils/axios';
+import axios from 'utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
-import objFromArray from '~/utils/objFromArray';
+import objFromArray from 'utils/objFromArray';
 
 // ----------------------------------------------------------------------
 

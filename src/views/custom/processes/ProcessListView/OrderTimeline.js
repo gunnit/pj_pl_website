@@ -1,9 +1,8 @@
 import { last } from 'lodash';
 import clsx from 'clsx';
 import React from 'react';
-import faker from 'faker';
 import PropTypes from 'prop-types';
-import { fDateTime } from '~/utils/formatTime';
+import { fDateTime } from 'utils/formatTime';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Typography, CardHeader, CardContent } from '@material-ui/core';
 import {
@@ -13,34 +12,34 @@ import {
   TimelineConnector,
   TimelineSeparator
 } from '@material-ui/lab';
-import { MTimelineDot } from '~/@material-extend';
+import { MTimelineDot } from '@material-extend';
 
 // ----------------------------------------------------------------------
 
 const TIMELINES = [
   {
     title: '1983, orders, $4220',
-    time: faker.date.past(),
+    time: '12:00',
     type: 'order1'
   },
   {
     title: '12 Invoices have been paid',
-    time: faker.date.past(),
+    time: '12:00',
     type: 'order2'
   },
   {
     title: 'Order #37745 from September',
-    time: faker.date.past(),
+    time: '12:00',
     type: 'order3'
   },
   {
     title: 'New order placed #XF-2356',
-    time: faker.date.past(),
+    time: '12:00',
     type: 'order4'
   },
   {
     title: 'New order placed #XF-2346',
-    time: faker.date.past(),
+    time: '12:00',
     type: 'order5'
   }
 ];

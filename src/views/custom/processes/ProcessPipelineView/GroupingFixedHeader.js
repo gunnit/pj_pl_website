@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Scrollbars from '~/components/Scrollbars';
+import Scrollbars from 'components/Scrollbars';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,

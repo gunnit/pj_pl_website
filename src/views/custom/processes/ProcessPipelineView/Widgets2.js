@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { Icon, InlineIcon } from '@iconify/react';
 import triangleAlert from '@iconify-icons/akar-icons/triangle-alert';
 import ReactApexChart from 'react-apexcharts';
-import { fNumber } from '~/utils/formatNumber';
+import { fNumber } from 'utils/formatNumber';
 import emailFill from '@iconify-icons/eva/email-fill';
-import { ApexChartsOption } from '~/components/Charts/Apexcharts';
+import { ApexChartsOption } from 'components/Charts/Apexcharts';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { Card, Box, Typography } from '@material-ui/core';
 

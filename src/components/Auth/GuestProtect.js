@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { PATH_APP } from '~/routes/paths';
+import { PATH_APP } from 'routes/paths';
 import { Redirect } from 'react-router-dom';
-import LoadingScreen from '~/components/LoadingScreen';
+import LoadingScreen from 'components/LoadingScreen';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
 
 // ----------------------------------------------------------------------

@@ -1,19 +1,19 @@
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import { Icon } from '@iconify/react';
-import Page from '~/components/Page';
+import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
 import { sentenceCase } from 'change-case';
-import { PATH_APP } from '~/routes/paths';
-import { fDate } from '~/utils/formatTime';
-import { fCurrency } from '~/utils/formatNumber';
+import { PATH_APP } from 'routes/paths';
+import { fDate } from 'utils/formatTime';
+import { fCurrency } from 'utils/formatNumber';
 import React, { useState, useEffect } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
-import { getProducts } from '~/redux/slices/product';
+import { getProducts } from 'redux/slices/product';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchNotFound from '~/components/SearchNotFound';
-import HeaderDashboard from '~/components/HeaderDashboard';
-import Scrollbars from '~/components/Scrollbars';
+import SearchNotFound from 'components/SearchNotFound';
+import HeaderDashboard from 'components/HeaderDashboard';
+import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import {
@@ -30,7 +30,7 @@ import {
   TableContainer,
   TablePagination
 } from '@material-ui/core';
-import { MLabel } from '~/@material-extend';
+import { MLabel } from '@material-extend';
 
 // ----------------------------------------------------------------------
 
