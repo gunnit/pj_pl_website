@@ -28,7 +28,7 @@ function AutomationPotential() {
                 <Grid item lg={12}>
                     <AutomationScoreDescriptionCard />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
                     <GenericBoxInfo
                         title={'Robotics (RPA)'}
                         description={'Robotics refers to an execution engine for processing rulebased tasks'}
@@ -36,7 +36,7 @@ function AutomationPotential() {
                         clickPath={''}
                     />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
                     <GenericBoxInfo
                         title={'Computer Vision (OCR)'}
                         description={'Tools used to extract information from images and convert them into a machine-readable format'}
@@ -44,7 +44,7 @@ function AutomationPotential() {
                         clickPath={''}
                     />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
                     <GenericBoxInfo
                         title={'Business Process Management (BPM)'}
                         description={'A set of workflow and process designing tools in which the business logic for optimized processes can be configured'}
@@ -52,7 +52,7 @@ function AutomationPotential() {
                         clickPath={''}
                     />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
                     <GenericBoxInfo
                         title={'Cognitive Enhancements'}
                         description={'Tools needed to automate knowledge-based business processes where human insight and decision making is required'}
