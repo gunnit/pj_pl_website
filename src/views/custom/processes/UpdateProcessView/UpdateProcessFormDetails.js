@@ -7,6 +7,7 @@ import {
   TextField,
   MenuItem,
 } from '@material-ui/core';
+import UpdateProcessTextField from './UpdateProcessTextField';
 
 // ----------------------------------------------------------------------
 
@@ -61,6 +62,12 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
           // helperText={touched.name && errors.name}
           className={classes.margin}
         />
+        {/* <UpdateProcessTextField
+          id={'name'}
+          label={'Process Name'}
+          getFieldProps={getFieldProps}
+          error={Boolean(touched.name && errors.name)}
+        /> */}
         <TextField
           color='secondary'
           fullWidth
