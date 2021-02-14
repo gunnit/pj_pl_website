@@ -65,6 +65,11 @@ const AppRoutes = {
       path: PATH_APP.processes.details,
       component: lazy(() => import('../views/custom/processes/ProcessDetailView'))
     },
+    {
+      exact: true,
+      path: PATH_APP.processes.update,
+      component: lazy(() => import('../views/custom/processes/UpdateProcessView'))
+    },
 
     // COE
 

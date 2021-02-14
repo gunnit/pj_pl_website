@@ -1,5 +1,7 @@
 Things to add:
 
+Click on stepper to go to that part
+
 Put logo on loading screen
 
 User redux

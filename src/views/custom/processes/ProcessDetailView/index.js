@@ -12,9 +12,9 @@ import CostsComparison from './CostsComparison';
 import BreakEven from './BreakEven';
 import Progress from './Progress';
 import { Link as RouterLink } from 'react-router-dom';
-
-
-
+import EditIcon from '@material-ui/icons/Edit';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -58,13 +58,14 @@ function ProcessDetailView() {
                                 />
                             ))}
                         </TabList>
-                        {/* <MButton variant='contained'>Update Process</MButton> */}
                         <ButtonGroup variant='contained'>
-                            <Button variant="contained" component={RouterLink}>
-                                Update Process
+                            <Button variant="contained" color='info' component={RouterLink} to={PATH_APP.processes.update}>
+                                <EditIcon />
+                                {/* Update Process */}
                             </Button>
-                            <Button color='inherit' variant="contained" component={RouterLink}>
-                                Archive Process
+                            <Button color='inherit' variant="contained" component={RouterLink} to={''}>
+                                <ArchiveIcon />
+                                {/* Archive Process */}
                             </Button>
                         </ButtonGroup>
                     </Box>
