@@ -1,13 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
-import { merge } from 'lodash';
 import PropTypes from 'prop-types';
-import { Icon } from '@iconify/react';
-import ReactApexChart from 'react-apexcharts';
-import { fNumber, fPercent } from 'utils/formatNumber';
-import { ApexChartsOption } from 'components/Charts/Apexcharts';
-import trendingUpFill from '@iconify-icons/eva/trending-up-fill';
-import trendingDownFill from '@iconify-icons/eva/trending-down-fill';
+import { fNumber } from 'utils/formatNumber';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 
@@ -54,27 +48,6 @@ GenericBoxInfoProduction.propTypes = {
 function GenericBoxInfoProduction({ className, numberOfItems, infoType, mainNumber, ...other }) {
     const classes = useStyles();
 
-    const chartData = [{
-        data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14].map(num => {
-            return Math.random() * num
-        })
-    }];
-    const chartOptions = merge(ApexChartsOption(), {
-        chart: { animations: { enabled: true }, sparkline: { enabled: true } },
-        stroke: { width: 2 },
-        tooltip: {
-            x: { show: false },
-            y: {
-                formatter: seriesName => fNumber(seriesName),
-                title: {
-                    formatter: function (seriesName) {
-                        return '';
-                    }
-                }
-            },
-            marker: { show: false }
-        }
-    });
 
     return (
         <Card className={clsx(classes.root, className)} {...other}>

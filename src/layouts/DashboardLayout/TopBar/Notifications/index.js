@@ -4,8 +4,8 @@ import NotificationItem from './NotificationItem';
 import PopoverMenu from 'components/PopoverMenu';
 import bellFill from '@iconify-icons/eva/bell-fill';
 import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useRef, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import React, { useRef, useState } from 'react';
 import doneAllFill from '@iconify-icons/eva/done-all-fill';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -39,7 +39,6 @@ function Notifications() {
   const classes = useStyles();
   const anchorRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
-  const dispatch = useDispatch();
   const { notifications } = useSelector(state => state.notifications);
   const totalUnRead = notifications.filter(item => item.isUnRead === true)
     .length;

@@ -2,7 +2,7 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import { useDispatch } from 'react-redux';
 import SearchNotFound from 'components/SearchNotFound';

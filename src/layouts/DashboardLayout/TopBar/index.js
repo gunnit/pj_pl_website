@@ -5,7 +5,6 @@ import Account from './Account';
 import DarkMode from './DarkMode';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import Notifications from './Notifications';
 import menu2Fill from '@iconify-icons/eva/menu-2-fill';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, AppBar, Hidden, Toolbar, IconButton } from '@material-ui/core';

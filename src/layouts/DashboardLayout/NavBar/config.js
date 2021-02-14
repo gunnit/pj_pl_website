@@ -1,5 +1,5 @@
 import React from 'react';
-import { MLabel, MIcon } from '@material-extend';
+import { MIcon } from '@material-extend';
 import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------

@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 import darkModeReducer from './slices/dark-mode';
-// import userReducer from './slices/user';
 
 // ----------------------------------------------------------------------
 
@@ -14,13 +12,6 @@ const rootPersistConfig = {
   keyPrefix: 'redux-',
   version: 1,
   whitelist: ['theme']
-};
-
-const productPersistConfig = {
-  key: 'product',
-  storage: storage,
-  keyPrefix: 'redux-',
-  blacklist: ['isLoading', 'error', 'products', 'product', 'filters']
 };
 
 const rootReducer = combineReducers({
