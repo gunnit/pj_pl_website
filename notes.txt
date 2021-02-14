@@ -1,5 +1,7 @@
 Things to add:
 
+Put logo on loading screen
+
 User redux
 
 Automation potential bottom pictures

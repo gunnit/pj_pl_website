@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import Logo from './Logo';
 import { makeStyles, alpha } from '@material-ui/core/styles';
+import { MCircularProgress } from '@material-extend';
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ function LoadingScreen({ className, ...other }) {
 
   return (
     <div className={clsx(classes.root, className)} {...other}>
-      <motion.div
+      {/* <motion.div
         initial={{ rotateY: 0 }}
         animate={{ rotateY: 360 }}
         transition={{
@@ -58,7 +58,8 @@ function LoadingScreen({ className, ...other }) {
           repeatDelay: 1
         }}
       >
-        <Logo sx={{ height: 64 }} />
+        <MCircularProgress />
+
       </motion.div>
 
       <motion.div
@@ -85,7 +86,8 @@ function LoadingScreen({ className, ...other }) {
           loop: Infinity
         }}
         className={clsx(classes.box, classes.outside)}
-      />
+      /> */}
+      <MCircularProgress />
     </div>
   );
 }
