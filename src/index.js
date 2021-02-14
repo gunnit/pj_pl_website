@@ -20,16 +20,18 @@ import * as serviceWorker from './serviceWorker';
 import { store, persistor } from './redux/store';
 import LoadingScreen from './components/LoadingScreen';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-
+import ContextWrapper from 'context/ContextWrapper';
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
   <Suspense fallback={<LoadingScreen />}>
-    <Provider store={store}>
-      <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
+    <ContextWrapper>
+      <Provider store={store}>
+        <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </ContextWrapper>
   </Suspense>,
   document.getElementById('root')
 );

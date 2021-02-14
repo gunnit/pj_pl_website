@@ -19,11 +19,11 @@ import { PATH_APP } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const SIMPLE_TAB = [
-    { value: '1', icon: <PhoneIcon />, label: 'Details', disabled: false },
-    { value: '2', icon: <FavoriteIcon />, label: 'Automation Potential', disabled: false },
-    { value: '3', icon: <PersonPinIcon />, label: 'Costs Comparison', disabled: true },
-    { value: '4', icon: <PersonPinIcon />, label: 'Break-even', disabled: true },
-    { value: '5', icon: <PersonPinIcon />, label: 'Progress', disabled: true }
+    { value: '1', icon: <PhoneIcon />, label: 'Details' },
+    { value: '2', icon: <FavoriteIcon />, label: 'Automation Potential' },
+    { value: '3', icon: <PersonPinIcon />, label: 'Costs Comparison' },
+    { value: '4', icon: <PersonPinIcon />, label: 'Break-even' },
+    { value: '5', icon: <PersonPinIcon />, label: 'Progress' }
 ];
 
 
