@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import ideaIcon from '@iconify-icons/flat-color-icons/idea';
 import { fShortenNumber } from 'utils/formatNumber';
-import appleFilled from '@iconify-icons/ant-design/apple-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 

@@ -10,7 +10,7 @@ import SearchNotFound from 'components/SearchNotFound';
 import { Link as RouterLink } from 'react-router-dom';
 import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Card,
@@ -149,8 +149,6 @@ const products = [
 
 function ProductListView() {
   const classes = useStyles();
-  const theme = useTheme();
-  // const { products } = useSelector(state => state.product);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -176,24 +174,6 @@ function ProductListView() {
       return;
     }
     setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {

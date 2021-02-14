@@ -1,6 +1,5 @@
 import React from 'react';
 import LineChart from './LineChart';
-import { makeStyles } from '@material-ui/core/styles';
 import {
     Card,
     CardHeader,

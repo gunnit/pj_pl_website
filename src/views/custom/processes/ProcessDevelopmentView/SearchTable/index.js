@@ -5,9 +5,8 @@ import ToolbarTable from './ToolbarTable';
 import Scrollbars from 'components/Scrollbars'
 import React, { useState } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
-import { useDispatch } from 'react-redux';
 import SearchNotFound from 'components/SearchNotFound';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Card,
@@ -19,7 +18,6 @@ import {
   TableContainer,
   TablePagination
 } from '@material-ui/core';
-import { MLabel } from '@material-extend';
 
 // ----------------------------------------------------------------------
 
@@ -139,8 +137,6 @@ const products = [
 
 function ProductListView() {
   const classes = useStyles();
-  const theme = useTheme();
-  const dispatch = useDispatch();
   // const { products } = useSelector(state => state.product);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');

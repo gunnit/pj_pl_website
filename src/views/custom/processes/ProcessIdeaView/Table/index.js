@@ -6,22 +6,18 @@ import React, { useState } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import SearchNotFound from 'components/SearchNotFound';
 import Scrollbars from 'components/Scrollbars';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Card,
   Table,
   TableRow,
-  Checkbox,
   TableBody,
   TableCell,
   Container,
-  IconButton,
-  Typography,
   TableContainer,
   TablePagination
 } from '@material-ui/core';
-import { MLabel } from '@material-extend';
 
 // ----------------------------------------------------------------------
 
@@ -140,7 +136,6 @@ const products = [
 
 function ProductListView() {
   const classes = useStyles();
-  const theme = useTheme();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);

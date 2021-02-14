@@ -32,11 +32,8 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
   const classes = useStyles();
   const {
     errors,
-    values,
     touched,
     handleSubmit,
-    isSubmitting,
-    setFieldValue,
     getFieldProps
   } = formik;
 

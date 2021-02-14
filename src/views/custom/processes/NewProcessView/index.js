@@ -10,8 +10,6 @@ import { useSnackbar } from 'notistack';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Container,
-  Card,
-  CardContent,
   Typography,
   Stepper,
   StepLabel,

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { alpha, makeStyles } from '@material-ui/core/styles';
-import { Box, Card, Typography, Divider, Grid } from '@material-ui/core';
+import { Box, Card, Typography, Grid } from '@material-ui/core';
 import roundVerifiedUser from '@iconify-icons/ic/round-verified-user';
 import clockFill from '@iconify-icons/eva/clock-fill';
 import roundVerified from '@iconify-icons/ic/round-verified';

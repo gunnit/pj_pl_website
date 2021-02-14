@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import {
-  Box,
-  Button,
-  CardHeader,
-  Card,
+  Card
 } from '@material-ui/core';
 import BasicTable from './BasicTable';
 
@@ -34,17 +30,11 @@ import BasicTable from './BasicTable';
 // });
 
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-}));
-
-
 ProjectInfo.propTypes = {
   className: PropTypes.string
 };
 
 export default function ProjectInfo({ className, ...other }) {
-  const classes = useStyles();
 
   return (
     <Card>
