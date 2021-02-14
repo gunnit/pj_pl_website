@@ -40,7 +40,7 @@ export const PATH_APP = {
   },
   processes: {
     dashboard: path(ROOTS.app, '/processes/dashboard'),
-    idea: path(ROOTS.app, '/processes/idea'),
+    idea: path(ROOTS.app, '/processes/ideas'),
     pipeline: path(ROOTS.app, '/processes/pipeline'),
     development: path(ROOTS.app, '/processes/development'),
     production: path(ROOTS.app, '/processes/production'),
@@ -48,7 +48,7 @@ export const PATH_APP = {
     list: path(ROOTS.app, '/processes/list'),
     // Will have specific process IDs
     details: path(ROOTS.app, '/processes/details'),
-    update: path(ROOTS.app, '/processes/update')
+    update: path(ROOTS.app, '/processes/update'),
   },
   coe: {
     vision: path(ROOTS.app, '/coe/vision'),

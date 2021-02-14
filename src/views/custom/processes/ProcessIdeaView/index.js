@@ -9,6 +9,8 @@ import Widgets3 from './Widgets3';
 import BarChart from './IdeasPerFunction';
 import ProcessCriticality from './ProcessCriticality';
 import NatureOfProcess from './NatureOfProcess';
+import NoProcesses from '../NoProcesses';
+
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -17,9 +19,11 @@ const useStyles = makeStyles(theme => ({
 function ProcessIdeaView() {
     const classes = useStyles();
 
+    const ideas = true;
+
     return (
         <Page title="Idea Dashboard" className={classes.root}>
-            <Container maxWidth="xl">
+            {ideas ? <Container maxWidth="xl">
                 <Box sx={{ pb: 5 }}>
                     <Typography variant="h4" gutterBottom>Idea Dashboard</Typography>
                     <Typography variant="subtitle1" color="textSecondary">
@@ -27,7 +31,6 @@ function ProcessIdeaView() {
                     </Typography>
                 </Box>
                 <Grid container spacing={3}>
-                    {/* For widgets, replace chart with image/icon */}
                     <Grid item xs={12} sm={12} md={4} lg={4}>
                         <Widgets1 />
                     </Grid>
@@ -53,6 +56,10 @@ function ProcessIdeaView() {
                     </Grid>
                 </Grid>
             </Container>
+                : <NoProcesses
+                    primaryText={'No process ideas'}
+                    secondaryText={'Add some of your ideas to unleash the full potential of the app!'}
+                />}
         </Page>
     );
 }

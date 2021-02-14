@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+import { ButtonAnimate } from 'components/Animate';
 
 // ----------------------------------------------------------------------
 
@@ -31,23 +32,25 @@ function GenericBoxInfo({ className, description, imagePath, clickPath, ...other
 
 
     return (
-        <Card className={clsx(classes.root, className)} {...other} component={RouterLink} to={clickPath}>
-            <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="h6" gutterBottom>
-                    {description}
-                </Typography>
-            </Box>
-            <Box
-                component="img"
-                alt="welcome"
-                src={imagePath}
-                sx={{
-                    p: 2,
-                    height: 205,
-                    margin: { xs: 'auto', md: 'inherit' }
-                }}
-            />
-        </Card>
+        <ButtonAnimate>
+            <Card className={clsx(classes.root, className)} {...other} component={RouterLink} to={clickPath}>
+                <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                        {description}
+                    </Typography>
+                </Box>
+                <Box
+                    component="img"
+                    alt="welcome"
+                    src={imagePath}
+                    sx={{
+                        p: 2,
+                        height: 205,
+                        margin: { xs: 'auto', md: 'inherit' }
+                    }}
+                />
+            </Card>
+        </ButtonAnimate>
     );
 }
 
