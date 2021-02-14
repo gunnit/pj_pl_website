@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 // ----------------------------------------------------------------------
 
 function ProjectionsTable() {
-    const classes = useStyles();
 
     return (
         <Card>
