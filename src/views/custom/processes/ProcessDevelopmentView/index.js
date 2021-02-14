@@ -29,7 +29,7 @@ function ProcessDevelopmentView() {
 
                     <Grid item xs={12} lg={3}>
                         <GenericBoxInfoDevelopment infoType={'Total Development Cost'} />
-                        <Icon icon={rocketIcon} className={classes.icon} />
+                        {/* <Icon icon={rocketIcon} className={classes.icon} /> */}
                     </Grid>
                     <Grid item xs={12} lg={3}>
                         <GenericBoxInfoDevelopment infoType={'Avg. Development Cost'} />

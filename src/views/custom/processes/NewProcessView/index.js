@@ -49,12 +49,12 @@ const QontoConnector = withStyles({
   },
   active: {
     '& $line': {
-      borderColor: '#784af4'
+      borderColor: '#00AB55' // same as theme.palette.primary.main
     }
   },
   completed: {
     '& $line': {
-      borderColor: '#784af4'
+      borderColor: '#00AB55'
     }
   },
   line: {
@@ -71,14 +71,14 @@ const useQontoStepIconStyles = makeStyles({
     color: '#eaeaf0',
     alignItems: 'center'
   },
-  active: { color: '#784af4' },
+  active: { color: '#00AB55' },
   circle: {
     width: 8,
     height: 8,
     borderRadius: '50%',
     backgroundColor: 'currentColor'
   },
-  completed: { color: '#784af4', zIndex: 1, fontSize: 18 }
+  completed: { color: '#00AB55', zIndex: 1, fontSize: 18 }
 });
 
 function QontoStepIcon(props) {
