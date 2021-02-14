@@ -1,5 +1,9 @@
 Things to add:
 
+Image on no processes page
+
+All images should have alt text
+
 Tabs not lighting up
 
 Click on stepper to go to that part

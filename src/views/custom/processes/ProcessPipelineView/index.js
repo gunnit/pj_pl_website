@@ -11,6 +11,8 @@ import ProjectionsTable from './ProjectionsTable';
 import Breakeven from './Breakeven';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import BubbleChart from './BubbleChart';
+import NoProcesses from '../NoProcesses';
+
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -21,61 +23,68 @@ function ProcessPipelineView() {
     // const { auth, profile } = useSelector(state => state.firebase);
     // const displayName = auth.displayName || profile.displayName;
 
+    const processes = true;
+
     return (
         <Page title="Pipeline Dashboard" className={classes.root}>
-            <Container maxWidth="xl">
-                <Box sx={{ pb: 5 }}>
-                    <Typography variant="h4" gutterBottom>Pipeline Dashboard</Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        Build a business case by assessing the automation potential and ROI
+            {processes
+                ? <Container maxWidth="xl">
+                    <Box sx={{ pb: 5 }}>
+                        <Typography variant="h4" gutterBottom>Pipeline Dashboard</Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            Build a business case by assessing the automation potential and ROI
                     </Typography>
-                </Box>
-                <Grid container spacing={3}>
+                    </Box>
+                    <Grid container spacing={3}>
 
-                    {/* For widgets, replace chart with image/icon */}
-                    <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets1 />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets2 />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets3 />
-                    </Grid>
+                        {/* For widgets, replace chart with image/icon */}
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                            <Widgets1 />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                            <Widgets2 />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                            <Widgets3 />
+                        </Grid>
 
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <Table />
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <Table />
+                        </Grid>
+                        <Grid item lg={12}>
+                            <BubbleChart />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Card>
+                                <CardHeader title="Top 10 Processes: Automation Potential" />
+                                <CardContent>
+                                    <ColumnSingleChart />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Card>
+                                <CardHeader title="Top 10 Processes: Annual Savings (1st Year)" />
+                                <CardContent>
+                                    <ColumnSingleChart />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <ProjectionsTable />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Breakeven />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <ThreeYearProjectionsTable />
+                        </Grid>
                     </Grid>
-                    <Grid item lg={12}>
-                        <BubbleChart />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Card>
-                            <CardHeader title="Top 10 Processes: Automation Potential" />
-                            <CardContent>
-                                <ColumnSingleChart />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Card>
-                            <CardHeader title="Top 10 Processes: Annual Savings (1st Year)" />
-                            <CardContent>
-                                <ColumnSingleChart />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ProjectionsTable />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Breakeven />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ThreeYearProjectionsTable />
-                    </Grid>
-                </Grid>
-            </Container>
+                </Container>
+                : <NoProcesses
+                    primaryText={'No processes in the pipeline'}
+                    secondaryText={'Add some of your ideas to unleash the full potential of the app!'}
+                />}
         </Page>
     );
 }
