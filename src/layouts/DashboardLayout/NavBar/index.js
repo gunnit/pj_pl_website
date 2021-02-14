@@ -6,7 +6,6 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import MyAvatar from 'components/MyAvatar';
 import Scrollbars from 'components/Scrollbars';
-import { PATH_APP } from 'routes/paths';
 import { Link as RouterLink, useLocation, matchPath } from 'react-router-dom';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import {
@@ -149,7 +148,7 @@ function NavBar({ isOpenNav, onCloseNav }) {
       <Link
         underline="none"
         component={RouterLink}
-        to={PATH_APP.management.user.account}
+        to={'/'}
       >
         <div className={classes.account}>
           <MyAvatar />
