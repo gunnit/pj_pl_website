@@ -6,7 +6,7 @@ import Page from 'components/Page';
 import Widgets1 from './Widgets1';
 import Widgets2 from './Widgets2';
 import Widgets3 from './Widgets3';
-import BarChart from './BarChart';
+import BarChart from './IdeasPerFunction';
 import ProcessCriticality from './ProcessCriticality';
 import NatureOfProcess from './NatureOfProcess';
 
@@ -16,8 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 function ProcessIdeaView() {
     const classes = useStyles();
-    // const { auth, profile } = useSelector(state => state.firebase);
-    // const displayName = auth.displayName || profile.displayName;
 
     return (
         <Page title="Idea Dashboard" className={classes.root}>
