@@ -13,6 +13,9 @@ import { ButtonAnimate } from 'components/Animate';
 
 const useStyles = makeStyles(theme => ({
     root: {},
+    buttonAnimate: {
+        width: '100%'
+    }
 }));
 
 function ProcessListView() {
@@ -26,22 +29,22 @@ function ProcessListView() {
                 </Box>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6} md={3} lg={3}>
-                        <ButtonAnimate>
+                        <ButtonAnimate className={classes.buttonAnimate}>
                             <Ideas />
                         </ButtonAnimate>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} lg={3}>
-                        <ButtonAnimate>
+                        <ButtonAnimate className={classes.buttonAnimate}>
                             <Pipeline />
                         </ButtonAnimate>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} lg={3}>
-                        <ButtonAnimate>
+                        <ButtonAnimate className={classes.buttonAnimate}>
                             <Development />
                         </ButtonAnimate>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} lg={3}>
-                        <ButtonAnimate>
+                        <ButtonAnimate className={classes.buttonAnimate}>
                             <Production />
                         </ButtonAnimate>
                     </Grid>
