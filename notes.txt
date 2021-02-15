@@ -1,5 +1,15 @@
 Things to add:
 
+Trying to submit form with errors should turn the inputs red
+
+Applications part of new process form - required or not?
+
+Tabs on process detail page should be scrollable for small screens
+
+Update button on process details page - keep, change, add tooltip
+
+Option to save unfinished forms since they're so long?
+
 Image on no processes page
 
 All images should have alt text

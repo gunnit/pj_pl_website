@@ -24,11 +24,10 @@ const useStyles = makeStyles(theme => ({
 
 NewProcessFormDetails.propTypes = {
   formik: PropTypes.object.isRequired,
-  onOpenPreview: PropTypes.func,
   className: PropTypes.string
 };
 
-function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
+function NewProcessFormDetails({ formik, className, ...other }) {
   const classes = useStyles();
   const {
     errors,
@@ -37,11 +36,7 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
     getFieldProps
   } = formik;
 
-  const [pipelineSelect, setPipelineSelect] = useState('');
 
-  const handleChangePipeline = e => {
-    setPipelineSelect(e.target.value);
-  };
 
   return (
     <FormikProvider value={formik}>
@@ -73,8 +68,9 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
           fullWidth
           variant="outlined"
           label="Pipeline"
-          value={pipelineSelect}
-          onChange={handleChangePipeline}
+          {...getFieldProps('pipelineSelect')}
+          // This select field needs formik.handleChange for formik to detect its value even though the other ones don't seem to need it for some reason
+          onChange={formik.handleChange}
           // helperText="Please select your currency"
           className={classes.margin}
         >
@@ -109,24 +105,6 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
           className={classes.margin}
         />
 
-        {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button
-            type="button"
-            color="inherit"
-            variant="outlined"
-            onClick={onOpenPreview}
-            sx={{ mr: 1.5 }}
-          >
-            Preview
-          </Button>
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            pending={isSubmitting}
-          >
-            Post
-          </LoadingButton>
-        </Box> */}
       </Form>
     </FormikProvider>
   );

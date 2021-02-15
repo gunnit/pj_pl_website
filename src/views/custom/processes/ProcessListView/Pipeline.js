@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     padding: theme.spacing(5, 0),
     color: theme.palette.info.darker,
-    backgroundColor: theme.palette.info.lighter
+    backgroundColor: theme.palette.info.lighter,
+    minWidth: 240
   },
   icon: {
     margin: 'auto',

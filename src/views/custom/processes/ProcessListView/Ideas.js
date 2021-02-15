@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { fShortenNumber } from 'utils/formatNumber';
 import androidFilled from '@iconify-icons/ant-design/android-filled';
@@ -15,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     padding: theme.spacing(5, 0),
     color: theme.palette.primary.darker,
-    backgroundColor: theme.palette.primary.lighter
+    backgroundColor: theme.palette.primary.lighter,
+    minWidth: 240
   },
   icon: {
     margin: 'auto',
@@ -36,11 +36,9 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-WeeklySales.propTypes = {
-  className: PropTypes.string
-};
 
-function WeeklySales({ className, ...other }) {
+
+export default function Ideas({ className, ...other }) {
   const classes = useStyles();
   const total = 70;
 
@@ -54,5 +52,3 @@ function WeeklySales({ className, ...other }) {
     </Card>
   );
 }
-
-export default WeeklySales;

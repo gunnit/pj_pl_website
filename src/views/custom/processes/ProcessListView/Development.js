@@ -1,9 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { fShortenNumber } from 'utils/formatNumber';
-import bugFilled from '@iconify-icons/ant-design/bug-filled';
+import windowsFilled from '@iconify-icons/ant-design/windows-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 
@@ -14,8 +13,9 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     textAlign: 'center',
     padding: theme.spacing(5, 0),
-    color: theme.palette.error.darker,
-    backgroundColor: theme.palette.error.lighter
+    color: theme.palette.warning.darker,
+    backgroundColor: theme.palette.warning.lighter,
+    minWidth: 240
   },
   icon: {
     margin: 'auto',
@@ -26,33 +26,29 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(8),
     justifyContent: 'center',
     marginBottom: theme.spacing(3),
-    color: theme.palette.error.dark,
+    color: theme.palette.warning.dark,
     backgroundImage: `linear-gradient(135deg, ${alpha(
-      theme.palette.error.dark,
+      theme.palette.warning.dark,
       0
-    )} 0%, ${alpha(theme.palette.error.dark, 0.24)} 100%)`
+    )} 0%, ${alpha(theme.palette.warning.dark, 0.24)} 100%)`
   }
 }));
 
 // ----------------------------------------------------------------------
 
-ListProduction.propTypes = {
-  className: PropTypes.string
-};
 
-function ListProduction({ className, ...other }) {
+const TOTAL = 15;
+
+export default function Development({ className, ...other }) {
   const classes = useStyles();
-  const total = 234;
 
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <div className={classes.icon}>
-        <Icon icon={bugFilled} width={24} height={24} />
+        <Icon icon={windowsFilled} width={24} height={24} />
       </div>
-      <Typography variant="h3">{fShortenNumber(total)}</Typography>
-      <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Production</Box>
+      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Development</Box>
     </Card>
   );
 }
-
-export default ListProduction;

@@ -21,11 +21,13 @@ import {
 import NewProcessFormOwnership from './NewProcessFormOwnership';
 import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
 import NewProcessFormRequirements from './NewProcessFormRequirements';
+import { Link as RouterLink } from 'react-router-dom';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
-const FILE_SIZE = 3145728; // bytes
-const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+// const FILE_SIZE = 3145728; // bytes
+// const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -106,56 +108,46 @@ QontoStepIcon.propTypes = {
 };
 
 
-
-
 function NewPostView() {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleOpenPreview = () => {
-    setOpen(true);
-  };
 
-  const handleClosePreview = () => {
-    setOpen(false);
-  };
 
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  };
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  const NewBlogSchema = Yup.object().shape({
+  const NewProcessSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    name2: Yup.string().required('Name is required'),
+    name2: Yup.string().required('Level 2 Name is required'),
+    pipelineSelect: Yup.string().required('Pipeline is required'),
     overview: Yup.string().required('Overview is required'),
     description: Yup.string().required('Description is required'),
+    processCritical: Yup.string().required('Process critical is required'),
+    businessProcess: Yup.string().required('Business process is required'),
+    businessUnit: Yup.string().required('Business unit is required'),
+    businessFunction: Yup.string().required('Business function is required'),
+    documentationAvailable: Yup.string().required('Documentation available is required'),
+    natureOfProcess: Yup.string().required('Nature of process is required'),
+    testEnvironmentAvailable: Yup.string().required('Test environment is required'),
+    sponsor: Yup.string().required('Sponsor is required'),
+    sme: Yup.string().required('SME is required'),
+    smeEmail: Yup.string().required('SME Email is required'),
+    ownerName: Yup.string().required('Owner name is required'),
+    ownerEmail: Yup.string().required('Owner email is required'),
+    savingsGoal: Yup.string().required('Savings goal is required'),
+    savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
+    manualSteps: Yup.string().required('Number of manual steps is required'),
+    painPoints: Yup.string().required('Pain points are required'),
+
     // content: Yup.string()
     //   .min(1000)
     //   .required('Content is required'),
-    // cover: Yup.mixed()
-    //   .required('Cover is required')
-    //   .test(
-    //     'fileSize',
-    //     `File is larger than ${fData(FILE_SIZE)}`,
-    //     value => value && value.size <= FILE_SIZE
-    //   )
-    //   .test(
-    //     'fileFormat',
-    //     'File type must be *.jpeg, *.jpg, *.png, *.gif',
-    //     value => value && FILE_FORMATS.includes(value.type)
-    //   )
+
   });
 
   const formik = useFormik({
@@ -164,15 +156,29 @@ function NewPostView() {
       name2: '',
       overview: '',
       description: '',
-      // content: '',
-      // cover: null
+      pipelineSelect: '',
+      processCritical: '',
+      businessProcess: '',
+      businessUnit: '',
+      businessFunction: '',
+      documentationAvailable: '',
+      natureOfProcess: '',
+      testEnvironmentAvailable: '',
+      sponsor: '',
+      sme: '',
+      smeEmail: '',
+      ownerName: '',
+      ownerEmail: '',
+      savingsGoal: '',
+      savingsGoalJustification: '',
+      manualSteps: '',
+      painPoints: '',
     },
-    validationSchema: NewBlogSchema,
+    validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
       try {
         // await fakeRequest(500);
         resetForm();
-        handleClosePreview();
         setSubmitting(false);
         enqueueSnackbar('Post success', { variant: 'success' });
       } catch (error) {
@@ -180,29 +186,70 @@ function NewPostView() {
         setSubmitting(false);
         setErrors({ afterSubmit: error.code });
       }
-    }
+    },
+    validateOnMount: true
   });
+
+
+  const handleNext = () => {
+    if (activeStep === 0) {
+
+      if (!formik.errors.name
+        && !formik.errors.name2
+        && !formik.errors.pipelineSelect
+        && !formik.errors.overview
+        && !formik.errors.description) {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+
+    } else if (activeStep === 1) {
+
+      if (!formik.errors.processCritical
+        && !formik.errors.businessProcess
+        && !formik.errors.businessFunction
+        && !formik.errors.documentationAvailable
+        && !formik.errors.natureOfProcess
+        && !formik.errors.testEnvironmentAvailable) {
+
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+
+    } else if (activeStep === 2) {
+
+      if (!formik.errors.sponsor
+        && !formik.errors.sme
+        && !formik.errors.smeEmail
+        && !formik.errors.ownerName
+        && !formik.errors.ownerEmail) {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+
+    } else if (formik.isValid) {
+
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
+
+    }
+
+  };
+
 
   // Shows part of the form for each step
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <NewProcessFormDetails formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormDetails formik={formik} />;
       case 1:
-        return <NewProcessFormCharacteristics formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormCharacteristics formik={formik} />;
       case 2:
-        return <NewProcessFormOwnership formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormOwnership formik={formik} />;
       default:
-        return <NewProcessFormRequirements formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormRequirements formik={formik} />;
     }
   }
   return (
     <Page title="New Process" className={classes.root}>
       <Container>
-        {/* Add margin to Typography */}
         <Typography variant='h4' gutterBottom>Create a new process</Typography>
-
-
         <div className={classes.root}>
           <Stepper
             alternativeLabel
@@ -230,13 +277,11 @@ function NewPostView() {
                   <Typography className={classes.instructions}>
                     {/* All steps completed - you&apos;re finished */}
                     New process submitted successfully!
-              </Typography>
-                  {/* Put a link here to the new process with 'Click here to view' */}
+                  </Typography>
+                  <Button variant='contained' component={RouterLink} to={PATH_APP.processes.details}>
+                    View Process Details
+                  </Button>
                 </Box>
-
-                <Button onClick={handleReset} className={classes.button}>
-                  Reset
-            </Button>
               </>
             ) : (
                 <div>
@@ -260,7 +305,7 @@ function NewPostView() {
                       className={classes.button}
                     >
                       Back
-              </Button>
+                    </Button>
                     <Button
                       variant="contained"
                       onClick={handleNext}

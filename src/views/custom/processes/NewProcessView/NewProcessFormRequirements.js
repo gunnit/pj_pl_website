@@ -14,7 +14,6 @@ import {
     Checkbox,
 } from '@material-ui/core';
 
-// ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -40,15 +39,11 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
     const classes = useStyles();
     const {
         errors,
-        values,
         touched,
         handleSubmit,
-        isSubmitting,
-        setFieldValue,
-        getFieldProps
+        getFieldProps,
+        handleChange,
     } = formik;
-
-    const [manualStepsSelect, setManualStepsSelect] = useState('')
 
 
     return (
@@ -251,7 +246,6 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
 
                 <TextField
                     fullWidth
-                    type='number'
                     label="Savings Goal Justification"
                     {...getFieldProps('savingsGoalJustification')}
                     error={Boolean(touched.savingsGoalJustification && errors.savingsGoalJustification)}
@@ -264,8 +258,8 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     fullWidth
                     variant="outlined"
                     label="Number of Manual Steps"
-                    value={manualStepsSelect}
-                    onChange={(e) => setManualStepsSelect(e.target.value)}
+                    {...getFieldProps('manualSteps')}
+                    onChange={handleChange}
                     className={classes.margin}
                 >
                     {/* Maybe change this to 0-9, 10-19, etc, 50+ */}
