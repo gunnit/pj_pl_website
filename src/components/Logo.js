@@ -13,7 +13,7 @@ function Logo({ className, ...other }) {
     <Box
       component="img"
       alt="logo"
-      src="/static/brand/logo_single.svg"
+      src="static/images/brand/logo_single.svg"
       height={40}
       className={className}
       {...other}

@@ -55,7 +55,7 @@ function Welcome({ className, ...other }) {
       <Box
         component="img"
         alt="welcome"
-        src="/static/illustrations/illustration_motivation.svg"
+        src="/static/images/process/undraw_new_ideas_jdea.svg"
         sx={{
           p: 2,
           height: 280,

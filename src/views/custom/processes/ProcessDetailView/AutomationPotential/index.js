@@ -32,7 +32,7 @@ function AutomationPotential() {
                     <GenericBoxInfo
                         title={'Robotics (RPA)'}
                         description={'Robotics refers to an execution engine for processing rulebased tasks'}
-                        imagePath={''}
+                        imagePath={'/static/images/process/undraw_Firmware_jw6u.svg'}
                         clickPath={''}
                     />
                 </Grid>
@@ -40,7 +40,7 @@ function AutomationPotential() {
                     <GenericBoxInfo
                         title={'Computer Vision (OCR)'}
                         description={'Tools used to extract information from images and convert them into a machine-readable format'}
-                        imagePath={''}
+                        imagePath={'/static/images/process/undraw_Artificial_intelligence_re_enpp.svg'}
                         clickPath={''}
                     />
                 </Grid>
@@ -48,7 +48,7 @@ function AutomationPotential() {
                     <GenericBoxInfo
                         title={'Business Process Management (BPM)'}
                         description={'A set of workflow and process designing tools in which the business logic for optimized processes can be configured'}
-                        imagePath={''}
+                        imagePath={'/static/images/process/undraw_prototyping_process_rswj.svg'}
                         clickPath={''}
                     />
                 </Grid>
@@ -56,7 +56,7 @@ function AutomationPotential() {
                     <GenericBoxInfo
                         title={'Cognitive Enhancements'}
                         description={'Tools needed to automate knowledge-based business processes where human insight and decision making is required'}
-                        imagePath={''}
+                        imagePath={'/static/images/process/undraw_services_5tv9.svg'}
                         clickPath={''}
                     />
                 </Grid>
