@@ -9,7 +9,7 @@ import GenericBoxInfo from './GenericBoxInfo';
 import CircleChart from './CircleChart'
 import BusinessFunctionChart from './BusinessFunctionChart';
 import BottomCard from './BottomCard';
-
+import RecentProcesses from './RecentProcesses';
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -84,6 +84,9 @@ function ProcessDashboardView() {
                     </Grid>
                     <Grid item xs={12} md={12} lg={12} >
                         <BusinessFunctionChart />
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12} >
+                        <RecentProcesses />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >
                         <BottomCard
