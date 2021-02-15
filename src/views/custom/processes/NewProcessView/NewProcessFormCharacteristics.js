@@ -40,13 +40,6 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
         handleChange
     } = formik;
 
-    const [processCritical, setProcessCritical] = useState('');
-    const [businessProcess, setBusinessProcess] = useState('');
-    const [businessUnit, setBusinessUnit] = useState('');
-    const [businessFunction, setBusinessFunction] = useState('');
-    const [documentationAvailable, setDocumentationAvailable] = useState('');
-    const [natureOfProcess, setNatureOfProcess] = useState('');
-    const [testEnvironmentAvailable, setTestEnvironmentAvailable] = useState('');
 
     return (
         <FormikProvider value={formik}>

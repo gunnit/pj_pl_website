@@ -147,6 +147,13 @@ function NewPostView() {
     documentationAvailable: Yup.string().required('Documentation available is required'),
     natureOfProcess: Yup.string().required('Nature of process is required'),
     testEnvironmentAvailable: Yup.string().required('Test environment is required'),
+    sponsor: Yup.string().required('Test environment is required'),
+    sme: Yup.string().required('Test environment is required'),
+    smeEmail: Yup.string().required('Test environment is required'),
+    ownerName: Yup.string().required('Test environment is required'),
+    ownerEmail: Yup.string().required('Test environment is required'),
+
+
     // content: Yup.string()
     //   .min(1000)
     //   .required('Content is required'),
@@ -167,6 +174,11 @@ function NewPostView() {
       documentationAvailable: '',
       natureOfProcess: '',
       testEnvironmentAvailable: '',
+      sponsor: '',
+      sme: '',
+      smeEmail: '',
+      ownerName: '',
+      ownerEmail: '',
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -210,21 +222,19 @@ function NewPostView() {
       }
 
     } else if (activeStep === 2) {
-      if (!formik.errors.name
-        && !formik.errors.name2
-        && !formik.errors.pipelineSelect
-        && !formik.errors.overview
-        && !formik.errors.description) {
+
+      if (!formik.errors.sponsor
+        && !formik.errors.sme
+        && !formik.errors.smeEmail
+        && !formik.errors.ownerName
+        && !formik.errors.ownerEmail) {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
       }
+
     } else if (formik.isValid) {
-      if (!formik.errors.name
-        && !formik.errors.name2
-        && !formik.errors.pipelineSelect
-        && !formik.errors.overview
-        && !formik.errors.description) {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-      }
+
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
+
 
     }
 
