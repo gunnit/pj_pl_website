@@ -124,9 +124,7 @@ function NewPostView() {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  };
+
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -136,26 +134,17 @@ function NewPostView() {
     setActiveStep(0);
   };
 
-  const NewBlogSchema = Yup.object().shape({
+  const NewProcessSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    name2: Yup.string().required('Name is required'),
+    name2: Yup.string().required('Level 2 Name is required'),
+    pipeline: Yup.string().required('Pipeline is required'),
     overview: Yup.string().required('Overview is required'),
     description: Yup.string().required('Description is required'),
+
     // content: Yup.string()
     //   .min(1000)
     //   .required('Content is required'),
-    // cover: Yup.mixed()
-    //   .required('Cover is required')
-    //   .test(
-    //     'fileSize',
-    //     `File is larger than ${fData(FILE_SIZE)}`,
-    //     value => value && value.size <= FILE_SIZE
-    //   )
-    //   .test(
-    //     'fileFormat',
-    //     'File type must be *.jpeg, *.jpg, *.png, *.gif',
-    //     value => value && FILE_FORMATS.includes(value.type)
-    //   )
+
   });
 
   const formik = useFormik({
@@ -164,10 +153,11 @@ function NewPostView() {
       name2: '',
       overview: '',
       description: '',
+      pipeline: '',
       // content: '',
       // cover: null
     },
-    validationSchema: NewBlogSchema,
+    validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
       try {
         // await fakeRequest(500);
@@ -180,26 +170,35 @@ function NewPostView() {
         setSubmitting(false);
         setErrors({ afterSubmit: error.code });
       }
-    }
+    },
+    validateOnMount: true
   });
+
+
+  const handleNext = () => {
+    console.log(formik)
+    if (formik.isValid) {
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
+    }
+  };
+
 
   // Shows part of the form for each step
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <NewProcessFormDetails formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormDetails formik={formik} />;
       case 1:
-        return <NewProcessFormCharacteristics formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormCharacteristics formik={formik} />;
       case 2:
-        return <NewProcessFormOwnership formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormOwnership formik={formik} />;
       default:
-        return <NewProcessFormRequirements formik={formik} onOpenPreview={handleOpenPreview} />;
+        return <NewProcessFormRequirements formik={formik} />;
     }
   }
   return (
     <Page title="New Process" className={classes.root}>
       <Container>
-        {/* Add margin to Typography */}
         <Typography variant='h4' gutterBottom>Create a new process</Typography>
 
 

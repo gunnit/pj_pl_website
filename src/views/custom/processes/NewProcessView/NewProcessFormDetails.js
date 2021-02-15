@@ -24,11 +24,10 @@ const useStyles = makeStyles(theme => ({
 
 NewProcessFormDetails.propTypes = {
   formik: PropTypes.object.isRequired,
-  onOpenPreview: PropTypes.func,
   className: PropTypes.string
 };
 
-function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
+function NewProcessFormDetails({ formik, className, ...other }) {
   const classes = useStyles();
   const {
     errors,
@@ -73,6 +72,7 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
           fullWidth
           variant="outlined"
           label="Pipeline"
+          {...getFieldProps('pipelineSelect')}
           value={pipelineSelect}
           onChange={handleChangePipeline}
           // helperText="Please select your currency"
@@ -109,24 +109,6 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
           className={classes.margin}
         />
 
-        {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button
-            type="button"
-            color="inherit"
-            variant="outlined"
-            onClick={onOpenPreview}
-            sx={{ mr: 1.5 }}
-          >
-            Preview
-          </Button>
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            pending={isSubmitting}
-          >
-            Post
-          </LoadingButton>
-        </Box> */}
       </Form>
     </FormikProvider>
   );
