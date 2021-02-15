@@ -36,11 +36,7 @@ function NewProcessFormDetails({ formik, className, ...other }) {
     getFieldProps
   } = formik;
 
-  const [pipelineSelect, setPipelineSelect] = useState('');
 
-  const handleChangePipeline = e => {
-    setPipelineSelect(e.target.value);
-  };
 
   return (
     <FormikProvider value={formik}>
@@ -73,8 +69,8 @@ function NewProcessFormDetails({ formik, className, ...other }) {
           variant="outlined"
           label="Pipeline"
           {...getFieldProps('pipelineSelect')}
-          value={pipelineSelect}
-          onChange={handleChangePipeline}
+          // This select field needs formik.handleChange for formik to detect its value even though the other ones don't seem to need it for some reason
+          onChange={formik.handleChange}
           // helperText="Please select your currency"
           className={classes.margin}
         >

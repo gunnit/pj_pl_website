@@ -137,10 +137,16 @@ function NewPostView() {
   const NewProcessSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     name2: Yup.string().required('Level 2 Name is required'),
-    pipeline: Yup.string().required('Pipeline is required'),
+    pipelineSelect: Yup.string().required('Pipeline is required'),
     overview: Yup.string().required('Overview is required'),
     description: Yup.string().required('Description is required'),
-
+    processCritical: Yup.string().required('Description is required'),
+    businessProcess: Yup.string().required('Business process is required'),
+    businessUnit: Yup.string().required('Business unit is required'),
+    businessFunction: Yup.string().required('Business function is required'),
+    documentationAvailable: Yup.string().required('Documentation available is required'),
+    natureOfProcess: Yup.string().required('Nature of process is required'),
+    testEnvironmentAvailable: Yup.string().required('Test environment is required'),
     // content: Yup.string()
     //   .min(1000)
     //   .required('Content is required'),
@@ -153,9 +159,14 @@ function NewPostView() {
       name2: '',
       overview: '',
       description: '',
-      pipeline: '',
-      // content: '',
-      // cover: null
+      pipelineSelect: '',
+      processCritical: '',
+      businessProcess: '',
+      businessUnit: '',
+      businessFunction: '',
+      documentationAvailable: '',
+      natureOfProcess: '',
+      testEnvironmentAvailable: '',
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -176,10 +187,47 @@ function NewPostView() {
 
 
   const handleNext = () => {
-    console.log(formik)
-    if (formik.isValid) {
-      setActiveStep(prevActiveStep => prevActiveStep + 1);
+    if (activeStep === 0) {
+
+      if (!formik.errors.name
+        && !formik.errors.name2
+        && !formik.errors.pipelineSelect
+        && !formik.errors.overview
+        && !formik.errors.description) {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+
+    } else if (activeStep === 1) {
+
+      if (!formik.errors.processCritical
+        && !formik.errors.businessProcess
+        && !formik.errors.businessFunction
+        && !formik.errors.documentationAvailable
+        && !formik.errors.natureOfProcess
+        && !formik.errors.testEnvironmentAvailable) {
+
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+
+    } else if (activeStep === 2) {
+      if (!formik.errors.name
+        && !formik.errors.name2
+        && !formik.errors.pipelineSelect
+        && !formik.errors.overview
+        && !formik.errors.description) {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+    } else if (formik.isValid) {
+      if (!formik.errors.name
+        && !formik.errors.name2
+        && !formik.errors.pipelineSelect
+        && !formik.errors.overview
+        && !formik.errors.description) {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      }
+
     }
+
   };
 
 
@@ -200,8 +248,6 @@ function NewPostView() {
     <Page title="New Process" className={classes.root}>
       <Container>
         <Typography variant='h4' gutterBottom>Create a new process</Typography>
-
-
         <div className={classes.root}>
           <Stepper
             alternativeLabel
@@ -229,7 +275,7 @@ function NewPostView() {
                   <Typography className={classes.instructions}>
                     {/* All steps completed - you&apos;re finished */}
                     New process submitted successfully!
-              </Typography>
+                  </Typography>
                   {/* Put a link here to the new process with 'Click here to view' */}
                 </Box>
 
@@ -259,7 +305,7 @@ function NewPostView() {
                       className={classes.button}
                     >
                       Back
-              </Button>
+                    </Button>
                     <Button
                       variant="contained"
                       onClick={handleNext}
