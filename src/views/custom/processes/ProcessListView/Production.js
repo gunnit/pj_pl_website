@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     padding: theme.spacing(5, 0),
     color: theme.palette.error.darker,
-    backgroundColor: theme.palette.error.lighter
+    backgroundColor: theme.palette.error.lighter,
+    minWidth: 240
   },
   icon: {
     margin: 'auto',
@@ -36,11 +37,8 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-ListProduction.propTypes = {
-  className: PropTypes.string
-};
 
-function ListProduction({ className, ...other }) {
+export default function Production({ className, ...other }) {
   const classes = useStyles();
   const total = 234;
 
@@ -54,5 +52,3 @@ function ListProduction({ className, ...other }) {
     </Card>
   );
 }
-
-export default ListProduction;

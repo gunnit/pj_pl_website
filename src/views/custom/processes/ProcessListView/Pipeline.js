@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
+import ideaIcon from '@iconify-icons/flat-color-icons/idea';
 import { fShortenNumber } from 'utils/formatNumber';
-import androidFilled from '@iconify-icons/ant-design/android-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 
@@ -14,8 +14,9 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     textAlign: 'center',
     padding: theme.spacing(5, 0),
-    color: theme.palette.primary.darker,
-    backgroundColor: theme.palette.primary.lighter
+    color: theme.palette.info.darker,
+    backgroundColor: theme.palette.info.lighter,
+    minWidth: 240
   },
   icon: {
     margin: 'auto',
@@ -26,33 +27,34 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(8),
     justifyContent: 'center',
     marginBottom: theme.spacing(3),
-    color: theme.palette.primary.dark,
+    color: theme.palette.info.dark,
     backgroundImage: `linear-gradient(135deg, ${alpha(
-      theme.palette.primary.dark,
+      theme.palette.info.dark,
       0
-    )} 0%, ${alpha(theme.palette.primary.dark, 0.24)} 100%)`
+    )} 0%, ${alpha(theme.palette.info.dark, 0.24)} 100%)`
   }
 }));
 
 // ----------------------------------------------------------------------
 
-WeeklySales.propTypes = {
+NewUsers.propTypes = {
   className: PropTypes.string
 };
 
-function WeeklySales({ className, ...other }) {
+const TOTAL = 31;
+
+function NewUsers({ className, ...other }) {
   const classes = useStyles();
-  const total = 70;
 
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <div className={classes.icon}>
-        <Icon icon={androidFilled} width={24} height={24} />
+        <Icon icon={ideaIcon} width={24} height={24} />
       </div>
-      <Typography variant="h3">{fShortenNumber(total)}</Typography>
-      <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Ideas</Box>
+      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Pipeline</Box>
     </Card>
   );
 }
 
-export default WeeklySales;
+export default NewUsers;

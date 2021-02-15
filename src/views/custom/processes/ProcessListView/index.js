@@ -1,16 +1,18 @@
 import React from 'react';
-import NewUsers from './NewUsers';
-import ItemOrders from './ItemOrders';
-import ListProduction from './ListProduction';
 import Page from 'components/Page';
-import WeeklySales from './WeeklySales';
+import Ideas from './Ideas';
+import Pipeline from './Pipeline';
+import Development from './Development';
+import Production from './Production';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'
+import { ButtonAnimate } from 'components/Animate';
+
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
-    root: {}
+    root: {},
 }));
 
 function ProcessListView() {
@@ -23,22 +25,25 @@ function ProcessListView() {
                     <Typography variant="h4">All Processes</Typography>
                 </Box>
                 <Grid container spacing={3}>
-                    {/*********************/}
-                    <Grid item xs={12} sm={6} md={3}>
-                        {/* Ideas */}
-                        <WeeklySales />
+                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <ButtonAnimate>
+                            <Ideas />
+                        </ButtonAnimate>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        {/* Pipeline */}
-                        <NewUsers />
+                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <ButtonAnimate>
+                            <Pipeline />
+                        </ButtonAnimate>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        {/* Development */}
-                        <ItemOrders />
+                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <ButtonAnimate>
+                            <Development />
+                        </ButtonAnimate>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        {/* Production */}
-                        <ListProduction />
+                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <ButtonAnimate>
+                            <Production />
+                        </ButtonAnimate>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Table />
