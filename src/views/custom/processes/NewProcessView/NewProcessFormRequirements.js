@@ -45,10 +45,9 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
         handleSubmit,
         isSubmitting,
         setFieldValue,
-        getFieldProps
+        getFieldProps,
+        handleChange,
     } = formik;
-
-    const [manualStepsSelect, setManualStepsSelect] = useState('')
 
 
     return (
@@ -251,7 +250,6 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
 
                 <TextField
                     fullWidth
-                    type='number'
                     label="Savings Goal Justification"
                     {...getFieldProps('savingsGoalJustification')}
                     error={Boolean(touched.savingsGoalJustification && errors.savingsGoalJustification)}
@@ -265,7 +263,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     variant="outlined"
                     label="Number of Manual Steps"
                     {...getFieldProps('manualSteps')}
-                    onChange={(e) => setManualStepsSelect(e.target.value)}
+                    onChange={handleChange}
                     className={classes.margin}
                 >
                     {/* Maybe change this to 0-9, 10-19, etc, 50+ */}

@@ -124,14 +124,8 @@ function NewPostView() {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
-
-
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   const NewProcessSchema = Yup.object().shape({
@@ -294,10 +288,6 @@ function NewPostView() {
                   </Typography>
                   {/* Put a link here to the new process with 'Click here to view' */}
                 </Box>
-
-                <Button onClick={handleReset} className={classes.button}>
-                  Reset
-            </Button>
               </>
             ) : (
                 <div>
