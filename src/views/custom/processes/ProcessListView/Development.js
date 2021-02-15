@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5, 0),
     color: theme.palette.warning.darker,
     backgroundColor: theme.palette.warning.lighter,
-    minWidth: 240
+    width: '100%'
   },
   icon: {
     margin: 'auto',
