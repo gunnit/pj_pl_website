@@ -1,5 +1,7 @@
 Things to add:
 
+Trying to submit form with errors should turn the inputs red
+
 Applications part of new process form - required or not?
 
 Tabs on process detail page should be scrollable for small screens

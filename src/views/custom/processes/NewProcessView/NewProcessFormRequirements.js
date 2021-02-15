@@ -14,7 +14,6 @@ import {
     Checkbox,
 } from '@material-ui/core';
 
-// ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -40,11 +39,8 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
     const classes = useStyles();
     const {
         errors,
-        values,
         touched,
         handleSubmit,
-        isSubmitting,
-        setFieldValue,
         getFieldProps,
         handleChange,
     } = formik;

@@ -21,11 +21,13 @@ import {
 import NewProcessFormOwnership from './NewProcessFormOwnership';
 import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
 import NewProcessFormRequirements from './NewProcessFormRequirements';
+import { Link as RouterLink } from 'react-router-dom';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
-const FILE_SIZE = 3145728; // bytes
-const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+// const FILE_SIZE = 3145728; // bytes
+// const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -106,20 +108,11 @@ QontoStepIcon.propTypes = {
 };
 
 
-
-
 function NewPostView() {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleOpenPreview = () => {
-    setOpen(true);
-  };
 
-  const handleClosePreview = () => {
-    setOpen(false);
-  };
 
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
@@ -186,7 +179,6 @@ function NewPostView() {
       try {
         // await fakeRequest(500);
         resetForm();
-        handleClosePreview();
         setSubmitting(false);
         enqueueSnackbar('Post success', { variant: 'success' });
       } catch (error) {
@@ -286,7 +278,9 @@ function NewPostView() {
                     {/* All steps completed - you&apos;re finished */}
                     New process submitted successfully!
                   </Typography>
-                  {/* Put a link here to the new process with 'Click here to view' */}
+                  <Button variant='contained' component={RouterLink} to={PATH_APP.processes.details}>
+                    View Process Details
+                  </Button>
                 </Box>
               </>
             ) : (
