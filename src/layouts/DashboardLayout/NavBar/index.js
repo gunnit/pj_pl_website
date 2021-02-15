@@ -189,7 +189,7 @@ function NavBar({ isOpenNav, onCloseNav }) {
           <Box
             component="img"
             alt="doc"
-            src="/static/icons/ic_doc.svg"
+            src="/static/images/icons/ic_doc.svg"
             sx={{ width: 36, height: 36, mb: 2 }}
           />
           <Box

@@ -140,7 +140,7 @@ function Hero({ className }) {
               <Box
                 component="img"
                 alt="sketch icon"
-                src="/static/icons/love-camera.svg"
+                src="static/images/icons/love-camera.svg"
                 sx={{ mr: 1, width: 20, height: 20 }}
               />
               <Link
@@ -175,19 +175,19 @@ function Hero({ className }) {
             >
               <motion.img
                 variants={varFadeInRight}
-                src="/static/icons/ic_m_sketch.svg"
+                src="/static/images/icons/ic_m_sketch.svg"
               />
               <motion.img
                 variants={varFadeInRight}
-                src="/static/icons/ic_m_sketch.svg"
+                src="/static/images/icons/ic_m_sketch.svg"
               />
               <motion.img
                 variants={varFadeInRight}
-                src="/static/icons/ic_m_sketch.svg"
+                src="/static/images/icons/ic_m_sketch.svg"
               />
               <motion.img
                 variants={varFadeInRight}
-                src="/static/icons/ic_m_sketch.svg"
+                src="/static/images/icons/ic_m_sketch.svg"
               />
             </Box>
           </div>

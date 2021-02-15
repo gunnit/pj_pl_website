@@ -10,19 +10,19 @@ import { Grid, Card, Container, Typography } from '@material-ui/core';
 
 const CARDS = [
   {
-    icon: '/static/icons/ic_sketch.svg',
+    icon: '/static/images/icons/ic_sketch.svg',
     title: 'Govern your CoE',
     description:
       'Perform a detailed assessment on your CoE to understand what needs improvement and use our guidelines on what to improve'
   },
   {
-    icon: '/static/icons/navbar/ic_dashboard.svg',
+    icon: '/static/images/icons/ic_dashboard.svg',
     title: 'Manage your pipeline',
     description:
       'Track your projects from idea to development with full transparency on the complexity for automation and ROI expectations'
   },
   {
-    icon: '/static/icons/ic_design.svg',
+    icon: '/static/images/icons/ic_design.svg',
     title: 'Find new processes',
     description:
       'Use our taxonomy of thousands of processes enhanced by NLP to help you find your next candidates for you automation journey'
