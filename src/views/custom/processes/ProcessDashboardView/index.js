@@ -7,7 +7,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Grid } from '@material-ui/core';
 import GenericBoxInfo from './GenericBoxInfo';
 import CircleChart from './CircleChart'
-// ----------------------------------------------------------------------
+import BusinessFunctionChart from './BusinessFunctionChart';
+import BottomCard from './BottomCard';
+
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -80,7 +82,41 @@ function ProcessDashboardView() {
                     <Grid item xs={12} md={4} lg={4} >
                         <CircleChart />
                     </Grid>
-
+                    <Grid item xs={12} md={12} lg={12} >
+                        <BusinessFunctionChart />
+                    </Grid>
+                    <Grid item xs={12} md={3} lg={3} >
+                        <BottomCard
+                            title={'Define a Vision'}
+                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
+                            imagePath={''}
+                            clickPath={''}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={3} lg={3} >
+                        <BottomCard
+                            title={'Define a Vision'}
+                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
+                            imagePath={''}
+                            clickPath={''}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={3} lg={3} >
+                        <BottomCard
+                            title={'Define a Vision'}
+                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
+                            imagePath={''}
+                            clickPath={''}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={3} lg={3} >
+                        <BottomCard
+                            title={'Define a Vision'}
+                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
+                            imagePath={''}
+                            clickPath={''}
+                        />
+                    </Grid>
                 </Grid>
             </Container>
         </Page>

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Card, Typography, CardHeader } from '@material-ui/core';
+import { Box, Card, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { ButtonAnimate } from 'components/Animate';
 
@@ -11,30 +12,25 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         alignItems: 'center',
+        flexDirection: 'column',
         padding: theme.spacing(3),
         textDecoration: 'none',
+        width: '100%'
     },
+    buttonAnimate: {
+        width: '100%'
+    }
 }));
 
 // ----------------------------------------------------------------------
 
 
-function GenericBoxInfo({ className, title, description, imagePath, clickPath, ...other }) {
+export default function BottomCard({ title, description, imagePath, clickPath, className, ...other }) {
     const classes = useStyles();
 
-
     return (
-        <ButtonAnimate>
+        <ButtonAnimate className={classes.buttonAnimate}>
             <Card className={clsx(classes.root, className)} {...other} component={RouterLink} to={clickPath}>
-                {/* <CardHeader title={title} /> */}
-                <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" gutterBottom>
-                        {title}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        {description}
-                    </Typography>
-                </Box>
                 <Box
                     component="img"
                     alt="welcome"
@@ -45,9 +41,15 @@ function GenericBoxInfo({ className, title, description, imagePath, clickPath, .
                         margin: { xs: 'auto', md: 'inherit' }
                     }}
                 />
+                <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                        {title}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        {description}
+                    </Typography>
+                </Box>
             </Card>
         </ButtonAnimate>
     );
 }
-
-export default GenericBoxInfo;
