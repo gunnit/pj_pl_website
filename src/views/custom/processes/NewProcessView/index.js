@@ -140,19 +140,22 @@ function NewPostView() {
     pipelineSelect: Yup.string().required('Pipeline is required'),
     overview: Yup.string().required('Overview is required'),
     description: Yup.string().required('Description is required'),
-    processCritical: Yup.string().required('Description is required'),
+    processCritical: Yup.string().required('Process critical is required'),
     businessProcess: Yup.string().required('Business process is required'),
     businessUnit: Yup.string().required('Business unit is required'),
     businessFunction: Yup.string().required('Business function is required'),
     documentationAvailable: Yup.string().required('Documentation available is required'),
     natureOfProcess: Yup.string().required('Nature of process is required'),
     testEnvironmentAvailable: Yup.string().required('Test environment is required'),
-    sponsor: Yup.string().required('Test environment is required'),
-    sme: Yup.string().required('Test environment is required'),
-    smeEmail: Yup.string().required('Test environment is required'),
-    ownerName: Yup.string().required('Test environment is required'),
-    ownerEmail: Yup.string().required('Test environment is required'),
-
+    sponsor: Yup.string().required('Sponsor is required'),
+    sme: Yup.string().required('SME is required'),
+    smeEmail: Yup.string().required('SME Email is required'),
+    ownerName: Yup.string().required('Owner name is required'),
+    ownerEmail: Yup.string().required('Owner email is required'),
+    savingsGoal: Yup.string().required('Savings goal is required'),
+    savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
+    manualSteps: Yup.string().required('Number of manual steps is required'),
+    painPoints: Yup.string().required('Pain points are required'),
 
     // content: Yup.string()
     //   .min(1000)
@@ -179,6 +182,10 @@ function NewPostView() {
       smeEmail: '',
       ownerName: '',
       ownerEmail: '',
+      savingsGoal: '',
+      savingsGoalJustification: '',
+      manualSteps: '',
+      painPoints: '',
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -234,7 +241,6 @@ function NewPostView() {
     } else if (formik.isValid) {
 
       setActiveStep(prevActiveStep => prevActiveStep + 1);
-
 
     }
 

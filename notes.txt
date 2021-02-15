@@ -1,5 +1,7 @@
 Things to add:
 
+Applications part of new process form - required or not?
+
 Tabs on process detail page should be scrollable for small screens
 
 Update button on process details page - keep, change, add tooltip

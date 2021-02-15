@@ -264,7 +264,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     fullWidth
                     variant="outlined"
                     label="Number of Manual Steps"
-                    value={manualStepsSelect}
+                    {...getFieldProps('manualSteps')}
                     onChange={(e) => setManualStepsSelect(e.target.value)}
                     className={classes.margin}
                 >
