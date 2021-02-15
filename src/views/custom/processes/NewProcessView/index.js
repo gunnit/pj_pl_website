@@ -122,6 +122,7 @@ function NewPostView() {
   };
 
   const NewProcessSchema = Yup.object().shape({
+    // min and max lengths? no reason for minimum, they can always edit it
     name: Yup.string().required('Name is required'),
     name2: Yup.string().required('Level 2 Name is required'),
     pipelineSelect: Yup.string().required('Pipeline is required'),
@@ -136,10 +137,10 @@ function NewPostView() {
     testEnvironmentAvailable: Yup.string().required('Test environment is required'),
     sponsor: Yup.string().required('Sponsor is required'),
     sme: Yup.string().required('SME is required'),
-    smeEmail: Yup.string().required('SME Email is required'),
+    smeEmail: Yup.string().email().required('SME Email is required'),
     ownerName: Yup.string().required('Owner name is required'),
     ownerEmail: Yup.string().required('Owner email is required'),
-    savingsGoal: Yup.string().required('Savings goal is required'),
+    savingsGoal: Yup.number().positive().required('Savings goal is required'),
     savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
     manualSteps: Yup.string().required('Number of manual steps is required'),
     painPoints: Yup.string().required('Pain points are required'),
