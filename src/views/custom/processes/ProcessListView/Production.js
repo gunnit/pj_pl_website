@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { fShortenNumber } from 'utils/formatNumber';
 import bugFilled from '@iconify-icons/ant-design/bug-filled';
