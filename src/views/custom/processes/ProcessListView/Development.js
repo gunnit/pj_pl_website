@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
+import gearsIcon from '@iconify-icons/whh/gears';
 import { fShortenNumber } from 'utils/formatNumber';
 import windowsFilled from '@iconify-icons/ant-design/windows-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
@@ -45,7 +46,7 @@ export default function Development({ className, ...other }) {
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <div className={classes.icon}>
-        <Icon icon={windowsFilled} width={24} height={24} />
+        <Icon icon={gearsIcon} width={24} height={24} />
       </div>
       <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
       <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Development</Box>

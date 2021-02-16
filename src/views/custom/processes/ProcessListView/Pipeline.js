@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '@iconify/react';
-import ideaIcon from '@iconify-icons/flat-color-icons/idea';
+import { Icon, InlineIcon } from '@iconify/react';
+import rocket11 from '@iconify-icons/maki/rocket-11';
 import { fShortenNumber } from 'utils/formatNumber';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
@@ -49,7 +49,7 @@ function NewUsers({ className, ...other }) {
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <div className={classes.icon}>
-        <Icon icon={ideaIcon} width={24} height={24} />
+        <Icon icon={rocket11} width={24} height={24} />
       </div>
       <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
       <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Pipeline</Box>

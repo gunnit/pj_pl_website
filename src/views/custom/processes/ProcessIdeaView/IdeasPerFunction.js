@@ -45,7 +45,7 @@ export default function IdeasPerFunction() {
 
   return (
     <Card>
-      <CardHeader title="Bar" />
+      <CardHeader title="Number of Submitter ideas per Function" />
       <CardContent>
         <ReactApexChart
           type="bar"

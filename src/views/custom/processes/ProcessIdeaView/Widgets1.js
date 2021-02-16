@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { merge } from 'lodash';
 import PropTypes from 'prop-types';
-import { Icon } from '@iconify/react';
-import rocketIcon from '@iconify-icons/fxemoji/rocket';
+import { Icon, InlineIcon } from '@iconify/react';
+import thumbsUp from '@iconify-icons/akar-icons/thumbs-up';
 import ReactApexChart from 'react-apexcharts';
 import { fNumber } from 'utils/formatNumber';
 import { ApexChartsOption } from 'components/Charts/Apexcharts';
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => {
     }
   };
 });
-
+ 
 // ----------------------------------------------------------------------
 
 Widgets1.propTypes = {
@@ -80,7 +80,7 @@ function Widgets1({ className, ...other }) {
         <Typography variant="h4"> {fNumber(TOTAL)} processes</Typography>
         <Box sx={{ typography: 'body2', opacity: 0.72 }}>Suggested to move to pipeline</Box>
       </Box>
-      <Icon icon={rocketIcon} className={classes.icon} />
+      <Icon icon={thumbsUp} className={classes.icon} />
     </Card>
   );
 }
