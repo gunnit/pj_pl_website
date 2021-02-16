@@ -1,21 +1,24 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import SearchTable from './SearchTable'
 import Page from 'components/Page';
-import GenericBoxInfoDevelopment from './GenericBoxInfoDevelopment';
+import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
 import NoProcesses from '../NoProcesses';
+import rocketIcon from '@iconify-icons/fxemoji/rocket';
 
 
 const useStyles = makeStyles(theme => ({
-    root: {}
+    root: {},
+
 }));
 
 function ProcessDevelopmentView() {
     const classes = useStyles();
+    const theme = useTheme()
     // const { auth, profile } = useSelector(state => state.firebase);
     // const displayName = auth.displayName || profile.displayName;
-    const processes = false;
+    const processes = true;
 
     return (
         <Page title="Development Dashboard" className={classes.root}>
@@ -25,22 +28,41 @@ function ProcessDevelopmentView() {
                         <Typography variant="h4" gutterBottom>Development Dashboard</Typography>
                         <Typography variant="subtitle1" color="textSecondary">
                             Track your projects in development and make sure they are put into production as predicted
-                    </Typography>
+                        </Typography>
                     </Box>
                     <Grid container spacing={3}>
 
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoDevelopment infoType={'Total Development Cost'} />
-                            {/* <Icon icon={rocketIcon} className={classes.icon} /> */}
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Total Development Cost'}
+                                mainNumber={0}
+                                backgroundColor={theme.palette.info.main}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoDevelopment infoType={'Avg. Development Cost'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Avg. Development Cost'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoDevelopment infoType={'Avg. Development Daily Rate'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Avg. Development Daily Rate'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoDevelopment infoType={'Avg. Development Duration'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Avg. Development Duration'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={12} lg={12}>
