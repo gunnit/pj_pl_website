@@ -28,7 +28,11 @@ function Details() {
                 </Grid>
                 <Grid item container spacing={3} md={4} alignContent='flex-start'>
                     <Grid item xs={12} md={12}>
-                        <GenericBoxInfoDetails infoType={'Automation Potential'} mainNumber={7.5} secondaryText={'score'} />
+                        <GenericBoxInfoDetails
+                         infoType={'Automation Potential'}
+                         mainNumber={7.5}
+                         secondaryText={'score'}
+                          />
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <GenericBoxInfoDetails infoType={'Hours Saved'} mainNumber={52} secondaryText={'(in FTE) per year'} />
