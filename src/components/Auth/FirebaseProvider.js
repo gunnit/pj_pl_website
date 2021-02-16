@@ -2,12 +2,12 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 import { store } from '../../redux/store';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { firebaseConfig } from '../../config';
+import { firebaseConfig, apiBaseUrl } from '../../config';
 import { createFirestoreInstance } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase';
-
+import Context from 'context/Context';
 // ----------------------------------------------------------------------
 
 if (!firebase.apps.length) {
@@ -31,12 +31,22 @@ const ADMIN_EMAILS = ['demo@minimals.cc'];
 
 function FirebaseProvider({ children }) {
   const { profile } = useSelector(state => state.firebase);
+  const { userEmail, setUserEmail, setUserId } = useContext(Context)
 
   useEffect(() => {
     const Initialise = async () => {
       try {
-        firebase.auth().onAuthStateChanged(user => {
+
+        firebase.auth().onAuthStateChanged((user) => {
+          // console.log(user)
+          // const token = await firebase.auth().currentUser.getIdToken(true);
+          if (user && user.email) {
+            setUserEmail(user.email)
+          }
+
+
           if (user && isLoaded(profile) && !profile.role) {
+
             firebase
               .firestore()
               .collection('users')
@@ -56,6 +66,30 @@ function FirebaseProvider({ children }) {
 
     Initialise();
   }, [profile]);
+
+  useEffect(() => {
+    // If user email from Firebase has been stored in the context, check for user in database using that email
+    if (userEmail) {
+
+      (async () => {
+        const res = await fetch(`${apiBaseUrl}/register/`, {
+          method: 'POST',
+          body: JSON.stringify({
+            // add name
+            email: userEmail,
+          }),
+          headers: {
+            "Content-Type": 'application/json',
+          }
+        })
+        const { id } = await res.json()
+
+        // userId in context will be used for future user database relationships
+        setUserId(id)
+      })()
+
+    }
+  }, [userEmail])
 
   return (
     <ReactReduxFirebaseProvider {...rrfProps}>
