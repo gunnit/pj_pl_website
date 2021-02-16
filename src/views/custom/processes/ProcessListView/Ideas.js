@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
+import ideaIcon from '@iconify-icons/el/idea';
 import { fShortenNumber } from 'utils/formatNumber';
 import androidFilled from '@iconify-icons/ant-design/android-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
@@ -46,10 +47,11 @@ export default function Ideas({ className, ...other }) {
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <div className={classes.icon}>
-        <Icon icon={androidFilled} width={24} height={24} />
+        <Icon icon={ideaIcon} width={24} height={24} />
       </div>
       <Typography variant="h3">{fShortenNumber(total)}</Typography>
       <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Ideas</Box>
     </Card>
   );
 }
+ 

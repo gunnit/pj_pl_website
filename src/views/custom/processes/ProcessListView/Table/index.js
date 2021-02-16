@@ -25,7 +25,7 @@ import {
   Menu,
   MenuItem,
 } from '@material-ui/core';
-
+import { MLabel } from '../../../../../@material-extend';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -273,12 +273,20 @@ function ProductListView() {
                             {name}
                           </TableCell>
                           <TableCell align="right">{priority}</TableCell>
-                          <TableCell align="right">{alignment}</TableCell>
+                          <TableCell align="right">                            
+                            <MLabel variant="filled" color="info">
+                            {alignment}
+                            </MLabel>
+                          </TableCell>
                           <TableCell align="right">{automationScore}</TableCell>
                           <TableCell align="right">{costWithoutAutomation}</TableCell>
                           <TableCell align="right">{costWithAutomation}</TableCell>
                           <TableCell align="right">{oneYearSavings}</TableCell>
-                          <TableCell align="right">{threeYearSavings}</TableCell>
+                          <TableCell align="right">
+                            <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
+                            {threeYearSavings}
+                            </MLabel>
+                          </TableCell>
                           <TableCell align="right">{dateCreated}</TableCell>
                           <TableCell align="right">
                             <IconButton className={classes.margin} onClick={handleOpen}>
