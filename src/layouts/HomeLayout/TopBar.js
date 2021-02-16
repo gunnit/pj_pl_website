@@ -182,7 +182,7 @@ function TopBar() {
             component={Link}
             href={PATH_HOME.purchase}
           >
-            Join Private Beta
+            Join Beta
           </Button>
 
           <Hidden mdUp>

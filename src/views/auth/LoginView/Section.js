@@ -31,7 +31,7 @@ function Section({ className }) {
       <Box component="h3" sx={{ typography: 'h3', px: 5, mt: 5, mb: 15 }}>
         Hi, Welcome Back
       </Box>
-      <img src="/static/illustrations/illustration_login.svg" alt="login" />
+      <img src="/static/images/illustrations/illustration_login.svg" alt="login" />
     </Card>
   );
 }

@@ -28,7 +28,7 @@ function Section({ className }) {
       </Box>
       <img
         alt="register"
-        src="/static/illustrations/illustration_register.svg"
+        src="/static/images/illustrations/illustration_register.svg"
       />
     </Card>
   );
