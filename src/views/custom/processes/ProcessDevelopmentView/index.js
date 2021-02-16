@@ -5,7 +5,13 @@ import SearchTable from './SearchTable'
 import Page from 'components/Page';
 import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
 import NoProcesses from '../NoProcesses';
-import rocketIcon from '@iconify-icons/fxemoji/rocket';
+import { Icon, InlineIcon } from '@iconify/react';
+import constructionWorker from '@iconify-icons/emojione-monotone/construction-worker';
+import costEstimateOutline from '@iconify-icons/teenyicons/cost-estimate-outline';
+import dollarCircleFilled from '@iconify-icons/ant-design/dollar-circle-filled';
+import fieldTimeOutlined from '@iconify-icons/ant-design/field-time-outlined';
+
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,32 +42,33 @@ function ProcessDevelopmentView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Development Cost'}
                                 mainNumber={0}
-                                backgroundColor={theme.palette.info.main}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.success.dark}
+                                icon={constructionWorker}
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Cost'}
                                 mainNumber={0}
-                                backgroundColor={''}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.success.main}
+                                icon={costEstimateOutline}
+                                
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Daily Rate'}
                                 mainNumber={0}
-                                backgroundColor={''}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.success.main}
+                                icon={dollarCircleFilled}
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Duration'}
                                 mainNumber={0}
-                                backgroundColor={''}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.success.main}
+                                icon={fieldTimeOutlined}
                             />
                         </Grid>
 

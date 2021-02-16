@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import SearchTable from './SearchTable'
 import Page from 'components/Page';
@@ -12,11 +12,13 @@ import rocketIcon from '@iconify-icons/fxemoji/rocket';
 
 
 const useStyles = makeStyles(theme => ({
-    root: {}
+    root: {},
+
 }));
 
 function ProcessProductionView() {
     const classes = useStyles();
+    const theme = useTheme()
     // const { auth, profile } = useSelector(state => state.firebase);
     // const displayName = auth.displayName || profile.displayName;
 
@@ -37,7 +39,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Development Cost'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -45,7 +47,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Maintenance Cost'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -53,7 +55,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total License Cost'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -61,7 +63,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Infrastructure Cost'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -76,7 +78,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'ROI Year 1'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -84,7 +86,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'ROI Year 2'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -92,7 +94,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'ROI Year 3'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -100,7 +102,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Savings After 3 Years'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -108,7 +110,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'FTE Savings'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -116,7 +118,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Hours Returned to Business'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -124,7 +126,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Net Present Value'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
@@ -132,7 +134,7 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Hours Saved (Yearly)'}
                                 mainNumber={0}
-                                backgroundColor={''}
+                                backgroundColor={theme.palette.success.darker}
                                 icon={rocketIcon}
                             />
                         </Grid>
