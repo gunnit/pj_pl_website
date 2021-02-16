@@ -27,6 +27,7 @@ import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
 import NewProcessFormRequirements from './NewProcessFormRequirements';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
+import InfoBox from './InfoBox';
 
 // ----------------------------------------------------------------------
 
@@ -335,6 +336,9 @@ function NewPostView() {
               <Button variant='contained'>Share Form</Button>
             </Grid>
           </Grid>
+          {/* <Grid item>
+            <InfoBox title={'title'} description={'description'} imagePath={''} />
+          </Grid> */}
           <Grid item marginBottom={3}>
             <Typography variant='h4' gutterBottom>Create a new process</Typography>
           </Grid>
