@@ -101,6 +101,12 @@ function NavItem({
     setShow(show => !show);
   };
 
+  const ideasNumber = 4
+  const pipelineNumber = 6
+  const developmentNumber = 3
+  const productionNumber = 10
+  const listOfProcessesNumber = 23
+
   if (children) {
     return (
       <>
@@ -163,8 +169,13 @@ function NavItem({
         {isSubItem ? <span className={classes.subIcon} /> : icon}
       </ListItemIcon>
       <ListItemText disableTypography primary={title} />
+      {title === 'ideas' && ideasNumber}
+      {title === 'pipeline' && pipelineNumber}
+      {title === 'development' && developmentNumber}
+      {title === 'production' && productionNumber}
+      {title === 'list of processes' && listOfProcessesNumber}
 
-      {info && info}
+      {/* {info && info} */}
     </ListItem>
   );
 }
