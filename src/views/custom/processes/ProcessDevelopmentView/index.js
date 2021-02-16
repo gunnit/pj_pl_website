@@ -42,7 +42,7 @@ function ProcessDevelopmentView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Development Cost'}
                                 mainNumber={0}
-                                backgroundColor={theme.palette.success.dark}
+                                backgroundColor={theme.palette.secondary.lighter}
                                 icon={constructionWorker}
                             />
                         </Grid>
@@ -50,7 +50,7 @@ function ProcessDevelopmentView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Cost'}
                                 mainNumber={0}
-                                backgroundColor={theme.palette.success.main}
+                                backgroundColor={theme.palette.success.lighter}
                                 icon={costEstimateOutline}
                                 
                             />
@@ -59,7 +59,7 @@ function ProcessDevelopmentView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Daily Rate'}
                                 mainNumber={0}
-                                backgroundColor={theme.palette.success.main}
+                                backgroundColor={theme.palette.success.lighter}
                                 icon={dollarCircleFilled}
                             />
                         </Grid>
@@ -67,7 +67,7 @@ function ProcessDevelopmentView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Duration'}
                                 mainNumber={0}
-                                backgroundColor={theme.palette.success.main}
+                                backgroundColor={theme.palette.success.lighter}
                                 icon={fieldTimeOutlined}
                             />
                         </Grid>

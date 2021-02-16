@@ -73,7 +73,7 @@ function VisionForm({ formik, onOpenPreview, className, ...other }) {
                 {...other}
             >
                 <Typography variant="subtitle2" gutterBottom>
-                    Please outline your organization's objectives for your RPA capability. What benefits are you aiming to achieve, and how are these aligned with your corporate strategy?
+                What policies do you have in place to control user access to the RPA application?
                 </Typography>
                 <TextField
                     select
@@ -85,11 +85,10 @@ function VisionForm({ formik, onOpenPreview, className, ...other }) {
                     className={classes.margin}
                 >
                     {[
-                        'RPA objectives are clearly aligned with corporate strategy.',
-                        'RPA objectives need adjustments and are aligned with corporate strategy.',
-                        'Work In Progress',
-                        'We are looking to identify the objectives of RPA and how these are aligned with the corporate strategy.',
-                        'There are no clear objectives or alignment to strategy.',
+                        'Logical Access Model created with input from all stakeholders, including Head of RPA, RPA Governance Board and IT. The LAM has been approved by the RPA Governance Board and complies to the organization’s security and standards.',
+                        'Logical Access Model in place, with input from Head of RPA, RPA Governance Board or IT. There is no process in place to approve the LAM by the RPA Governance Board.',
+                        'Logical Access Model in place, however, there was no input from Head of RPA, RPA Governance Board or IT. The LAM has not been approved by the RPA Governance Board.',
+                        'There is no Logical Access Model in place.',
                     ].map(option => (
                         <MenuItem key={option} value={option}>
                             {option}
