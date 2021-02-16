@@ -146,10 +146,6 @@ function ProductListView() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
 
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, [dispatch]);
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');

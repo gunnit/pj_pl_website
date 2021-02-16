@@ -49,7 +49,7 @@ export default function NoProcesses({ primaryText, secondaryText }) {
                         component={motion.img}
                         variants={varBounceIn}
                         alt="404"
-                        src="/static/illustrations/illustration_404.svg"
+                        src="/static/images/illustrations/illustration_404.svg"
                         sx={{ width: '100%', maxHeight: 240, my: { xs: 5, sm: 10 } }}
                     />
                     <Button

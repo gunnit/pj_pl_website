@@ -5,9 +5,11 @@ import SearchTable from './SearchTable'
 import Page from 'components/Page';
 import Breakeven from './Breakeven';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
-import GenericBoxInfoProduction from './GenericBoxInfoProduction';
+import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
 import BarChart from './BarChart';
 import NoProcesses from '../NoProcesses';
+import rocketIcon from '@iconify-icons/fxemoji/rocket';
+
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -31,20 +33,38 @@ function ProcessProductionView() {
                     </Typography>
                     </Box>
                     <Grid container spacing={3}>
-
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Total Development Cost'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Total Development Cost'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Total Maintenance Cost'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Total Maintenance Cost'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Total License Cost'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Total License Cost'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Total Infrastructure Cost'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Total Infrastructure Cost'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
-
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <SearchTable />
                         </Grid>
@@ -53,28 +73,68 @@ function ProcessProductionView() {
                             <BarChart />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'ROI Year 1'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'ROI Year 1'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'ROI Year 2'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'ROI Year 2'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'ROI Year 3'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'ROI Year 3'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Savings After 3 Years'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Savings After 3 Years'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'FTE Savings'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'FTE Savings'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Hours Returned to Business'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Hours Returned to Business'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Net Present Value'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Net Present Value'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
-                            <GenericBoxInfoProduction infoType={'Hours Saved (Yearly)'} />
+                            <InfoBoxWithTitleAndNumber
+                                infoType={'Hours Saved (Yearly)'}
+                                mainNumber={0}
+                                backgroundColor={''}
+                                icon={rocketIcon}
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <Breakeven />

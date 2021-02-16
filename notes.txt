@@ -1,5 +1,7 @@
 Things to add:
 
+Navbar heading only turns green for top option underneath it
+
 Trying to submit form with errors should turn the inputs red
 
 Applications part of new process form - required or not?
