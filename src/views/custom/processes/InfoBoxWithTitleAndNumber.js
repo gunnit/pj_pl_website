@@ -1,12 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
-import { merge } from 'lodash';
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import rocketIcon from '@iconify-icons/fxemoji/rocket';
-import ReactApexChart from 'react-apexcharts';
 import { fNumber } from 'utils/formatNumber';
-import { ApexChartsOption } from 'components/Charts/Apexcharts';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Card, Typography, Box } from '@material-ui/core';
 
@@ -33,9 +29,8 @@ const useStyles = makeStyles(theme => {
 });
 
 
-function Widgets1({ className, mainNumber, infoType, backgroundColor, ...other }) {
+export default function InfoBoxWithTitleAndNumber({ className, mainNumber, infoType, backgroundColor, icon, ...other }) {
     const classes = useStyles();
-    const theme = useTheme();
 
 
     return (
@@ -49,9 +44,7 @@ function Widgets1({ className, mainNumber, infoType, backgroundColor, ...other }
                 </Typography>
             </Box>
 
-            <Icon icon={rocketIcon} className={classes.icon} />
+            <Icon icon={icon} className={classes.icon} />
         </Card>
     );
 }
-
-export default Widgets1;
