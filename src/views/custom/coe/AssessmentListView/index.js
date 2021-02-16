@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from 'components/Page';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Container, Grid, Card, CardHeader, Box, CardContent, Button } from '@material-ui/core';
+import { Container, Grid, Card, CardHeader, Box, CardContent, Button, Typography } from '@material-ui/core';
 import RadarChart from './RadarChart';
 import CategoryRatings from './CategoryRatings';
 import EditIcon from '@material-ui/icons/Edit';
@@ -19,6 +19,14 @@ export default function AssessmentListView() {
     return (
         <Page title="Assessment List" className={classes.root}>
             <Container maxWidth="xl">
+                <Box sx={{ pb: 5 }}>
+                    <Typography variant="h4" gutterBottom>
+                        Assessment List
+                     </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        Keep track of how your group evolves over time
+                    </Typography>
+                </Box>
                 <Card>
                     <CardHeader title={title} />
                     <CardContent>
