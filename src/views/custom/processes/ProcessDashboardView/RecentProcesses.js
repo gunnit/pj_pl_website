@@ -12,7 +12,7 @@ import {
   Card,
   CardHeader,
 } from '@material-ui/core';
-
+import { MLabel } from '../../../../@material-extend';
 // ----------------------------------------------------------------------
 
 function createData(name, calories, fat, carbs, protein) {
@@ -20,11 +20,11 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const BASIC_TABLE = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9)
+  createData('Frozen yoghurt', 159, 6.0, 24, "CFO"),
+  createData('Ice cream sandwich', 237, 9.0, 37, "CFO"),
+  createData('Eclair', 262, 16.0, 24, "CFO"),
+  createData('Cupcake', 305, 3.7, 67, "CFO"),
+  createData('Gingerbread', 356, 16.0, 49, "CFO")
 ];
 
 const useStyles = makeStyles({
@@ -48,11 +48,11 @@ export default function BasicTable() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                <TableCell>Process Name</TableCell>
+                <TableCell align="right">Objective Alignment</TableCell>
+                <TableCell align="right">Automation Potential</TableCell>
+                <TableCell align="right">Saving</TableCell>
+                <TableCell align="right">Owner</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -61,10 +61,22 @@ export default function BasicTable() {
                   <TableCell component="th" scope="row">
                     {row.name}
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell align="right">
+                    {row.calories}%
+                  </TableCell>
+                  <TableCell align="right">
+                    <MLabel variant="filled" color="info">
+                          {row.fat}
+                    </MLabel>
+                  </TableCell>
+                  <TableCell align="right">
+                    <MLabel variant="filled" color={row.carbs > 0 ? "primary" : "error"}>
+                          {row.carbs}
+                    </MLabel>
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.protein}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

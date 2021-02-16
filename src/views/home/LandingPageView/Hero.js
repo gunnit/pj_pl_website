@@ -161,7 +161,7 @@ function Hero({ className }) {
                 to={PATH_APP.main.dashboard}
                 startIcon={<Icon icon={flashFill} width={20} height={20} />}
               >
-                Join Private Beta
+                Join Beta
               </Button>
             </motion.div>
 

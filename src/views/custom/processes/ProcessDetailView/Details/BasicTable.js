@@ -9,6 +9,8 @@ import {
   TableContainer,
   Typography
 } from '@material-ui/core';
+import { Icon } from '@iconify/react';
+import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 
 // ----------------------------------------------------------------------
 
@@ -45,6 +47,11 @@ export default function BasicTable() {
             <TableRow key={row.title} className={classes.hideLastBorder}>
               <TableCell component="th" scope="row">
                 <Typography variant='subtitle2' color='textSecondary'>
+                <Icon
+                  icon={moreVerticalFill}
+                  width={20}
+                  height={20}
+                />
                   {row.title}
                 </Typography>
               </TableCell>

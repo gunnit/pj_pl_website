@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
+import raceflagIcon from '@iconify-icons/whh/raceflag';
 import { fShortenNumber } from 'utils/formatNumber';
 import bugFilled from '@iconify-icons/ant-design/bug-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
@@ -44,7 +45,7 @@ export default function Production({ className, ...other }) {
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <div className={classes.icon}>
-        <Icon icon={bugFilled} width={24} height={24} />
+        <Icon icon={raceflagIcon} width={24} height={24} />
       </div>
       <Typography variant="h3">{fShortenNumber(total)}</Typography>
       <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Production</Box>

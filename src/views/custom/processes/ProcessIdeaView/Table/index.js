@@ -18,6 +18,7 @@ import {
   TableContainer,
   TablePagination
 } from '@material-ui/core';
+import { MLabel } from '../../../../../@material-extend';
 
 // ----------------------------------------------------------------------
 
@@ -126,10 +127,10 @@ const products = [
   createData('id', 'Yes', 'New Account Entry', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
   createData('id2', 'Yes', 'Credit Checks', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
   createData('id3', 'Yes', 'Ledger Entry', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id4', 'Yes', 'Loan Approval', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
+  createData('id4', 'Yes', 'Loan Approval', '70%', 'Moderately', 0, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
   createData('id5', 'Yes', 'P&L Reconciliation', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
   createData('id6', 'Yes', 'P&L Reconciliation', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id7', 'Yes', 'Order Processing Part 1', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
+  createData('id7', 'Yes', 'Order Processing Part 1', '70%', 'Moderately', -10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
 ];
 
 // ----------------------------------------------------------------------
@@ -247,9 +248,17 @@ function ProductListView() {
                           </TableCell>
 
                           <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">{alignment}</TableCell>
+                          <TableCell align="right">                            
+                            <MLabel variant="filled" color="info">
+                            {alignment}
+                            </MLabel>
+                          </TableCell>
                           <TableCell align="right">{processCritical}</TableCell>
-                          <TableCell align="right">{savingsGoal}</TableCell>
+                          <TableCell align="right">
+                            <MLabel variant="filled" color={savingsGoal > 0 ? "primary" : "error"}>
+                            {savingsGoal}
+                            </MLabel>
+                          </TableCell>
                           <TableCell align="right">{numberOfSteps}</TableCell>
                           <TableCell align="right">{natureOfProcess}</TableCell>
                           <TableCell align="right">{testEnvironment}</TableCell>

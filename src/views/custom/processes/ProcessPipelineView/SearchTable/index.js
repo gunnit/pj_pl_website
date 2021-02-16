@@ -19,7 +19,7 @@ import {
   TableContainer,
   TablePagination
 } from '@material-ui/core';
-
+import { MLabel } from '../../../../../@material-extend';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -271,11 +271,19 @@ function ProductListView() {
                             {overallRating}
                           </TableCell>
                           <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">{alignment}</TableCell>
+                          <TableCell align="right">                            
+                            <MLabel variant="filled" color="info">
+                            {alignment}
+                            </MLabel>
+                          </TableCell>
                           <TableCell align="right">{automationScore}</TableCell>
                           <TableCell align="right">{costWithoutAutomation}</TableCell>
                           <TableCell align="right">{costWithAutomation}</TableCell>
-                          <TableCell align="right">{savings}</TableCell>
+                          <TableCell align="right">
+                            <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
+                            {savings}
+                            </MLabel>
+                          </TableCell>
                           <TableCell align="right">{owner}</TableCell>
                         </TableRow>
                       );
