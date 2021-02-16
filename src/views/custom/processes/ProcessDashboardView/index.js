@@ -92,31 +92,31 @@ function ProcessDashboardView() {
                         <BottomCard
                             title={'Define a Vision'}
                             description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
-                            imagePath={''}
+                            imagePath={'/static/images/process/undraw_statistic_chart_38b6.svg'}
                             clickPath={''}
                         />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >
                         <BottomCard
-                            title={'Define a Vision'}
-                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
-                            imagePath={''}
+                            title={'Assess your Organization'}
+                            description={'Assess the organizational design that best supports delivery of your RPA capability and aligns with your corportate strategy and culture.'}
+                            imagePath={'/static/images/process/undraw_solution_mindset_34bi.svg'}
                             clickPath={''}
                         />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >
                         <BottomCard
-                            title={'Define a Vision'}
-                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
-                            imagePath={''}
+                            title={'Govern the pipeline'}
+                            description={'Assess and select processes to build a sustainable automation pipeline and implement governacne for a secured and digital workforce.'}
+                            imagePath={'/static/images/process/undraw_Booking_re_gw4j.svg'}
                             clickPath={''}
                         />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >
                         <BottomCard
-                            title={'Define a Vision'}
-                            description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
-                            imagePath={''}
+                            title={'Consult the Wiki'}
+                            description={'Discover your next process from our process databse, benchmark your operations against industry standards and understand your process metrics.'}
+                            imagePath={'/static/images/process/undraw_Web_search_re_efla.svg'}
                             clickPath={''}
                         />
                     </Grid>
