@@ -188,7 +188,18 @@ function ColorlibStepIcon(props) {
 export default function NewProcessView() {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-
+  const [sliderValues, setSliderValues] = useState({
+    cost_reduction: 7,
+    reduce_process_duration: 7,
+    improve_accuracy: 7,
+    enable_audit_trail: 7,
+    enable_scalability: 7,
+    improve_security: 7,
+    client_satisfaction: 7,
+    improve_consistency: 7,
+    improve_reliability: 7,
+    increase_retention: 7
+  })
 
 
   const [activeStep, setActiveStep] = useState(0);
@@ -200,8 +211,8 @@ export default function NewProcessView() {
 
   const NewProcessSchema = Yup.object().shape({
     // min and max lengths? no reason for minimum, they can always edit it
-    name: Yup.string().required('Name is required'),
-    name2: Yup.string().required('Level 2 Name is required'),
+    process_name: Yup.string().required('Name is required'),
+    process_L2_process_name: Yup.string().required('Level 2 Name is required'),
     // pipelineSelect: Yup.string().required('Pipeline is required'),
     // overview: Yup.string().required('Overview is required'),
     // description: Yup.string().required('Description is required'),
@@ -306,11 +317,12 @@ export default function NewProcessView() {
 
     } else if (formik.isValid) {
       console.log(formik)
+      console.log(sliderValues)
 
       // const res = await fetch(`${apiBaseUrl}/register/`, {
       //   method: 'POST',
       //   body: JSON.stringify({
-      //     ...formik.values, slider values
+      //     ...formik.values, ...sliderValues
       //   }),
       //   headers: {
       //     "Content-Type": 'application/json',
@@ -337,7 +349,7 @@ export default function NewProcessView() {
       case 2:
         return <NewProcessFormOwnership formik={formik} />;
       default:
-        return <NewProcessFormRequirements formik={formik} />;
+        return <NewProcessFormRequirements formik={formik} setSliderValues={setSliderValues} />;
     }
   }
   return (

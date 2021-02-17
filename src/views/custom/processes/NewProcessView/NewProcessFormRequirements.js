@@ -35,7 +35,7 @@ NewProcessFormRequirements.propTypes = {
     className: PropTypes.string
 };
 
-function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other }) {
+function NewProcessFormRequirements({ formik, onOpenPreview, setSliderValues, className, ...other }) {
     const classes = useStyles();
     const {
         errors,
@@ -66,7 +66,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, cost_reduction: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -84,7 +84,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, reduce_process_duration: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -102,7 +102,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_accuracy: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -121,7 +121,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_audit_trail: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -140,7 +140,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_scalability: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -160,7 +160,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_security: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -178,7 +178,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_consistency: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -196,7 +196,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_reliability: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -216,7 +216,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, client_satisfaction: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -236,7 +236,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
-                    onChangeCommitted={(e, value) => console.log(value)}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, increase_retention: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
