@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Page from 'components/Page';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
@@ -27,7 +27,8 @@ import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
 import NewProcessFormRequirements from './NewProcessFormRequirements';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
-import InfoBox from './InfoBox';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
 
 // ----------------------------------------------------------------------
 
@@ -201,6 +202,7 @@ export default function NewProcessView() {
     increase_retention: 7
   })
 
+  const { userId } = useContext(Context)
 
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
@@ -260,10 +262,10 @@ export default function NewProcessView() {
       process_SME_tel: '',
       owner_name: '',
       owner_email: '',
-      savingsGoal: '',
+      // savingsGoal: '',
       saving_target_explanation: '',
       num_of_manual_steps: '',
-      painPoints: '',
+      // painPoints: '',
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -316,21 +318,23 @@ export default function NewProcessView() {
       }
 
     } else if (formik.isValid) {
-      console.log(formik)
-      console.log(sliderValues)
+      // console.log(formik)
+      // console.log(sliderValues)
 
-      // const res = await fetch(`${apiBaseUrl}/register/`, {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     ...formik.values, ...sliderValues
-      //   }),
-      //   headers: {
-      //     "Content-Type": 'application/json',
-      //   }
-      //   // Authorization###
-      // })
+      const res = await fetch(`${apiBaseUrl}/create_process/`, {
+        method: 'POST',
+        body: JSON.stringify({
+          ...formik.values,
+          ...sliderValues,
+          customer_id: userId
+        }),
+        headers: {
+          "Content-Type": 'application/json',
+        }
+        // Authorization###
+      })
 
-      // console.log(await res.json())
+      console.log(await res.json())
 
       setActiveStep(prevActiveStep => prevActiveStep + 1);
 
