@@ -151,7 +151,7 @@ const products = [
 
 // ----------------------------------------------------------------------
 
-function ProductListView() {
+export default function ProcessTable({ processes }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -160,10 +160,8 @@ function ProductListView() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-  const { setCurrentProcess } = useContext(Context)
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, [dispatch]);
+  const { setCurrentProcessId } = useContext(Context)
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -195,22 +193,22 @@ function ProductListView() {
 
   const handleOpen = (event, id) => {
     setOpen(event.currentTarget);
-    setCurrentProcess(id)
+    setCurrentProcessId(id)
   };
   const handleClose = (option) => {
     setOpen(null);
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
-  const filteredProducts = applySortFilter(
-    products,
+  const filteredProcesses = applySortFilter(
+    processes,
     getComparator(order, orderBy),
     filterName
   );
 
-  const isProductNotFound = filteredProducts.length === 0;
+  const isProductNotFound = filteredProcesses.length === 0;
 
   return (
     <Page title="All Processes" className={classes.root}>
@@ -230,13 +228,13 @@ function ProductListView() {
                   classes={classes}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={products.length}
+                  rowCount={processes.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredProducts
+                  {filteredProcesses
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
 
@@ -344,7 +342,7 @@ function ProductListView() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={products.length}
+            count={processes.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -355,5 +353,3 @@ function ProductListView() {
     </Page >
   );
 }
-
-export default ProductListView;

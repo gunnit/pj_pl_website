@@ -46,34 +46,35 @@ export default function ProcessDetailView() {
         setValue(newValue);
     };
 
-    const [ideas, setIdeas] = useState(null)
+    const [processDetails, setProcessDetails] = useState(null)
     const [error, setError] = useState(false)
-    const { userId } = useContext(Context)
+    const { userId, currentProcessId } = useContext(Context)
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (!ideas && userId) {
+        if (currentProcessId && userId) {
 
-    //         // (async function () {
-    //         //     try {
-    //         //         const res = await fetch(`${apiBaseUrl}/ideas/${processId}`)
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId}`)
 
-    //         //         setIdeas(await res.json())
-    //         //     } catch (e) {
-    //         //         setError(true)
-    //         //     }
-    //         // })()
-    //     }
+                    setProcessDetails(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
 
-    // }, [ideas, userId])
+    }, [currentProcessId, userId])
 
-    // if (error) {
-    //     return <Page500View />
-    // }
+    if (error) {
+        return <Page500View />
+    }
 
-    // if (!ideas) {
-    //     return <LoadingScreen />
-    // }
+    if (!processDetails) {
+        return <LoadingScreen />
+    }
+
 
 
     return (

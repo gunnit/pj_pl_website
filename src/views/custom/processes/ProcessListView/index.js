@@ -29,29 +29,29 @@ function ProcessListView() {
     const [error, setError] = useState(false)
     const { userId } = useContext(Context)
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (!processes && userId) {
+        if (!processes && userId) {
 
-    //         (async function () {
-    //             try {
-    //                 const res = await fetch(`${apiBaseUrl}/process_list/${userId}`)
-    //                 setProcesses(await res.json())
-    //             } catch (e) {
-    //                 setError(true)
-    //             }
-    //         })()
-    //     }
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/process_list/${userId}`)
+                    setProcesses(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
 
-    // }, [processes, userId])
+    }, [processes, userId])
 
-    // if (error) {
-    //     return <Page500View />
-    // }
+    if (error) {
+        return <Page500View />
+    }
 
-    // if (!processes) {
-    //     return <LoadingScreen />
-    // }
+    if (!processes) {
+        return <LoadingScreen />
+    }
 
     return (
         <Page title="All Processes" className={classes.root}>
@@ -86,7 +86,7 @@ function ProcessListView() {
                         </ButtonAnimate>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <Table />
+                        <Table processes={processes.processes} />
                     </Grid>
                 </Grid>
             </Container>
