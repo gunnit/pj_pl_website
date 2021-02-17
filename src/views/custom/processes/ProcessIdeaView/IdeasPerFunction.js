@@ -11,12 +11,9 @@ import { useTheme } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [
-  { data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380] }
-];
 
-export default function IdeasPerFunction() {
-  const theme = useTheme();
+
+export default function IdeasPerFunction({ chartData }) {
   const chartOptions = merge(ApexChartsOption(), {
     stroke: { show: false },
     plotOptions: {
@@ -62,7 +59,7 @@ export default function IdeasPerFunction() {
         <ReactApexChart
           type="bar"
           height={320}
-          series={CHART_DATA}
+          series={chartData}
           options={chartOptions}
         />
       </CardContent>

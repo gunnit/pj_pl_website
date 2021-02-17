@@ -6,7 +6,7 @@ import Page from 'components/Page';
 import Widgets1 from './Widgets1';
 import Widgets2 from './Widgets2';
 import Widgets3 from './Widgets3';
-import BarChart from './IdeasPerFunction';
+import IdeasPerFunction from './IdeasPerFunction';
 import ProcessCriticality from './ProcessCriticality';
 import NatureOfProcess from './NatureOfProcess';
 import NoProcesses from '../NoProcesses';
@@ -76,7 +76,23 @@ function ProcessIdeaView() {
                     </Grid>
 
                     <Grid item lg={12}>
-                        <BarChart />
+                        <IdeasPerFunction chartData={[
+                            ideas.count_function_processes_finance,
+                            ideas.count_function_processes_inventory,
+                            ideas.count_function_processes_production,
+                            ideas.count_function_processes_supply_chain,
+                            ideas.count_function_processes_procurement,
+                            ideas.count_function_processes_accounting,
+                            ideas.count_function_processes_HR,
+                            ideas.count_function_processes_legal,
+                            ideas.count_function_processes_marketing,
+                            ideas.count_function_processes_sales,
+                            ideas.count_function_processes_customer_services,
+                            ideas.count_function_processes_development,
+                            ideas.count_function_processes_IT,
+                            ideas.count_function_processes_other,
+                            ideas.count_function_processes_notanswered,
+                        ]} />
                     </Grid>
                     <Grid item lg={6}>
                         <ProcessCriticality />
