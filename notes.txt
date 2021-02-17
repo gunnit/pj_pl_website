@@ -1,5 +1,7 @@
 Things to add:
 
+Loading button when submitting forms
+
 Change demo user autofill on login
 
 NavBar not displaying properly

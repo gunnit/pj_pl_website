@@ -29,6 +29,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
+import { LoadingButton } from '@material-ui/lab';
+
 
 // ----------------------------------------------------------------------
 
@@ -205,6 +207,7 @@ export default function NewProcessView() {
   const { userId } = useContext(Context)
 
   const [activeStep, setActiveStep] = useState(0);
+  const [pending, setPending] = useState(false)
   const steps = getSteps();
 
   const handleBack = () => {
@@ -318,7 +321,7 @@ export default function NewProcessView() {
       }
 
     } else if (formik.isValid) {
-
+      setPending(true)
       try {
         const res = await fetch(`${apiBaseUrl}/create_process/`, {
           method: 'POST',
@@ -429,12 +432,21 @@ export default function NewProcessView() {
                       Back
                     </Button>
                     <Button
+                      disabled={pending}
                       variant="contained"
                       onClick={handleNext}
                       className={classes.button}
                     >
                       {activeStep === steps.length - 1 ? 'Create' : 'Next'}
                     </Button>
+                    {/* <LoadingButton
+                      pending={pending}
+                      variant="contained"
+                      pendingPosition="start"
+                      startIcon={<AlarmIcon />}
+                    >
+                      Save
+          </LoadingButton> */}
                   </Box>
                 </div>
               )}
