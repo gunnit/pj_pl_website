@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import SearchTable from './SearchTable'
@@ -10,7 +10,10 @@ import constructionWorker from '@iconify-icons/emojione-monotone/construction-wo
 import costEstimateOutline from '@iconify-icons/teenyicons/cost-estimate-outline';
 import dollarCircleFilled from '@iconify-icons/ant-design/dollar-circle-filled';
 import fieldTimeOutlined from '@iconify-icons/ant-design/field-time-outlined';
-
+import { apiBaseUrl } from 'config';
+import Page500View from 'views/errors/Page500View';
+import LoadingScreen from 'components/LoadingScreen';
+import Context from 'context/Context';
 
 
 
@@ -22,13 +25,39 @@ const useStyles = makeStyles(theme => ({
 function ProcessDevelopmentView() {
     const classes = useStyles();
     const theme = useTheme()
-    // const { auth, profile } = useSelector(state => state.firebase);
-    // const displayName = auth.displayName || profile.displayName;
-    const processes = true;
+    const [development, setDevelopment] = useState(null)
+    const [error, setError] = useState(false)
+    const { userId } = useContext(Context)
+
+
+    useEffect(() => {
+
+        if (!development && userId) {
+
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/development_report/${userId}`)
+                    setDevelopment(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
+
+    }, [development, userId])
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!development) {
+        return <LoadingScreen />
+    }
+
 
     return (
         <Page title="Development Dashboard" className={classes.root}>
-            {processes
+            {development.processes_idea.length
                 ? <Container maxWidth="xl">
                     <Box sx={{ pb: 5 }}>
                         <Typography variant="h4" gutterBottom>Development Dashboard</Typography>
@@ -49,10 +78,10 @@ function ProcessDevelopmentView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Cost'}
-                                mainNumber={0}
+                                mainNumber={development.avg_development_cost}
                                 backgroundColor={theme.palette.success.lighter}
                                 icon={costEstimateOutline}
-                                
+
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>

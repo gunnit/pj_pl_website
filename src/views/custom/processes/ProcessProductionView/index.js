@@ -53,7 +53,7 @@ function ProcessProductionView() {
 
     return (
         <Page title="Production Dashboard" className={classes.root}>
-            {production.processes_production.length
+            {production.processes_idea.length
                 ? <Container maxWidth="xl">
                     <Box sx={{ pb: 5 }}>
                         <Typography variant="h4" gutterBottom>Production Dashboard</Typography>
