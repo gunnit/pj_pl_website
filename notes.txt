@@ -1,5 +1,7 @@
 Things to add:
 
+Change demo user autofill on login
+
 NavBar not displaying properly
 
 Dashboard new user page

@@ -163,15 +163,6 @@ export default function IdeasTable({ processes }) {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = event => {
-    if (event.target.checked) {
-      const newSelecteds = processes.map(n => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -217,7 +208,6 @@ export default function IdeasTable({ processes }) {
                   rowCount={processes.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredProcesses
@@ -239,6 +229,7 @@ export default function IdeasTable({ processes }) {
                       const isItemSelected = selected.indexOf(process_name) !== -1;
                       const labelId = `enhanced-table-checkbox-${index}`;
 
+                      // && and || statements below are to say what to do when the data is null
                       return (
                         <TableRow
                           hover
@@ -255,7 +246,7 @@ export default function IdeasTable({ processes }) {
                             scope="row"
                             padding="none"
                           >
-                            {moveToPipeline}
+                            {moveToPipeline || ''}
                           </TableCell>
 
                           <TableCell align="right">{process_name || ''}</TableCell>

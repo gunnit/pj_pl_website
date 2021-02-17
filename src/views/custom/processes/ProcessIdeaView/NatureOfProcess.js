@@ -1,5 +1,4 @@
 import React from 'react';
-import DonutChart from './DonutChart';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Card,
@@ -7,6 +6,9 @@ import {
     CardContent,
     Typography,
 } from '@material-ui/core';
+import { merge } from 'lodash';
+import ReactApexChart from 'react-apexcharts';
+import { ApexChartsOption } from 'components/Charts/Apexcharts';
 
 // ----------------------------------------------------------------------
 
@@ -20,14 +22,30 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function NatureOfProcess() {
+
+
+
+function NatureOfProcess({ data }) {
     const classes = useStyles();
+
+    const chartOptions = merge(ApexChartsOption(), {
+        labels: ['Entirely repetitive', 'Semi-repetitive', 'Not repetitive', 'Not answered'],
+        stroke: { show: false },
+        legend: { horizontalAlign: 'center' },
+        plotOptions: { pie: { donut: { size: '90%' } } }
+    });
+
 
     return (
         <Card>
             <CardHeader title="Nature of Process" />
             <CardContent className={classes.content}>
-                <DonutChart />
+                <ReactApexChart
+                    width={400}
+                    type="donut"
+                    series={data}
+                    options={chartOptions}
+                />
             </CardContent>
             <CardContent>
                 <Typography>

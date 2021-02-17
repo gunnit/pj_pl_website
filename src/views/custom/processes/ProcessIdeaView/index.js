@@ -76,7 +76,7 @@ function ProcessIdeaView() {
                     </Grid>
 
                     <Grid item lg={12}>
-                        <IdeasPerFunction chartData={[
+                        <IdeasPerFunction data={[
                             ideas.count_function_processes_finance,
                             ideas.count_function_processes_inventory,
                             ideas.count_function_processes_production,
@@ -95,10 +95,24 @@ function ProcessIdeaView() {
                         ]} />
                     </Grid>
                     <Grid item lg={6}>
-                        <ProcessCriticality />
+                        <ProcessCriticality
+                            data={[
+                                ideas.count_criticality_processes_idea_extremely,
+                                ideas.count_criticality_processes_idea_very,
+                                ideas.count_criticality_processes_idea_moderately,
+                                ideas.count_criticality_processes_idea_slightly,
+                                ideas.count_criticality_processes_idea_notatall,
+                                ideas.count_criticality_processes_idea_notanswered,
+                            ]}
+                        />
                     </Grid>
                     <Grid item lg={6}>
-                        <NatureOfProcess />
+                        <NatureOfProcess data={[
+                            ideas.count_natureofprocess_processes_idea_entirely_repetitive,
+                            ideas.count_natureofprocess_processes_idea_semi_repetitive,
+                            ideas.count_natureofprocess_processes_idea_not_repetitive,
+                            ideas.count_natureofprocess_processes_idea_blank_repetitive,
+                        ]} />
                     </Grid>
                 </Grid>
             </Container>

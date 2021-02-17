@@ -214,7 +214,7 @@ export default function NewProcessView() {
   const NewProcessSchema = Yup.object().shape({
     // min and max lengths? no reason for minimum, they can always edit it
     process_name: Yup.string().required('Name is required'),
-    process_L2_process_name: Yup.string().required('Level 2 Name is required'),
+    // process_L2_process_name: Yup.string().required('Level 2 Name is required'),
     pipeline: Yup.string().required('Pipeline is required'),
     // overview: Yup.string().required('Overview is required'),
     // description: Yup.string().required('Description is required'),
