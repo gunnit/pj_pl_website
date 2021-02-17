@@ -250,8 +250,8 @@ function NewProcessFormRequirements({ formik, onOpenPreview, setSliderValues, cl
                     fullWidth
                     type='number'
                     label="Savings Goal"
-                    {...getFieldProps('savingsGoal')}
-                    error={Boolean(touched.savingsGoal && errors.savingsGoal)}
+                    {...getFieldProps('process_objective')}
+                    error={Boolean(touched.process_objective && errors.process_objective)}
                     helperText={'What is a quantitative measure on how success will be measured on the process?'}
                     className={classes.margin}
                 />
@@ -327,9 +327,9 @@ function NewProcessFormRequirements({ formik, onOpenPreview, setSliderValues, cl
                     minRows={3}
                     maxRows={5}
                     label="Explain pain points"
-                    {...getFieldProps('painPoints')}
-                    error={Boolean(touched.painPoints && errors.painPoints)}
-                    // helperText={touched.painPoints && errors.painPoints}
+                    {...getFieldProps('note')}
+                    error={Boolean(touched.note && errors.note)}
+                    // helperText={touched.note && errors.note}
                     helperText={'List the main issues why this process needs to be automated'}
                     className={classes.margin}
                 />
