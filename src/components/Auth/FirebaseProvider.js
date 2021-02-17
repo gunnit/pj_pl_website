@@ -81,6 +81,7 @@ function FirebaseProvider({ children }) {
           headers: {
             "Content-Type": 'application/json',
           }
+          // Authorization###
         })
         const { id } = await res.json()
 

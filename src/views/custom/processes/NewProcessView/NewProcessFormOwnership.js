@@ -70,8 +70,8 @@ function NewProcessFormOwnership({ formik, onOpenPreview, className, ...other })
                 <TextField
                     fullWidth
                     label="Process SME"
-                    {...getFieldProps('sme')}
-                    error={Boolean(touched.sme && errors.sme)}
+                    {...getFieldProps('process_SME')}
+                    error={Boolean(touched.process_SME && errors.process_SME)}
                     helperText={'Process subject matter expert name. The one with the most knowledge on the process.'}
                     className={classes.margin}
                 />
@@ -80,8 +80,8 @@ function NewProcessFormOwnership({ formik, onOpenPreview, className, ...other })
                     fullWidth
                     type='email'
                     label="Process SME Email"
-                    {...getFieldProps('smeEmail')}
-                    error={Boolean(touched.smeEmail && errors.smeEmail)}
+                    {...getFieldProps('process_SME_email')}
+                    error={Boolean(touched.process_SME_email && errors.process_SME_email)}
                     className={classes.margin}
                 />
 
@@ -89,7 +89,7 @@ function NewProcessFormOwnership({ formik, onOpenPreview, className, ...other })
                     fullWidth
                     type='number'
                     label="Process SME Phone Number"
-                    {...getFieldProps('smePhone')}
+                    {...getFieldProps('process_SME_tel')}
                     error={Boolean(touched.smePhone && errors.smePhone)}
                     className={classes.margin}
                 />
@@ -97,7 +97,7 @@ function NewProcessFormOwnership({ formik, onOpenPreview, className, ...other })
                 <TextField
                     fullWidth
                     label="Process Owner Name"
-                    {...getFieldProps('ownerName')}
+                    {...getFieldProps('owner_name')}
                     error={Boolean(touched.ownerName && errors.ownerName)}
                     className={classes.margin}
                 />
@@ -105,7 +105,7 @@ function NewProcessFormOwnership({ formik, onOpenPreview, className, ...other })
                 <TextField
                     fullWidth
                     label="Process Owner Email"
-                    {...getFieldProps('ownerEmail')}
+                    {...getFieldProps('owner_email')}
                     error={Boolean(touched.ownerEmail && errors.ownerEmail)}
                     className={classes.margin}
                 />

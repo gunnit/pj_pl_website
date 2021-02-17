@@ -185,7 +185,7 @@ function ColorlibStepIcon(props) {
   );
 }
 
-function NewPostView() {
+export default function NewProcessView() {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -202,25 +202,25 @@ function NewPostView() {
     // min and max lengths? no reason for minimum, they can always edit it
     name: Yup.string().required('Name is required'),
     name2: Yup.string().required('Level 2 Name is required'),
-    pipelineSelect: Yup.string().required('Pipeline is required'),
-    overview: Yup.string().required('Overview is required'),
-    description: Yup.string().required('Description is required'),
-    processCritical: Yup.string().required('Process critical is required'),
-    businessProcess: Yup.string().required('Business process is required'),
-    businessUnit: Yup.string().required('Business unit is required'),
-    businessFunction: Yup.string().required('Business function is required'),
-    documentationAvailable: Yup.string().required('Documentation available is required'),
-    natureOfProcess: Yup.string().required('Nature of process is required'),
-    testEnvironmentAvailable: Yup.string().required('Test environment is required'),
-    sponsor: Yup.string().required('Sponsor is required'),
-    sme: Yup.string().required('SME is required'),
-    smeEmail: Yup.string().email().required('SME Email is required'),
-    ownerName: Yup.string().required('Owner name is required'),
-    ownerEmail: Yup.string().required('Owner email is required'),
-    savingsGoal: Yup.number().positive().required('Savings goal is required'),
-    savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
-    manualSteps: Yup.string().required('Number of manual steps is required'),
-    painPoints: Yup.string().required('Pain points are required'),
+    // pipelineSelect: Yup.string().required('Pipeline is required'),
+    // overview: Yup.string().required('Overview is required'),
+    // description: Yup.string().required('Description is required'),
+    // processCritical: Yup.string().required('Process critical is required'),
+    // businessProcess: Yup.string().required('Business process is required'),
+    // businessUnit: Yup.string().required('Business unit is required'),
+    // businessFunction: Yup.string().required('Business function is required'),
+    // documentationAvailable: Yup.string().required('Documentation available is required'),
+    // natureOfProcess: Yup.string().required('Nature of process is required'),
+    // testEnvironmentAvailable: Yup.string().required('Test environment is required'),
+    // sponsor: Yup.string().required('Sponsor is required'),
+    // sme: Yup.string().required('SME is required'),
+    // smeEmail: Yup.string().email().required('SME Email is required'),
+    // ownerName: Yup.string().required('Owner name is required'),
+    // ownerEmail: Yup.string().required('Owner email is required'),
+    // savingsGoal: Yup.number().positive().required('Savings goal is required'),
+    // savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
+    // manualSteps: Yup.string().required('Number of manual steps is required'),
+    // painPoints: Yup.string().required('Pain points are required'),
 
     // content: Yup.string()
     //   .min(1000)
@@ -230,26 +230,28 @@ function NewPostView() {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      name2: '',
+      process_name: '',
+      process_L2_process_name: '',
       overview: '',
       description: '',
-      pipelineSelect: '',
-      processCritical: '',
-      businessProcess: '',
-      businessUnit: '',
-      businessFunction: '',
-      documentationAvailable: '',
-      natureOfProcess: '',
-      testEnvironmentAvailable: '',
+      pipeline: '',
+      process_critical: '',
+      process_type: '',
+      business_unit: '',
+      function: '',
+      process_documentation_available: '',
+      nature_of_process: '',
+      test_env_available: '',
+      team: '',
       sponsor: '',
-      sme: '',
-      smeEmail: '',
-      ownerName: '',
-      ownerEmail: '',
+      process_SME: '',
+      process_SME_email: '',
+      process_SME_tel: '',
+      owner_name: '',
+      owner_email: '',
       savingsGoal: '',
-      savingsGoalJustification: '',
-      manualSteps: '',
+      saving_target_explanation: '',
+      num_of_manual_steps: '',
       painPoints: '',
     },
     validationSchema: NewProcessSchema,
@@ -269,7 +271,7 @@ function NewPostView() {
   });
 
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeStep === 0) {
 
       if (!formik.errors.name
@@ -303,6 +305,20 @@ function NewPostView() {
       }
 
     } else if (formik.isValid) {
+      console.log(formik)
+
+      // const res = await fetch(`${apiBaseUrl}/register/`, {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     ...formik.values, slider values
+      //   }),
+      //   headers: {
+      //     "Content-Type": 'application/json',
+      //   }
+      //   // Authorization###
+      // })
+
+      // console.log(await res.json())
 
       setActiveStep(prevActiveStep => prevActiveStep + 1);
 
@@ -336,9 +352,6 @@ function NewPostView() {
               <Button variant='contained'>Share Form</Button>
             </Grid>
           </Grid>
-          {/* <Grid item>
-            <InfoBox title={'title'} description={'description'} imagePath={''} />
-          </Grid> */}
           <Grid item marginBottom={3}>
             <Typography variant='h4' gutterBottom>Create a new process</Typography>
           </Grid>
@@ -404,7 +417,7 @@ function NewPostView() {
                       onClick={handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Create' : 'Next'}
                     </Button>
                   </Box>
                 </div>
@@ -415,5 +428,3 @@ function NewPostView() {
     </Page>
   );
 }
-
-export default NewPostView;

@@ -50,7 +50,7 @@ function NewProcessFormDetails({ formik, className, ...other }) {
         <TextField
           fullWidth
           label="Process Name"
-          {...getFieldProps('name')}
+          {...getFieldProps('process_name')}
           error={Boolean(touched.name && errors.name)}
           // helperText={touched.name && errors.name}
           className={classes.margin}
@@ -58,8 +58,8 @@ function NewProcessFormDetails({ formik, className, ...other }) {
         <TextField
           fullWidth
           label="Level 2 - Process Name"
-          {...getFieldProps('name2')}
-          error={Boolean(touched.name2 && errors.name2)}
+          {...getFieldProps('process_L2_process_name')}
+          error={Boolean(touched.process_L2_process_name && errors.process_L2_process_name)}
           helperText={'Level 2 process name or taxonomy reference'}
           className={classes.margin}
         />
@@ -68,7 +68,7 @@ function NewProcessFormDetails({ formik, className, ...other }) {
           fullWidth
           variant="outlined"
           label="Pipeline"
-          {...getFieldProps('pipelineSelect')}
+          {...getFieldProps('pipeline')}
           // This select field needs formik.handleChange for formik to detect its value even though the other ones don't seem to need it for some reason
           onChange={formik.handleChange}
           // helperText="Please select your currency"

@@ -33,14 +33,12 @@ function ProcessIdeaView() {
             (async function () {
                 try {
                     const res = await fetch(`${apiBaseUrl}/ideas/${userId}`)
-                    // console.log(await res.json())
+
                     setIdeas(await res.json())
                 } catch (e) {
                     setError(true)
                 }
-
             })()
-
         }
 
     }, [ideas])

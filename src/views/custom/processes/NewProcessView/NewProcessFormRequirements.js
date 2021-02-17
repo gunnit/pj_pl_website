@@ -66,6 +66,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography
                     gutterBottom
@@ -83,6 +84,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography
                     gutterBottom
@@ -100,6 +102,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -118,6 +121,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography
                     gutterBottom
@@ -136,6 +140,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography
                     gutterBottom
@@ -155,6 +160,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -172,6 +178,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -189,6 +196,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography
                     gutterBottom
@@ -208,6 +216,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography
                     gutterBottom
@@ -227,6 +236,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => console.log(value)}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -234,6 +244,8 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     By removing repetitive tasks employees will be able to perform more value adding tasks
                 </Typography>
 
+
+                {/* Find out what to change this name to */}
                 <TextField
                     fullWidth
                     type='number'
@@ -247,8 +259,8 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                 <TextField
                     fullWidth
                     label="Savings Goal Justification"
-                    {...getFieldProps('savingsGoalJustification')}
-                    error={Boolean(touched.savingsGoalJustification && errors.savingsGoalJustification)}
+                    {...getFieldProps('saving_target_explanation')}
+                    error={Boolean(touched.saving_target_explanation && errors.saving_target_explanation)}
                     helperText={'Provide a short explanation on how you calculated the savings goal for this process.'}
                     className={classes.margin}
                 />
@@ -258,7 +270,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     fullWidth
                     variant="outlined"
                     label="Number of Manual Steps"
-                    {...getFieldProps('manualSteps')}
+                    {...getFieldProps('num_of_manual_steps')}
                     onChange={handleChange}
                     className={classes.margin}
                 >
