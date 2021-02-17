@@ -13,6 +13,7 @@ import NoProcesses from '../NoProcesses';
 import LoadingScreen from 'components/LoadingScreen';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
+import Page500View from 'views/errors/Page500View';
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,23 +22,32 @@ const useStyles = makeStyles(theme => ({
 
 function ProcessIdeaView() {
     const classes = useStyles();
-    const [loading, setLoading] = useState(true)
     const [ideas, setIdeas] = useState(null)
-    const error = false;
+    const [error, setError] = useState(false)
     const { userId } = useContext(Context)
 
     useEffect(() => {
 
         if (!ideas) {
+
             (async function () {
-                const res = await fetch(`${apiBaseUrl}/ideas/5`)
-                // console.log(await res.json())
-                setIdeas(await res.json())
+                try {
+                    const res = await fetch(`${apiBaseUrl}/ideas/${userId}`)
+                    // console.log(await res.json())
+                    setIdeas(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+
             })()
-            // fetchData()
+
         }
 
     }, [ideas])
+
+    if (error) {
+        return <Page500View />
+    }
 
     if (!ideas) {
         return <LoadingScreen />
