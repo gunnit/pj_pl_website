@@ -215,7 +215,7 @@ export default function NewProcessView() {
     // min and max lengths? no reason for minimum, they can always edit it
     process_name: Yup.string().required('Name is required'),
     process_L2_process_name: Yup.string().required('Level 2 Name is required'),
-    // pipelineSelect: Yup.string().required('Pipeline is required'),
+    pipeline: Yup.string().required('Pipeline is required'),
     // overview: Yup.string().required('Overview is required'),
     // description: Yup.string().required('Description is required'),
     // processCritical: Yup.string().required('Process critical is required'),
@@ -262,10 +262,10 @@ export default function NewProcessView() {
       process_SME_tel: '',
       owner_name: '',
       owner_email: '',
-      // savingsGoal: '',
+      process_objective: null,
       saving_target_explanation: '',
       num_of_manual_steps: '',
-      // painPoints: '',
+      note: '',
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -288,8 +288,8 @@ export default function NewProcessView() {
     if (activeStep === 0) {
 
       if (!formik.errors.name
-        && !formik.errors.name2
-        && !formik.errors.pipelineSelect
+        && !formik.errors.process_L2_process_name
+        && !formik.errors.pipeline
         && !formik.errors.overview
         && !formik.errors.description) {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -318,8 +318,7 @@ export default function NewProcessView() {
       }
 
     } else if (formik.isValid) {
-      // console.log(formik)
-      // console.log(sliderValues)
+
       try {
         const res = await fetch(`${apiBaseUrl}/create_process/`, {
           method: 'POST',
@@ -338,10 +337,6 @@ export default function NewProcessView() {
       } catch (e) {
         console.error(e)
       }
-
-
-
-
 
     }
 
