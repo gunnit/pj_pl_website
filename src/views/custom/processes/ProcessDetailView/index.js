@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Container, Box, Button, ButtonGroup } from '@material-ui/core';
@@ -15,8 +15,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import { PATH_APP } from 'routes/paths';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
+import Page500View from 'views/errors/Page500View';
+import LoadingScreen from 'components/LoadingScreen';
 
-// ----------------------------------------------------------------------
 
 const SIMPLE_TAB = [
     { value: '1', icon: <PhoneIcon />, label: 'Details' },
@@ -35,13 +38,42 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function ProcessDetailView() {
+export default function ProcessDetailView() {
     const classes = useStyles();
     const [value, setValue] = useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const [ideas, setIdeas] = useState(null)
+    const [error, setError] = useState(false)
+    const { userId } = useContext(Context)
+
+    useEffect(() => {
+
+        // if (!ideas && userId) {
+
+        //     (async function () {
+        //         try {
+        //             const res = await fetch(`${apiBaseUrl}/ideas/${processId}`)
+
+        //             setIdeas(await res.json())
+        //         } catch (e) {
+        //             setError(true)
+        //         }
+        //     })()
+        // }
+
+    }, [ideas, userId])
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!ideas) {
+        return <LoadingScreen />
+    }
 
 
     return (
@@ -89,5 +121,3 @@ function ProcessDetailView() {
         </Page>
     );
 }
-
-export default ProcessDetailView;

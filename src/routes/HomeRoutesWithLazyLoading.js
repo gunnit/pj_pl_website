@@ -1,10 +1,8 @@
 import React, { lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 import HomeLayout from 'layouts/HomeLayout';
-import LandingPageView from '../views/home/LandingPageView';
-import ComponentsView from '../views/home/ComponentsView';
-import AboutPageView from '../views/home/AboutPageView';
 
+// ----------------------------------------------------------------------
 
 const HomeRoutes = {
   path: '*',
@@ -13,17 +11,17 @@ const HomeRoutes = {
     {
       exact: true,
       path: '/',
-      component: LandingPageView
+      component: lazy(() => import('../views/home/LandingPageView'))
     },
     {
       exact: true,
       path: '/components',
-      component: ComponentsView
+      component: lazy(() => import('../views/home/ComponentsView'))
     },
     {
       exact: true,
       path: '/about',
-      component: AboutPageView
+      component: lazy(() => import('../views/home/AboutPageView'))
     },
     {
       component: () => <Redirect to="/404" />

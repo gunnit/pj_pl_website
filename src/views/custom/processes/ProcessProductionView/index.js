@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import SearchTable from './SearchTable'
@@ -9,24 +9,51 @@ import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
 import BarChart from './BarChart';
 import NoProcesses from '../NoProcesses';
 import rocketIcon from '@iconify-icons/fxemoji/rocket';
+import Context from 'context/Context';
+import { apiBaseUrl } from 'config';
+import Page500View from 'views/errors/Page500View';
+import LoadingScreen from 'components/LoadingScreen';
 
 
 const useStyles = makeStyles(theme => ({
     root: {},
-
 }));
 
 function ProcessProductionView() {
     const classes = useStyles();
     const theme = useTheme()
-    // const { auth, profile } = useSelector(state => state.firebase);
-    // const displayName = auth.displayName || profile.displayName;
+    const [production, setProduction] = useState(null)
+    const [error, setError] = useState(false)
+    const { userId } = useContext(Context)
 
-    const processes = true;
+
+    useEffect(() => {
+
+        if (!production && userId) {
+
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/production_report/${userId}`)
+                    setProduction(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
+
+    }, [production, userId])
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!production) {
+        return <LoadingScreen />
+    }
 
     return (
         <Page title="Production Dashboard" className={classes.root}>
-            {processes
+            {production.processes_production.length
                 ? <Container maxWidth="xl">
                     <Box sx={{ pb: 5 }}>
                         <Typography variant="h4" gutterBottom>Production Dashboard</Typography>
