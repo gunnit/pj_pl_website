@@ -209,6 +209,7 @@ export default function NewProcessView() {
   const [activeStep, setActiveStep] = useState(0);
   const [pending, setPending] = useState(false)
   const steps = getSteps();
+  const { setProcessCounts } = useContext(Context)
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -291,37 +292,22 @@ export default function NewProcessView() {
     if (activeStep === 0) {
 
       if (!formik.errors.name
-        && !formik.errors.process_L2_process_name
-        && !formik.errors.pipeline
-        && !formik.errors.overview
-        && !formik.errors.description) {
+        && !formik.errors.pipeline) {
+
         setActiveStep(prevActiveStep => prevActiveStep + 1);
       }
-
     } else if (activeStep === 1) {
 
-      if (!formik.errors.processCritical
-        && !formik.errors.businessProcess
-        && !formik.errors.businessFunction
-        && !formik.errors.documentationAvailable
-        && !formik.errors.natureOfProcess
-        && !formik.errors.testEnvironmentAvailable) {
-
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-      }
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
 
     } else if (activeStep === 2) {
 
-      if (!formik.errors.sponsor
-        && !formik.errors.sme
-        && !formik.errors.smeEmail
-        && !formik.errors.ownerName
-        && !formik.errors.ownerEmail) {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-      }
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
 
     } else if (formik.isValid) {
+
       setPending(true)
+
       try {
         const res = await fetch(`${apiBaseUrl}/create_process/`, {
           method: 'POST',
@@ -336,7 +322,13 @@ export default function NewProcessView() {
           // Authorization###
         })
 
+        // Pipeline value is lower case in the context
+        const lowerCasePipeline = formik.values.pipeline.toLowerCase()
+        // processCounts in context needs to be updated for navbar numbers
+        setProcessCounts(previous => ({ ...previous, [lowerCasePipeline]: previous[lowerCasePipeline] + 1 }))
+
         setActiveStep(prevActiveStep => prevActiveStep + 1);
+
       } catch (e) {
         console.error(e)
       }
