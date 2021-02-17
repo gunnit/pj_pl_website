@@ -28,7 +28,7 @@ function ProcessIdeaView() {
 
     useEffect(() => {
 
-        if (!ideas) {
+        if (!ideas && userId) {
 
             (async function () {
                 try {
@@ -41,7 +41,7 @@ function ProcessIdeaView() {
             })()
         }
 
-    }, [ideas])
+    }, [ideas, userId])
 
     if (error) {
         return <Page500View />

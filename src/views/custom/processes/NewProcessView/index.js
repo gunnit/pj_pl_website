@@ -320,23 +320,28 @@ export default function NewProcessView() {
     } else if (formik.isValid) {
       // console.log(formik)
       // console.log(sliderValues)
+      try {
+        const res = await fetch(`${apiBaseUrl}/create_process/`, {
+          method: 'POST',
+          body: JSON.stringify({
+            ...formik.values,
+            ...sliderValues,
+            customer_id: userId
+          }),
+          headers: {
+            "Content-Type": 'application/json',
+          }
+          // Authorization###
+        })
 
-      const res = await fetch(`${apiBaseUrl}/create_process/`, {
-        method: 'POST',
-        body: JSON.stringify({
-          ...formik.values,
-          ...sliderValues,
-          customer_id: userId
-        }),
-        headers: {
-          "Content-Type": 'application/json',
-        }
-        // Authorization###
-      })
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      } catch (e) {
+        console.error(e)
+      }
 
-      console.log(await res.json())
 
-      setActiveStep(prevActiveStep => prevActiveStep + 1);
+
+
 
     }
 
