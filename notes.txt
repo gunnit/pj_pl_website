@@ -1,5 +1,9 @@
 Things to add:
 
+NavBar not displaying properly
+
+Dashboard new user page
+
 Process list view none found page
 
 Navbar heading only turns green for top option underneath it

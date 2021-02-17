@@ -135,7 +135,7 @@ const products = [
 
 // ----------------------------------------------------------------------
 
-function ProductListView() {
+export default function IdeasTable({ processes }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -143,7 +143,6 @@ function ProductListView() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
-
 
 
   const handleRequestSort = (event, property) => {
@@ -154,7 +153,7 @@ function ProductListView() {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = products.map(n => n.name);
+      const newSelecteds = processes.map(n => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -248,15 +247,15 @@ function ProductListView() {
                           </TableCell>
 
                           <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">                            
+                          <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                            {alignment}
+                              {alignment}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{processCritical}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={savingsGoal > 0 ? "primary" : "error"}>
-                            {savingsGoal}
+                              {savingsGoal}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{numberOfSteps}</TableCell>
@@ -301,5 +300,3 @@ function ProductListView() {
     </Page >
   );
 }
-
-export default ProductListView;
