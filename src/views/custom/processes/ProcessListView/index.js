@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Page from 'components/Page';
 import Ideas from './Ideas';
 import Pipeline from './Pipeline';
@@ -9,7 +9,11 @@ import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'
 import { ButtonAnimate } from 'components/Animate';
 import ShowAllProcesses from './ShowAllProcesses';
-// ----------------------------------------------------------------------
+import Page500View from 'views/errors/Page500View';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
+import LoadingScreen from 'components/LoadingScreen';
+
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -20,6 +24,34 @@ const useStyles = makeStyles(theme => ({
 
 function ProcessListView() {
     const classes = useStyles();
+
+    const [processes, setProcesses] = useState(null)
+    const [error, setError] = useState(false)
+    const { userId } = useContext(Context)
+
+    useEffect(() => {
+
+        if (!processes && userId) {
+
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/process_list/${userId}`)
+                    setProcesses(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
+
+    }, [processes, userId])
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!processes) {
+        return <LoadingScreen />
+    }
 
     return (
         <Page title="All Processes" className={classes.root}>

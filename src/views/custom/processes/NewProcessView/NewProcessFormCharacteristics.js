@@ -56,7 +56,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Process Critical"
                     onChange={handleChange}
-                    {...getFieldProps('processCritical')}
+                    {...getFieldProps('process_critical')}
                     helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -73,7 +73,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Type of Business Process"
                     onChange={handleChange}
-                    {...getFieldProps('businessProcess')}
+                    {...getFieldProps('process_type')}
                     // helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -90,7 +90,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Business Unit"
                     onChange={handleChange}
-                    {...getFieldProps('businessUnit')}
+                    {...getFieldProps('business_unit')}
                     // helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -107,7 +107,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Function"
                     onChange={handleChange}
-                    {...getFieldProps('businessFunction')}
+                    {...getFieldProps('function')}
                     // helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -124,7 +124,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Documentation Available"
                     onChange={handleChange}
-                    {...getFieldProps('documentationAvailable')}
+                    {...getFieldProps('process_documentation_available')}
                     helperText="Is documentation for the process available? E.g. flowcharts, knowhow doc, video recordings, etc."
                     className={classes.margin}
                 >
@@ -141,7 +141,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Nature of Process"
                     onChange={handleChange}
-                    {...getFieldProps('natureOfProcess')}
+                    {...getFieldProps('nature_of_process')}
                     className={classes.margin}
                 >
                     {['Entirely repetitive', 'Semi-repetitive', 'Not repetitive'].map(option => (
@@ -157,7 +157,7 @@ function NewProcessFormCharacteristics({ formik, className, ...other }) {
                     variant="outlined"
                     label="Test Environment Available"
                     onChange={handleChange}
-                    {...getFieldProps('testEnvironmentAvailable')}
+                    {...getFieldProps('test_env_available')}
                     helperText="Is there a virtual test environment where the process could be developed?"
                     className={classes.margin}
                 >

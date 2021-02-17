@@ -7,13 +7,6 @@ import GuestProtect from 'components/Auth/GuestProtect';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { Suspense, Fragment, lazy, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import LoginView from 'views/auth/LoginView';
-import RegisterView from 'views/auth/RegisterView';
-import ResetPasswordView from 'views/auth/ResetPasswordView';
-import VerifyCodeView from 'views/auth/VerifyCodeView';
-import Page404View from 'views/errors/Page404View';
-
-
 
 // ----------------------------------------------------------------------
 
@@ -105,38 +98,38 @@ const routes = [
     exact: true,
     guard: GuestProtect,
     path: PATH_PAGE.auth.login,
-    component: LoginView
+    component: lazy(() => import('views/auth/LoginView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.loginUnprotected,
-    component: LoginView
+    component: lazy(() => import('views/auth/LoginView'))
   },
   {
     exact: true,
     guard: GuestProtect,
     path: PATH_PAGE.auth.register,
-    component: RegisterView
+    component: lazy(() => import('views/auth/RegisterView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.registerUnprotected,
-    component: RegisterView
+    component: lazy(() => import('views/auth/RegisterView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.resetPassword,
-    component: ResetPasswordView
+    component: lazy(() => import('views/auth/ResetPasswordView'))
   },
   {
     exact: true,
     path: PATH_PAGE.auth.verify,
-    component: VerifyCodeView
+    component: lazy(() => import('views/auth/VerifyCodeView'))
   },
   {
     exact: true,
     path: '/404',
-    component: Page404View
+    component: lazy(() => import('views/errors/Page404View'))
   },
   {
     exact: true,

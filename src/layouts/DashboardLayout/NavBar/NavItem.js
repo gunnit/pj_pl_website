@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import arrowIosForwardFill from '@iconify-icons/eva/arrow-ios-forward-fill';
 import arrowIosDownwardFill from '@iconify-icons/eva/arrow-ios-downward-fill';
@@ -13,7 +13,8 @@ import {
   ListItemIcon,
   ListItemText
 } from '@material-ui/core';
-
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -77,6 +78,7 @@ NavItem.propTypes = {
   href: PropTypes.string,
   info: PropTypes.element,
   icon: PropTypes.element,
+  apiRoute: PropTypes.string,
   open: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string
@@ -86,6 +88,7 @@ function NavItem({
   level,
   title,
   href,
+  apiRoute,
   info,
   icon,
   open = false,
@@ -96,9 +99,17 @@ function NavItem({
   const classes = useStyles();
   const [show, setShow] = useState(open);
   const isSubItem = level > 0;
+  const { userId } = useContext(Context);
 
-  const handleShow = () => {
+  const handleShow = async () => {
     setShow(show => !show);
+
+    // if (apiRoute) {
+    //   const res = await fetch(`${apiBaseUrl}${apiRoute}/${userId}`)
+    //   console.log(await res.json())
+    // }
+
+
   };
 
   const ideasNumber = 4

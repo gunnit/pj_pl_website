@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'
@@ -10,6 +10,10 @@ import BarChart from './IdeasPerFunction';
 import ProcessCriticality from './ProcessCriticality';
 import NatureOfProcess from './NatureOfProcess';
 import NoProcesses from '../NoProcesses';
+import LoadingScreen from 'components/LoadingScreen';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
+import Page500View from 'views/errors/Page500View';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,12 +22,38 @@ const useStyles = makeStyles(theme => ({
 
 function ProcessIdeaView() {
     const classes = useStyles();
+    const [ideas, setIdeas] = useState(null)
+    const [error, setError] = useState(false)
+    const { userId } = useContext(Context)
 
-    const ideas = true;
+    useEffect(() => {
+
+        if (!ideas && userId) {
+
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/ideas/${userId}`)
+
+                    setIdeas(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
+
+    }, [ideas, userId])
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!ideas) {
+        return <LoadingScreen />
+    }
 
     return (
         <Page title="Idea Dashboard" className={classes.root}>
-            {ideas ? <Container maxWidth="xl">
+            {ideas.processes_idea.length ? <Container maxWidth="xl">
                 <Box sx={{ pb: 5 }}>
                     <Typography variant="h4" gutterBottom>Idea Dashboard</Typography>
                     <Typography variant="subtitle1" color="textSecondary">
@@ -32,16 +62,16 @@ function ProcessIdeaView() {
                 </Box>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets1 />
+                        <Widgets1 amount={ideas.strongly_suggested_for_automation} total={ideas.processes_idea.length} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets2 />
+                        <Widgets2 amount={ideas.suggested_for_automation} total={ideas.processes_idea.length} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets3 />
+                        <Widgets3 amount={ideas.not_suggested_for_automation} total={ideas.processes_idea.length} />
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={12} lg={12}>                   
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Table />
                     </Grid>
 

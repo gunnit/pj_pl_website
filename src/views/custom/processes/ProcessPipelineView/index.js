@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography, Card, CardHeader, CardContent } from '@material-ui/core';
 import Table from './SearchTable'
@@ -12,6 +12,10 @@ import Breakeven from './Breakeven';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import BubbleChart from './BubbleChart';
 import NoProcesses from '../NoProcesses';
+import Page500View from 'views/errors/Page500View';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
+import LoadingScreen from 'components/LoadingScreen';
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,14 +24,37 @@ const useStyles = makeStyles(theme => ({
 
 function ProcessPipelineView() {
     const classes = useStyles();
-    // const { auth, profile } = useSelector(state => state.firebase);
-    // const displayName = auth.displayName || profile.displayName;
+    const [pipeline, setPipeline] = useState(null)
+    const [error, setError] = useState(false)
+    const { userId } = useContext(Context)
 
-    const processes = true;
+    useEffect(() => {
+
+        if (!pipeline) {
+
+            (async function () {
+                try {
+                    const res = await fetch(`${apiBaseUrl}/pipeline/${userId}`)
+                    setPipeline(await res.json())
+                } catch (e) {
+                    setError(true)
+                }
+            })()
+        }
+
+    }, [pipeline])
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!pipeline) {
+        return <LoadingScreen />
+    }
 
     return (
         <Page title="Pipeline Dashboard" className={classes.root}>
-            {processes
+            {pipeline.processes_pipeline.length
                 ? <Container maxWidth="xl">
                     <Box sx={{ pb: 5 }}>
                         <Typography variant="h4" gutterBottom>Pipeline Dashboard</Typography>

@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Page from 'components/Page';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
@@ -27,7 +27,8 @@ import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
 import NewProcessFormRequirements from './NewProcessFormRequirements';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
-import InfoBox from './InfoBox';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
 
 // ----------------------------------------------------------------------
 
@@ -185,11 +186,23 @@ function ColorlibStepIcon(props) {
   );
 }
 
-function NewPostView() {
+export default function NewProcessView() {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const [sliderValues, setSliderValues] = useState({
+    cost_reduction: 7,
+    reduce_process_duration: 7,
+    improve_accuracy: 7,
+    enable_audit_trail: 7,
+    enable_scalability: 7,
+    improve_security: 7,
+    client_satisfaction: 7,
+    improve_consistency: 7,
+    improve_reliability: 7,
+    increase_retention: 7
+  })
 
-
+  const { userId } = useContext(Context)
 
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
@@ -200,27 +213,27 @@ function NewPostView() {
 
   const NewProcessSchema = Yup.object().shape({
     // min and max lengths? no reason for minimum, they can always edit it
-    name: Yup.string().required('Name is required'),
-    name2: Yup.string().required('Level 2 Name is required'),
-    pipelineSelect: Yup.string().required('Pipeline is required'),
-    overview: Yup.string().required('Overview is required'),
-    description: Yup.string().required('Description is required'),
-    processCritical: Yup.string().required('Process critical is required'),
-    businessProcess: Yup.string().required('Business process is required'),
-    businessUnit: Yup.string().required('Business unit is required'),
-    businessFunction: Yup.string().required('Business function is required'),
-    documentationAvailable: Yup.string().required('Documentation available is required'),
-    natureOfProcess: Yup.string().required('Nature of process is required'),
-    testEnvironmentAvailable: Yup.string().required('Test environment is required'),
-    sponsor: Yup.string().required('Sponsor is required'),
-    sme: Yup.string().required('SME is required'),
-    smeEmail: Yup.string().email().required('SME Email is required'),
-    ownerName: Yup.string().required('Owner name is required'),
-    ownerEmail: Yup.string().required('Owner email is required'),
-    savingsGoal: Yup.number().positive().required('Savings goal is required'),
-    savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
-    manualSteps: Yup.string().required('Number of manual steps is required'),
-    painPoints: Yup.string().required('Pain points are required'),
+    process_name: Yup.string().required('Name is required'),
+    process_L2_process_name: Yup.string().required('Level 2 Name is required'),
+    // pipelineSelect: Yup.string().required('Pipeline is required'),
+    // overview: Yup.string().required('Overview is required'),
+    // description: Yup.string().required('Description is required'),
+    // processCritical: Yup.string().required('Process critical is required'),
+    // businessProcess: Yup.string().required('Business process is required'),
+    // businessUnit: Yup.string().required('Business unit is required'),
+    // businessFunction: Yup.string().required('Business function is required'),
+    // documentationAvailable: Yup.string().required('Documentation available is required'),
+    // natureOfProcess: Yup.string().required('Nature of process is required'),
+    // testEnvironmentAvailable: Yup.string().required('Test environment is required'),
+    // sponsor: Yup.string().required('Sponsor is required'),
+    // sme: Yup.string().required('SME is required'),
+    // smeEmail: Yup.string().email().required('SME Email is required'),
+    // ownerName: Yup.string().required('Owner name is required'),
+    // ownerEmail: Yup.string().required('Owner email is required'),
+    // savingsGoal: Yup.number().positive().required('Savings goal is required'),
+    // savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
+    // manualSteps: Yup.string().required('Number of manual steps is required'),
+    // painPoints: Yup.string().required('Pain points are required'),
 
     // content: Yup.string()
     //   .min(1000)
@@ -230,27 +243,29 @@ function NewPostView() {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      name2: '',
+      process_name: '',
+      process_L2_process_name: '',
       overview: '',
       description: '',
-      pipelineSelect: '',
-      processCritical: '',
-      businessProcess: '',
-      businessUnit: '',
-      businessFunction: '',
-      documentationAvailable: '',
-      natureOfProcess: '',
-      testEnvironmentAvailable: '',
+      pipeline: '',
+      process_critical: '',
+      process_type: '',
+      business_unit: '',
+      function: '',
+      process_documentation_available: '',
+      nature_of_process: '',
+      test_env_available: '',
+      team: '',
       sponsor: '',
-      sme: '',
-      smeEmail: '',
-      ownerName: '',
-      ownerEmail: '',
-      savingsGoal: '',
-      savingsGoalJustification: '',
-      manualSteps: '',
-      painPoints: '',
+      process_SME: '',
+      process_SME_email: '',
+      process_SME_tel: '',
+      owner_name: '',
+      owner_email: '',
+      // savingsGoal: '',
+      saving_target_explanation: '',
+      num_of_manual_steps: '',
+      // painPoints: '',
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -269,7 +284,7 @@ function NewPostView() {
   });
 
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeStep === 0) {
 
       if (!formik.errors.name
@@ -303,8 +318,30 @@ function NewPostView() {
       }
 
     } else if (formik.isValid) {
+      // console.log(formik)
+      // console.log(sliderValues)
+      try {
+        const res = await fetch(`${apiBaseUrl}/create_process/`, {
+          method: 'POST',
+          body: JSON.stringify({
+            ...formik.values,
+            ...sliderValues,
+            customer_id: userId
+          }),
+          headers: {
+            "Content-Type": 'application/json',
+          }
+          // Authorization###
+        })
 
-      setActiveStep(prevActiveStep => prevActiveStep + 1);
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      } catch (e) {
+        console.error(e)
+      }
+
+
+
+
 
     }
 
@@ -321,7 +358,7 @@ function NewPostView() {
       case 2:
         return <NewProcessFormOwnership formik={formik} />;
       default:
-        return <NewProcessFormRequirements formik={formik} />;
+        return <NewProcessFormRequirements formik={formik} setSliderValues={setSliderValues} />;
     }
   }
   return (
@@ -336,9 +373,6 @@ function NewPostView() {
               <Button variant='contained'>Share Form</Button>
             </Grid>
           </Grid>
-          {/* <Grid item>
-            <InfoBox title={'title'} description={'description'} imagePath={''} />
-          </Grid> */}
           <Grid item marginBottom={3}>
             <Typography variant='h4' gutterBottom>Create a new process</Typography>
           </Grid>
@@ -404,7 +438,7 @@ function NewPostView() {
                       onClick={handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Create' : 'Next'}
                     </Button>
                   </Box>
                 </div>
@@ -415,5 +449,3 @@ function NewPostView() {
     </Page>
   );
 }
-
-export default NewPostView;
