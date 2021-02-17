@@ -31,7 +31,7 @@ const ADMIN_EMAILS = ['demo@minimals.cc'];
 
 function FirebaseProvider({ children }) {
   const { profile } = useSelector(state => state.firebase);
-  const { userEmail, setUserEmail, setUserId } = useContext(Context)
+  const { userEmail, setUserEmail, setUserId, setProcessCounts } = useContext(Context)
 
   useEffect(() => {
     const Initialise = async () => {
@@ -83,10 +83,14 @@ function FirebaseProvider({ children }) {
           }
           // Authorization###
         })
-        const { id } = await res.json()
+        const { id, process_counts } = await res.json()
 
         // userId in context will be used for future user database relationships
         setUserId(id)
+
+        // processCounts in context will be used to display the numbers on the navbar
+        setProcessCounts(process_counts)
+
       })()
 
     }

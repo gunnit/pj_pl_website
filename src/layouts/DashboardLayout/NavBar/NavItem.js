@@ -99,24 +99,13 @@ function NavItem({
   const classes = useStyles();
   const [show, setShow] = useState(open);
   const isSubItem = level > 0;
-  const { userId } = useContext(Context);
+  const { processCounts } = useContext(Context);
 
   const handleShow = async () => {
     setShow(show => !show);
-
-    // if (apiRoute) {
-    //   const res = await fetch(`${apiBaseUrl}${apiRoute}/${userId}`)
-    //   console.log(await res.json())
-    // }
-
-
   };
 
-  const ideasNumber = 4
-  const pipelineNumber = 6
-  const developmentNumber = 3
-  const productionNumber = 10
-  const listOfProcessesNumber = 23
+
 
   if (children) {
     return (
@@ -180,12 +169,11 @@ function NavItem({
         {isSubItem ? <span className={classes.subIcon} /> : icon}
       </ListItemIcon>
       <ListItemText disableTypography primary={title} />
-      {title === 'ideas' && ideasNumber}
-      {title === 'pipeline' && pipelineNumber}
-      {title === 'development' && developmentNumber}
-      {title === 'production' && productionNumber}
-      {title === 'list of processes' && listOfProcessesNumber}
-
+      {title === 'ideas' && processCounts.idea}
+      {title === 'pipeline' && processCounts.pipeline}
+      {title === 'development' && processCounts.development}
+      {title === 'production' && processCounts.production}
+      {title === 'list of processes' && processCounts.idea + processCounts.pipeline + processCounts.development + processCounts.production}
       {/* {info && info} */}
     </ListItem>
   );
