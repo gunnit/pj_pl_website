@@ -30,11 +30,11 @@ function ProcessPipelineView() {
 
     useEffect(() => {
 
-        if (!pipeline) {
+        if (!pipeline && userId) {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/pipeline/${userId}`)
+                    const res = await fetch(`${apiBaseUrl}/pipeline_report/${userId}`)
                     setPipeline(await res.json())
                 } catch (e) {
                     setError(true)
@@ -42,7 +42,7 @@ function ProcessPipelineView() {
             })()
         }
 
-    }, [pipeline])
+    }, [pipeline, userId])
 
     if (error) {
         return <Page500View />
@@ -54,7 +54,7 @@ function ProcessPipelineView() {
 
     return (
         <Page title="Pipeline Dashboard" className={classes.root}>
-            {pipeline.processes_pipeline.length
+            {pipeline.processes_idea.length
                 ? <Container maxWidth="xl">
                     <Box sx={{ pb: 5 }}>
                         <Typography variant="h4" gutterBottom>Pipeline Dashboard</Typography>
