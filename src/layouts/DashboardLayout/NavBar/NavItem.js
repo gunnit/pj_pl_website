@@ -173,7 +173,8 @@ function NavItem({
       {title === 'pipeline' && processCounts.pipeline}
       {title === 'development' && processCounts.development}
       {title === 'production' && processCounts.production}
-      {title === 'list of processes' && processCounts.idea + processCounts.pipeline + processCounts.development + processCounts.production}
+      {(Object.keys(processCounts).length === 4 && title === 'list of processes')
+        && processCounts.idea + processCounts.pipeline + processCounts.development + processCounts.production}
       {/* {info && info} */}
     </ListItem>
   );
