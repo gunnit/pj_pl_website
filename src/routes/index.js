@@ -53,39 +53,44 @@ function RouteProgress(props) {
     };
   }, []);
 
+
+
   return <Route {...props} />;
 }
 
-// Exported into App.js to render the page
+// Imported in App.js to render the page
 export function renderRoutes(routes = []) {
+
+
+
   return (
-    <Suspense fallback={<LoadingScreen />}>
-      <Switch>
-        {routes.map((route, i) => {
-          const Layout = route.layout || Fragment;
-          const Component = route.component;
-          const Guard = route.guard || Fragment;
-          return (
-            <RouteProgress
-              key={i}
-              path={route.path}
-              exact={route.exact}
-              render={props => (
-                <Guard>
-                  <Layout>
-                    {route.routes ? (
-                      renderRoutes(route.routes)
-                    ) : (
-                        <Component {...props} />
-                      )}
-                  </Layout>
-                </Guard>
-              )}
-            />
-          );
-        })}
-      </Switch>
-    </Suspense>
+    // <Suspense fallback={<LoadingScreen />}>
+    <Switch>
+      {routes.map((route, i) => {
+        const Layout = route.layout || Fragment;
+        const Component = route.component;
+        const Guard = route.guard || Fragment;
+        return (
+          <RouteProgress
+            key={i}
+            path={route.path}
+            exact={route.exact}
+            render={props => (
+              <Guard>
+                <Layout>
+                  {route.routes ? (
+                    renderRoutes(route.routes)
+                  ) : (
+                      <Component {...props} />
+                    )}
+                </Layout>
+              </Guard>
+            )}
+          />
+        );
+      })}
+    </Switch>
+    // </Suspense>
   );
 }
 

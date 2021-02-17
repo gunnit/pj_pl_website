@@ -82,6 +82,7 @@ function reduceChild({ array, item, pathname, level }) {
         info={item.info}
         href={item.href}
         title={item.title}
+        apiRoute={item.apiRoute}
         open={Boolean(match)}
       >
         {renderNavItems({
@@ -101,6 +102,7 @@ function reduceChild({ array, item, pathname, level }) {
         icon={item.icon}
         info={item.info}
         title={item.title}
+        apiRoute={item.apiRoute}
       />
     ];
   }

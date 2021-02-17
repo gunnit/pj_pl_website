@@ -3,22 +3,7 @@ import React, { lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 import AuthProtect from 'components/Auth/AuthProtect';
 import DashboardLayout from 'layouts/DashboardLayout';
-import ProcessDashboardView from 'views/custom/processes/ProcessDashboardView';
-import ProcessIdeaView from 'views/custom/processes/ProcessIdeaView';
-import ProcessPipelineView from '../views/custom/processes/ProcessPipelineView';
-import ProcessDevelopmentView from '../views/custom/processes/ProcessDevelopmentView';
-import ProcessProductionView from '../views/custom/processes/ProcessProductionView';
-import NewProcessView from '../views/custom/processes/NewProcessView';
-import ProcessListView from '../views/custom/processes/ProcessListView';
-import ProcessDetailView from 'views/custom/processes/ProcessDetailView';
-import UpdateProcessView from 'views/custom/processes/UpdateProcessView';
-import VisionView from 'views/custom/coe/VisionView';
-import AssessmentView from 'views/custom/coe/AssessmentView';
-import AssessmentListView from 'views/custom/coe/AssessmentListView';
-import LikedProcessesView from 'views/custom/discovery/LikedProcessesView';
-import TaxonomyView from 'views/custom/discovery/TaxonomyView';
-import ProcessSearchView from 'views/custom/discovery/ProcessSearchView';
-
+// import ProcessIdeaView from 'views/custom/processes/ProcessIdeaView';
 
 // ----------------------------------------------------------------------
 
@@ -32,61 +17,61 @@ const AppRoutes = {
     {
       exact: true,
       path: PATH_APP.main.dashboard,
-      component: ProcessDashboardView,
+      component: lazy(() => import('../views/custom/processes/ProcessDashboardView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.dashboard,
       // Component JSX is in ProcessDashboardView/index.js, and index.js imports its components from the other files in the ProcessDashboardView folder
-      component: ProcessDashboardView
+      component: lazy(() => import('views/custom/processes/ProcessDashboardView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.idea,
       // Component JSX is in ProcessIdeaView/index.js, and index.js imports its components from the other files in the ProcessIdeaView folder
       // component: ProcessIdeaView,
-      component: ProcessIdeaView,
+      component: lazy(() => import('views/custom/processes/ProcessIdeaView')),
       apiPath: '/ideas'
     },
     {
       exact: true,
       path: PATH_APP.processes.pipeline,
       // Component JSX is in ProcesssPipelineView/index.js, and index.js imports its components from the other files in the ProcessPipelineView folder
-      component: ProcessPipelineView
+      component: lazy(() => import('views/custom/processes/ProcessPipelineView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.development,
       // Component JSX is in ProcessDevelopmentView/index.js, and index.js imports its components from the other files in the ProcessDevelopmentView folder
-      component: ProcessDevelopmentView
+      component: lazy(() => import('views/custom/processes/ProcessDevelopmentView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.production,
       // Component JSX is in ProcessProductionView/index.js, and index.js imports its components from the other files in the ProcessProduction folder
-      component: ProcessProductionView
+      component: lazy(() => import('views/custom/processes/ProcessProductionView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.new,
       // Component JSX is in NewProcessView/index.js, and index.js imports its components from the other files in the NewProcessView folder
-      component: NewProcessView
+      component: lazy(() => import('../views/custom/processes/NewProcessView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.list,
       // Component JSX is in ProcessListView/index.js, and index.js imports its components from the other files in the ProcessListView folder
-      component: ProcessListView
+      component: lazy(() => import('../views/custom/processes/ProcessListView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.details,
-      component: ProcessDetailView
+      component: lazy(() => import('../views/custom/processes/ProcessDetailView'))
     },
     {
       exact: true,
       path: PATH_APP.processes.update,
-      component: UpdateProcessView
+      component: lazy(() => import('../views/custom/processes/UpdateProcessView'))
     },
 
     // COE
@@ -94,17 +79,17 @@ const AppRoutes = {
     {
       exact: true,
       path: PATH_APP.coe.vision,
-      component: VisionView
+      component: lazy(() => import('../views/custom/coe/VisionView'))
     },
     {
       exact: true,
       path: PATH_APP.coe.assessment,
-      component: AssessmentView
+      component: lazy(() => import('../views/custom/coe/AssessmentView'))
     },
     {
       exact: true,
       path: PATH_APP.coe.assessmentList,
-      component: AssessmentListView
+      component: lazy(() => import('../views/custom/coe/AssessmentListView'))
     },
     {
       exact: true,
@@ -117,17 +102,17 @@ const AppRoutes = {
     {
       exact: true,
       path: PATH_APP.discovery.likedProcesses,
-      component: LikedProcessesView
+      component: lazy(() => import('../views/custom/discovery/LikedProcessesView'))
     },
     {
       exact: true,
       path: PATH_APP.discovery.taxonomy,
-      component: TaxonomyView
+      component: lazy(() => import('../views/custom/discovery/TaxonomyView'))
     },
     {
       exact: true,
       path: PATH_APP.discovery.processSearch,
-      component: ProcessSearchView
+      component: lazy(() => import('../views/custom/discovery/ProcessSearchView'))
     },
     {
       exact: true,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'
@@ -10,6 +10,9 @@ import BarChart from './IdeasPerFunction';
 import ProcessCriticality from './ProcessCriticality';
 import NatureOfProcess from './NatureOfProcess';
 import NoProcesses from '../NoProcesses';
+import LoadingScreen from 'components/LoadingScreen';
+import { apiBaseUrl } from 'config';
+import Context from 'context/Context';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,12 +21,30 @@ const useStyles = makeStyles(theme => ({
 
 function ProcessIdeaView() {
     const classes = useStyles();
+    const [loading, setLoading] = useState(true)
+    const error = false;
+    const { userId, ideas, setIdeas } = useContext(Context)
 
-    const ideas = true;
+    useEffect(() => {
+
+        if (!ideas) {
+            async function fetchData() {
+                const res = await fetch(`${apiBaseUrl}/ideas/5`)
+                console.log(await res.json())
+                setLoading(false)
+            }
+            fetchData()
+        }
+
+    }, [ideas])
+
+    if (loading) {
+        return <LoadingScreen />
+    }
 
     return (
         <Page title="Idea Dashboard" className={classes.root}>
-            {ideas ? <Container maxWidth="xl">
+            {!error ? <Container maxWidth="xl">
                 <Box sx={{ pb: 5 }}>
                     <Typography variant="h4" gutterBottom>Idea Dashboard</Typography>
                     <Typography variant="subtitle1" color="textSecondary">
@@ -41,7 +62,7 @@ function ProcessIdeaView() {
                         <Widgets3 />
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={12} lg={12}>                   
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Table />
                     </Grid>
 
