@@ -34,17 +34,13 @@ const useStyles = makeStyles(theme => {
 
 // ----------------------------------------------------------------------
 
-Widgets2.propTypes = {
-  className: PropTypes.string
-};
 
-const TOTAL = 5;
 
-function Widgets2({ className, ...other }) {
+function Widgets2({ className, total, amount, ...other }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const chartData = [75];
+  const chartData = [(amount / total * 100).toFixed(0)];
   const chartOptions = merge(ApexChartsOption(), {
     colors: [theme.palette.warning.main],
     chart: { sparkline: { enabled: true } },
@@ -75,7 +71,7 @@ function Widgets2({ className, ...other }) {
         options={chartOptions}
       />
       <Box sx={{ ml: 3, color: 'white' }}>
-        <Typography variant="h4"> {fNumber(TOTAL)} processes</Typography>
+        <Typography variant="h4"> {fNumber(amount)} {amount !== 1 ? 'processes' : 'process'}</Typography>
         <Box sx={{ typography: 'body2', opacity: 0.72 }}>Evaluate before moving to pipeline</Box>
       </Box>
       <Icon icon={triangleAlert} className={classes.icon} />

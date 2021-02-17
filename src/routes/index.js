@@ -61,8 +61,6 @@ function RouteProgress(props) {
 // Imported in App.js to render the page
 export function renderRoutes(routes = []) {
 
-
-
   return (
     // <Suspense fallback={<LoadingScreen />}>
     <Switch>
