@@ -119,21 +119,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function createData(id, moveToPipeline, name, alignment, processCritical, savingsGoal, numberOfSteps, natureOfProcess, testEnvironment, owner) {
-  return { id, moveToPipeline, name, alignment, processCritical, savingsGoal, numberOfSteps, natureOfProcess, testEnvironment, owner };
+function createData(id, moveToPipeline, process_name, alignment, process_critical, process_objective, num_of_manual_steps, nature_of_process, test_env_available, owner_name) {
+  return { id, moveToPipeline, process_name, alignment, process_critical, process_objective, num_of_manual_steps, nature_of_process, test_env_available, owner_name };
 }
 
-const products = [
-  createData('id', 'Yes', 'New Account Entry', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id2', 'Yes', 'Credit Checks', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id3', 'Yes', 'Ledger Entry', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id4', 'Yes', 'Loan Approval', '70%', 'Moderately', 0, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id5', 'Yes', 'P&L Reconciliation', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id6', 'Yes', 'P&L Reconciliation', '70%', 'Moderately', 10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-  createData('id7', 'Yes', 'Order Processing Part 1', '70%', 'Moderately', -10000, '10-20', 'Entirely repetitive', 'No', 'CRO-Supply Chain'),
-];
-
-// ----------------------------------------------------------------------
 
 export default function IdeasTable({ processes }) {
   const classes = useStyles();
@@ -144,6 +133,29 @@ export default function IdeasTable({ processes }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
 
+  processes = processes.map(({
+    id,
+    moveToPipeline,
+    process_name,
+    alignment,
+    process_critical,
+    process_objective,
+    num_of_manual_steps,
+    nature_of_process,
+    test_env_available,
+    owner_name
+  }) => {
+    return createData(id,
+      moveToPipeline,
+      process_name,
+      alignment,
+      process_critical,
+      process_objective,
+      num_of_manual_steps,
+      nature_of_process,
+      test_env_available,
+      owner_name)
+  })
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -175,15 +187,15 @@ export default function IdeasTable({ processes }) {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
-  const filteredProducts = applySortFilter(
-    products,
+  const filteredProcesses = applySortFilter(
+    processes,
     getComparator(order, orderBy),
     filterName
   );
 
-  const isProductNotFound = filteredProducts.length === 0;
+  const isProductNotFound = filteredProcesses.length === 0;
 
   return (
     <Page title="Process Ideas" className={classes.root}>
@@ -202,29 +214,29 @@ export default function IdeasTable({ processes }) {
                   classes={classes}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={products.length}
+                  rowCount={processes.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredProducts
+                  {filteredProcesses
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
                       const {
                         id,
                         moveToPipeline,
-                        name,
+                        process_name,
                         alignment,
-                        processCritical,
-                        savingsGoal,
-                        numberOfSteps,
-                        natureOfProcess,
-                        testEnvironment,
-                        owner,
+                        process_critical,
+                        process_objective,
+                        num_of_manual_steps,
+                        nature_of_process,
+                        test_env_available,
+                        owner_name,
                       } = row;
 
-                      const isItemSelected = selected.indexOf(name) !== -1;
+                      const isItemSelected = selected.indexOf(process_name) !== -1;
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
@@ -246,22 +258,23 @@ export default function IdeasTable({ processes }) {
                             {moveToPipeline}
                           </TableCell>
 
-                          <TableCell align="right">{name}</TableCell>
+                          <TableCell align="right">{process_name || ''}</TableCell>
                           <TableCell align="right">
-                            <MLabel variant="filled" color="info">
-                              {alignment}
-                            </MLabel>
+                            {alignment
+                              && <MLabel variant="filled" color="info">
+                                {alignment}
+                              </MLabel>}
                           </TableCell>
-                          <TableCell align="right">{processCritical}</TableCell>
+                          <TableCell align="right">{process_critical || ''}</TableCell>
                           <TableCell align="right">
-                            <MLabel variant="filled" color={savingsGoal > 0 ? "primary" : "error"}>
-                              {savingsGoal}
-                            </MLabel>
+                            {process_objective && <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
+                              {process_objective}
+                            </MLabel>}
                           </TableCell>
-                          <TableCell align="right">{numberOfSteps}</TableCell>
-                          <TableCell align="right">{natureOfProcess}</TableCell>
-                          <TableCell align="right">{testEnvironment}</TableCell>
-                          <TableCell align="right">{owner}</TableCell>
+                          <TableCell align="right">{num_of_manual_steps || ''}</TableCell>
+                          <TableCell align="right">{nature_of_process || ''}</TableCell>
+                          <TableCell align="right">{test_env_available || ''}</TableCell>
+                          <TableCell align="right">{owner_name || ''}</TableCell>
                         </TableRow>
                       );
                     })}
@@ -289,7 +302,7 @@ export default function IdeasTable({ processes }) {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={products.length}
+            count={processes.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
