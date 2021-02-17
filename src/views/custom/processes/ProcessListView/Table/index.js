@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
 import { PATH_APP } from 'routes/paths';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import SearchNotFound from 'components/SearchNotFound';
 import { Link as RouterLink } from 'react-router-dom';
@@ -26,6 +26,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
+import Context from 'context/Context';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -159,7 +160,7 @@ function ProductListView() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-
+  const { setCurrentProcess } = useContext(Context)
   // useEffect(() => {
   //   dispatch(getProducts());
   // }, [dispatch]);
@@ -192,8 +193,9 @@ function ProductListView() {
     setFilterName(event.target.value);
   };
 
-  const handleOpen = event => {
+  const handleOpen = (event, id) => {
     setOpen(event.currentTarget);
+    setCurrentProcess(id)
   };
   const handleClose = (option) => {
     setOpen(null);
@@ -273,9 +275,9 @@ function ProductListView() {
                             {name}
                           </TableCell>
                           <TableCell align="right">{priority}</TableCell>
-                          <TableCell align="right">                            
+                          <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                            {alignment}
+                              {alignment}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{automationScore}</TableCell>
@@ -284,12 +286,12 @@ function ProductListView() {
                           <TableCell align="right">{oneYearSavings}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
-                            {threeYearSavings}
+                              {threeYearSavings}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{dateCreated}</TableCell>
                           <TableCell align="right">
-                            <IconButton className={classes.margin} onClick={handleOpen}>
+                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                               <Icon
                                 icon={moreVerticalFill}
                                 width={20}

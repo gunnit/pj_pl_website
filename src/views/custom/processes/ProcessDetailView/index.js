@@ -50,30 +50,30 @@ export default function ProcessDetailView() {
     const [error, setError] = useState(false)
     const { userId } = useContext(Context)
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        // if (!ideas && userId) {
+    //     if (!ideas && userId) {
 
-        //     (async function () {
-        //         try {
-        //             const res = await fetch(`${apiBaseUrl}/ideas/${processId}`)
+    //         // (async function () {
+    //         //     try {
+    //         //         const res = await fetch(`${apiBaseUrl}/ideas/${processId}`)
 
-        //             setIdeas(await res.json())
-        //         } catch (e) {
-        //             setError(true)
-        //         }
-        //     })()
-        // }
+    //         //         setIdeas(await res.json())
+    //         //     } catch (e) {
+    //         //         setError(true)
+    //         //     }
+    //         // })()
+    //     }
 
-    }, [ideas, userId])
+    // }, [ideas, userId])
 
-    if (error) {
-        return <Page500View />
-    }
+    // if (error) {
+    //     return <Page500View />
+    // }
 
-    if (!ideas) {
-        return <LoadingScreen />
-    }
+    // if (!ideas) {
+    //     return <LoadingScreen />
+    // }
 
 
     return (
