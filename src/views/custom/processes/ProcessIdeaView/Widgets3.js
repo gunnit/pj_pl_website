@@ -35,8 +35,6 @@ const useStyles = makeStyles(theme => {
 // ----------------------------------------------------------------------
 
 
-
-
 function Widgets3({ className, total, amount, ...other }) {
     const classes = useStyles();
     const theme = useTheme();

@@ -41,7 +41,7 @@ const TABLE_HEAD = [
     id: 'moveToPipeline',
     numeric: false,
     disablePadding: true,
-    label: 'Move to Pipeline'
+    label: 'Move to Pipeline',
   },
   {
     id: 'name',
