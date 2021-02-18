@@ -8,6 +8,7 @@ import { PATH_APP } from 'routes/paths';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { makeStyles } from '@material-ui/core/styles';
@@ -342,12 +343,13 @@ export default function DevelopmentTable({ processes }) {
                           </IconButton>
                         </TableCell>
                         <TableCell align="right">
+                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
+                            <ArrowBackIcon />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
                           <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findNextStage(pipeline), true, id)}>
-                            <Icon
-                              icon={ArrowForwardIcon}
-                              width={20}
-                              height={20}
-                            />
+                            <ArrowForwardIcon />
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -405,7 +407,7 @@ export default function DevelopmentTable({ processes }) {
         <Dialog open={!!openDialog} onClose={() => handleCloseDialog()}>
           {openDialog &&
             <>
-              <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage}?</DialogTitle>
+              <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage} phase?</DialogTitle>
               <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
               <Button color='error'>Cancel</Button>
             </>}

@@ -97,7 +97,6 @@ function ProcessProductionView() {
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <SearchTable processes={production.processes_idea} />
                         </Grid>
-
                         <Grid item lg={12}>
                             <BarChart />
                         </Grid>

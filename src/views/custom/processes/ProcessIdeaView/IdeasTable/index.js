@@ -392,7 +392,7 @@ export default function IdeasTable({ processes }) {
       <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
         {openDialogName &&
           <>
-            <DialogTitle id="simple-dialog-title">Move {openDialogName} into pipeline?</DialogTitle>
+            <DialogTitle id="simple-dialog-title">Move {openDialogName} into Pipeline phase?</DialogTitle>
             <Button onClick={moveToPipelineClick}>Yes</Button>
             <Button color='error'>Cancel</Button>
           </>}
