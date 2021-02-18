@@ -1,6 +1,5 @@
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
-import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
 import { Icon } from '@iconify/react';
 import React, { useState, useContext } from 'react';
@@ -393,7 +392,7 @@ export default function IdeasTable({ processes }) {
       <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
         {openDialogName &&
           <>
-            <DialogTitle id="simple-dialog-title">Move {openDialogName} to pipeline?</DialogTitle>
+            <DialogTitle id="simple-dialog-title">Move {openDialogName} into pipeline?</DialogTitle>
             <Button onClick={moveToPipelineClick}>Yes</Button>
             <Button color='error'>Cancel</Button>
           </>}
