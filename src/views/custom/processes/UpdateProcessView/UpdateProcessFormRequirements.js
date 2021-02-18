@@ -43,33 +43,15 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
 
     const handleCheckboxChange = (e) => {
-        // if (e.target.checked) {
-        // if (checkboxValues.has(e.target.value)) {
-        //     return
-        // } else {
-        //     const copy = new Set([...checkboxValues])
-        //     copy.add(e.target.value)
-        //     setCheckboxValues(copy)
-        // }
 
-        // // } else {
-        // if (checkboxValues.has(e.target.value)) {
-        //     const copy = new Set([...checkboxValues])
-        //     copy.delete(e.target.value)
-        //     setCheckboxValues(copy)
-        // } else {
-        //     return
-        // }
-        // // }
-
-        if (checkboxValues.has(e.target.value.toString())) {
+        if (checkboxValues.has(parseInt(e.target.value))) {
             const copy = new Set([...checkboxValues])
-            copy.delete(e.target.value.toString())
-            setCheckboxValues(copy)
+
+            setCheckboxValues(copy.delete(parseInt(e.target.value)))
         } else {
             const copy = new Set([...checkboxValues])
-            copy.add(e.target.value)
-            setCheckboxValues(copy)
+
+            setCheckboxValues(copy.add(parseInt(e.target.value)))
         }
     }
 
@@ -330,7 +312,7 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                         {applications.map(({ id, name }) => {
                             return (
                                 <FormControlLabel
-                                    checked={checkboxValues.has(id.toString())}
+                                    checked={checkboxValues.has(id)}
                                     key={`${id}${name}`}
                                     control={<Checkbox color='secondary' />}
                                     label={name}

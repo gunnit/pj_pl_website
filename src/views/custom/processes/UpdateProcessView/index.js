@@ -360,7 +360,7 @@ export default function UpdateProcessView() {
         increase_retention,
       })
 
-      console.log(new Set([...applications_tec]))
+
       setCheckboxValues(new Set([...applications_tec]))
 
       setLoading(false)
