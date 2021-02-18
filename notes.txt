@@ -1,5 +1,13 @@
 Things to add:
 
+Stepper icons
+
+Nature of process not working
+
+Backend validations?
+
+Graph tooltips displaying weird things
+
 Loading button when submitting forms
 
 Change demo user autofill on login

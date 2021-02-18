@@ -193,6 +193,8 @@ export default function ProcessTable({ processes }) {
 
   const handleOpen = (event, id) => {
     setOpen(event.currentTarget);
+
+    // Context to get the process details if the user clicks to view the process details
     setCurrentProcessId(id)
   };
   const handleClose = (option) => {

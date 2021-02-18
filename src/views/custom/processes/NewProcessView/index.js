@@ -31,7 +31,6 @@ import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
 
-
 // ----------------------------------------------------------------------
 
 // const FILE_SIZE = 3145728; // bytes
@@ -193,12 +192,11 @@ export default function NewProcessView() {
   }, [])
 
 
-  const { userId } = useContext(Context)
+  const { userId, setCurrentProcessId, setProcessCounts } = useContext(Context)
 
   const [activeStep, setActiveStep] = useState(0);
   const [pending, setPending] = useState(false)
   const steps = getSteps();
-  const { setProcessCounts } = useContext(Context)
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -318,6 +316,11 @@ export default function NewProcessView() {
         setProcessCounts(previous => ({ ...previous, [lowerCasePipeline]: previous[lowerCasePipeline] + 1 }))
 
         setActiveStep(prevActiveStep => prevActiveStep + 1);
+
+        const { id } = await res.json()
+
+        // Store ID of created process in context in case the user decides to view it
+        setCurrentProcessId(id)
 
       } catch (e) {
         console.error(e)
