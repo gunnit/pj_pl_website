@@ -2,23 +2,32 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
-import Scrollbars from 'components/Scrollbars'
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Icon } from '@iconify/react';
 import { visuallyHidden } from '@material-ui/utils';
 import SearchNotFound from 'components/SearchNotFound';
+import Scrollbars from 'components/Scrollbars';
+import { PATH_APP } from 'routes/paths';
+import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Card,
   Table,
   TableRow,
+  Checkbox,
   TableBody,
   TableCell,
   Container,
+  IconButton,
   TableContainer,
-  TablePagination
+  TablePagination,
+  Menu,
+  MenuItem,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
+import Context from 'context/Context';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -114,7 +123,10 @@ function applySortFilter(array, comparator, query) {
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  sortSpan: visuallyHidden
+  sortSpan: visuallyHidden,
+  routerLink: {
+    textDecoration: 'none'
+  }
 }));
 
 // Make sure this part is correct when adding the real data
@@ -144,10 +156,9 @@ function ProductListView() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
+  const [isOpen, setOpen] = useState(null);
 
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, [dispatch]);
+  const { setCurrentProcessId } = useContext(Context)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -184,6 +195,16 @@ function ProductListView() {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+
+  const handleOpen = (event, id) => {
+    setOpen(event.currentTarget);
+
+    // Context to get the process details if the user clicks to view the process details
+    setCurrentProcessId(id)
+  };
+  const handleClose = (option) => {
+    setOpen(null);
   };
 
   const handleChangeRowsPerPage = event => {
@@ -269,9 +290,9 @@ function ProductListView() {
                             {overallRating}
                           </TableCell>
                           <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">                            
+                          <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                            {alignment}
+                              {alignment}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{automationScore}</TableCell>
@@ -279,10 +300,19 @@ function ProductListView() {
                           <TableCell align="right">{costWithAutomation}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                            {savings}
+                              {savings}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{owner}</TableCell>
+                          <TableCell align="right">
+                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                              <Icon
+                                icon={moreVerticalFill}
+                                width={20}
+                                height={20}
+                              />
+                            </IconButton>
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -306,6 +336,25 @@ function ProductListView() {
               </Table>
             </TableContainer>
           </Scrollbars>
+
+          <Menu
+            keepMounted
+            id="simple-menu"
+            anchorEl={isOpen}
+            onClose={handleClose}
+            open={Boolean(isOpen)}
+          >
+            {[{ text: 'View details', path: PATH_APP.processes.details },
+            { text: 'Update', path: PATH_APP.processes.update },
+            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+              <RouterLink to={option.path} className={classes.routerLink}>
+                <MenuItem key={option.text} onClick={handleClose}>
+                  {option.text}
+                </MenuItem>
+              </RouterLink>
+            ))}
+          </Menu>
+
 
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}

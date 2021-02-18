@@ -151,29 +151,6 @@ export default function IdeasTable({ processes }) {
 
   const { setCurrentProcessId } = useContext(Context)
 
-  processes = processes.map(({
-    id,
-    moveToPipeline,
-    process_name,
-    alignment,
-    process_critical,
-    process_objective,
-    num_of_manual_steps,
-    nature_of_process,
-    test_env_available,
-    owner_name
-  }) => {
-    return createData(id,
-      moveToPipeline,
-      process_name,
-      alignment,
-      process_critical,
-      process_objective,
-      num_of_manual_steps,
-      nature_of_process,
-      test_env_available,
-      owner_name)
-  })
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

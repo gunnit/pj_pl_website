@@ -2,10 +2,14 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Icon } from '@iconify/react';
 import { visuallyHidden } from '@material-ui/utils';
 import SearchNotFound from 'components/SearchNotFound';
 import Scrollbars from 'components/Scrollbars';
+import { PATH_APP } from 'routes/paths';
+import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -16,11 +20,15 @@ import {
   TableBody,
   TableCell,
   Container,
+  IconButton,
   TableContainer,
-  TablePagination
+  TablePagination,
+  Menu,
+  MenuItem,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
-// ----------------------------------------------------------------------
+import Context from 'context/Context';
+
 
 const TABLE_HEAD = [
   {
@@ -76,6 +84,9 @@ const TABLE_HEAD = [
     numeric: true,
     disablePadding: false,
     label: 'Owner'
+  },
+  {
+    id: ''
   }
 ];
 
@@ -115,7 +126,10 @@ function applySortFilter(array, comparator, query) {
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  sortSpan: visuallyHidden
+  sortSpan: visuallyHidden,
+  routerLink: {
+    textDecoration: 'none'
+  }
 }));
 
 // Make sure this part is correct when adding the real data
@@ -136,29 +150,22 @@ const products = [
 
 // ----------------------------------------------------------------------
 
-function ProductListView() {
+export default function SearchTable() {
   const classes = useStyles();
-  // const { products } = useSelector(state => state.product);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
+  const [isOpen, setOpen] = useState(null);
+
+  const { setCurrentProcessId } = useContext(Context)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
-  };
-
-  const handleSelectAllClick = event => {
-    if (event.target.checked) {
-      const newSelecteds = products.map(n => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
   };
 
   const handleClick = (event, name) => {
@@ -186,6 +193,16 @@ function ProductListView() {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const handleOpen = (event, id) => {
+    setOpen(event.currentTarget);
+
+    // Context to get the process details if the user clicks to view the process details
+    setCurrentProcessId(id)
+  };
+  const handleClose = (option) => {
+    setOpen(null);
   };
 
   const handleFilterByName = event => {
@@ -226,7 +243,6 @@ function ProductListView() {
                   rowCount={products.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredProducts
@@ -271,9 +287,9 @@ function ProductListView() {
                             {overallRating}
                           </TableCell>
                           <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">                            
+                          <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                            {alignment}
+                              {alignment}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{automationScore}</TableCell>
@@ -281,10 +297,19 @@ function ProductListView() {
                           <TableCell align="right">{costWithAutomation}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                            {savings}
+                              {savings}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{owner}</TableCell>
+                          <TableCell align="right">
+                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                              <Icon
+                                icon={moreVerticalFill}
+                                width={20}
+                                height={20}
+                              />
+                            </IconButton>
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -309,6 +334,24 @@ function ProductListView() {
             </TableContainer>
           </Scrollbars>
 
+          <Menu
+            keepMounted
+            id="simple-menu"
+            anchorEl={isOpen}
+            onClose={handleClose}
+            open={Boolean(isOpen)}
+          >
+            {[{ text: 'View details', path: PATH_APP.processes.details },
+            { text: 'Update', path: PATH_APP.processes.update },
+            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+              <RouterLink to={option.path} className={classes.routerLink}>
+                <MenuItem key={option.text} onClick={handleClose}>
+                  {option.text}
+                </MenuItem>
+              </RouterLink>
+            ))}
+          </Menu>
+
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
@@ -323,5 +366,3 @@ function ProductListView() {
     </Page >
   );
 }
-
-export default ProductListView;

@@ -46,7 +46,6 @@ export const PATH_APP = {
     production: path(ROOTS.app, '/processes/production'),
     new: path(ROOTS.app, '/processes/new'),
     list: path(ROOTS.app, '/processes/list'),
-    // Will have specific process IDs
     details: path(ROOTS.app, '/processes/details'),
     update: path(ROOTS.app, '/processes/update'),
   },

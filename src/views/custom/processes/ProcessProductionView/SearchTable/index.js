@@ -2,25 +2,32 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
-import React, { useState } from 'react';
+import { Icon } from '@iconify/react';
+import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
+import { PATH_APP } from 'routes/paths';
+import { Link as RouterLink } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
 import Scrollbars from 'components/Scrollbars';
+import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Card,
   Table,
   TableRow,
-  Checkbox,
   TableBody,
   TableCell,
   Container,
+  IconButton,
   TableContainer,
-  TablePagination
+  TablePagination,
+  Menu,
+  MenuItem,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
-// ----------------------------------------------------------------------
+import Context from 'context/Context';
+
 
 const TABLE_HEAD = [
   {
@@ -76,6 +83,9 @@ const TABLE_HEAD = [
     numeric: true,
     disablePadding: false,
     label: 'Owner'
+  },
+  {
+    id: ''
   }
 ];
 
@@ -115,7 +125,10 @@ function applySortFilter(array, comparator, query) {
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  sortSpan: visuallyHidden
+  sortSpan: visuallyHidden,
+  routerLink: {
+    textDecoration: 'none'
+  }
 }));
 
 // Make sure this part is correct when adding the real data
@@ -138,17 +151,15 @@ const products = [
 
 function ProductListView() {
   const classes = useStyles();
-  // const { products } = useSelector(state => state.product);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
+  const [isOpen, setOpen] = useState(null);
 
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, [dispatch]);
+  const { setCurrentProcessId } = useContext(Context)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -156,32 +167,6 @@ function ProductListView() {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = event => {
-    if (event.target.checked) {
-      const newSelecteds = products.map(n => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -195,6 +180,17 @@ function ProductListView() {
   const handleFilterByName = event => {
     setFilterName(event.target.value);
   };
+
+  const handleOpen = (event, id) => {
+    setOpen(event.currentTarget);
+
+    // Context to get the process details if the user clicks to view the process details
+    setCurrentProcessId(id)
+  };
+  const handleClose = (option) => {
+    setOpen(null);
+  };
+
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
@@ -230,7 +226,6 @@ function ProductListView() {
                   rowCount={products.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredProducts
@@ -260,12 +255,8 @@ function ProductListView() {
                           role="checkbox"
                           selected={isItemSelected}
                           aria-checked={isItemSelected}
-                          onClick={event => handleClick(event, name)}
                           className={classes.row}
                         >
-                          <TableCell padding="checkbox">
-                            <Checkbox checked={isItemSelected} />
-                          </TableCell>
                           <TableCell
                             component="th"
                             id={labelId}
@@ -275,9 +266,9 @@ function ProductListView() {
                             {overallRating}
                           </TableCell>
                           <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">                            
+                          <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                            {alignment}
+                              {alignment}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{automationScore}</TableCell>
@@ -285,10 +276,19 @@ function ProductListView() {
                           <TableCell align="right">{costWithAutomation}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                            {savings}
+                              {savings}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{owner}</TableCell>
+                          <TableCell align="right">
+                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                              <Icon
+                                icon={moreVerticalFill}
+                                width={20}
+                                height={20}
+                              />
+                            </IconButton>
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -312,6 +312,25 @@ function ProductListView() {
               </Table>
             </TableContainer>
           </Scrollbars>
+
+          <Menu
+            keepMounted
+            id="simple-menu"
+            anchorEl={isOpen}
+            onClose={handleClose}
+            open={Boolean(isOpen)}
+          >
+            {[{ text: 'View details', path: PATH_APP.processes.details },
+            { text: 'Update', path: PATH_APP.processes.update },
+            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+              <RouterLink to={option.path} className={classes.routerLink}>
+                <MenuItem key={option.text} onClick={handleClose}>
+                  {option.text}
+                </MenuItem>
+              </RouterLink>
+            ))}
+          </Menu>
+
 
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
