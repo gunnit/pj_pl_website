@@ -296,7 +296,7 @@ export default function ProcessTable({ processes }) {
                                 icon={moreVerticalFill}
                                 width={20}
                                 height={20}
-                              />
+                              /> 
                             </IconButton>
                           </TableCell>
                         </TableRow>
