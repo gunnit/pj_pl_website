@@ -7,7 +7,9 @@ import {
   Step,
   Stepper,
   StepLabel,
-  StepConnector
+  StepConnector,
+  Card,
+  Box,
 } from '@material-ui/core';
 import ideaIcon from '@iconify-icons/el/idea';
 import raceflagIcon from '@iconify-icons/whh/raceflag';
@@ -136,7 +138,11 @@ ColorlibStepIcon.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(3)
+  },
   button: { marginRight: theme.spacing(1) },
   instructions: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) }
 }));
@@ -145,28 +151,42 @@ function getSteps() {
   return ['Idea', 'Pipeline', 'Development', 'Production'];
 }
 
+function getActiveStep(pipeline) {
+  switch (pipeline) {
+    case 'Idea':
+      return 0;
+    case 'Pipeline':
+      return 1;
+    case 'Development':
+      return 2;
+    default:
+      return 3;
+  }
+}
 
-function CustomizedSteppers() {
+export default function CustomizedStepper({ pipeline, className, ...other }) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(getActiveStep(pipeline));
   const steps = getSteps();
 
   return (
-    <div className={classes.root}>
+    <Card className={clsx(classes.root, className)} {...other}>
+      <Box sx={{ flexGrow: 1 }}>
+        <div>
 
-      <Stepper
-        alternativeLabel
-        activeStep={activeStep}
-        connector={<ColorlibConnector />}
-      >
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </div>
+          <Stepper
+            alternativeLabel
+            activeStep={activeStep}
+            connector={<ColorlibConnector />}
+          >
+            {steps.map(label => (
+              <Step key={label}>
+                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+      </Box>
+    </Card>
   );
 }
-
-export default CustomizedSteppers;

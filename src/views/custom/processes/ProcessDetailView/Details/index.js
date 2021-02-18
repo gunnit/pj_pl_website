@@ -1,19 +1,19 @@
 import React from 'react';
 import { Container, Grid } from '@material-ui/core';
-import StepperBox from './StepperBox';
+import CustomizedStepper from './CustomizedStepper';
 import Welcome from './Welcome';
 import GenericBoxInfoDetails from './GenericBoxInfoDetails';
 import ProcessDescription from './ProcessDescription';
 
 
-function Details() {
+function Details({ processDetails }) {
 
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 <Grid item container xs={12} md={8} spacing={3} alignContent='flex-start'>
                     <Grid item xs={12} md={12}>
-                        <StepperBox />
+                        <CustomizedStepper pipeline={processDetails.process.pipline} />
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <Welcome />
@@ -29,10 +29,10 @@ function Details() {
                 <Grid item container spacing={3} md={4} alignContent='flex-start'>
                     <Grid item xs={12} md={12}>
                         <GenericBoxInfoDetails
-                         infoType={'Automation Potential'}
-                         mainNumber={7.5}
-                         secondaryText={'score'}
-                          />
+                            infoType={'Automation Potential'}
+                            mainNumber={7.5}
+                            secondaryText={'score'}
+                        />
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <GenericBoxInfoDetails infoType={'Hours Saved'} mainNumber={52} secondaryText={'(in FTE) per year'} />

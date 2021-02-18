@@ -103,7 +103,7 @@ export default function ProcessDetailView() {
                         </ButtonGroup>
                     </Box>
                     <TabPanel value={'1'}>
-                        <Details />
+                        <Details processDetails={processDetails} />
                     </TabPanel>
                     <TabPanel value={'2'}>
                         <AutomationPotential />
