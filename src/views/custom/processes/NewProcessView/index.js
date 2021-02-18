@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Page from 'components/Page';
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
@@ -51,31 +51,6 @@ const useStyles = makeStyles(theme => ({
 function getSteps() {
   return ['Process Details', 'Process Characteristics', 'Process Ownership', 'Automation Requirements'];
 }
-
-
-
-const QontoConnector = withStyles({
-  alternativeLabel: {
-    top: 10,
-    left: 'calc(-50% + 16px)',
-    right: 'calc(50% + 16px)'
-  },
-  active: {
-    '& $line': {
-      borderColor: '#00AB55' // same as theme.palette.primary.main
-    }
-  },
-  completed: {
-    '& $line': {
-      borderColor: '#00AB55'
-    }
-  },
-  line: {
-    borderColor: '#eaeaf0',
-    borderTopWidth: 3,
-    borderRadius: 1
-  }
-})(StepConnector);
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -203,6 +178,20 @@ export default function NewProcessView() {
     improve_reliability: 7,
     increase_retention: 7
   })
+  const [checkboxValues, setCheckboxValues] = useState(new Set())
+  const [applications, setApplications] = useState([])
+
+  useEffect(() => {
+    // fetch applications from database
+    (async function () {
+      const res = await fetch(`${apiBaseUrl}/applications/`)
+      // map over applications in jsx
+
+      setApplications(await res.json())
+    })()
+
+  }, [])
+
 
   const { userId } = useContext(Context)
 
@@ -314,6 +303,7 @@ export default function NewProcessView() {
           body: JSON.stringify({
             ...formik.values,
             ...sliderValues,
+            applications: [...checkboxValues],
             customer_id: userId
           }),
           headers: {
@@ -348,7 +338,7 @@ export default function NewProcessView() {
       case 2:
         return <NewProcessFormOwnership formik={formik} />;
       default:
-        return <NewProcessFormRequirements formik={formik} setSliderValues={setSliderValues} />;
+        return <NewProcessFormRequirements formik={formik} applications={applications} checkboxValues={checkboxValues} setCheckboxValues={setCheckboxValues} setSliderValues={setSliderValues} />;
     }
   }
   return (

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormikProvider } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +13,7 @@ import {
     FormControlLabel,
     Checkbox,
 } from '@material-ui/core';
+import { apiBaseUrl } from 'config';
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +36,7 @@ NewProcessFormRequirements.propTypes = {
     className: PropTypes.string
 };
 
-function NewProcessFormRequirements({ formik, onOpenPreview, setSliderValues, className, ...other }) {
+function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSliderValues, checkboxValues, setCheckboxValues, className, ...other }) {
     const classes = useStyles();
     const {
         errors,
@@ -44,6 +45,30 @@ function NewProcessFormRequirements({ formik, onOpenPreview, setSliderValues, cl
         getFieldProps,
         handleChange,
     } = formik;
+
+
+
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            if (checkboxValues.has(e.target.value)) {
+                return
+            } else {
+                const copy = new Set([...checkboxValues])
+                copy.add(e.target.value)
+                setCheckboxValues(copy)
+            }
+
+        } else {
+            if (checkboxValues.has(e.target.value)) {
+                const copy = new Set([...checkboxValues])
+                copy.delete(e.target.value)
+                setCheckboxValues(copy)
+            } else {
+                return
+            }
+        }
+    }
+
 
 
     return (
@@ -285,38 +310,17 @@ function NewProcessFormRequirements({ formik, onOpenPreview, setSliderValues, cl
                 <Typography>Applications</Typography>
                 <Grid container>
                     <FormGroup>
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Excel"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Tablaeu"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="ToughEnergy"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Outlook"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="PowerPoint"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="JD Edwards"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="SAP"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Oracle"
-                        />
+                        {applications.map(({ id, name }) => {
+                            return (
+                                <FormControlLabel
+                                    key={`${id}${name}`}
+                                    control={<Checkbox />}
+                                    label={name}
+                                    value={id}
+                                    onChange={handleCheckboxChange}
+                                />
+                            )
+                        })}
                     </FormGroup>
                 </Grid>
 
