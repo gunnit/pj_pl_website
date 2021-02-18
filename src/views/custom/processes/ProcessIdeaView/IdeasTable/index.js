@@ -8,11 +8,13 @@ import { visuallyHidden } from '@material-ui/utils';
 import { PATH_APP } from 'routes/paths';
 import { Link as RouterLink } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
+  Button,
   Card,
   Table,
   TableRow,
@@ -24,10 +26,13 @@ import {
   TablePagination,
   Menu,
   MenuItem,
+  Typography,
+  Dialog,
+  DialogTitle,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
-
+import { apiBaseUrl } from 'config';
 
 // ----------------------------------------------------------------------
 
@@ -148,8 +153,9 @@ export default function IdeasTable({ processes }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
+  const [openDialogName, setOpenDialogName] = useState(null);
 
-  const { setCurrentProcessId } = useContext(Context)
+  const { currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
 
 
   const handleRequestSort = (event, property) => {
@@ -158,6 +164,13 @@ export default function IdeasTable({ processes }) {
     setOrderBy(property);
   };
 
+  const handleCloseDialog = value => {
+    setOpenDialogName(null);
+  };
+
+  const handleOpenDialog = (event, name) => {
+    setOpenDialogName(name)
+  }
 
   const handleOpen = (event, id) => {
     setOpen(event.currentTarget);
@@ -183,6 +196,7 @@ export default function IdeasTable({ processes }) {
     setFilterName(event.target.value);
   };
 
+
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
@@ -191,6 +205,42 @@ export default function IdeasTable({ processes }) {
     getComparator(order, orderBy),
     filterName
   );
+
+  const handleOpenDialogClick = (process_name, id) => {
+    setOpenDialogName(process_name)
+    setCurrentProcessId(id)
+  }
+
+  const moveToPipelineClick = async () => {
+    try {
+
+      // currentProcessId will be the ID of the process that was clicked on
+      await fetch(`${apiBaseUrl}/change_status/${currentProcessId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          pipeline_status: 'Pipeline'
+        }),
+        headers: {
+          "Content-Type": 'application/json',
+        }
+        // Authorization###
+      })
+
+      // Change navbar numbers
+      setProcessCounts(previous => ({
+        ...previous,
+        idea: previous.idea - 1,
+        pipeline: previous.pipeline + 1
+      }))
+
+
+      // Redirect to process detail page
+      history.push(PATH_APP.processes.details)
+
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   const isProductNotFound = filteredProcesses.length === 0;
 
@@ -281,6 +331,15 @@ export default function IdeasTable({ processes }) {
                               />
                             </IconButton>
                           </TableCell>
+                          <TableCell align="right">
+                            <IconButton className={classes.margin} onClick={() => handleOpenDialogClick(process_name, id)}>
+                              <Icon
+                                icon={ArrowForwardIcon}
+                                width={20}
+                                height={20}
+                              />
+                            </IconButton>
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -334,7 +393,22 @@ export default function IdeasTable({ processes }) {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Card>
+
+
+        <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
+          {openDialogName &&
+            <>
+              <DialogTitle id="simple-dialog-title">Move {openDialogName} to pipeline?</DialogTitle>
+              <Button onClick={moveToPipelineClick}>Yes</Button>
+              <Button color='error'>Cancel</Button>
+            </>}
+          {/* <Typography>Move {openDialogName} to pipeline?</Typography> */}
+        </Dialog>
+
       </Container>
+
+
+
     </Page >
   );
 }
