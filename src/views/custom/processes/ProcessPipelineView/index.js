@@ -66,13 +66,13 @@ function ProcessPipelineView() {
 
                         {/* For widgets, replace chart with image/icon */}
                         <Grid item xs={12} sm={12} md={4} lg={4}>
-                            <Widgets1 />
+                            <Widgets1 amount={pipeline.strongly_suggested_for_automation} total={pipeline.processes_idea.length} />
                         </Grid>
                         <Grid item xs={12} sm={12} md={4} lg={4}>
-                            <Widgets2 />
+                            <Widgets2 amount={pipeline.suggested_for_automation} total={pipeline.processes_idea.length} />
                         </Grid>
                         <Grid item xs={12} sm={12} md={4} lg={4}>
-                            <Widgets3 />
+                            <Widgets3 amount={pipeline.not_suggested_for_automation} total={pipeline.processes_idea.length} />
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={12} lg={12}>

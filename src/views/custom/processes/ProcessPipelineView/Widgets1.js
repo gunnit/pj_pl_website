@@ -40,7 +40,7 @@ Widgets1.propTypes = {
 
 const TOTAL = 3;
 
-function Widgets1({ className, ...other }) {
+function Widgets1({ className, total, amount, ...other }) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -74,7 +74,7 @@ function Widgets1({ className, ...other }) {
         options={chartOptions}
       />
       <Box sx={{ ml: 3, color: 'white' }}>
-        <Typography variant="h4"> {fNumber(TOTAL)} processes</Typography>
+      <Typography variant="h4"> {fNumber(amount)} {amount !== 1 ? 'processes' : 'process'}</Typography>
         <Box sx={{ typography: 'body2', opacity: 0.72 }}>Suggested to move to development</Box>
       </Box>
       <Icon icon={thumbsUp} className={classes.icon} />
