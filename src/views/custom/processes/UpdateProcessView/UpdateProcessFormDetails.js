@@ -43,6 +43,7 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
         {...other}
       >
         <TextField
+          color='secondary'
           fullWidth
           label="Process Name"
           {...getFieldProps('process_name')}
@@ -52,6 +53,7 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
         />
         <TextField
           fullWidth
+          color='secondary'
           label="Level 2 - Process Name"
           {...getFieldProps('process_L2_process_name')}
           error={Boolean(touched.process_L2_process_name && errors.process_L2_process_name)}
@@ -60,6 +62,7 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
         />
         <TextField
           select
+          color='secondary'
           fullWidth
           variant="outlined"
           label="Pipeline"
@@ -78,6 +81,7 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
 
         <TextField
           fullWidth
+          color='secondary'
           multiline
           minRows={3}
           maxRows={5}
@@ -92,6 +96,7 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
           fullWidth
           multiline
           minRows={3}
+          color='secondary'
           maxRows={5}
           label="Process Description"
           {...getFieldProps('description')}

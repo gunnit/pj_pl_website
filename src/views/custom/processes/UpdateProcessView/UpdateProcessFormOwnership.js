@@ -45,6 +45,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
             >
                 <TextField
                     fullWidth
+                    color='secondary'
                     label="Project Sponsor"
                     {...getFieldProps('sponsor')}
                     error={Boolean(touched.sponsor && errors.sponsor)}
@@ -54,6 +55,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
 
                 <TextField
                     fullWidth
+                    color='secondary'
                     label="Assigned Team"
                     {...getFieldProps('team')}
                     error={Boolean(touched.team && errors.team)}
@@ -62,6 +64,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
 
                 <TextField
                     fullWidth
+                    color='secondary'
                     label="Process SME"
                     {...getFieldProps('process_SME')}
                     error={Boolean(touched.process_SME && errors.process_SME)}
@@ -71,6 +74,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
 
                 <TextField
                     fullWidth
+                    color='secondary'
                     type='email'
                     label="Process SME Email"
                     {...getFieldProps('process_SME_email')}
@@ -80,6 +84,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
 
                 <TextField
                     fullWidth
+                    color='secondary'
                     type='number'
                     label="Process SME Phone Number"
                     {...getFieldProps('process_SME_tel')}
@@ -89,6 +94,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
 
                 <TextField
                     fullWidth
+                    color='secondary'
                     label="Process Owner Name"
                     {...getFieldProps('owner_name')}
                     error={Boolean(touched.ownerName && errors.ownerName)}
@@ -97,6 +103,7 @@ export default function UpdateProcessFormOwnership({ formik, onOpenPreview, clas
 
                 <TextField
                     fullWidth
+                    color='secondary'
                     label="Process Owner Email"
                     {...getFieldProps('owner_email')}
                     error={Boolean(touched.ownerEmail && errors.ownerEmail)}

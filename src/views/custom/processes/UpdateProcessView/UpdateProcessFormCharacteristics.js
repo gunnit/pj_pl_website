@@ -46,6 +46,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 {...other}
             >
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"
@@ -63,6 +64,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 </TextField>
 
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"
@@ -80,6 +82,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 </TextField>
 
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"
@@ -97,6 +100,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 </TextField>
 
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"
@@ -114,6 +118,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 </TextField>
 
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"
@@ -131,6 +136,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 </TextField>
 
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"
@@ -147,6 +153,7 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                 </TextField>
 
                 <TextField
+                    color='secondary'
                     select
                     fullWidth
                     variant="outlined"

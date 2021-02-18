@@ -43,23 +43,33 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
 
     const handleCheckboxChange = (e) => {
-        if (e.target.checked) {
-            if (checkboxValues.has(e.target.value)) {
-                return
-            } else {
-                const copy = new Set([...checkboxValues])
-                copy.add(e.target.value)
-                setCheckboxValues(copy)
-            }
+        // if (e.target.checked) {
+        // if (checkboxValues.has(e.target.value)) {
+        //     return
+        // } else {
+        //     const copy = new Set([...checkboxValues])
+        //     copy.add(e.target.value)
+        //     setCheckboxValues(copy)
+        // }
 
+        // // } else {
+        // if (checkboxValues.has(e.target.value)) {
+        //     const copy = new Set([...checkboxValues])
+        //     copy.delete(e.target.value)
+        //     setCheckboxValues(copy)
+        // } else {
+        //     return
+        // }
+        // // }
+
+        if (checkboxValues.has(e.target.value.toString())) {
+            const copy = new Set([...checkboxValues])
+            copy.delete(e.target.value.toString())
+            setCheckboxValues(copy)
         } else {
-            if (checkboxValues.has(e.target.value)) {
-                const copy = new Set([...checkboxValues])
-                copy.delete(e.target.value)
-                setCheckboxValues(copy)
-            } else {
-                return
-            }
+            const copy = new Set([...checkboxValues])
+            copy.add(e.target.value)
+            setCheckboxValues(copy)
         }
     }
 
@@ -277,6 +287,7 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 {/* Find out what to change this name to */}
                 <TextField
                     fullWidth
+                    color='secondary'
                     type='number'
                     label="Savings Goal"
                     {...getFieldProps('process_objective')}
@@ -286,6 +297,7 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 />
 
                 <TextField
+                    color='secondary'
                     fullWidth
                     label="Savings Goal Justification"
                     {...getFieldProps('saving_target_explanation')}
@@ -296,6 +308,7 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <TextField
                     select
+                    color='secondary'
                     fullWidth
                     variant="outlined"
                     label="Number of Manual Steps"
@@ -317,8 +330,9 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                         {applications.map(({ id, name }) => {
                             return (
                                 <FormControlLabel
+                                    checked={checkboxValues.has(id.toString())}
                                     key={`${id}${name}`}
-                                    control={<Checkbox />}
+                                    control={<Checkbox color='secondary' />}
                                     label={name}
                                     value={id}
                                     onChange={handleCheckboxChange}
@@ -330,6 +344,7 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
 
                 <TextField
+                    color='secondary'
                     fullWidth
                     multiline
                     minRows={3}

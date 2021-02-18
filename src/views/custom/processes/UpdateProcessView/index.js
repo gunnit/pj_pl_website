@@ -59,14 +59,16 @@ const useQontoStepIconStyles = makeStyles({
     color: '#eaeaf0',
     alignItems: 'center'
   },
-  active: { color: '#00AB55' },
+  active: { color: '#1890FF' },
   circle: {
     width: 8,
     height: 8,
     borderRadius: '50%',
     backgroundColor: 'currentColor'
   },
-  completed: { color: '#00AB55', zIndex: 1, fontSize: 18 }
+  completed: {
+    color: '#1890FF', zIndex: 1, fontSize: 18
+  }
 });
 
 function QontoStepIcon(props) {
@@ -316,6 +318,7 @@ export default function UpdateProcessView() {
         improve_consistency,
         improve_reliability,
         increase_retention,
+        applications_tec,
       } = await res.json()
 
       formik.setValues({
@@ -356,6 +359,9 @@ export default function UpdateProcessView() {
         improve_reliability,
         increase_retention,
       })
+
+      console.log(new Set([...applications_tec]))
+      setCheckboxValues(new Set([...applications_tec]))
 
       setLoading(false)
 
