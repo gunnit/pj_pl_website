@@ -6,7 +6,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import { PATH_APP } from 'routes/paths';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Scrollbars from 'components/Scrollbars';
@@ -146,6 +146,7 @@ function createData(id, moveToPipeline, process_name, alignment, process_critica
 
 export default function IdeasTable({ processes }) {
   const classes = useStyles();
+  const history = useHistory();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
