@@ -192,7 +192,8 @@ export default function NewProcessView() {
   }, [])
 
 
-  const { userId, setCurrentProcessId, setProcessCounts } = useContext(Context)
+
+  const { userId, currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
 
   const [activeStep, setActiveStep] = useState(0);
   const [pending, setPending] = useState(false)
@@ -273,7 +274,6 @@ export default function NewProcessView() {
     },
     validateOnMount: true
   });
-
 
   const handleNext = async () => {
     if (activeStep === 0) {

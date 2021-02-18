@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Form, FormikProvider } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -22,13 +21,8 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-NewProcessFormCharacteristics.propTypes = {
-    formik: PropTypes.object.isRequired,
-    onOpenPreview: PropTypes.func,
-    className: PropTypes.string
-};
 
-function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...other }) {
+export default function UpdateProcessFormCharacteristics({ formik, className, ...other }) {
     const classes = useStyles();
     const {
         errors,
@@ -37,16 +31,9 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
         handleSubmit,
         isSubmitting,
         setFieldValue,
-        getFieldProps
+        getFieldProps,
+        handleChange
     } = formik;
-
-    const [processCritical, setProcessCritical] = useState('');
-    const [businessProcess, setBusinessProcess] = useState('');
-    const [businessUnit, setBusinessUnit] = useState('');
-    const [businessFunction, setBusinessFunction] = useState('');
-    const [documentationAvailable, setDocumentationAvailable] = useState('');
-    const [natureOfProcess, setNatureOfProcess] = useState('');
-    const [testEnvironmentAvailable, setTestEnvironmentAvailable] = useState('');
 
 
     return (
@@ -58,14 +45,13 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                 className={clsx(classes.root, className)}
                 {...other}
             >
-
                 <TextField
                     select
                     fullWidth
                     variant="outlined"
                     label="Process Critical"
-                    value={processCritical}
-                    onChange={(e) => setProcessCritical(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('process_critical')}
                     helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -81,8 +67,8 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                     fullWidth
                     variant="outlined"
                     label="Type of Business Process"
-                    value={businessProcess}
-                    onChange={(e) => setBusinessProcess(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('process_type')}
                     // helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -98,8 +84,8 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                     fullWidth
                     variant="outlined"
                     label="Business Unit"
-                    value={businessUnit}
-                    onChange={(e) => setBusinessUnit(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('business_unit')}
                     // helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -115,8 +101,8 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                     fullWidth
                     variant="outlined"
                     label="Function"
-                    value={businessFunction}
-                    onChange={(e) => setBusinessFunction(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('function')}
                     // helperText="If the process is down and operations need to be performed manually, how severe will the impact on business be? Extremely: the process is critical to business and is one of the core processes. Not at all: the process does not impact business and operations"
                     className={classes.margin}
                 >
@@ -132,8 +118,8 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                     fullWidth
                     variant="outlined"
                     label="Documentation Available"
-                    value={documentationAvailable}
-                    onChange={(e) => setDocumentationAvailable(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('process_documentation_available')}
                     helperText="Is documentation for the process available? E.g. flowcharts, knowhow doc, video recordings, etc."
                     className={classes.margin}
                 >
@@ -149,8 +135,8 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                     fullWidth
                     variant="outlined"
                     label="Nature of Process"
-                    value={natureOfProcess}
-                    onChange={(e) => setNatureOfProcess(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('nature_of_process')}
                     className={classes.margin}
                 >
                     {['Entirely repetitive', 'Semi-repetitive', 'Not repetitive'].map(option => (
@@ -165,8 +151,8 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
                     fullWidth
                     variant="outlined"
                     label="Test Environment Available"
-                    value={testEnvironmentAvailable}
-                    onChange={(e) => setTestEnvironmentAvailable(e.target.value)}
+                    onChange={handleChange}
+                    {...getFieldProps('test_env_available')}
                     helperText="Is there a virtual test environment where the process could be developed?"
                     className={classes.margin}
                 >
@@ -180,5 +166,3 @@ function NewProcessFormCharacteristics({ formik, onOpenPreview, className, ...ot
         </FormikProvider >
     );
 }
-
-export default NewProcessFormCharacteristics;

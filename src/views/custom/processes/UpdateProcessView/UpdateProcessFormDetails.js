@@ -1,13 +1,11 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Form, FormikProvider } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   TextField,
   MenuItem,
 } from '@material-ui/core';
-import UpdateProcessTextField from './UpdateProcessTextField';
 
 // ----------------------------------------------------------------------
 
@@ -23,13 +21,9 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-NewProcessFormDetails.propTypes = {
-  formik: PropTypes.object.isRequired,
-  onOpenPreview: PropTypes.func,
-  className: PropTypes.string
-};
 
-function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
+
+export default function UpdateProcessFormDetails({ formik, className, ...other }) {
   const classes = useStyles();
   const {
     errors,
@@ -38,11 +32,6 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
     getFieldProps
   } = formik;
 
-  const [pipelineSelect, setPipelineSelect] = useState('');
-
-  const handleChangePipeline = e => {
-    setPipelineSelect(e.target.value);
-  };
 
   return (
     <FormikProvider value={formik}>
@@ -54,37 +43,29 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
         {...other}
       >
         <TextField
-          color='secondary'
           fullWidth
           label="Process Name"
-          {...getFieldProps('name')}
+          {...getFieldProps('process_name')}
           error={Boolean(touched.name && errors.name)}
           // helperText={touched.name && errors.name}
           className={classes.margin}
         />
-        {/* <UpdateProcessTextField
-          id={'name'}
-          label={'Process Name'}
-          getFieldProps={getFieldProps}
-          error={Boolean(touched.name && errors.name)}
-        /> */}
         <TextField
-          color='secondary'
           fullWidth
           label="Level 2 - Process Name"
-          {...getFieldProps('name2')}
-          error={Boolean(touched.name2 && errors.name2)}
+          {...getFieldProps('process_L2_process_name')}
+          error={Boolean(touched.process_L2_process_name && errors.process_L2_process_name)}
           helperText={'Level 2 process name or taxonomy reference'}
           className={classes.margin}
         />
         <TextField
           select
-          color='secondary'
           fullWidth
           variant="outlined"
           label="Pipeline"
-          value={pipelineSelect}
-          onChange={handleChangePipeline}
+          {...getFieldProps('pipeline')}
+          // This select field needs formik.handleChange for formik to detect its value even though the other ones don't seem to need it for some reason
+          onChange={formik.handleChange}
           // helperText="Please select your currency"
           className={classes.margin}
         >
@@ -96,7 +77,6 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
         </TextField>
 
         <TextField
-          color='secondary'
           fullWidth
           multiline
           minRows={3}
@@ -109,7 +89,6 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
         />
 
         <TextField
-          color='secondary'
           fullWidth
           multiline
           minRows={3}
@@ -125,5 +104,3 @@ function NewProcessFormDetails({ formik, onOpenPreview, className, ...other }) {
     </FormikProvider>
   );
 }
-
-export default NewProcessFormDetails;

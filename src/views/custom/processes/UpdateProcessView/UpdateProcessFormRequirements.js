@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormikProvider } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,8 +13,8 @@ import {
     FormControlLabel,
     Checkbox,
 } from '@material-ui/core';
+import { apiBaseUrl } from 'config';
 
-// ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -30,25 +30,40 @@ function valuetext(value) {
     return `$${value}°C`;
 }
 
-NewProcessFormRequirements.propTypes = {
-    formik: PropTypes.object.isRequired,
-    onOpenPreview: PropTypes.func,
-    className: PropTypes.string
-};
 
-function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other }) {
+export default function UpdateProcessFormRequirements({ formik, onOpenPreview, applications, setSliderValues, checkboxValues, setCheckboxValues, className, ...other }) {
     const classes = useStyles();
     const {
         errors,
-        values,
         touched,
         handleSubmit,
-        isSubmitting,
-        setFieldValue,
-        getFieldProps
+        getFieldProps,
+        handleChange,
     } = formik;
 
-    const [manualStepsSelect, setManualStepsSelect] = useState('')
+
+
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            if (checkboxValues.has(e.target.value)) {
+                return
+            } else {
+                const copy = new Set([...checkboxValues])
+                copy.add(e.target.value)
+                setCheckboxValues(copy)
+            }
+
+        } else {
+            if (checkboxValues.has(e.target.value)) {
+                const copy = new Set([...checkboxValues])
+                copy.delete(e.target.value)
+                setCheckboxValues(copy)
+            } else {
+                return
+            }
+        }
+    }
+
 
 
     return (
@@ -71,6 +86,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, cost_reduction: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -88,6 +104,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, reduce_process_duration: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -105,6 +122,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_accuracy: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -123,6 +141,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_audit_trail: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -141,6 +160,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_scalability: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -160,6 +180,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_security: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -177,6 +198,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_consistency: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -194,6 +216,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_reliability: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -213,6 +236,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, client_satisfaction: value }))}
                 />
                 <Typography
                     gutterBottom
@@ -232,6 +256,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     marks
                     min={1}
                     max={10}
+                    onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, increase_retention: value }))}
                 />
                 <Typography gutterBottom
                     variant="subtitle2"
@@ -239,22 +264,23 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     By removing repetitive tasks employees will be able to perform more value adding tasks
                 </Typography>
 
+
+                {/* Find out what to change this name to */}
                 <TextField
                     fullWidth
                     type='number'
                     label="Savings Goal"
-                    {...getFieldProps('savingsGoal')}
-                    error={Boolean(touched.savingsGoal && errors.savingsGoal)}
+                    {...getFieldProps('process_objective')}
+                    error={Boolean(touched.process_objective && errors.process_objective)}
                     helperText={'What is a quantitative measure on how success will be measured on the process?'}
                     className={classes.margin}
                 />
 
                 <TextField
                     fullWidth
-                    type='number'
                     label="Savings Goal Justification"
-                    {...getFieldProps('savingsGoalJustification')}
-                    error={Boolean(touched.savingsGoalJustification && errors.savingsGoalJustification)}
+                    {...getFieldProps('saving_target_explanation')}
+                    error={Boolean(touched.saving_target_explanation && errors.saving_target_explanation)}
                     helperText={'Provide a short explanation on how you calculated the savings goal for this process.'}
                     className={classes.margin}
                 />
@@ -264,8 +290,8 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     fullWidth
                     variant="outlined"
                     label="Number of Manual Steps"
-                    value={manualStepsSelect}
-                    onChange={(e) => setManualStepsSelect(e.target.value)}
+                    {...getFieldProps('num_of_manual_steps')}
+                    onChange={handleChange}
                     className={classes.margin}
                 >
                     {/* Maybe change this to 0-9, 10-19, etc, 50+ */}
@@ -279,38 +305,17 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                 <Typography>Applications</Typography>
                 <Grid container>
                     <FormGroup>
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Excel"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Tablaeu"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="ToughEnergy"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Outlook"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="PowerPoint"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="JD Edwards"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="SAP"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Oracle"
-                        />
+                        {applications.map(({ id, name }) => {
+                            return (
+                                <FormControlLabel
+                                    key={`${id}${name}`}
+                                    control={<Checkbox />}
+                                    label={name}
+                                    value={id}
+                                    onChange={handleCheckboxChange}
+                                />
+                            )
+                        })}
                     </FormGroup>
                 </Grid>
 
@@ -321,9 +326,9 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
                     minRows={3}
                     maxRows={5}
                     label="Explain pain points"
-                    {...getFieldProps('painPoints')}
-                    error={Boolean(touched.painPoints && errors.painPoints)}
-                    // helperText={touched.painPoints && errors.painPoints}
+                    {...getFieldProps('note')}
+                    error={Boolean(touched.note && errors.note)}
+                    // helperText={touched.note && errors.note}
                     helperText={'List the main issues why this process needs to be automated'}
                     className={classes.margin}
                 />
@@ -332,5 +337,3 @@ function NewProcessFormRequirements({ formik, onOpenPreview, className, ...other
         </FormikProvider >
     );
 }
-
-export default NewProcessFormRequirements;
