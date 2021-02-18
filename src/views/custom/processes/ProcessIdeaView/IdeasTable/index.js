@@ -26,7 +26,6 @@ import {
   TablePagination,
   Menu,
   MenuItem,
-  Typography,
   Dialog,
   DialogTitle,
 } from '@material-ui/core';
@@ -147,6 +146,7 @@ function createData(id, moveToPipeline, process_name, alignment, process_critica
 export default function IdeasTable({ processes }) {
   const classes = useStyles();
   const history = useHistory();
+
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -168,10 +168,6 @@ export default function IdeasTable({ processes }) {
   const handleCloseDialog = value => {
     setOpenDialogName(null);
   };
-
-  const handleOpenDialog = (event, name) => {
-    setOpenDialogName(name)
-  }
 
   const handleOpen = (event, id) => {
     setOpen(event.currentTarget);
@@ -246,170 +242,163 @@ export default function IdeasTable({ processes }) {
   const isProductNotFound = filteredProcesses.length === 0;
 
   return (
-    <Page title="Process Ideas" className={classes.root}>
-      <Container>
-        <Card className={classes.card}>
-          <ToolbarTable
-            numSelected={selected.length}
-            filterName={filterName}
-            onFilterName={handleFilterByName}
-          />
-          <Scrollbars>
-            <TableContainer component={Box} sx={{ minWidth: 800 }}>
-              <Table>
-                <HeadTable
-                  order={order}
-                  classes={classes}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={processes.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                />
-                <TableBody>
-                  {filteredProcesses
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-                      const {
-                        id,
-                        moveToPipeline,
-                        process_name,
-                        alignment,
-                        process_critical,
-                        process_objective,
-                        num_of_manual_steps,
-                        nature_of_process,
-                        test_env_available,
-                        owner_name,
-                      } = row;
+    <Container>
+      <Card className={classes.card}>
+        <ToolbarTable
+          numSelected={selected.length}
+          filterName={filterName}
+          onFilterName={handleFilterByName}
+        />
+        <Scrollbars>
+          <TableContainer component={Box} sx={{ minWidth: 800 }}>
+            <Table>
+              <HeadTable
+                order={order}
+                classes={classes}
+                orderBy={orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={processes.length}
+                numSelected={selected.length}
+                onRequestSort={handleRequestSort}
+              />
+              <TableBody>
+                {filteredProcesses
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const {
+                      id,
+                      moveToPipeline,
+                      process_name,
+                      alignment,
+                      process_critical,
+                      process_objective,
+                      num_of_manual_steps,
+                      nature_of_process,
+                      test_env_available,
+                      owner_name,
+                    } = row;
 
-                      const isItemSelected = selected.indexOf(process_name) !== -1;
-                      const labelId = `enhanced-table-checkbox-${index}`;
+                    const isItemSelected = selected.indexOf(process_name) !== -1;
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                      // && and || statements below are to say what to do when the data is null
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                          className={classes.row}
+                    // && and || statements below are to say what to do when the data is null
+                    return (
+                      <TableRow
+                        hover
+                        key={id}
+                        tabIndex={-1}
+                        role="checkbox"
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
+                        className={classes.row}
+                      >
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
                         >
-                          <TableCell
-                            component="th"
-                            id={labelId}
-                            scope="row"
-                            padding="none"
-                          >
-                            {moveToPipeline || ''}
-                          </TableCell>
+                          {moveToPipeline || ''}
+                        </TableCell>
 
-                          <TableCell align="right">{process_name || ''}</TableCell>
-                          <TableCell align="right">
-                            {alignment
-                              && <MLabel variant="filled" color="info">
-                                {alignment}
-                              </MLabel>}
-                          </TableCell>
-                          <TableCell align="right">{process_critical || ''}</TableCell>
-                          <TableCell align="right">
-                            {process_objective && <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
-                              {process_objective}
+                        <TableCell align="right">{process_name || ''}</TableCell>
+                        <TableCell align="right">
+                          {alignment
+                            && <MLabel variant="filled" color="info">
+                              {alignment}
                             </MLabel>}
-                          </TableCell>
-                          <TableCell align="right">{num_of_manual_steps || ''}</TableCell>
-                          <TableCell align="right">{nature_of_process || ''}</TableCell>
-                          <TableCell align="right">{test_env_available || ''}</TableCell>
-                          <TableCell align="right">{owner_name || ''}</TableCell>
-                          <TableCell align="right">
-                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
-                              <Icon
-                                icon={moreVerticalFill}
-                                width={20}
-                                height={20}
-                              />
-                            </IconButton>
-                          </TableCell>
-                          <TableCell align="right">
-                            <IconButton className={classes.margin} onClick={() => handleOpenDialogClick(process_name, id)}>
-                              <Icon
-                                icon={ArrowForwardIcon}
-                                width={20}
-                                height={20}
-                              />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-                {isProductNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6}>
-                        <Box sx={{ py: 3 }}>
-                          <SearchNotFound searchQuery={filterName} />
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
+                        </TableCell>
+                        <TableCell align="right">{process_critical || ''}</TableCell>
+                        <TableCell align="right">
+                          {process_objective && <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
+                            {process_objective}
+                          </MLabel>}
+                        </TableCell>
+                        <TableCell align="right">{num_of_manual_steps || ''}</TableCell>
+                        <TableCell align="right">{nature_of_process || ''}</TableCell>
+                        <TableCell align="right">{test_env_available || ''}</TableCell>
+                        <TableCell align="right">{owner_name || ''}</TableCell>
+                        <TableCell align="right">
+                          <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                            <Icon
+                              icon={moreVerticalFill}
+                              width={20}
+                              height={20}
+                            />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                          <IconButton className={classes.margin} onClick={() => handleOpenDialogClick(process_name, id)}>
+                            <Icon
+                              icon={ArrowForwardIcon}
+                              width={20}
+                              height={20}
+                            />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
                 )}
-              </Table>
-            </TableContainer>
-          </Scrollbars>
+              </TableBody>
+              {isProductNotFound && (
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center" colSpan={6}>
+                      <Box sx={{ py: 3 }}>
+                        <SearchNotFound searchQuery={filterName} />
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              )}
+            </Table>
+          </TableContainer>
+        </Scrollbars>
 
-          <Menu
-            keepMounted
-            id="simple-menu"
-            anchorEl={isOpen}
-            onClose={handleClose}
-            open={Boolean(isOpen)}
-          >
-            {[{ text: 'View details', path: PATH_APP.processes.details },
-            { text: 'Update', path: PATH_APP.processes.update },
-            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
-              <RouterLink to={option.path} className={classes.routerLink}>
-                <MenuItem key={option.text} onClick={handleClose}>
-                  {option.text}
-                </MenuItem>
-              </RouterLink>
-            ))}
-          </Menu>
-
-
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={processes.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
-
-
-        <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
-          {openDialogName &&
-            <>
-              <DialogTitle id="simple-dialog-title">Move {openDialogName} to pipeline?</DialogTitle>
-              <Button onClick={moveToPipelineClick}>Yes</Button>
-              <Button color='error'>Cancel</Button>
-            </>}
-          {/* <Typography>Move {openDialogName} to pipeline?</Typography> */}
-        </Dialog>
-
-      </Container>
+        <Menu
+          keepMounted
+          id="simple-menu"
+          anchorEl={isOpen}
+          onClose={handleClose}
+          open={Boolean(isOpen)}
+        >
+          {[{ text: 'View details', path: PATH_APP.processes.details },
+          { text: 'Update', path: PATH_APP.processes.update },
+          { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+            <RouterLink to={option.path} className={classes.routerLink}>
+              <MenuItem key={option.text} onClick={handleClose}>
+                {option.text}
+              </MenuItem>
+            </RouterLink>
+          ))}
+        </Menu>
 
 
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={processes.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Card>
 
-    </Page >
+      <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
+        {openDialogName &&
+          <>
+            <DialogTitle id="simple-dialog-title">Move {openDialogName} to pipeline?</DialogTitle>
+            <Button onClick={moveToPipelineClick}>Yes</Button>
+            <Button color='error'>Cancel</Button>
+          </>}
+      </Dialog>
+
+    </Container>
   );
 }

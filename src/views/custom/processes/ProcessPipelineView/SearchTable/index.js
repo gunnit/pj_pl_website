@@ -2,21 +2,22 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
-import React, { useState, useContext } from 'react';
 import { Icon } from '@iconify/react';
+import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
-import SearchNotFound from 'components/SearchNotFound';
-import Scrollbars from 'components/Scrollbars';
 import { PATH_APP } from 'routes/paths';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import SearchNotFound from 'components/SearchNotFound';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
-import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
+  Button,
   Card,
   Table,
   TableRow,
-  Checkbox,
   TableBody,
   TableCell,
   Container,
@@ -25,10 +26,12 @@ import {
   TablePagination,
   Menu,
   MenuItem,
+  Dialog,
+  DialogTitle,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
-
+import { apiBaseUrl } from 'config';
 
 const TABLE_HEAD = [
   {
@@ -132,26 +135,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// Make sure this part is correct when adding the real data
 
-function createData(id, overallRating, name, alignment, automationScore, costWithoutAutomation, costWithAutomation, savings, owner) {
-  return { id, overallRating, name, alignment, automationScore, costWithoutAutomation, costWithAutomation, savings, owner };
-}
-
-const products = [
-  createData('id', 'Yes', 'Process', '70%', 'Moderately', 10, 2000, 1000, 1000, 'CRO-Supply Chain'),
-  createData('id2', 'Yes', 'Process2', '70%', 'Moderately', 10, 4000, 1000, 3000, 'CRO-Supply Chain'),
-  createData('id3', 'Yes', 'Process3', '70%', 'Moderately', 10, 9000, 1000, 8000, 'CRO-Supply Chain'),
-  createData('id4', 'Yes', 'Process4', '70%', 'Moderately', 10, 4000, 1000, 3000, 'CRO-Supply Chain'),
-  createData('id5', 'Yes', 'Process5', '70%', 'Moderately', 10, 1020, 1000, 20, 'CRO-Supply Chain'),
-  createData('id6', 'Yes', 'Process6', '70%', 'Moderately', 10, 4800, 1000, 3800, 'CRO-Supply Chain'),
-  createData('id7', 'Yes', 'Process7', '70%', 'Moderately', 10, 4000, 1000, 3000, 'CRO-Supply Chain'),
-];
 
 // ----------------------------------------------------------------------
 
-export default function SearchTable() {
+export default function SearchTable({ processes }) {
   const classes = useStyles();
+  const history = useHistory();
+
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -159,8 +150,13 @@ export default function SearchTable() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
+  const [openDialogName, setOpenDialogName] = useState(null);
 
-  const { setCurrentProcessId } = useContext(Context)
+  const { currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
+
+  const handleCloseDialog = value => {
+    setOpenDialogName(null);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -168,23 +164,36 @@ export default function SearchTable() {
     setOrderBy(property);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
+  const moveToDevelopmentClick = async () => {
+    try {
+
+      // currentProcessId will be the ID of the process that was clicked on
+      await fetch(`${apiBaseUrl}/change_status/${currentProcessId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          pipeline_status: 'Development'
+        }),
+        headers: {
+          "Content-Type": 'application/json',
+        }
+        // Authorization###
+      })
+
+      // Change navbar numbers
+      setProcessCounts(previous => ({
+        ...previous,
+        pipeline: previous.pipeline - 1,
+        development: previous.development + 1
+      }))
+
+
+      // Redirect to process detail page
+      history.push(PATH_APP.processes.details)
+
+    } catch (e) {
+      console.error(e)
     }
-    setSelected(newSelected);
-  };
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -209,160 +218,172 @@ export default function SearchTable() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
+  const handleOpenDialogClick = (process_name, id) => {
+    setOpenDialogName(process_name)
+    setCurrentProcessId(id)
+  }
 
-  const filteredProducts = applySortFilter(
-    products,
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
+
+  const filteredProcesses = applySortFilter(
+    processes,
     getComparator(order, orderBy),
     filterName
   );
 
-  const isProductNotFound = filteredProducts.length === 0;
+  const isProductNotFound = filteredProcesses.length === 0;
 
   return (
-    <Page title="Process Ideas" className={classes.root}>
-      <Container>
+    <Container>
+      <Card className={classes.card}>
+        <ToolbarTable
+          numSelected={selected.length}
+          filterName={filterName}
+          onFilterName={handleFilterByName}
+        />
 
+        <Scrollbars>
+          <TableContainer component={Box} sx={{ minWidth: 800 }}>
+            <Table>
+              <HeadTable
+                order={order}
+                classes={classes}
+                orderBy={orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={processes.length}
+                numSelected={selected.length}
+                onRequestSort={handleRequestSort}
+              />
+              <TableBody>
+                {filteredProcesses
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(({
+                    id,
+                    overallRating,
+                    process_name,
+                    alignment,
+                    automationScore,
+                    costWithoutAutomation,
+                    costWithAutomation,
+                    savings,
+                    owner,
+                  }, index) => {
 
-        <Card className={classes.card}>
-          <ToolbarTable
-            numSelected={selected.length}
-            filterName={filterName}
-            onFilterName={handleFilterByName}
-          />
+                    // Overall Rating	Process Name	Objective Alignment	Automation Score	Cost Without Automation	Cost With Automation	Saving	Owner
 
-          <Scrollbars>
-            <TableContainer component={Box} sx={{ minWidth: 800 }}>
-              <Table>
-                <HeadTable
-                  order={order}
-                  classes={classes}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={products.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                />
-                <TableBody>
-                  {filteredProducts
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                      const {
-                        id,
-                        overallRating,
-                        name,
-                        alignment,
-                        automationScore,
-                        costWithoutAutomation,
-                        costWithAutomation,
-                        savings,
-                        owner,
-                      } = row;
-
-                      const isItemSelected = selected.indexOf(name) !== -1;
-                      const labelId = `enhanced-table-checkbox-${index}`;
-
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                          onClick={event => handleClick(event, name)}
-                          className={classes.row}
+                    return (
+                      <TableRow
+                        hover
+                        key={id}
+                        tabIndex={-1}
+                        role="checkbox"
+                        className={classes.row}
+                      >
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
                         >
-                          <TableCell padding="checkbox">
-                            <Checkbox checked={isItemSelected} />
-                          </TableCell>
-                          <TableCell
-                            component="th"
-                            id={labelId}
-                            scope="row"
-                            padding="none"
-                          >
-                            {overallRating}
-                          </TableCell>
-                          <TableCell align="right">{name}</TableCell>
-                          <TableCell align="right">
-                            <MLabel variant="filled" color="info">
-                              {alignment}
-                            </MLabel>
-                          </TableCell>
-                          <TableCell align="right">{automationScore}</TableCell>
-                          <TableCell align="right">{costWithoutAutomation}</TableCell>
-                          <TableCell align="right">{costWithAutomation}</TableCell>
-                          <TableCell align="right">
-                            <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                              {savings}
-                            </MLabel>
-                          </TableCell>
-                          <TableCell align="right">{owner}</TableCell>
-                          <TableCell align="right">
-                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
-                              <Icon
-                                icon={moreVerticalFill}
-                                width={20}
-                                height={20}
-                              />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-                {isProductNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6}>
-                        <Box sx={{ py: 3 }}>
-                          <SearchNotFound searchQuery={filterName} />
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
+                          {overallRating}
+                        </TableCell>
+                        <TableCell align="right">{process_name}</TableCell>
+                        <TableCell align="right">
+                          <MLabel variant="filled" color="info">
+                            {alignment}
+                          </MLabel>
+                        </TableCell>
+                        <TableCell align="right">{automationScore}</TableCell>
+                        <TableCell align="right">{costWithoutAutomation}</TableCell>
+                        <TableCell align="right">{costWithAutomation}</TableCell>
+                        <TableCell align="right">
+                          <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
+                            {savings}
+                          </MLabel>
+                        </TableCell>
+                        <TableCell align="right">{owner}</TableCell>
+                        <TableCell align="right">
+                          <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                            <Icon
+                              icon={moreVerticalFill}
+                              width={20}
+                              height={20}
+                            />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                          <IconButton className={classes.margin} onClick={() => handleOpenDialogClick(process_name, id)}>
+                            <Icon
+                              icon={ArrowForwardIcon}
+                              width={20}
+                              height={20}
+                            />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
                 )}
-              </Table>
-            </TableContainer>
-          </Scrollbars>
+              </TableBody>
+              {isProductNotFound && (
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center" colSpan={6}>
+                      <Box sx={{ py: 3 }}>
+                        <SearchNotFound searchQuery={filterName} />
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              )}
+            </Table>
+          </TableContainer>
+        </Scrollbars>
 
-          <Menu
-            keepMounted
-            id="simple-menu"
-            anchorEl={isOpen}
-            onClose={handleClose}
-            open={Boolean(isOpen)}
-          >
-            {[{ text: 'View details', path: PATH_APP.processes.details },
-            { text: 'Update', path: PATH_APP.processes.update },
-            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
-              <RouterLink to={option.path} className={classes.routerLink}>
-                <MenuItem key={option.text} onClick={handleClose}>
-                  {option.text}
-                </MenuItem>
-              </RouterLink>
-            ))}
-          </Menu>
+        <Menu
+          keepMounted
+          id="simple-menu"
+          anchorEl={isOpen}
+          onClose={handleClose}
+          open={Boolean(isOpen)}
+        >
+          {[{ text: 'View details', path: PATH_APP.processes.details },
+          { text: 'Update', path: PATH_APP.processes.update },
+          { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+            <RouterLink to={option.path} className={classes.routerLink}>
+              <MenuItem key={option.text} onClick={handleClose}>
+                {option.text}
+              </MenuItem>
+            </RouterLink>
+          ))}
+        </Menu>
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={products.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
-      </Container>
-    </Page >
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={processes.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+
+        <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
+          {openDialogName &&
+            <>
+              <DialogTitle id="simple-dialog-title">Move {openDialogName} to development?</DialogTitle>
+              <Button onClick={moveToDevelopmentClick}>Yes</Button>
+              <Button color='error'>Cancel</Button>
+            </>}
+        </Dialog>
+      </Card>
+    </Container>
   );
 }
