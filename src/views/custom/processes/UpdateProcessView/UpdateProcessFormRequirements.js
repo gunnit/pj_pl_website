@@ -31,7 +31,7 @@ function valuetext(value) {
 }
 
 
-export default function UpdateProcessFormRequirements({ formik, onOpenPreview, applications, setSliderValues, checkboxValues, setCheckboxValues, className, ...other }) {
+export default function UpdateProcessFormRequirements({ formik, onOpenPreview, applications, sliderValues, setSliderValues, checkboxValues, setCheckboxValues, className, ...other }) {
     const classes = useStyles();
     const {
         errors,
@@ -40,7 +40,6 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
         getFieldProps,
         handleChange,
     } = formik;
-
 
 
     const handleCheckboxChange = (e) => {
@@ -79,7 +78,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Direct Cost Reduction</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.cost_reduction}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -97,7 +97,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Reduce Process Duration</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.reduce_process_duration}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -115,7 +116,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Improve Accuracy</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.improve_accuracy}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -134,7 +136,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Improve Audit Trail</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.enable_audit_trail}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -153,7 +156,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Enable Scalability of Automation</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.enable_scalability}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -173,7 +177,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Security</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.improve_security}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -191,7 +196,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Improve Consistency</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.improve_consistency}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -209,7 +215,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Improve Reliability</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.improve_reliability}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -229,7 +236,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Client Satisfaction</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.client_satisfaction}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
@@ -249,7 +257,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
                 <Typography gutterBottom>Increase Retention</Typography>
                 <Slider
-                    defaultValue={7}
+                    color='secondary'
+                    defaultValue={sliderValues.increase_retention}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}

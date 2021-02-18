@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
+import LoadingScreen from 'components/LoadingScreen';
 import { useSnackbar } from 'notistack';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
@@ -175,10 +176,12 @@ export default function UpdateProcessView() {
     client_satisfaction: 7,
     improve_consistency: 7,
     improve_reliability: 7,
-    increase_retention: 7
+    increase_retention: 7,
   })
   const [checkboxValues, setCheckboxValues] = useState(new Set())
   const [applications, setApplications] = useState([])
+
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // fetch applications from database
@@ -193,7 +196,7 @@ export default function UpdateProcessView() {
 
 
 
-  const { userId, currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
+  const { userId, currentProcessId } = useContext(Context)
 
   const [activeStep, setActiveStep] = useState(0);
   const [pending, setPending] = useState(false)
@@ -303,6 +306,16 @@ export default function UpdateProcessView() {
         saving_target_explanation,
         num_of_manual_steps,
         note,
+        cost_reduction,
+        reduce_process_duration,
+        improve_accuracy,
+        enable_audit_trail,
+        enable_scalability,
+        improve_security,
+        client_satisfaction,
+        improve_consistency,
+        improve_reliability,
+        increase_retention,
       } = await res.json()
 
       formik.setValues({
@@ -330,6 +343,22 @@ export default function UpdateProcessView() {
         num_of_manual_steps,
         note,
       })
+
+      setSliderValues({
+        cost_reduction,
+        reduce_process_duration,
+        improve_accuracy,
+        enable_audit_trail,
+        enable_scalability,
+        improve_security,
+        client_satisfaction,
+        improve_consistency,
+        improve_reliability,
+        increase_retention,
+      })
+
+      setLoading(false)
+
 
     })()
 
@@ -402,9 +431,24 @@ export default function UpdateProcessView() {
       case 2:
         return <UpdateProcessFormOwnership formik={formik} />;
       default:
-        return <UpdateProcessFormRequirements formik={formik} applications={applications} checkboxValues={checkboxValues} setCheckboxValues={setCheckboxValues} setSliderValues={setSliderValues} />;
+        return (
+          <UpdateProcessFormRequirements
+            formik={formik}
+            applications={applications}
+            checkboxValues={checkboxValues}
+            setCheckboxValues={setCheckboxValues}
+            sliderValues={sliderValues}
+            setSliderValues={setSliderValues}
+          />
+        );
     }
   }
+
+
+  if (loading) {
+    return <LoadingScreen />
+  }
+
   return (
     <Page title="New Process" className={classes.root}>
       <Container>
