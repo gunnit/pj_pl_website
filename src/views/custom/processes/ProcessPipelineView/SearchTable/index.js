@@ -120,7 +120,7 @@ function applySortFilter(array, comparator, query) {
 
   if (query) {
     array = filter(array, _product => {
-      return _product.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return _product.process_name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
     return array;
   }
