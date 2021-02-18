@@ -65,7 +65,7 @@ function ProcessProductionView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Development Cost'}
-                                mainNumber={0}
+                                mainNumber={production.total_development_cost}
                                 backgroundColor={theme.palette.secondary.lighter}
                                 icon={rocketIcon}
                             />
@@ -73,7 +73,7 @@ function ProcessProductionView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Maintenance Cost'}
-                                mainNumber={0}
+                                mainNumber={production.total_maintenance_cost}
                                 backgroundColor={theme.palette.secondary.lighter}
                                 icon={rocketIcon}
                             />
@@ -81,7 +81,7 @@ function ProcessProductionView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total License Cost'}
-                                mainNumber={0}
+                                mainNumber={production.total_licence_cost}
                                 backgroundColor={theme.palette.secondary.lighter}
                                 icon={rocketIcon}
                             />
@@ -89,7 +89,7 @@ function ProcessProductionView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Infrastructure Cost'}
-                                mainNumber={0}
+                                mainNumber={production.total_infrastructure_cost}
                                 backgroundColor={theme.palette.secondary.lighter}
                                 icon={rocketIcon}
                             />
@@ -103,7 +103,7 @@ function ProcessProductionView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'ROI Year 1'}
-                                mainNumber={0}
+                                mainNumber={production.total_infrastructure_cost}
                                 backgroundColor={theme.palette.error.lighter}
                                 icon={rocketIcon}
                             />

@@ -70,7 +70,7 @@ function ProcessDevelopmentView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Development Cost'}
-                                mainNumber={0}
+                                mainNumber={development.sum_total_development_costs}
                                 backgroundColor={theme.palette.secondary.lighter}
                                 icon={constructionWorker}
                             />
@@ -87,7 +87,7 @@ function ProcessDevelopmentView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Daily Rate'}
-                                mainNumber={0}
+                                mainNumber={development.avg_development_rate}
                                 backgroundColor={theme.palette.success.lighter}
                                 icon={dollarCircleFilled}
                             />
@@ -95,7 +95,7 @@ function ProcessDevelopmentView() {
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Avg. Development Duration'}
-                                mainNumber={0}
+                                mainNumber={development.avg_development_time}
                                 backgroundColor={theme.palette.success.lighter}
                                 icon={fieldTimeOutlined}
                             />
