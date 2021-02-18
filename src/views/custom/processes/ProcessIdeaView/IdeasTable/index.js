@@ -91,6 +91,9 @@ const TABLE_HEAD = [
   },
   {
     id: ''
+  },
+  {
+    id: ''
   }
 ];
 
@@ -154,6 +157,8 @@ export default function IdeasTable({ processes }) {
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
   const [openDialogName, setOpenDialogName] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
+
 
   const { currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
 
@@ -328,11 +333,7 @@ export default function IdeasTable({ processes }) {
                         </TableCell>
                         <TableCell align="right">
                           <IconButton className={classes.margin} onClick={() => handleOpenDialogClick(process_name, id)}>
-                            <Icon
-                              icon={ArrowForwardIcon}
-                              width={20}
-                              height={20}
-                            />
+                            <ArrowForwardIcon />
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -368,7 +369,7 @@ export default function IdeasTable({ processes }) {
         >
           {[{ text: 'View details', path: PATH_APP.processes.details },
           { text: 'Update', path: PATH_APP.processes.update },
-          { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+          { text: 'Delete', path: '' }].map(option => (
             <RouterLink to={option.path} className={classes.routerLink}>
               <MenuItem key={option.text} onClick={handleClose}>
                 {option.text}
@@ -397,6 +398,15 @@ export default function IdeasTable({ processes }) {
             <Button color='error'>Cancel</Button>
           </>}
       </Dialog>
+
+      {/* <Dialog open={!!confirmDelete} onClose={() => handleCloseDialog()}>
+        {confirmDelete &&
+          <>
+            <DialogTitle id="simple-dialog-title">Are you sure you want to delete {confirmDelete.name} </DialogTitle>
+            <Button onClick={confirmDeleteClick}>Yes</Button>
+            <Button color='error'>Cancel</Button>
+          </>}
+      </Dialog> */}
 
     </Container>
   );
