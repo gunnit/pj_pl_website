@@ -1,6 +1,5 @@
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
-import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
 import { Icon } from '@iconify/react';
 import React, { useState, useContext } from 'react';
@@ -135,11 +134,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function findNextStage(currentStage) {
+  if (currentStage === 'Idea') {
+    return 'Pipeline'
+  } else if (currentStage === 'Pipeline') {
+    return 'Development'
+  } else if (currentStage === 'Development') {
+    return 'Production'
+  }
+}
+
+function findPreviousStage(currentStage) {
+  if (currentStage === 'Pipeline') {
+    return 'Idea'
+  } else if (currentStage === 'Development') {
+    return 'Pipeline'
+  } else if (currentStage === 'Production') {
+    return 'Development'
+  }
+}
 
 
 // ----------------------------------------------------------------------
 
-export default function SearchTable({ processes }) {
+export default function DevelopmentTable({ processes }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -150,12 +168,12 @@ export default function SearchTable({ processes }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-  const [openDialogName, setOpenDialogName] = useState(null);
+  const [openDialog, setOpenDialog] = useState(null);
 
   const { currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
 
   const handleCloseDialog = value => {
-    setOpenDialogName(null);
+    setOpenDialog(null);
   };
 
   const handleRequestSort = (event, property) => {
@@ -164,14 +182,14 @@ export default function SearchTable({ processes }) {
     setOrderBy(property);
   };
 
-  const moveToDevelopmentClick = async () => {
+  const moveStage = async (currentStage, futureStage) => {
     try {
 
       // currentProcessId will be the ID of the process that was clicked on
       await fetch(`${apiBaseUrl}/change_status/${currentProcessId}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          pipeline_status: 'Development'
+          pipeline_status: futureStage
         }),
         headers: {
           "Content-Type": 'application/json',
@@ -182,8 +200,8 @@ export default function SearchTable({ processes }) {
       // Change navbar numbers
       setProcessCounts(previous => ({
         ...previous,
-        pipeline: previous.pipeline - 1,
-        development: previous.development + 1
+        [currentStage.toLowerCase()]: previous[currentStage.toLowerCase()] - 1,
+        [futureStage.toLowerCase()]: previous[futureStage.toLowerCase()] + 1
       }))
 
 
@@ -218,8 +236,8 @@ export default function SearchTable({ processes }) {
     setFilterName(event.target.value);
   };
 
-  const handleOpenDialogClick = (process_name, id) => {
-    setOpenDialogName(process_name)
+  const handleOpenDialog = (name, currentStage, nextStage, forward, id) => {
+    setOpenDialog({ name, currentStage, nextStage, forward })
     setCurrentProcessId(id)
   }
 
@@ -260,6 +278,7 @@ export default function SearchTable({ processes }) {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(({
                     id,
+                    pipline: pipeline,
                     overallRating,
                     process_name,
                     alignment,
@@ -279,7 +298,6 @@ export default function SearchTable({ processes }) {
                         hover
                         key={id}
                         tabIndex={-1}
-                        role="checkbox"
                         className={classes.row}
                       >
                         <TableCell
@@ -315,7 +333,16 @@ export default function SearchTable({ processes }) {
                           </IconButton>
                         </TableCell>
                         <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={() => handleOpenDialogClick(process_name, id)}>
+                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
+                            <Icon
+                              icon={ArrowForwardIcon}
+                              width={20}
+                              height={20}
+                            />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findNextStage(pipeline), true, id)}>
                             <Icon
                               icon={ArrowForwardIcon}
                               width={20}
@@ -375,11 +402,11 @@ export default function SearchTable({ processes }) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
 
-        <Dialog open={!!openDialogName} onClose={() => handleCloseDialog()}>
-          {openDialogName &&
+        <Dialog open={!!openDialog} onClose={() => handleCloseDialog()}>
+          {openDialog &&
             <>
-              <DialogTitle id="simple-dialog-title">Move {openDialogName} to development?</DialogTitle>
-              <Button onClick={moveToDevelopmentClick}>Yes</Button>
+              <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage}?</DialogTitle>
+              <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
               <Button color='error'>Cancel</Button>
             </>}
         </Dialog>
