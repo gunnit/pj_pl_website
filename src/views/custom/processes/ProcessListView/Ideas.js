@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import ideaIcon from '@iconify-icons/el/idea';
 import { fShortenNumber } from 'utils/formatNumber';
 import androidFilled from '@iconify-icons/ant-design/android-filled';
@@ -54,4 +54,3 @@ export default function Ideas({ className, ...other }) {
     </Card>
   );
 }
- 

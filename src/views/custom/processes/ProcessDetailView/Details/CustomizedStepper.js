@@ -2,9 +2,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Check from '@material-ui/icons/Check';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Step,
@@ -12,6 +9,12 @@ import {
   StepLabel,
   StepConnector
 } from '@material-ui/core';
+import ideaIcon from '@iconify-icons/el/idea';
+import raceflagIcon from '@iconify-icons/whh/raceflag';
+import rocket11 from '@iconify-icons/maki/rocket-11';
+import gearsIcon from '@iconify-icons/whh/gears';
+import { Icon } from '@iconify/react';
+
 
 // ----------------------------------------------------------------------
 
@@ -108,10 +111,10 @@ function ColorlibStepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
-    4: <VideoLabelIcon />
+    1: <Icon icon={ideaIcon} />,
+    2: <Icon icon={rocket11} />,
+    3: <Icon icon={gearsIcon} />,
+    4: <Icon icon={raceflagIcon} />
   };
 
   return (
