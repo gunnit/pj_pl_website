@@ -1,5 +1,11 @@
 Things to add:
 
+Maybe change clicking on table three dots context set time
+
+Material-UI imports check if they are importing too much
+
+View details, update, delete could be different colors and/or have icons
+
 Stepper icons
 
 Nature of process not working

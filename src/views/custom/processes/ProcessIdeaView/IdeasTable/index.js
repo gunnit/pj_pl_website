@@ -2,10 +2,14 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
-import React, { useState } from 'react';
+import { Icon } from '@iconify/react';
+import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
+import { PATH_APP } from 'routes/paths';
+import { Link as RouterLink } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
 import Scrollbars from 'components/Scrollbars';
+import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -15,10 +19,15 @@ import {
   TableBody,
   TableCell,
   Container,
+  IconButton,
   TableContainer,
-  TablePagination
+  TablePagination,
+  Menu,
+  MenuItem,
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
+import Context from 'context/Context';
+
 
 // ----------------------------------------------------------------------
 
@@ -76,6 +85,9 @@ const TABLE_HEAD = [
     numeric: true,
     disablePadding: false,
     label: 'Owner'
+  },
+  {
+    id: ''
   }
 ];
 
@@ -115,7 +127,10 @@ function applySortFilter(array, comparator, query) {
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  sortSpan: visuallyHidden
+  sortSpan: visuallyHidden,
+  routerLink: {
+    textDecoration: 'none'
+  }
 }));
 
 
@@ -132,6 +147,9 @@ export default function IdeasTable({ processes }) {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
+  const [isOpen, setOpen] = useState(null);
+
+  const { setCurrentProcessId } = useContext(Context)
 
   processes = processes.map(({
     id,
@@ -161,6 +179,17 @@ export default function IdeasTable({ processes }) {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
+  };
+
+
+  const handleOpen = (event, id) => {
+    setOpen(event.currentTarget);
+
+    // Context to get the process details if the user clicks to view the process details
+    setCurrentProcessId(id)
+  };
+  const handleClose = (option) => {
+    setOpen(null);
   };
 
 
@@ -266,6 +295,15 @@ export default function IdeasTable({ processes }) {
                           <TableCell align="right">{nature_of_process || ''}</TableCell>
                           <TableCell align="right">{test_env_available || ''}</TableCell>
                           <TableCell align="right">{owner_name || ''}</TableCell>
+                          <TableCell align="right">
+                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                              <Icon
+                                icon={moreVerticalFill}
+                                width={20}
+                                height={20}
+                              />
+                            </IconButton>
+                          </TableCell>
                         </TableRow>
                       );
                     })}
@@ -289,6 +327,25 @@ export default function IdeasTable({ processes }) {
               </Table>
             </TableContainer>
           </Scrollbars>
+
+          <Menu
+            keepMounted
+            id="simple-menu"
+            anchorEl={isOpen}
+            onClose={handleClose}
+            open={Boolean(isOpen)}
+          >
+            {[{ text: 'View details', path: PATH_APP.processes.details },
+            { text: 'Update', path: PATH_APP.processes.update },
+            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+              <RouterLink to={option.path} className={classes.routerLink}>
+                <MenuItem key={option.text} onClick={handleClose}>
+                  {option.text}
+                </MenuItem>
+              </RouterLink>
+            ))}
+          </Menu>
+
 
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
