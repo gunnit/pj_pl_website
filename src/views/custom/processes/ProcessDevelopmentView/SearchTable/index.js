@@ -38,7 +38,7 @@ const TABLE_HEAD = [
     id: 'overallRating',
     numeric: false,
     disablePadding: true,
-    label: 'Overall Rating'
+    label: 'Status'
   },
   {
     id: 'name',
@@ -50,40 +50,34 @@ const TABLE_HEAD = [
     id: 'alignment',
     numeric: true,
     disablePadding: false,
-    label: 'Alignment'
+    label: 'Development Start'
   },
   {
     id: 'automationScore',
     numeric: true,
     disablePadding: false,
-    label: 'Automation Score'
+    label: 'Planned End Date'
   },
   {
     id: 'savingsGoal',
     numeric: true,
     disablePadding: false,
-    label: 'Savings Goal'
+    label: 'Development Days'
   },
   {
     id: 'numberOfSteps',
     numeric: true,
     disablePadding: false,
-    label: 'Number of Steps'
+    label: 'Development Cost'
   },
   {
     id: 'natureOfProcess',
     numeric: true,
     disablePadding: false,
-    label: 'Nature of Process'
-  },
-  {
-    id: 'testEnvironment',
-    numeric: true,
-    disablePadding: false,
     label: 'Test Environment'
   },
   {
-    id: 'owner',
+    id: 'testEnvironment',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
