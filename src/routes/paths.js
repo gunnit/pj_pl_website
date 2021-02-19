@@ -28,6 +28,7 @@ export const PATH_PAGE = {
 export const PATH_HOME = {
   about: '/about',
   dashboard: path(ROOTS.app, '/processes/dashboard'),
+  faq: '/faq',
 };
 
 export const PATH_APP = {

@@ -31,6 +31,7 @@ import { MIconButton } from '@material-extend';
 const MENU_LINKS = [
   { title: 'Home', icon: homeFill, href: '/' },
   { title: 'About', icon: roundStreetview, href: PATH_HOME.about },
+  { title: 'FAQ', icon: roundStreetview, href: PATH_HOME.faq },
   { title: 'Dashboard', icon: roundSpeed, href: PATH_HOME.dashboard },
 ];
 
