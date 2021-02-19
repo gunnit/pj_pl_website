@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     accordionContainer: {
-        width: '80%'
+        width: '80%',
     }
 }));
 

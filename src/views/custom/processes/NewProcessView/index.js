@@ -20,7 +20,8 @@ import {
   StepConnector,
   Step,
   Button,
-  Grid
+  Grid,
+  Drawer,
 } from '@material-ui/core';
 import NewProcessFormOwnership from './NewProcessFormOwnership';
 import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
@@ -42,7 +43,11 @@ const useStyles = makeStyles(theme => ({
   instructions: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) },
   buttonContainer: {
     justifyContent: 'flex-end', spacing: 3
-  }
+  },
+  drawerPaper: {
+    height: 280,
+    background: theme.palette.background.default
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -330,6 +335,8 @@ export default function NewProcessView() {
 
   };
 
+  const [openDrawer, setOpenDrawer] = useState(false)
+
 
   // Shows part of the form for each step
   function getStepContent(step) {
@@ -350,7 +357,7 @@ export default function NewProcessView() {
         <Grid container justifyContent='space-between'>
           <Grid item container className={classes.buttonContainer} spacing={3}>
             <Grid item>
-              <Button variant='contained'>Info</Button>
+              <Button variant='contained' onClick={() => setOpenDrawer(true)}>Info</Button>
             </Grid>
             <Grid item>
               <Button variant='contained'>Share Form</Button>
@@ -437,6 +444,16 @@ export default function NewProcessView() {
               )}
           </div>
         </div>
+
+        <Drawer
+          anchor="top"
+          open={openDrawer}
+          variant="temporary"
+          onClose={() => setOpenDrawer(false)}
+          classes={{ paper: classes.drawerPaper }}
+        >
+          Drawer
+        </Drawer>
       </Container>
     </Page>
   );
