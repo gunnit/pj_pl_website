@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Container } from '@material-ui/core';
-import BreakEvenTable from './BreakEvenTable';
+import BreakEvenAnalysis from './BreakEvenTable';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import GenericBoxInfoProduction from './GenericBoxInfoProduction';
 import MixedChart from './MixedChart';
@@ -52,13 +52,13 @@ export default function BreakEven({ processDetails }) {
                     <QuarterlyCashFlow data={processDetails.quarter} />
                 </Grid>
                 <Grid item xs={12}>
-                    <BreakEvenTable />
+                    <BreakEvenAnalysis data={processDetails.year} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ThreeYearProjectionsTable />
+                    <ThreeYearProjectionsTable data={processDetails.year} />
                 </Grid>
                 <Grid item xs={12}>
-                    <MixedChart />
+                    <MixedChart data={processDetails.year} />
                 </Grid>
                 <Grid item xs={12}>
                     <ThreeYearROI />
