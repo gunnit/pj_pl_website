@@ -22,7 +22,6 @@ import {
   Button,
   Grid,
   Dialog,
-  DialogTitle,
   Card,
 } from '@material-ui/core';
 import NewProcessFormOwnership from './NewProcessFormOwnership';
@@ -45,10 +44,6 @@ const useStyles = makeStyles(theme => ({
   instructions: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) },
   buttonContainer: {
     justifyContent: 'flex-end', spacing: 3
-  },
-  drawerPaper: {
-    height: 280,
-    background: theme.palette.background.default
   },
   dialog: {
     display: 'flex',
@@ -347,7 +342,6 @@ export default function NewProcessView() {
 
   };
 
-  const [openDrawer, setOpenDrawer] = useState(false)
 
 
   // Shows part of the form for each step

@@ -1,5 +1,7 @@
 Things to add:
 
+Update process form different info card
+
 Image alt texts
 
 Ideas table conditional logic

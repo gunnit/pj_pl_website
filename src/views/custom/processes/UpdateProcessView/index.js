@@ -20,7 +20,9 @@ import {
   StepConnector,
   Step,
   Button,
-  Grid
+  Grid,
+  Dialog,
+  Card,
 } from '@material-ui/core';
 import UpdateProcessFormDetails from './UpdateProcessFormDetails';
 import UpdateProcessFormOwnership from './UpdateProcessFormOwnership';
@@ -34,8 +36,6 @@ import { LoadingButton } from '@material-ui/lab';
 
 // ----------------------------------------------------------------------
 
-// const FILE_SIZE = 3145728; // bytes
-// const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -43,6 +43,11 @@ const useStyles = makeStyles(theme => ({
   instructions: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) },
   buttonContainer: {
     justifyContent: 'flex-end', spacing: 3
+  },
+  dialog: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(3),
   }
 }));
 
@@ -184,6 +189,8 @@ export default function UpdateProcessView() {
   const [applications, setApplications] = useState([])
 
   const [loading, setLoading] = useState(true)
+
+  const [openDialog, setOpenDialog] = useState(false)
 
   useEffect(() => {
     // fetch applications from database
@@ -454,7 +461,7 @@ export default function UpdateProcessView() {
         <Grid container justifyContent='space-between'>
           <Grid item container className={classes.buttonContainer} spacing={3}>
             <Grid item>
-              <Button variant='contained' color='secondary'>Info</Button>
+              <Button variant='contained' color='secondary' onClick={() => setOpenDialog(true)}>Info</Button>
             </Grid>
             <Grid item>
               <Button variant='contained' color='secondary'>Share Form</Button>
@@ -543,6 +550,34 @@ export default function UpdateProcessView() {
               )}
           </div>
         </div>
+
+        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+          {openDialog
+            && <>
+              <Card className={classes.dialog}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Typography variant="h5" gutterBottom>
+                    A few simple reminders:
+                </Typography>
+                  <Typography variant="subtitle1" color='textSecondary'>
+                    Below is the process form, your starting point for creating a new process. The process is connected to all of the criteria of the process that make it unique. A process can have many different parameters. For now, let's focus on setting up the basic information. None of the fields are mandatory - input what you know and feel, but the more information you can collect the better results you will get. Have fun!
+                  </Typography>
+                </Box>
+                <Box
+                  component="img"
+                  alt="reminders-image"
+                  src={''}
+                  sx={{
+                    p: 2,
+                    height: 205,
+                    margin: { xs: 'auto', md: 'inherit' }
+                  }}
+                />
+              </Card>
+            </>}
+        </Dialog>
+
+
       </Container>
     </Page>
   );
