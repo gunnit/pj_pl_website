@@ -83,8 +83,8 @@ function ProcessDashboardView() {
                                 <GenericBoxInfo
                                     numberOfItems={19}
                                     infoType={'Ideas'}
-                                    mainNumber={5594797}
-                                    secondaryNumber={2.8}
+                                    mainNumber={dashboard.net_benefit_sum_idea}
+                                    secondaryNumber={dashboard.processes_idea_count}
                                     chartColor={theme.palette.primary.main}
                                 />
                             </Grid>
@@ -92,8 +92,8 @@ function ProcessDashboardView() {
                                 <GenericBoxInfo
                                     numberOfItems={14}
                                     infoType={'Pipeline'}
-                                    mainNumber={45797}
-                                    secondaryNumber={-6.0}
+                                    mainNumber={dashboard.net_benefit_sum_pipeline}
+                                    secondaryNumber={dashboard.processes_pipeline_count}
                                     chartColor={theme.palette.info.main}
                                 />
                             </Grid>
@@ -102,8 +102,8 @@ function ProcessDashboardView() {
                                 <GenericBoxInfo
                                     numberOfItems={65}
                                     infoType={'Development'}
-                                    mainNumber={9694797}
-                                    secondaryNumber={-7.9}
+                                    mainNumber={dashboard.net_benefit_sum_development}
+                                    secondaryNumber={dashboard.processes_development_count}
                                     chartColor={theme.palette.warning.main}
                                 />
                             </Grid>
@@ -111,8 +111,8 @@ function ProcessDashboardView() {
                                 <GenericBoxInfo
                                     numberOfItems={43}
                                     infoType={'Production'}
-                                    mainNumber={5597}
-                                    secondaryNumber={1.4}
+                                    mainNumber={dashboard.net_benefit_sum_production}
+                                    secondaryNumber={dashboard.processes_production_count}
                                     chartColor={theme.palette.error.main}
                                 />
                             </Grid>

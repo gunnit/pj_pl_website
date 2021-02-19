@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
-import ReactApexChart from 'react-apexcharts';
+import ideaIcon from '@iconify-icons/el/idea';
 import { fNumber, fPercent } from 'utils/formatNumber';
 import trendingUpFill from '@iconify-icons/eva/trending-up-fill';
 import trendingDownFill from '@iconify-icons/eva/trending-down-fill';
@@ -39,7 +39,15 @@ const useStyles = makeStyles(theme => ({
     },
     estimatedSavings: {
         marginBottom: theme.spacing(1)
-    }
+    },
+    icon: {
+        width: 120,
+        height: 120,
+        opacity: 0.12,
+        position: 'absolute',
+        right: theme.spacing(-3),
+        color: theme.palette.common.white
+      }
 }));
 
 // ----------------------------------------------------------------------
@@ -62,24 +70,7 @@ function GenericBoxInfo({ className, numberOfItems, infoType, mainNumber, second
             return Math.random() * num
         })
     }];
-    const chartOptions = {
-        colors: [chartColor],
-        chart: { sparkline: { enabled: true } },
-        plotOptions: { bar: { columnWidth: '68%', endingShape: 'rounded' } },
-        labels: [1, 2, 3, 4, 5, 6, 7, 8],
-        tooltip: {
-            x: { show: false },
-            y: {
-                formatter: seriesName => fNumber(seriesName),
-                title: {
-                    formatter: function (seriesName) {
-                        return '';
-                    }
-                }
-            },
-            marker: { show: false }
-        }
-    };
+
 
     return (
         <Card className={clsx(classes.root, className)} {...other}>
@@ -108,7 +99,7 @@ function GenericBoxInfo({ className, numberOfItems, infoType, mainNumber, second
                     </div>
                     <Typography variant="subtitle2" component="span">
                         {secondaryNumber > 0 && '+'}
-                        {fPercent(secondaryNumber)}
+                        {secondaryNumber}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="span">
                         &nbsp;number of processes
@@ -116,13 +107,7 @@ function GenericBoxInfo({ className, numberOfItems, infoType, mainNumber, second
                 </div>
             </Box>
 
-            <ReactApexChart
-                type="bar"
-                width={60}
-                height={36}
-                series={chartData}
-                options={chartOptions}
-            />
+            <Icon icon={ideaIcon} className={classes.icon} />
         </Card>
     );
 }
