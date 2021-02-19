@@ -38,7 +38,7 @@ const TABLE_HEAD = [
     id: 'overallRating',
     numeric: false,
     disablePadding: true,
-    label: 'Overall Rating'
+    label: 'Status'
   },
   {
     id: 'name',
@@ -50,40 +50,34 @@ const TABLE_HEAD = [
     id: 'alignment',
     numeric: true,
     disablePadding: false,
-    label: 'Alignment'
+    label: 'Development Start'
   },
   {
     id: 'automationScore',
     numeric: true,
     disablePadding: false,
-    label: 'Automation Score'
+    label: 'Planned End Date'
   },
   {
     id: 'savingsGoal',
     numeric: true,
     disablePadding: false,
-    label: 'Savings Goal'
+    label: 'Development Days'
   },
   {
     id: 'numberOfSteps',
     numeric: true,
     disablePadding: false,
-    label: 'Number of Steps'
+    label: 'Development Cost'
   },
   {
     id: 'natureOfProcess',
     numeric: true,
     disablePadding: false,
-    label: 'Nature of Process'
-  },
-  {
-    id: 'testEnvironment',
-    numeric: true,
-    disablePadding: false,
     label: 'Test Environment'
   },
   {
-    id: 'owner',
+    id: 'testEnvironment',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
@@ -280,17 +274,19 @@ export default function DevelopmentTable({ processes }) {
                   .map(({
                     id,
                     pipline: pipeline,
-                    overallRating,
                     process_name,
-                    alignment,
-                    automationScore,
-                    costWithoutAutomation,
-                    costWithAutomation,
-                    savings,
-                    owner,
+                    is_past_due,
+                    start_development,
+                    predicted_go_live_date,
+                    processassumptions: {
+                      required_process_days,
+                      total_development_cost,
+                    },
+                    test_env_available,
+                    business_unit,
+                    function: processFunction,
                   }, index) => {
 
-                    // Overall Rating	Process Name	Objective Alignment	Automation Score	Cost Without Automation	Cost With Automation	Saving	Owner
 
                     const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -307,23 +303,23 @@ export default function DevelopmentTable({ processes }) {
                           scope="row"
                           padding="none"
                         >
-                          {overallRating}
+                          {is_past_due ? 'Running late' : 'On track'}
                         </TableCell>
                         <TableCell align="right">{process_name}</TableCell>
+                        <TableCell align="right">{start_development}</TableCell>
+                        <TableCell align="right">{predicted_go_live_date}</TableCell>
                         <TableCell align="right">
                           <MLabel variant="filled" color="info">
-                            {alignment}
+                            {required_process_days === 0 ? 'Not completed' : required_process_days}
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{automationScore}</TableCell>
-                        <TableCell align="right">{costWithoutAutomation}</TableCell>
-                        <TableCell align="right">{costWithAutomation}</TableCell>
                         <TableCell align="right">
-                          <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                            {savings}
+                          <MLabel variant="filled" color="info">
+                            {total_development_cost === 0 ? 'Not completed' : total_development_cost}
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{owner}</TableCell>
+                        <TableCell align="right">{test_env_available}</TableCell>
+                        <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
                         <TableCell align="right">
                           <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                             <Icon

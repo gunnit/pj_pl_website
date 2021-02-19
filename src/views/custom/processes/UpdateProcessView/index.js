@@ -392,31 +392,24 @@ export default function UpdateProcessView() {
       setPending(true)
 
       try {
-        // const res = await fetch(`${apiBaseUrl}/create_process/`, {
-        //   method: 'POST',
-        //   body: JSON.stringify({
-        //     ...formik.values,
-        //     ...sliderValues,
-        //     applications: [...checkboxValues],
-        //     customer_id: userId
-        //   }),
-        //   headers: {
-        //     "Content-Type": 'application/json',
-        //   }
-        //   // Authorization###
-        // })
+        const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            ...formik.values,
+            ...sliderValues,
+            applications: [...checkboxValues],
+            customer_id: userId
+          }),
+          headers: {
+            "Content-Type": 'application/json',
+          }
+          // Authorization###
+        })
 
-        // // Pipeline value is lower case in the context
-        // const lowerCasePipeline = formik.values.pipeline.toLowerCase()
-        // // processCounts in context needs to be updated for navbar numbers
-        // setProcessCounts(previous => ({ ...previous, [lowerCasePipeline]: previous[lowerCasePipeline] + 1 }))
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
 
-        // setActiveStep(prevActiveStep => prevActiveStep + 1);
+        const { id } = await res.json()
 
-        // const { id } = await res.json()
-
-        // // Store ID of created process in context in case the user decides to view it
-        // setCurrentProcessId(id)
 
       } catch (e) {
         console.error(e)
@@ -461,10 +454,10 @@ export default function UpdateProcessView() {
         <Grid container justifyContent='space-between'>
           <Grid item container className={classes.buttonContainer} spacing={3}>
             <Grid item>
-              <Button variant='contained' color='info'>Info</Button>
+              <Button variant='contained' color='secondary'>Info</Button>
             </Grid>
             <Grid item>
-              <Button variant='contained' color='info'>Share Form</Button>
+              <Button variant='contained' color='secondary'>Share Form</Button>
             </Grid>
           </Grid>
           <Grid item marginBottom={3}>
@@ -524,7 +517,7 @@ export default function UpdateProcessView() {
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       className={classes.button}
-                      color='info'
+                      color='secondary'
                     >
                       Back
                     </Button>
@@ -533,7 +526,7 @@ export default function UpdateProcessView() {
                       variant="contained"
                       onClick={handleNext}
                       className={classes.button}
-                      color='info'
+                      color='secondary'
                     >
                       {activeStep === steps.length - 1 ? 'Create' : 'Next'}
                     </Button>

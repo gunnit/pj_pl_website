@@ -32,12 +32,20 @@ import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 
+{/* <th>Production Date</th>
+                     <th>Process Name</th>
+                     <th>Automation Score</th>
+                     <th>Cost Without Automation</th>
+                     <th>Cost With Automation</th>
+                     <th>Saving</th>                     
+                     <th>Owner</th> */}
+
 const TABLE_HEAD = [
   {
-    id: 'overallRating',
+    id: 'productionDate',
     numeric: false,
     disablePadding: true,
-    label: 'Overall Rating'
+    label: 'Production Date'
   },
   {
     id: 'name',
@@ -46,40 +54,28 @@ const TABLE_HEAD = [
     label: 'Name'
   },
   {
-    id: 'alignment',
-    numeric: true,
-    disablePadding: false,
-    label: 'Alignment'
-  },
-  {
     id: 'automationScore',
     numeric: true,
     disablePadding: false,
     label: 'Automation Score'
   },
   {
-    id: 'savingsGoal',
+    id: 'costWithoutAutomation',
     numeric: true,
     disablePadding: false,
-    label: 'Savings Goal'
+    label: 'Cost Without Automation'
   },
   {
-    id: 'numberOfSteps',
+    id: 'costWithAutomation',
     numeric: true,
     disablePadding: false,
-    label: 'Number of Steps'
+    label: 'Cost With Automation'
   },
   {
-    id: 'natureOfProcess',
+    id: 'savings',
     numeric: true,
     disablePadding: false,
-    label: 'Nature of Process'
-  },
-  {
-    id: 'testEnvironment',
-    numeric: true,
-    disablePadding: false,
-    label: 'Test Environment'
+    label: 'Savings'
   },
   {
     id: 'owner',
@@ -133,16 +129,6 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none'
   }
 }));
-
-function findNextStage(currentStage) {
-  if (currentStage === 'Idea') {
-    return 'Pipeline'
-  } else if (currentStage === 'Pipeline') {
-    return 'Development'
-  } else if (currentStage === 'Development') {
-    return 'Production'
-  }
-}
 
 function findPreviousStage(currentStage) {
   if (currentStage === 'Pipeline') {
@@ -279,14 +265,16 @@ export default function ProductionTable({ processes }) {
                   .map(({
                     id,
                     pipline: pipeline,
-                    overallRating,
+                    pipline_development: pipeline_development,
                     process_name,
-                    alignment,
-                    automationScore,
-                    costWithoutAutomation,
-                    costWithAutomation,
-                    savings,
-                    owner,
+                    process_score,
+                    processassumptions: {
+                      total_current_process_cost,
+                      total_future_cost,
+                      total_net_benefit
+                    },
+                    business_unit,
+                    function: processFunction,
                   }, index) => {
 
                     // Overall Rating	Process Name	Objective Alignment	Automation Score	Cost Without Automation	Cost With Automation	Saving	Owner
@@ -306,23 +294,25 @@ export default function ProductionTable({ processes }) {
                           scope="row"
                           padding="none"
                         >
-                          {overallRating}
+                          {pipeline_development}
                         </TableCell>
                         <TableCell align="right">{process_name}</TableCell>
                         <TableCell align="right">
                           <MLabel variant="filled" color="info">
-                            {alignment}
+                            {process_score}
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{automationScore}</TableCell>
-                        <TableCell align="right">{costWithoutAutomation}</TableCell>
-                        <TableCell align="right">{costWithAutomation}</TableCell>
+                        <TableCell align="right">{total_current_process_cost}</TableCell>
+                        <TableCell align="right">{total_future_cost}</TableCell>
                         <TableCell align="right">
-                          <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                            {savings}
+                          <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : total_net_benefit < 0 ? "error" : "warning"}>
+                            {total_net_benefit}
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{owner}</TableCell>
+                        {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
+                        <TableCell align="right">
+                          {(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}
+                        </TableCell>
                         <TableCell align="right">
                           <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                             <Icon
