@@ -50,7 +50,7 @@ const TABLE_HEAD = [
     id: 'alignment',
     numeric: true,
     disablePadding: false,
-    label: 'Alignment'
+    label: 'Objective Alignment'
   },
   {
     id: 'automationScore',
@@ -62,28 +62,22 @@ const TABLE_HEAD = [
     id: 'savingsGoal',
     numeric: true,
     disablePadding: false,
-    label: 'Savings Goal'
+    label: 'Cost Without Automation'
   },
   {
     id: 'numberOfSteps',
     numeric: true,
     disablePadding: false,
-    label: 'Number of Steps'
+    label: 'Cost With Automation'
   },
   {
     id: 'natureOfProcess',
     numeric: true,
     disablePadding: false,
-    label: 'Nature of Process'
+    label: 'Savings'
   },
   {
     id: 'testEnvironment',
-    numeric: true,
-    disablePadding: false,
-    label: 'Test Environment'
-  },
-  {
-    id: 'owner',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
@@ -280,14 +274,19 @@ export default function DevelopmentTable({ processes }) {
                   .map(({
                     id,
                     pipline: pipeline,
-                    overallRating,
+                    final_process_score,
                     process_name,
-                    alignment,
-                    automationScore,
-                    costWithoutAutomation,
-                    costWithAutomation,
-                    savings,
-                    owner,
+                    processobjectives: {
+                      total_alignment_score_coverted
+                    },
+                    process_score,
+                    processassumptions: {
+                      current_process_cost_calc, // cost without automation
+                      tot_future_process_cost,
+                      total_net_benefit, // cost with automation
+                    },
+                    business_unit,
+                    function: processFunction, // because function is a reserved word
                   }, index) => {
 
                     // Overall Rating	Process Name	Objective Alignment	Automation Score	Cost Without Automation	Cost With Automation	Saving	Owner
@@ -307,23 +306,25 @@ export default function DevelopmentTable({ processes }) {
                           scope="row"
                           padding="none"
                         >
-                          {overallRating}
+                          {/* >= 20 means suggested to move to development, >= 10 means evaluate before moving to development, otherwise not suggested */}
+                          {final_process_score >= 20 ? 'Move' : final_process_score >= 10 ? 'Evaluate' : 'Not suggested'}
                         </TableCell>
                         <TableCell align="right">{process_name}</TableCell>
                         <TableCell align="right">
                           <MLabel variant="filled" color="info">
-                            {alignment}
+                            {total_alignment_score_coverted}
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{automationScore}</TableCell>
-                        <TableCell align="right">{costWithoutAutomation}</TableCell>
-                        <TableCell align="right">{costWithAutomation}</TableCell>
+                        <TableCell align="right">{process_score === 0 ? 'Not completed' : process_score}</TableCell>
+                        <TableCell align="right">{current_process_cost_calc}</TableCell>
+                        <TableCell align="right">{tot_future_process_cost}</TableCell>
                         <TableCell align="right">
-                          <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
-                            {savings}
+                          <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : "error"}>
+                            {total_net_benefit}
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{owner}</TableCell>
+                        {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
+                        <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
                         <TableCell align="right">
                           <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                             <Icon

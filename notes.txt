@@ -1,5 +1,9 @@
 Things to add:
 
+if total net benefit is equal to 0, couldn't it just be zero? all of these
+
+Table sorting isn't working
+
 Case insensitive queries? development Development etc
 
 Process level 3 name in forms
