@@ -112,7 +112,7 @@ export default function ProcessDetailView() {
                         <CostsComparison />
                     </TabPanel>
                     <TabPanel value={'4'}>
-                        <BreakEven />
+                        <BreakEven processDetails={processDetails} />
                     </TabPanel>
                     <TabPanel value={'5'}>
                         <Progress />

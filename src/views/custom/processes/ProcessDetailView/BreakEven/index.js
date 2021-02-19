@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     root: {}
 }));
 
-function ProcessProductionView() {
+export default function BreakEven({ processDetails }) {
     const classes = useStyles();
     // const { auth, profile } = useSelector(state => state.firebase);
     // const displayName = auth.displayName || profile.displayName;
@@ -49,7 +49,7 @@ function ProcessProductionView() {
                     <GenericBoxInfoProduction infoType={'Hours Saved (Yearly)'} />
                 </Grid>
                 <Grid item xs={12}>
-                    <QuarterlyCashFlow />
+                    <QuarterlyCashFlow data={processDetails.quarter} />
                 </Grid>
                 <Grid item xs={12}>
                     <BreakEvenTable />
@@ -67,5 +67,3 @@ function ProcessProductionView() {
         </Container>
     );
 }
-
-export default ProcessProductionView;

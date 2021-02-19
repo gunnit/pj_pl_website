@@ -1,5 +1,9 @@
 Things to add:
 
+Change navbar numbers if pipeline is changed when updating a process
+
+Update process redirect after submitting? New process also?
+
 Update process form different info card
 
 Image alt texts
