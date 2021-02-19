@@ -1,5 +1,7 @@
 Things to add:
 
+Ideas table conditional logic
+
 if total net benefit is equal to 0, couldn't it just be zero? all of these
 
 Table sorting isn't working
