@@ -144,6 +144,12 @@ export default function QuarterlyCashFlow({ data: {
         q4_savings_y2,
     ]
 
+    const rows = [
+        { cells: costWithoutAutomationRow },
+        { cells: costWithAutomationRow },
+        { cells: savingsRow },
+    ]
+
 
     return (
         <Card>
@@ -202,7 +208,7 @@ export default function QuarterlyCashFlow({ data: {
                             </TableHead>
 
                             <TableBody>
-                                {GROUPING_TABLE.map((row, i) => {
+                                {rows.map((row, i) => {
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                             {i === 0
@@ -213,13 +219,19 @@ export default function QuarterlyCashFlow({ data: {
                                                 && <TableCell align='left'>
                                                     Cost With Automation
                                                    </TableCell>}
-                                            {COLUMNS.map(column => {
-                                                const value = row[column.id];
+                                            {i === 2
+                                                && <TableCell align='left'>
+                                                    Savings
+                                                   </TableCell>}
+                                            {row.cells.map(cell => {
                                                 return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        {column.format && typeof value === 'number'
+                                                    <TableCell key={cell}
+                                                    // align={column.align}
+                                                    >
+                                                        {/* {column.format && typeof value === 'number'
                                                             ? column.format(value)
-                                                            : value}
+                                                            : value} */}
+                                                        {cell}
                                                     </TableCell>
                                                 );
                                             })}
