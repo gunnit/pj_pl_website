@@ -32,12 +32,20 @@ import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 
+{/* <th>Production Date</th>
+                     <th>Process Name</th>
+                     <th>Automation Score</th>
+                     <th>Cost Without Automation</th>
+                     <th>Cost With Automation</th>
+                     <th>Saving</th>                     
+                     <th>Owner</th> */}
+
 const TABLE_HEAD = [
   {
-    id: 'overallRating',
+    id: 'productionDate',
     numeric: false,
     disablePadding: true,
-    label: 'Overall Rating'
+    label: 'Production Date'
   },
   {
     id: 'name',
@@ -46,40 +54,28 @@ const TABLE_HEAD = [
     label: 'Name'
   },
   {
-    id: 'alignment',
-    numeric: true,
-    disablePadding: false,
-    label: 'Alignment'
-  },
-  {
     id: 'automationScore',
     numeric: true,
     disablePadding: false,
     label: 'Automation Score'
   },
   {
-    id: 'savingsGoal',
+    id: 'costWithoutAutomation',
     numeric: true,
     disablePadding: false,
-    label: 'Savings Goal'
+    label: 'Cost Without Automation'
   },
   {
-    id: 'numberOfSteps',
+    id: 'costWithAutomation',
     numeric: true,
     disablePadding: false,
-    label: 'Number of Steps'
+    label: 'Cost With Automation'
   },
   {
-    id: 'natureOfProcess',
+    id: 'savings',
     numeric: true,
     disablePadding: false,
-    label: 'Nature of Process'
-  },
-  {
-    id: 'testEnvironment',
-    numeric: true,
-    disablePadding: false,
-    label: 'Test Environment'
+    label: 'Savings'
   },
   {
     id: 'owner',
