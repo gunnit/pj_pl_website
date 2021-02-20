@@ -1,5 +1,7 @@
 Things to add:
 
+Quarterly cash flow table styling
+
 Bubble chart data dashboard
 
 assumptions.current_employee_cost?

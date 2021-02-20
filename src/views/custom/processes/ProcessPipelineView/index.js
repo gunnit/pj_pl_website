@@ -8,7 +8,7 @@ import Widgets2 from './Widgets2';
 import Widgets3 from './Widgets3';
 import ColumnSingleChart from './ColumnSingleChart';
 import QuarterlyProjectionsTable from './QuarterlyProjectionsTable';
-import Breakeven from './Breakeven';
+import BreakEvenChart from './BreakEvenChart';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import BubbleChart from './BubbleChart';
 import NoProcesses from '../NoProcesses';
@@ -101,7 +101,9 @@ function ProcessPipelineView() {
                             <QuarterlyProjectionsTable data={pipeline} />
                         </Grid>
                         <Grid item xs={12}>
-                            <Breakeven />
+                            <BreakEvenChart
+                                total_process_quarter_ideas_with_automation={pipeline.total_process_quarter_ideas_with_automation}
+                                total_process_quarter_ideas_with_no_automation={pipeline.total_process_quarter_ideas_with_no_automation} />
                         </Grid>
                         <Grid item xs={12}>
                             <ThreeYearProjectionsTable />
