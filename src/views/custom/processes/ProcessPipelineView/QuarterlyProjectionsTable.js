@@ -108,7 +108,6 @@ export default function QuarterlyCashFlow({ data: {
 
               <TableBody>
                 {rows.map((row, i) => {
-                  console.log(row)
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                       {i === 0
