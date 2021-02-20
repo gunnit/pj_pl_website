@@ -21,20 +21,6 @@ export default function BubbleChart({ data, className, ...other }) {
   // processassumptions.process_net_benefit
   // processobjectives.total_alignment_score_graph
 
-  // const chartData = [
-  //   {
-  //     name: "Processes",
-  //     data: data.map(({
-  //       process_score,
-  //       processassumptions: {
-  //         total_net_benefit
-  //       },
-  //       processobjectives: {
-  //         total_alignment_score_coverted
-  //       }
-  //     }) => [process_score, total_net_benefit, total_alignment_score_coverted]),
-  //   },
-  // ]
 
   const chartData = data.map((process, i) => {
     return {

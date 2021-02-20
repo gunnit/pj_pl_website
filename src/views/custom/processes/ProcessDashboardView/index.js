@@ -118,7 +118,12 @@ function ProcessDashboardView() {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} md={4} lg={4} >
-                            <CircleChart />
+                            <CircleChart
+                                net_benefit_sum_idea={dashboard.net_benefit_sum_idea}
+                                net_benefit_sum_pipeline={dashboard.net_benefit_sum_pipeline}
+                                net_benefit_sum_development={dashboard.net_benefit_sum_development}
+                                net_benefit_sum_production={dashboard.net_benefit_sum_production}
+                            />
                         </Grid>
                         <Grid item xs={12} md={12} lg={12} >
                             <BusinessFunctionChart />

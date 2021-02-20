@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
 import { merge } from 'lodash';
-// import _ from 'lodash';
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
 import { fNumber } from 'utils/formatNumber';
@@ -34,10 +33,18 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-function CircleChart({ className, ...other }) {
+function CircleChart({
+  net_benefit_sum_idea,
+  net_benefit_sum_pipeline,
+  net_benefit_sum_development,
+  net_benefit_sum_production,
+  className,
+  ...other
+}) {
+
   const classes = useStyles();
   const theme = useTheme();
-  const chartData = [44, 75, 50, 60];
+  const chartData = [net_benefit_sum_idea, net_benefit_sum_pipeline, net_benefit_sum_development, net_benefit_sum_production];
   const chartOptions = merge(ApexChartsOption(), {
     labels: ['Ideas', 'Pipeline', 'Development', 'Production'],
     legend: { floating: true, horizontalAlign: 'center' },
