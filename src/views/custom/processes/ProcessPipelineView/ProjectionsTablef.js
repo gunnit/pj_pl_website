@@ -1,5 +1,5 @@
 import React from 'react';
-import GroupingFixedHeader from './GroupingFixedHeader';
+import GroupingFixedHeader from './QuarterlyProjectionsTable';
 import { Card, CardHeader } from '@material-ui/core';
 
 function ProjectionsTable() {
