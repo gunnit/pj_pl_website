@@ -1,20 +1,53 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid } from '@material-ui/core';
+import { Box, Card, Typography, Container, Grid, Button } from '@material-ui/core';
+import { PATH_APP } from 'routes/paths';
 import RadarChartCard from './RadarChartCard';
 import AutomationScores from './AutomationScores';
 import AutomationScoreDescriptionCard from './AutomationScoreDescriptionCard';
 import GenericBoxInfo from './GenericBoxInfo';
+import { Link as RouterLink } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 
 const useStyles = makeStyles(theme => ({
-    root: {}
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(3),
+    },
 }));
 
-function AutomationPotential() {
+function AutomationPotential({ processDetails }) {
     const classes = useStyles();
+
+    if (processDetails.median_score_potential === '0.00') {
+        return (
+            <Card className={classes.root}>
+                <Box
+                    component="img"
+                    alt="welcome"
+                    src={''}
+                    sx={{
+                        p: 2,
+                        height: 205,
+                        margin: { xs: 'auto', md: 'inherit' }
+                    }}
+                />
+                <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                        Complete the process automation potential assessment
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        The automation potential assessment will help you determine in a qualitative way if the process is a good candidate for automation.
+                    </Typography>
+                </Box>
+                <Button variant='contained' color='info' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
+            </Card>
+        )
+    }
 
     return (
         <Container maxWidth="xl">

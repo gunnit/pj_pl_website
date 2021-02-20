@@ -13,7 +13,7 @@ export default function ContextWrapper({ children }) {
             userEmail, setUserEmail,
             userId, setUserId,
             currentProcessId, setCurrentProcessId,
-            processCounts, setProcessCounts
+            processCounts, setProcessCounts,
         }}>
             {children}
         </Context.Provider>

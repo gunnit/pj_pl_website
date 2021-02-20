@@ -18,7 +18,7 @@ import AssessmentListView from 'views/custom/coe/AssessmentListView';
 import LikedProcessesView from 'views/custom/discovery/LikedProcessesView';
 import TaxonomyView from 'views/custom/discovery/TaxonomyView';
 import ProcessSearchView from 'views/custom/discovery/ProcessSearchView';
-
+import AutomationAssessmentView from 'views/custom/processes/AutomationAssessmentView';
 
 // ----------------------------------------------------------------------
 
@@ -87,6 +87,11 @@ const AppRoutes = {
       exact: true,
       path: PATH_APP.processes.update,
       component: UpdateProcessView
+    },
+    {
+      exact: true,
+      path: PATH_APP.processes.automationAssessment,
+      component: AutomationAssessmentView
     },
 
     // COE

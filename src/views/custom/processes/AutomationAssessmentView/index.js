@@ -5,7 +5,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
-import NewProcessFormDetails from './NewProcessFormDetails';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
@@ -24,9 +23,6 @@ import {
     Dialog,
     Card,
 } from '@material-ui/core';
-import NewProcessFormOwnership from './NewProcessFormOwnership';
-import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
-import NewProcessFormRequirements from './NewProcessFormRequirements';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
@@ -172,20 +168,9 @@ function ColorlibStepIcon(props) {
 export default function NewProcessView() {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
-    const [sliderValues, setSliderValues] = useState({
-        cost_reduction: 7,
-        reduce_process_duration: 7,
-        improve_accuracy: 7,
-        enable_audit_trail: 7,
-        enable_scalability: 7,
-        improve_security: 7,
-        client_satisfaction: 7,
-        improve_consistency: 7,
-        improve_reliability: 7,
-        increase_retention: 7
-    })
-    const [checkboxValues, setCheckboxValues] = useState(new Set())
-    const [applications, setApplications] = useState([])
+
+    const [questions, setQuestions] = useState(null)
+
     const [openDialog, setOpenDialog] = useState(null);
 
     const handleCloseDialog = value => {
@@ -193,7 +178,7 @@ export default function NewProcessView() {
     };
 
 
-    const { userId, currentProcessId, } = useContext(Context)
+    const { userId, currentProcessId } = useContext(Context)
 
     const [activeStep, setActiveStep] = useState(0);
     const [pending, setPending] = useState(false)
@@ -212,7 +197,7 @@ export default function NewProcessView() {
         initialValues: {
             process_name: '',
         },
-        validationSchema: NewProcessSchema,
+        validationSchema: AutomationAssessmentSchema,
         onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
             try {
                 // await fakeRequest(500);
@@ -284,6 +269,21 @@ export default function NewProcessView() {
     };
 
 
+    useEffect(() => {
+
+        if (userId) {
+            (async function () {
+                // get questions
+                // In the future will have the user select the category and use that category
+
+                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}`)
+
+                setQuestions(await res.json())
+
+            })()
+        }
+
+    }, [userId])
 
 
 
@@ -292,23 +292,14 @@ export default function NewProcessView() {
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <Bottlenecks formik={formik} />;
-            case 1:
-                return <DataQuality formik={formik} />;
-            case 2:
-                return <DataComplexity formik={formik} />;
-            case 3:
-                return <Technology formik={formik} />;
-            case 4:
-                return <SuitabilityForTransformation formik={formik} />;
-            case 5:
-                return <DriversForChange formik={formik} />;
-            default:
-                return <Scalability formik={formik} applications={applications} checkboxValues={checkboxValues} setCheckboxValues={setCheckboxValues} setSliderValues={setSliderValues} />;
+                // return <Bottlenecks formik={formik} />;
+                return <div>case0</div>
+
         }
     }
+
     return (
-        <Page title="New Process" className={classes.root}>
+        <Page title="Automation Potential Assessment" className={classes.root}>
             <Container>
                 <Grid container justifyContent='space-between'>
                     <Grid item container className={classes.buttonContainer} spacing={3}>
@@ -409,10 +400,10 @@ export default function NewProcessView() {
                                 <Box sx={{ flexGrow: 1 }}>
                                     <Typography variant="h5" gutterBottom>
                                         A few simple reminders:
-                </Typography>
+                                    </Typography>
                                     <Typography variant="subtitle1" color='textSecondary'>
                                         Below is the process form, your starting point for creating a new process. The process is connected to all of the criteria of the process that make it unique. A process can have many different parameters. For now, let's focus on setting up the basic information. None of the fields are mandatory - input what you know and feel, but the more information you can collect the better results you will get. Have fun!
-                  </Typography>
+                                    </Typography>
                                 </Box>
                                 <Box
                                     component="img"
