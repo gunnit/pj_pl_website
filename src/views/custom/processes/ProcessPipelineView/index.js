@@ -78,14 +78,17 @@ function ProcessPipelineView() {
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <Table processes={pipeline.processes_idea} />
                         </Grid>
-                        <Grid item lg={12}>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
                             <BubbleChart processes={pipeline.processes_idea} />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Card>
                                 <CardHeader title="Top 10 Processes: Automation Potential" />
                                 <CardContent>
-                                    <ColumnSingleChart />
+                                    <ColumnSingleChart
+                                        xAxisData={pipeline.process_list}
+                                        yAxisData={pipeline.process_list_score}
+                                    />
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -93,7 +96,10 @@ function ProcessPipelineView() {
                             <Card>
                                 <CardHeader title="Top 10 Processes: Annual Savings (1st Year)" />
                                 <CardContent>
-                                    <ColumnSingleChart />
+                                    <ColumnSingleChart
+                                        xAxisData={pipeline.process_net_benefit_name}
+                                        yAxisData={pipeline.process_net_benefit}
+                                    />
                                 </CardContent>
                             </Card>
                         </Grid>

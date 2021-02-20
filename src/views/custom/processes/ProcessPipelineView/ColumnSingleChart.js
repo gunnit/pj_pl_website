@@ -5,33 +5,24 @@ import { ApexChartsOption } from 'components/Charts/Apexcharts';
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [
-  { name: 'Net Profit', data: [44, 55, 57, 56, 61, 58, 63, 60, 66] }
-];
 
-const ColumnSingleChart = () => {
+
+const ColumnSingleChart = ({ xAxisData, yAxisData }) => {
+
+
+  const chartData = [
+    { name: 'Process', data: yAxisData }
+  ];
+
+
   const chartOptions = merge(ApexChartsOption(), {
     plotOptions: { bar: { columnWidth: '14%', endingShape: 'rounded' } },
     stroke: { show: false },
     xaxis: {
-      categories: [
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct'
-      ]
+      categories: xAxisData
     },
     tooltip: {
-      y: {
-        formatter: function (val) {
-          return '$ ' + val + ' thousands';
-        }
-      }
+
     }
   });
 
@@ -39,7 +30,7 @@ const ColumnSingleChart = () => {
     <ReactApexChart
       type="bar"
       height={320}
-      series={CHART_DATA}
+      series={chartData}
       options={chartOptions}
     />
   );
