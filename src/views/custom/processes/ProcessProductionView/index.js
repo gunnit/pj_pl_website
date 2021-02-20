@@ -6,7 +6,7 @@ import Page from 'components/Page';
 import BreakEvenChart from './BreakEvenChart';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
-import BarChart from './BarChart';
+import IdeasPerFunction from './IdeasPerFunction';
 import NoProcesses from '../NoProcesses';
 import rocketIcon from '@iconify-icons/fxemoji/rocket';
 import Context from 'context/Context';
@@ -98,7 +98,25 @@ function ProcessProductionView() {
                             <SearchTable processes={production.processes_idea} />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <BarChart />
+                            <IdeasPerFunction
+                                data={[
+                                    production.count_function_processes_finance,
+                                    production.count_function_processes_inventory,
+                                    production.count_function_processes_production,
+                                    production.count_function_processes_supply_chain,
+                                    production.count_function_processes_procurement,
+                                    production.count_function_processes_accounting,
+                                    production.count_function_processes_HR,
+                                    production.count_function_processes_legal,
+                                    production.count_function_processes_marketing,
+                                    production.count_function_processes_sales,
+                                    production.count_function_processes_customer_services,
+                                    production.count_function_processes_development,
+                                    production.count_function_processes_IT,
+                                    production.count_function_processes_other,
+                                    production.count_function_processes_notanswered,
+                                ]}
+                            />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber

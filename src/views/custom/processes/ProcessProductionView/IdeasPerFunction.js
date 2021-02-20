@@ -7,13 +7,12 @@ import {
   CardHeader,
   CardContent,
 } from '@material-ui/core';
+
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [
-  { data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380] }
-];
 
-function BarChart() {
+
+export default function IdeasPerFunction({ data }) {
   const chartOptions = merge(ApexChartsOption(), {
     stroke: { show: false },
     plotOptions: {
@@ -36,23 +35,34 @@ function BarChart() {
         'IT',
         'Other',
         'Not answered',
-      ]
+      ],
+      labels: {
+        style: {
+          colors: ['#F9FAFB']
+        }
+      }
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: ['#F9FAFB']
+        }
+      }
     }
   });
 
   return (
     <Card>
-      <CardHeader title="Bar" />
+      <CardHeader title="Number of Submitted Ideas per Function" />
       <CardContent>
         <ReactApexChart
           type="bar"
           height={320}
-          series={CHART_DATA}
+          series={[{ data }]}
           options={chartOptions}
         />
       </CardContent>
     </Card>
+
   );
 }
-
-export default BarChart;
