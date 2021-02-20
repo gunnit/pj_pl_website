@@ -1,5 +1,7 @@
 Things to add:
 
+assumptions.current_employee_cost?
+
 Change navbar numbers if pipeline is changed when updating a process
 
 Update process redirect after submitting? New process also?

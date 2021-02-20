@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Grid } from '@material-ui/core';
-import WithoutAutomation from './WithoutAutomation';
-import WithAutomation from './WithAutomation';
+import CostWithoutAutomation from './CostWithoutAutomation';
+import CostWithAutomation from './CostWithAutomation';
 import GenericBoxInfoCostsComparison from './GenericBoxInfoCostsComparison';
 import GenericBoxInfoDevelopment from './GenericBoxInfoDevelopment';
 import GenericBoxInfo from './GenericBoxInfo';
@@ -10,16 +10,16 @@ import ComparisonChartCard from './ComparisonChartCard';
 
 
 
-function CostsComparison() {
+function CostsComparison({ processDetails }) {
 
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 <Grid item lg={6}>
-                    <WithAutomation />
+                    <CostWithoutAutomation data={processDetails.assumptions} />
                 </Grid>
                 <Grid item lg={6}>
-                    <WithoutAutomation />
+                    <CostWithAutomation data={processDetails.assumptions} />
                 </Grid>
                 <Grid item lg={6}>
                     <GenericBoxInfoCostsComparison infoType={'Total Cost Without Automation'} />

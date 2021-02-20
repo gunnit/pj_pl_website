@@ -211,28 +211,6 @@ export default function NewProcessView() {
     const formik = useFormik({
         initialValues: {
             process_name: '',
-            process_L2_process_name: '',
-            overview: '',
-            description: '',
-            pipeline: '',
-            process_critical: '',
-            process_type: '',
-            business_unit: '',
-            function: '',
-            process_documentation_available: '',
-            nature_of_process: '',
-            test_env_available: '',
-            team: '',
-            sponsor: '',
-            process_SME: '',
-            process_SME_email: '',
-            process_SME_tel: '',
-            owner_name: '',
-            owner_email: '',
-            process_objective: null,
-            saving_target_explanation: '',
-            num_of_manual_steps: '',
-            note: '',
         },
         validationSchema: NewProcessSchema,
         onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -304,6 +282,9 @@ export default function NewProcessView() {
         }
 
     };
+
+
+
 
 
 

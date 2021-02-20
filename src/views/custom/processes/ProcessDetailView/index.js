@@ -109,7 +109,7 @@ export default function ProcessDetailView() {
                         <AutomationPotential />
                     </TabPanel>
                     <TabPanel value={'3'}>
-                        <CostsComparison />
+                        <CostsComparison processDetails={processDetails} />
                     </TabPanel>
                     <TabPanel value={'4'}>
                         <BreakEven processDetails={processDetails} />
