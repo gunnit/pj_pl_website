@@ -13,25 +13,17 @@ import {
 } from '@material-ui/core';
 import { MLabel } from '@material-extend';
 
-// ----------------------------------------------------------------------
-
-function createData(category, yearOne, yearTwo, yearThree) {
-  return { category, yearOne, yearTwo, yearThree };
-}
-
-const BASIC_TABLE = [
-  createData('Cost without automation', 159, 6.0, 24),
-  createData('Cost with automation', 237, 9.0, 37),
-  createData('Savings', -237, 9.0, 37),
-];
 
 const useStyles = makeStyles({
   root: {}
 });
 
-// ----------------------------------------------------------------------
 
-function ThreeYearProjectionsTable() {
+export default function ThreeYearProjectionsTable({
+  total_process_years_ideas_with_auto,
+  total_process_years_ideas_with_no_auto_total,
+  total_process_years_ideas_savings_total,
+}) {
   const classes = useStyles();
 
   return (
@@ -52,12 +44,30 @@ function ThreeYearProjectionsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {BASIC_TABLE.map(row => (
+            {[{
+              name: 'Cost With Automation',
+              yearOne: total_process_years_ideas_with_no_auto_total[0],
+              yearTwo: total_process_years_ideas_with_no_auto_total[1],
+              yearThree: total_process_years_ideas_with_no_auto_total[2],
+            },
+            {
+              name: 'Cost Without Automation',
+              yearOne: total_process_years_ideas_with_auto[0],
+              yearTwo: total_process_years_ideas_with_auto[1],
+              yearThree: total_process_years_ideas_with_auto[2],
+            },
+            {
+              name: 'Savings',
+              yearOne: total_process_years_ideas_savings_total[0],
+              yearTwo: total_process_years_ideas_savings_total[1],
+              yearThree: total_process_years_ideas_savings_total[2],
+            }
+            ].map(row => (
               <TableRow key={row.name} className={classes.hideLastBorder}>
                 <TableCell component="th" scope="row">
-                  {row.category}
+                  {row.name}
                 </TableCell>
-                {row.category === 'Savings'
+                {row.name === 'Savings'
                   ?
                   <>
                     <TableCell align="right">
@@ -91,5 +101,3 @@ function ThreeYearProjectionsTable() {
     </Card>
   );
 }
-
-export default ThreeYearProjectionsTable;

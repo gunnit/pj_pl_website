@@ -167,11 +167,15 @@ function ProcessProductionView() {
                         <Grid item xs={12}>
                             <BreakEvenChart
                                 total_process_quarter_ideas_with_automation={production.total_process_quarter_ideas_with_automation}
-                                total_process_quarter_ideas_with_no_automation={production.total_process_quarter_ideas_with_no_automation} />
+                                total_process_quarter_ideas_with_no_automation={production.total_process_quarter_ideas_with_no_automation}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <ThreeYearProjectionsTable />
+                            <ThreeYearProjectionsTable
+                                total_process_years_ideas_with_auto={production.total_process_years_ideas_with_auto}
+                                total_process_years_ideas_with_no_auto_total={production.total_process_years_ideas_with_no_auto_total}
+                                total_process_years_ideas_savings_total={production.total_process_years_ideas_savings_total}
+                            />
                         </Grid>
                     </Grid>
                 </Container>
