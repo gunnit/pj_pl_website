@@ -287,7 +287,6 @@ export default function DevelopmentTable({ processes }) {
                     function: processFunction,
                   }, index) => {
 
-                    console.log(id)
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
