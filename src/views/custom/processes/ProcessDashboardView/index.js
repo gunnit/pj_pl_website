@@ -69,7 +69,7 @@ function ProcessDashboardView() {
 
                         </Grid>
                         <Grid item xs={12} md={8} lg={8}>
-                            <BubbleChart />
+                            <BubbleChart data={dashboard.processes} />
                         </Grid>
                         <Grid
                             item

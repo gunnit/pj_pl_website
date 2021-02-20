@@ -13,19 +13,37 @@ const useStyles = makeStyles(() => ({
 
 // ----------------------------------------------------------------------
 
-BubbleChart.propTypes = {
-  className: PropTypes.string
-};
 
-function BubbleChart({ className, ...other }) {
+export default function BubbleChart({ data, className, ...other }) {
   const classes = useStyles();
 
-  const chartData = [
-    {
-      name: "Processes",
-      data: [...new Array(30)].map(el => [Math.random() * 10, Math.random() * 10, Math.random() * 10]),
-    },
-  ]
+  // process_score
+  // processassumptions.process_net_benefit
+  // processobjectives.total_alignment_score_graph
+
+  // const chartData = [
+  //   {
+  //     name: "Processes",
+  //     data: data.map(({
+  //       process_score,
+  //       processassumptions: {
+  //         total_net_benefit
+  //       },
+  //       processobjectives: {
+  //         total_alignment_score_coverted
+  //       }
+  //     }) => [process_score, total_net_benefit, total_alignment_score_coverted]),
+  //   },
+  // ]
+
+  const chartData = data.map((process, i) => {
+    return {
+      name: process.process_name,
+      data: [[process.process_score,
+      process.processassumptions.total_net_benefit,
+      process.processobjectives.total_alignment_score_coverted]]
+    }
+  })
 
   const theme = useTheme()
 
@@ -36,7 +54,7 @@ function BubbleChart({ className, ...other }) {
       theme.palette.primary.dark,
     ],
 
-    
+
     chart: {
       toolbar: { show: false },
       zoom: { enabled: false },
@@ -122,5 +140,3 @@ function BubbleChart({ className, ...other }) {
     </Card>
   );
 }
-
-export default BubbleChart;
