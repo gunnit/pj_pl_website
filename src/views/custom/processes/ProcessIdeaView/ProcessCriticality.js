@@ -18,23 +18,16 @@ function ProcessCriticality({ data }) {
         stroke: { show: false },
         xaxis: {
             categories: [
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct'
+                'Extremely',
+                'Very',
+                'Moderately',
+                'Slightly',
+                'Not at all',
+                'Not answered',
             ]
         },
         tooltip: {
-            y: {
-                formatter: function (val) {
-                    return '$ ' + val + ' thousands';
-                }
-            }
+
         }
     });
     return (
@@ -44,7 +37,7 @@ function ProcessCriticality({ data }) {
                 <ReactApexChart
                     type="bar"
                     height={320}
-                    series={[{ name: 'name', data }]}
+                    series={[{ name: 'Number of Processes', data }]}
                     options={chartOptions}
                 />
             </CardContent>

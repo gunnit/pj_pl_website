@@ -15,17 +15,6 @@ import {
 import { MLabel } from '../../../../@material-extend';
 // ----------------------------------------------------------------------
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const BASIC_TABLE = [
-  createData('Frozen yoghurt', 159, 6.0, 24, "CFO"),
-  createData('Ice cream sandwich', 237, 9.0, 37, "CFO"),
-  createData('Eclair', 262, 16.0, 24, "CFO"),
-  createData('Cupcake', 305, 3.7, 67, "CFO"),
-  createData('Gingerbread', 356, 16.0, 49, "CFO")
-];
 
 const useStyles = makeStyles({
   root: {}
@@ -33,12 +22,12 @@ const useStyles = makeStyles({
 
 // ----------------------------------------------------------------------
 
-export default function BasicTable() {
+export default function RecentProcesses({ processes }) {
   const classes = useStyles();
 
   return (
     <Card>
-      <CardHeader title="10 Most Recent Processes" />
+      <CardHeader title="Recently Created Processes" />
       <Scrollbars>
         <TableContainer
           component={Box}
@@ -50,33 +39,38 @@ export default function BasicTable() {
               <TableRow>
                 <TableCell>Process Name</TableCell>
                 <TableCell align="right">Objective Alignment</TableCell>
-                <TableCell align="right">Automation Potential</TableCell>
-                <TableCell align="right">Saving</TableCell>
+                <TableCell align="right">Automation Score</TableCell>
+                <TableCell align="right">Savings</TableCell>
                 <TableCell align="right">Owner</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {BASIC_TABLE.map(row => (
-                <TableRow key={row.name} className={classes.hideLastBorder}>
+              {processes.map(({
+                name,
+                objectiveAlignment,
+                automationScore,
+                savings,
+                businessUnit,
+                businessFunction,
+              }, i) => (
+                <TableRow key={`${name}${i}`} className={classes.hideLastBorder}>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {name}
                   </TableCell>
                   <TableCell align="right">
-                    {row.calories}%
+                    {objectiveAlignment}%
                   </TableCell>
                   <TableCell align="right">
                     <MLabel variant="filled" color="info">
-                          {row.fat}
+                      {automationScore}
                     </MLabel>
                   </TableCell>
                   <TableCell align="right">
-                    <MLabel variant="filled" color={row.carbs > 0 ? "primary" : "error"}>
-                          {row.carbs}
+                    <MLabel variant="filled" color={savings > 0 ? "primary" : "error"}>
+                      {savings}
                     </MLabel>
                   </TableCell>
-                  <TableCell align="right">
-                    {row.protein}
-                  </TableCell>
+                  <TableCell align="right">{(businessUnit && businessFunction) ? `${businessUnit} - ${businessFunction}` : !!businessUnit ? `${businessUnit}` : !!businessFunction ? businessFunction : ''}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

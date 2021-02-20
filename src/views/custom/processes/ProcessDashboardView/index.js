@@ -7,7 +7,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Grid } from '@material-ui/core';
 import GenericBoxInfo from './GenericBoxInfo';
 import CircleChart from './CircleChart'
-import BusinessFunctionChart from './BusinessFunctionChart';
+import IdeasPerFunction from './IdeasPerFunction';
 import BottomCard from './BottomCard';
 import RecentProcesses from './RecentProcesses';
 import NoProcesses from '../NoProcesses';
@@ -64,9 +64,7 @@ function ProcessDashboardView() {
                 ? <Container maxWidth="xl">
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={4} lg={4}>
-
                             <Welcome displayName={displayName} />
-
                         </Grid>
                         <Grid item xs={12} md={8} lg={8}>
                             <BubbleChart data={dashboard.processes} />
@@ -97,7 +95,6 @@ function ProcessDashboardView() {
                                     chartColor={theme.palette.info.main}
                                 />
                             </Grid>
-
                             <Grid item xs={12} md={6}>
                                 <GenericBoxInfo
                                     numberOfItems={65}
@@ -126,10 +123,30 @@ function ProcessDashboardView() {
                             />
                         </Grid>
                         <Grid item xs={12} md={12} lg={12} >
-                            <BusinessFunctionChart />
+                            <IdeasPerFunction
+                                data={[
+                                    dashboard.count_function_processes_finance,
+                                    dashboard.count_function_processes_inventory,
+                                    dashboard.count_function_processes_production,
+                                    dashboard.count_function_processes_supply_chain,
+                                    dashboard.count_function_processes_procurement,
+                                    dashboard.count_function_processes_accounting,
+                                    dashboard.count_function_processes_HR,
+                                    dashboard.count_function_processes_legal,
+                                    dashboard.count_function_processes_marketing,
+                                    dashboard.count_function_processes_sales,
+                                    dashboard.count_function_processes_customer_services,
+                                    dashboard.count_function_processes_development,
+                                    dashboard.count_function_processes_IT,
+                                    dashboard.count_function_processes_other,
+                                    dashboard.count_function_processes_notanswered,
+                                ]}
+                            />
                         </Grid>
                         <Grid item xs={12} md={12} lg={12} >
-                            <RecentProcesses />
+                            <RecentProcesses
+                                processes={dashboard.process_table}
+                            />
                         </Grid>
                         <Grid item xs={12} md={3} lg={3} >
                             <BottomCard
