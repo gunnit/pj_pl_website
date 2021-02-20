@@ -28,6 +28,8 @@ import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
+import LoadingScreen from 'components/LoadingScreen';
+
 
 // ----------------------------------------------------------------------
 
@@ -50,9 +52,6 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-function getSteps() {
-    return ['Process Details', 'Process Characteristics', 'Process Ownership', 'Automation Requirements'];
-}
 
 const useQontoStepIconStyles = makeStyles({
     root: {
@@ -180,9 +179,8 @@ export default function AutomationAssessmentView() {
 
     const { userId, currentProcessId } = useContext(Context)
 
-    const [activeStep, setActiveStep] = useState(null);
+    const [activeStep, setActiveStep] = useState(0);
     const [pending, setPending] = useState(false)
-    const steps = getSteps();
 
     const handleBack = () => {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -214,18 +212,7 @@ export default function AutomationAssessmentView() {
     });
 
     const handleNext = async () => {
-        if (activeStep === 0) {
-
-            // if (!formik.errors.name
-            //     && !formik.errors.pipeline) {
-
-            setActiveStep(prevActiveStep => prevActiveStep + 1);
-            // }
-        } else if (activeStep === 1) {
-
-            setActiveStep(prevActiveStep => prevActiveStep + 1);
-
-        } else if (activeStep === 2) {
+        if (activeStep < subgroups.length - 1) {
 
             setActiveStep(prevActiveStep => prevActiveStep + 1);
 
@@ -280,8 +267,7 @@ export default function AutomationAssessmentView() {
 
                 const { questions } = await res.json()
 
-                setQuestions(questions)
-                setActiveStep(questions[0].subgroup)
+
 
                 // Store subgroups. This requires subgroups to be in the correct order from the database
 
@@ -299,6 +285,20 @@ export default function AutomationAssessmentView() {
 
                 setSubgroups(subgroupsInOrder)
 
+                const questionsSortedBySubgroup = {}
+
+                questions.forEach(question => {
+                    if (questionsSortedBySubgroup[question.subgroup]) {
+                        questionsSortedBySubgroup[question.subgroup].push(question)
+                    } else {
+                        questionsSortedBySubgroup[question.subgroup] = [question]
+
+                    }
+                })
+
+                setQuestions(questionsSortedBySubgroup)
+
+
             })()
         }
 
@@ -309,12 +309,25 @@ export default function AutomationAssessmentView() {
 
     // Shows part of the form for each step
     function getStepContent(step) {
-        switch (step) {
-            case questions:
-                // return <Bottlenecks formik={formik} />;
-                return <div>case0</div>
+        // step is a certain subgroup
+        return (
+            <>
+                {questions[step].map(question => {
+                    return (
+                        <>
+                            <div>{question.question}</div>
+                            {question.answers.map(answer => {
+                                <div>{answer.text}</div>
+                            })}
+                        </>
+                    )
+                })}
+            </>
+        )
+    }
 
-        }
+    if (!subgroups || !questions) {
+        return <LoadingScreen />
     }
 
     return (
@@ -330,7 +343,7 @@ export default function AutomationAssessmentView() {
                         </Grid>
                     </Grid>
                     <Grid item marginBottom={3}>
-                        <Typography variant='h4' gutterBottom>Create a new process</Typography>
+                        <Typography variant='h4' gutterBottom>Determine the automation potential</Typography>
                     </Grid>
                 </Grid>
                 <div className={classes.root}>
@@ -339,7 +352,7 @@ export default function AutomationAssessmentView() {
                         activeStep={activeStep}
                         connector={<ColorlibConnector />}
                     >
-                        {steps.map(label => (
+                        {subgroups.map(label => (
                             <Step key={label}>
                                 <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
                             </Step>
@@ -347,7 +360,7 @@ export default function AutomationAssessmentView() {
                     </Stepper>
 
                     <div>
-                        {activeStep === steps.length ? (
+                        {activeStep === subgroups.length ? (
                             <>
                                 <Box
                                     sx={{
@@ -377,7 +390,7 @@ export default function AutomationAssessmentView() {
                                         }}
                                     >
                                         <Typography className={classes.instructions}>
-                                            {getStepContent(activeStep)}
+                                            {getStepContent(subgroups[activeStep])}
                                         </Typography>
                                     </Box>
 
@@ -395,7 +408,7 @@ export default function AutomationAssessmentView() {
                                             onClick={handleNext}
                                             className={classes.button}
                                         >
-                                            {activeStep === steps.length - 1 ? 'Create' : 'Next'}
+                                            {activeStep === subgroups.length - 1 ? 'Create' : 'Next'}
                                         </Button>
                                         {/* <LoadingButton
                       pending={pending}
