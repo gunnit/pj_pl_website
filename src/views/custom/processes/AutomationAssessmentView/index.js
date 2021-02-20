@@ -49,6 +49,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(3),
+    },
+    margin: {
+        marginBottom: theme.spacing(3)
+    },
+    helperText: {
+        padding: theme.spacing(0, 2)
     }
 }));
 

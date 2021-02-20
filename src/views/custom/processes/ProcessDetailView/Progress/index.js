@@ -4,20 +4,18 @@ import SuggestedTasks from './SuggestedTasks';
 import AllTasks from './AllTasks';
 
 
-function Progress() {
+export default function Progress({ processDetails }) {
 
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 <Grid item lg={12}>
-                    <SuggestedTasks />
+                    <SuggestedTasks tasks={processDetails.process_tasks} />
                 </Grid>
                 <Grid item lg={12}>
-                    <AllTasks />
+                    <AllTasks tasks={processDetails.all_process_tasks} />
                 </Grid>
             </Grid>
         </Container>
     );
 }
-
-export default Progress;

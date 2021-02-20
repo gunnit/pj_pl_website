@@ -115,7 +115,7 @@ export default function ProcessDetailView() {
                         <BreakEven processDetails={processDetails} />
                     </TabPanel>
                     <TabPanel value={'5'}>
-                        <Progress />
+                        <Progress processDetails={processDetails} />
                     </TabPanel>
                 </TabContext>
             </Container>
