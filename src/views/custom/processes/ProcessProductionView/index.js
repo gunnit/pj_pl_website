@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import SearchTable from './SearchTable'
 import Page from 'components/Page';
-import Breakeven from './Breakeven';
+import BreakEvenChart from './BreakEvenChart';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
 import BarChart from './BarChart';
@@ -97,7 +97,7 @@ function ProcessProductionView() {
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <SearchTable processes={production.processes_idea} />
                         </Grid>
-                        <Grid item lg={12}>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
                             <BarChart />
                         </Grid>
                         <Grid item xs={12} lg={3}>
@@ -165,7 +165,10 @@ function ProcessProductionView() {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Breakeven />
+                            <BreakEvenChart
+                                total_process_quarter_ideas_with_automation={production.total_process_quarter_ideas_with_automation}
+                                total_process_quarter_ideas_with_no_automation={production.total_process_quarter_ideas_with_no_automation} />
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <ThreeYearProjectionsTable />
