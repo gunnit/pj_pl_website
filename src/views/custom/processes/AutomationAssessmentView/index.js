@@ -165,12 +165,12 @@ function ColorlibStepIcon(props) {
     );
 }
 
-export default function NewProcessView() {
+export default function AutomationAssessmentView() {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 
     const [questions, setQuestions] = useState(null)
-
+    const [subgroups, setSubgroups] = useState(null)
     const [openDialog, setOpenDialog] = useState(null);
 
     const handleCloseDialog = value => {
@@ -180,7 +180,7 @@ export default function NewProcessView() {
 
     const { userId, currentProcessId } = useContext(Context)
 
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(null);
     const [pending, setPending] = useState(false)
     const steps = getSteps();
 
@@ -278,7 +278,26 @@ export default function NewProcessView() {
 
                 const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}`)
 
-                setQuestions(await res.json())
+                const { questions } = await res.json()
+
+                setQuestions(questions)
+                setActiveStep(questions[0].subgroup)
+
+                // Store subgroups. This requires subgroups to be in the correct order from the database
+
+                const foundSubgroups = new Set()
+
+                const subgroupsInOrder = questions.reduce((accum, { subgroup }) => {
+                    // If subgroup isn't already added, add it to the set and push it to the accumulator so the same subgroup won't get added twice
+                    if (!foundSubgroups.has(subgroup)) {
+                        foundSubgroups.add(subgroup)
+                        return [...accum, subgroup]
+                    } else {
+                        return accum
+                    }
+                }, [])
+
+                setSubgroups(subgroupsInOrder)
 
             })()
         }
@@ -291,7 +310,7 @@ export default function NewProcessView() {
     // Shows part of the form for each step
     function getStepContent(step) {
         switch (step) {
-            case 0:
+            case questions:
                 // return <Bottlenecks formik={formik} />;
                 return <div>case0</div>
 
