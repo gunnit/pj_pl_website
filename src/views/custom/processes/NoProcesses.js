@@ -48,8 +48,8 @@ export default function NoProcesses({ primaryText, secondaryText }) {
                     <Box
                         component={motion.img}
                         variants={varBounceIn}
-                        alt="404"
-                        src="/static/images/illustrations/illustration_404.svg"
+                        alt="Inser a process"
+                        src="/static/images/illustrations/illustration_maintenance.svg"
                         sx={{ width: '100%', maxHeight: 240, my: { xs: 5, sm: 10 } }}
                     />
                     <Button
