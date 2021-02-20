@@ -17,15 +17,17 @@ BubbleChart.propTypes = {
   className: PropTypes.string
 };
 
-function BubbleChart({ className, ...other }) {
+function BubbleChart({ processes, className, ...other }) {
   const classes = useStyles();
 
-  const chartData = [
-    {
-      name: "Processes",
-      data: [...new Array(30)].map(el => [Math.random() * 10, Math.random() * 10, Math.random() * 10]),
-    },
-  ]
+  const chartData = processes.map((process, i) => {
+    return {
+      name: process.process_name,
+      data: [[process.process_score,
+      process.processassumptions.total_net_benefit,
+      process.processobjectives.total_alignment_score_coverted]]
+    }
+  })
 
   const theme = useTheme()
 
@@ -36,7 +38,7 @@ function BubbleChart({ className, ...other }) {
       theme.palette.primary.dark,
     ],
 
-    
+
     chart: {
       toolbar: { show: false },
       zoom: { enabled: false },

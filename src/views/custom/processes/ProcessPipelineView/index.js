@@ -79,7 +79,7 @@ function ProcessPipelineView() {
                             <Table processes={pipeline.processes_idea} />
                         </Grid>
                         <Grid item lg={12}>
-                            <BubbleChart />
+                            <BubbleChart processes={pipeline.processes_idea} />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Card>
