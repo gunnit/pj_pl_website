@@ -10,43 +10,53 @@ import {
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [
-  {
-    name: 'Team A',
-    type: 'column',
-    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
-  },
-  {
-    name: 'Team B',
-    type: 'area',
-    data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-  },
-  {
-    name: 'Team C',
-    type: 'line',
-    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
-  }
-];
 
-function MixedChart() {
+
+export default function ThreeYearProjectionsChart({
+  data: {
+    y1_savings_total,
+    y1_with_auto_total,
+    y1_with_no_auto_total,
+    y2_savings_total,
+    y2_with_auto_total,
+    y2_with_no_auto_total,
+    y3_savings_total,
+    y3_with_auto_total,
+    y3_with_no_auto_total,
+  }
+}) {
+
+
+
+  const chartData = [
+    {
+      name: 'Cost Without Automation',
+      type: 'column',
+      data: [y1_with_no_auto_total, y2_with_no_auto_total, y3_with_no_auto_total]
+    },
+    {
+      name: 'Cost With Automation',
+      type: 'column',
+      data: [y1_with_auto_total, y2_with_auto_total, y3_with_auto_total]
+    },
+    {
+      name: 'Savings',
+      type: 'line',
+      data: [y1_savings_total, y2_savings_total, y3_savings_total]
+    }
+  ];
+
+
   const chartOptions = merge(ApexChartsOption(), {
     stroke: { width: [0, 2, 3] },
     plotOptions: { bar: { columnWidth: '18%', endingShape: 'rounded' } },
     fill: { type: ['solid', 'gradient', 'solid'] },
     labels: [
-      '01/01/2003',
-      '02/01/2003',
-      '03/01/2003',
-      '04/01/2003',
-      '05/01/2003',
-      '06/01/2003',
-      '07/01/2003',
-      '08/01/2003',
-      '09/01/2003',
-      '10/01/2003',
-      '11/01/2003'
+      'Year One',
+      'Year Two',
+      'Year Three',
     ],
-    xaxis: { type: 'datetime' },
+    // xaxis: { type: 'datetime' },
     yaxis: { title: { text: 'Points' }, min: 0 },
     tooltip: {
       shared: true,
@@ -69,7 +79,7 @@ function MixedChart() {
         <ReactApexChart
           type="line"
           height={320}
-          series={CHART_DATA}
+          series={chartData}
           options={chartOptions}
         />
       </CardContent>
@@ -77,5 +87,3 @@ function MixedChart() {
 
   );
 }
-
-export default MixedChart;

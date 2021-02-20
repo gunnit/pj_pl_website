@@ -81,8 +81,75 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-export default function QuarterlyCashFlow() {
+export default function QuarterlyCashFlow({ data: {
+    q1_savings_y1,
+    q1_savings_y2,
+    q1_with_auto_y1,
+    q1_with_auto_y2,
+    q1_with_no_auto_y1,
+    q1_with_no_auto_y2,
+    q2_savings_y1,
+    q2_savings_y2,
+    q2_with_auto_y1,
+    q2_with_auto_y2,
+    q2_with_no_auto_y1,
+    q2_with_no_auto_y2,
+    q3_savings_y1,
+    q3_savings_y2,
+    q3_with_auto_y1,
+    q3_with_auto_y2,
+    q3_with_no_auto_y1,
+    q3_with_no_auto_y2,
+    q4_savings_y1,
+    q4_savings_y2,
+    q4_with_auto_y1,
+    q4_with_auto_y2,
+    q4_with_no_auto_y1,
+    q4_with_no_auto_y2,
+} }) {
     const classes = useStyles();
+
+
+
+    const costWithoutAutomationRow = [
+        q1_with_no_auto_y1,
+        q2_with_no_auto_y1,
+        q3_with_no_auto_y1,
+        q4_with_no_auto_y1,
+        q1_with_no_auto_y2,
+        q2_with_no_auto_y2,
+        q3_with_no_auto_y2,
+        q4_with_no_auto_y2,
+    ]
+
+    const costWithAutomationRow = [
+        q1_with_auto_y1,
+        q2_with_auto_y1,
+        q3_with_auto_y1,
+        q4_with_auto_y1,
+        q1_with_auto_y2,
+        q2_with_auto_y2,
+        q3_with_auto_y2,
+        q4_with_auto_y2,
+    ]
+
+    const savingsRow = [
+        q1_savings_y1,
+        q2_savings_y1,
+        q3_savings_y1,
+        q4_savings_y1,
+        q1_savings_y2,
+        q2_savings_y2,
+        q3_savings_y2,
+        q4_savings_y2,
+    ]
+
+    const rows = [
+        { cells: costWithoutAutomationRow },
+        { cells: costWithAutomationRow },
+        { cells: savingsRow },
+    ]
+
 
     return (
         <Card>
@@ -94,21 +161,39 @@ export default function QuarterlyCashFlow() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell
+                                        colSpan={1}
+                                        classes={{ head: classes.tableHead }}
+                                    />
+                                    <TableCell
                                         align="right"
-                                        colSpan={4}
+                                        colSpan={1}
                                         classes={{ head: classes.tableHead }}
                                     >
                                         Year 1
                                     </TableCell>
                                     <TableCell
+                                        align="left"
+                                        colSpan={3}
+                                        classes={{ head: classes.tableHead }}
+                                    />
+                                    <TableCell
                                         align="right"
-                                        colSpan={4}
+                                        colSpan={1}
                                         classes={{ head: classes.tableHead }}
                                     >
                                         Year 2
                                     </TableCell>
+                                    <TableCell
+                                        align="right"
+                                        colSpan={3}
+                                        classes={{ head: classes.tableHead }}
+                                    />
                                 </TableRow>
                                 <TableRow>
+                                    <TableCell
+                                        // align='right'
+                                        style={{ top: 56, minWidth: 50 }}
+                                    />
                                     {COLUMNS.map(column => (
                                         <TableCell
                                             key={column.id}
@@ -118,20 +203,35 @@ export default function QuarterlyCashFlow() {
                                             {column.label}
                                         </TableCell>
                                     ))}
+
                                 </TableRow>
                             </TableHead>
 
                             <TableBody>
-                                {GROUPING_TABLE.map(row => {
+                                {rows.map((row, i) => {
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                            {COLUMNS.map(column => {
-                                                const value = row[column.id];
+                                            {i === 0
+                                                && <TableCell align='left'>
+                                                    Cost Without Automation
+                                                </TableCell>}
+                                            {i === 1
+                                                && <TableCell align='left'>
+                                                    Cost With Automation
+                                                   </TableCell>}
+                                            {i === 2
+                                                && <TableCell align='left'>
+                                                    Savings
+                                                   </TableCell>}
+                                            {row.cells.map(cell => {
                                                 return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        {column.format && typeof value === 'number'
+                                                    <TableCell key={cell}
+                                                    // align={column.align}
+                                                    >
+                                                        {/* {column.format && typeof value === 'number'
                                                             ? column.format(value)
-                                                            : value}
+                                                            : value} */}
+                                                        {cell}
                                                     </TableCell>
                                                 );
                                             })}
@@ -139,6 +239,7 @@ export default function QuarterlyCashFlow() {
                                     );
                                 })}
                             </TableBody>
+
                         </Table>
                     </TableContainer>
                 </div>

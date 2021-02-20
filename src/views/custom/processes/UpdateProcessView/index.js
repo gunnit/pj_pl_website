@@ -355,16 +355,16 @@ export default function UpdateProcessView() {
       })
 
       setSliderValues({
-        cost_reduction,
-        reduce_process_duration,
-        improve_accuracy,
-        enable_audit_trail,
-        enable_scalability,
-        improve_security,
-        client_satisfaction,
-        improve_consistency,
-        improve_reliability,
-        increase_retention,
+        cost_reduction: parseInt(cost_reduction),
+        reduce_process_duration: parseInt(reduce_process_duration),
+        improve_accuracy: parseInt(improve_accuracy),
+        enable_audit_trail: parseInt(enable_audit_trail),
+        enable_scalability: parseInt(enable_scalability),
+        improve_security: parseInt(improve_security),
+        client_satisfaction: parseInt(client_satisfaction),
+        improve_consistency: parseInt(improve_consistency),
+        improve_reliability: parseInt(improve_reliability),
+        increase_retention: parseInt(increase_retention),
       })
 
 
@@ -372,6 +372,7 @@ export default function UpdateProcessView() {
 
       setLoading(false)
 
+      // If pipeline changes, update navbar numbers
 
     })()
 
@@ -400,7 +401,7 @@ export default function UpdateProcessView() {
 
       try {
         const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId}`, {
-          method: 'POST',
+          method: 'PUT',
           body: JSON.stringify({
             ...formik.values,
             ...sliderValues,
@@ -415,7 +416,6 @@ export default function UpdateProcessView() {
 
         setActiveStep(prevActiveStep => prevActiveStep + 1);
 
-        const { id } = await res.json()
 
 
       } catch (e) {
@@ -497,9 +497,9 @@ export default function UpdateProcessView() {
                 >
                   <Typography className={classes.instructions}>
                     {/* All steps completed - you&apos;re finished */}
-                    New process submitted successfully!
+                    Your changes were saved.
                   </Typography>
-                  <Button variant='contained' component={RouterLink} to={PATH_APP.processes.details}>
+                  <Button color='secondary' variant='contained' component={RouterLink} to={PATH_APP.processes.details}>
                     View Process Details
                   </Button>
                 </Box>
@@ -535,7 +535,7 @@ export default function UpdateProcessView() {
                       className={classes.button}
                       color='secondary'
                     >
-                      {activeStep === steps.length - 1 ? 'Create' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Save' : 'Next'}
                     </Button>
                     {/* <LoadingButton
                       pending={pending}

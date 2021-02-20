@@ -46,8 +46,8 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
 
         if (checkboxValues.has(parseInt(e.target.value))) {
             const copy = new Set([...checkboxValues])
-
-            setCheckboxValues(copy.delete(parseInt(e.target.value)))
+            copy.delete(parseInt(e.target.value))
+            setCheckboxValues(copy)
         } else {
             const copy = new Set([...checkboxValues])
 

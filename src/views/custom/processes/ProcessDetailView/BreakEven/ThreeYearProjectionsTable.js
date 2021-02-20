@@ -33,8 +33,27 @@ const useStyles = makeStyles({
 
 // ----------------------------------------------------------------------
 
-function ThreeYearProjectionsTable() {
+function ThreeYearProjectionsTable({
+  data: {
+    y1_savings_total,
+    y1_with_auto_total,
+    y1_with_no_auto_total,
+    y2_savings_total,
+    y2_with_auto_total,
+    y2_with_no_auto_total,
+    y3_savings_total,
+    y3_with_auto_total,
+    y3_with_no_auto_total,
+  }
+}) {
   const classes = useStyles();
+
+
+  const rows = [
+    { category: 'Cost Without Automation', yearOne: y1_with_no_auto_total, yearTwo: y2_with_no_auto_total, yearThree: y3_with_no_auto_total },
+    { category: 'Cost With Automation', yearOne: y1_with_auto_total, yearTwo: y2_with_auto_total, yearThree: y3_with_auto_total },
+    { category: 'Savings', yearOne: y1_savings_total, yearTwo: y2_savings_total, yearThree: y3_savings_total }
+  ]
 
   return (
     <Card>
@@ -54,7 +73,7 @@ function ThreeYearProjectionsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {BASIC_TABLE.map(row => (
+            {rows.map(row => (
               <TableRow key={row.name} className={classes.hideLastBorder}>
                 <TableCell component="th" scope="row">
                   {row.category}
