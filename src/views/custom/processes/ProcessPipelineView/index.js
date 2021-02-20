@@ -106,7 +106,11 @@ function ProcessPipelineView() {
                                 total_process_quarter_ideas_with_no_automation={pipeline.total_process_quarter_ideas_with_no_automation} />
                         </Grid>
                         <Grid item xs={12}>
-                            <ThreeYearProjectionsTable />
+                            <ThreeYearProjectionsTable
+                                total_process_years_ideas_with_auto={pipeline.total_process_years_ideas_with_auto}
+                                total_process_years_ideas_with_no_auto_total={pipeline.total_process_years_ideas_with_no_auto_total}
+                                total_process_years_ideas_savings_total={pipeline.total_process_years_ideas_savings_total}
+                            />
                         </Grid>
                     </Grid>
                 </Container>
