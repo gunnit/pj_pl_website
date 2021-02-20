@@ -131,24 +131,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
-function createData(id, name, priority, alignment, automationScore, costWithoutAutomation, costWithAutomation, oneYearSavings, threeYearSavings, dateCreated) {
-  return { id, name, priority, alignment, automationScore, costWithoutAutomation, costWithAutomation, oneYearSavings, threeYearSavings, dateCreated };
-}
-
-const products = [
-  createData('id', 'New Account Entry', 'Low', '30%', 3, 23700, 54500, 5000, 15000, 'February 10, 2021'),
-  createData('id1', 'Credit Checks', 'Medium', '60%', 4, 11620, 35300, 5000, 15000, 'February 10, 2021'),
-  createData('id2', 'Ledger Entry', 'High', '80%', 9, 55000, 35400, 5000, 15000, 'February 7, 2021'),
-  createData('id3', 'Loan Approval', 'High', '90%', 10, 10000, 5000, 5000, 15000, 'February 6, 2021'),
-  createData('id4', 'P&L Reconciliation', 'Low', '10%', 1, 10000, 5000, 5000, 15000, 'January 27, 2021'),
-  createData('id5', 'AML Authentication', 'High', '70%', 8, 10000, 5000, 5000, 15000, 'January 26, 2021'),
-  createData('id6', 'Order Processing Part 1', 'Medium', '50%', 6, 10000, 5000, 5000, 15000, 'January 25, 2021'),
-  createData('id7', 'CRM Updates', 'Low', '20%', 2, 10000, 5000, 5000, 15000, 'January 25, 2021'),
-  createData('id8', 'Payroll Processing', 'Low', '20%', 2, 10000, 5000, 5000, 15000, 'January 22, 2021'),
-];
-
 // ----------------------------------------------------------------------
 
 export default function ProcessTable({ processes }) {
@@ -162,7 +144,7 @@ export default function ProcessTable({ processes }) {
   const [isOpen, setOpen] = useState(null);
   const { setCurrentProcessId } = useContext(Context)
 
-
+  console.log(processes)
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -171,7 +153,7 @@ export default function ProcessTable({ processes }) {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = products.map(n => n.name);
+      const newSelecteds = processes.map(n => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -242,7 +224,7 @@ export default function ProcessTable({ processes }) {
 
                       const {
                         id,
-                        name,
+                        process_name,
                         priority,
                         alignment,
                         automationScore,
@@ -253,7 +235,7 @@ export default function ProcessTable({ processes }) {
                         dateCreated
                       } = row;
 
-                      const isItemSelected = selected.indexOf(name) !== -1;
+                      const isItemSelected = selected.indexOf(process_name) !== -1;
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
@@ -272,7 +254,7 @@ export default function ProcessTable({ processes }) {
                             scope="row"
                             padding="none"
                           >
-                            {name}
+                            {process_name}
                           </TableCell>
                           <TableCell align="right">{priority}</TableCell>
                           <TableCell align="right">
@@ -296,7 +278,7 @@ export default function ProcessTable({ processes }) {
                                 icon={moreVerticalFill}
                                 width={20}
                                 height={20}
-                              /> 
+                              />
                             </IconButton>
                           </TableCell>
                         </TableRow>

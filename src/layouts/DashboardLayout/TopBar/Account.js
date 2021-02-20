@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import { useSnackbar } from 'notistack';
 import { useSelector } from 'react-redux';
 import MyAvatar from 'components/MyAvatar';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { useFirebase } from 'react-redux-firebase';
 import PopoverMenu from 'components/PopoverMenu';
 import useIsMountedRef from 'hooks/useIsMountedRef';
@@ -12,7 +12,7 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography } from '@material-ui/core';
 import { MIconButton } from '@material-extend';
-
+import Context from 'context/Context';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -62,6 +62,8 @@ function Account() {
   const { auth, profile } = useSelector(state => state.firebase);
   const displayName = auth.displayName || profile.displayName || '';
 
+  const { setUserId, setProcessCounts } = useContext(Context)
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -72,6 +74,8 @@ function Account() {
   const handleLogout = async () => {
     try {
       await firebase.logout();
+      setUserId(null)
+      setProcessCounts({})
       if (isMountedRef.current) {
         history.push('/');
         handleClose();

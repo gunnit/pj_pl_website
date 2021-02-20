@@ -71,6 +71,7 @@ function FirebaseProvider({ children }) {
     // If user email from Firebase has been stored in the context, check for user in database using that email
     if (userEmail) {
 
+
       (async () => {
         const res = await fetch(`${apiBaseUrl}/register/`, {
           method: 'POST',

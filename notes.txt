@@ -1,5 +1,7 @@
 Things to add:
 
+Info for forms say you can edit it later
+
 Ideas per function chart integers
 
 Quarterly cash flow table styling

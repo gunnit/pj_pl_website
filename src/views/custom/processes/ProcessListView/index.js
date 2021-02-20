@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function ProcessListView() {
+export default function ProcessListView() {
     const classes = useStyles();
 
     const [processes, setProcesses] = useState(null)
@@ -93,5 +93,3 @@ function ProcessListView() {
         </Page>
     );
 }
-
-export default ProcessListView;
