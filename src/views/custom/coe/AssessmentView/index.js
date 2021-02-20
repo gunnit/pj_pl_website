@@ -130,10 +130,7 @@ function AssessmentView() {
     };
 
     const NewBlogSchema = Yup.object().shape({
-        name: Yup.string().required('Name is required'),
-        name2: Yup.string().required('Name is required'),
-        overview: Yup.string().required('Overview is required'),
-        description: Yup.string().required('Description is required'),
+        // name: Yup.string().required('Name is required'),
         // content: Yup.string()
         //   .min(1000)
         //   .required('Content is required'),
@@ -153,10 +150,10 @@ function AssessmentView() {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            name2: '',
-            overview: '',
-            description: '',
+            // name: '',
+            // name2: '',
+            // overview: '',
+            // description: '',
             // content: '',
             // cover: null
         },

@@ -22,6 +22,8 @@ import {
     Grid,
     Dialog,
     Card,
+    TextField,
+    MenuItem,
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
@@ -187,13 +189,13 @@ export default function AutomationAssessmentView() {
     };
 
     const AutomationAssessmentSchema = Yup.object().shape({
-        process_name: Yup.string().required('Name is required'),
-        pipeline: Yup.string().required('Pipeline is required'),
+        // process_name: Yup.string().required('Name is required'),
+        // pipeline: Yup.string().required('Pipeline is required'),
     });
 
     const formik = useFormik({
         initialValues: {
-            process_name: '',
+
         },
         validationSchema: AutomationAssessmentSchema,
         onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -219,8 +221,8 @@ export default function AutomationAssessmentView() {
         } else if (formik.isValid) {
 
             setPending(true)
-
             try {
+                console.log(formik.values)
                 // const res = await fetch(`${apiBaseUrl}/create_process/`, {
                 //     method: 'POST',
                 //     body: JSON.stringify({
@@ -240,7 +242,7 @@ export default function AutomationAssessmentView() {
                 // // processCounts in context needs to be updated for navbar numbers
                 // setProcessCounts(previous => ({ ...previous, [lowerCasePipeline]: previous[lowerCasePipeline] + 1 }))
 
-                // setActiveStep(prevActiveStep => prevActiveStep + 1);
+                setActiveStep(prevActiveStep => prevActiveStep + 1);
 
                 // const { id } = await res.json()
 
@@ -285,6 +287,8 @@ export default function AutomationAssessmentView() {
 
                 setSubgroups(subgroupsInOrder)
 
+                // questions need to be sorted by subgroup so the right questions will be displayed on each step
+
                 const questionsSortedBySubgroup = {}
 
                 questions.forEach(question => {
@@ -315,10 +319,25 @@ export default function AutomationAssessmentView() {
                 {questions[step].map(question => {
                     return (
                         <>
-                            <div>{question.question}</div>
-                            {question.answers.map(answer => {
-                                <div>{answer.text}</div>
-                            })}
+                            <Typography variant="subtitle2" gutterBottom>
+                                {question.title}
+                            </Typography >
+                            <TextField
+                                select
+                                fullWidth
+                                variant="outlined"
+                                label={question.question}
+                                {...formik.getFieldProps(question.title)}
+                                // Select fields need formik.handleChange for formik to detect its value
+                                onChange={formik.handleChange}
+                                className={classes.margin}
+                            >
+                                {question.answers.map(answer => (
+                                    <MenuItem key={answer.text} value={answer.value}>
+                                        {answer.text}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </>
                     )
                 })}
@@ -371,12 +390,11 @@ export default function AutomationAssessmentView() {
                                     }}
                                 >
                                     <Typography className={classes.instructions}>
-                                        {/* All steps completed - you&apos;re finished */}
-                    New process submitted successfully!
-                  </Typography>
+                                        Assessment complete!
+                                    </Typography>
                                     <Button variant='contained' component={RouterLink} to={PATH_APP.processes.details}>
-                                        View Process Details
-                  </Button>
+                                        Back to Process Details
+                                    </Button>
                                 </Box>
                             </>
                         ) : (
@@ -408,7 +426,7 @@ export default function AutomationAssessmentView() {
                                             onClick={handleNext}
                                             className={classes.button}
                                         >
-                                            {activeStep === subgroups.length - 1 ? 'Create' : 'Next'}
+                                            {activeStep === subgroups.length - 1 ? 'Submit' : 'Next'}
                                         </Button>
                                         {/* <LoadingButton
                       pending={pending}

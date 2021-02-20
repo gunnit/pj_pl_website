@@ -1,5 +1,7 @@
 Things to add:
 
+When assessment is complete, it should redirect to the automation potential tab
+
 Automation questions group by subgroup order by created date
 
 Automation assessment qualitative
