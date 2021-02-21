@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RadarChartCard({ score }) {
+export default function RadarChartCard({ score, median_score_potential }) {
     const classes = useStyles();
 
     const theme = useTheme();
@@ -87,8 +87,8 @@ export default function RadarChartCard({ score }) {
                 <div className={classes.cardHeader}>
                     <Typography>Automation Score:</Typography>
                     <MLabel className={classes.cardLabel} variant="filled" color={"primary"}>
-                        32
-                </MLabel>
+                        {median_score_potential}
+                    </MLabel>
                 </div>
             } />
             <CardContent className={classes.content}>
