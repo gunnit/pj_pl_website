@@ -19,7 +19,7 @@ const rrfProps = {
   firebase,
   config: {
     userProfile: 'users',
-    useFirestoreForProfile: true
+    useFirestoreForProfile: true,
   },
   dispatch: store.dispatch,
   createFirestoreInstance
@@ -36,7 +36,6 @@ function FirebaseProvider({ children }) {
   useEffect(() => {
     const Initialise = async () => {
       try {
-
         firebase.auth().onAuthStateChanged((user) => {
           // console.log(user)
           // const token = await firebase.auth().currentUser.getIdToken(true);
@@ -45,8 +44,8 @@ function FirebaseProvider({ children }) {
           }
 
 
-          if (user && isLoaded(profile) && !profile.role) {
 
+          if (user && isLoaded(profile) && !profile.role) {
             firebase
               .firestore()
               .collection('users')

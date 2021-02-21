@@ -1,6 +1,6 @@
 Things to add:
 
-Serializers, pictures,
+Serializers, pictures, alt text for images
 
 Cost without automation cost comparison tab
 

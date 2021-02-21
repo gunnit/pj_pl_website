@@ -27,6 +27,7 @@ import {
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
+import { LegendToggleRounded } from '@material-ui/icons';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -133,7 +134,7 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-export default function ProcessTable({ processes }) {
+export default function ProcessTable({ processes, pipelineFilter }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -144,7 +145,6 @@ export default function ProcessTable({ processes }) {
   const [isOpen, setOpen] = useState(null);
   const { setCurrentProcessId } = useContext(Context)
 
-  console.log(processes)
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -188,11 +188,21 @@ export default function ProcessTable({ processes }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
-  const filteredProcesses = applySortFilter(
+  let filteredProcesses = applySortFilter(
     processes,
     getComparator(order, orderBy),
     filterName
   );
+
+  filteredProcesses = filteredProcesses.filter(process => {
+    if (pipelineFilter) {
+      return process.pipline === pipelineFilter
+    } else {
+      return true
+    }
+
+  });
+
 
   const isProductNotFound = filteredProcesses.length === 0;
 

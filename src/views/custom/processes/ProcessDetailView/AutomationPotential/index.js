@@ -60,7 +60,7 @@ export default function AutomationPotential({ processDetails }) {
                     <RadarChartCard score={processDetails.score} median_score_potential={processDetails.median_score_potential} />
                 </Grid>
                 <Grid item lg={12}>
-                    <AutomationScoreDescriptionCard />
+                    <AutomationScoreDescriptionCard processDetails={processDetails} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4}>
                     <GenericBoxInfo

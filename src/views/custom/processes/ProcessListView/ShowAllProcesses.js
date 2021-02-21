@@ -37,12 +37,12 @@ const useStyles = makeStyles(theme => ({
 // ----------------------------------------------------------------------
 
 
-export default function Production({ className, ...other }) {
+export default function Production({ setPipelineFilter, className, ...other }) {
     const classes = useStyles();
     const total = 234;
 
     return (
-        <Card className={clsx(classes.root, className)} {...other}>
+        <Card className={clsx(classes.root, className)} {...other} onClick={() => setPipelineFilter('')}>
             <div className={classes.icon}>
                 <Icon icon={bugFilled} width={24} height={24} />
             </div>

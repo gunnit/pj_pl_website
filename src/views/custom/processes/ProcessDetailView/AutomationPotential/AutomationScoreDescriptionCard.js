@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function AutomationScoreDescriptionCard() {
+function AutomationScoreDescriptionCard({ processDetails }) {
     const classes = useStyles();
 
     return (
@@ -28,7 +28,7 @@ function AutomationScoreDescriptionCard() {
             <CardHeader title={
                 <>
                     <Typography variant='subtitle2'>Automation Score</Typography>
-                    <Typography variant='h3'>5.2</Typography>
+                    <Typography variant='h3'>{processDetails.median_score_potential}</Typography>
                     <MLabel color='warning'>Medium</MLabel>
                 </>
             } />

@@ -13,6 +13,7 @@ import Page500View from 'views/errors/Page500View';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import LoadingScreen from 'components/LoadingScreen';
+import NoProcesses from '../NoProcesses';
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,6 +29,8 @@ export default function ProcessListView() {
     const [processes, setProcesses] = useState(null)
     const [error, setError] = useState(false)
     const { userId } = useContext(Context)
+
+    const [pipelineFilter, setPipelineFilter] = useState('')
 
     useEffect(() => {
 
@@ -55,41 +58,46 @@ export default function ProcessListView() {
 
     return (
         <Page title="All Processes" className={classes.root}>
-            <Container maxWidth="xl">
-                <Box sx={{ pb: 5 }}>
-                    <Typography variant="h4">All Processes</Typography>
-                </Box>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
-                        <ButtonAnimate className={classes.buttonAnimate}>
-                            <ShowAllProcesses />
-                        </ButtonAnimate>
+            {processes.processes.length
+                ? <Container maxWidth="xl">
+                    <Box sx={{ pb: 5 }}>
+                        <Typography variant="h4">All Processes</Typography>
+                    </Box>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
+                            <ButtonAnimate className={classes.buttonAnimate}>
+                                <ShowAllProcesses setPipelineFilter={setPipelineFilter} />
+                            </ButtonAnimate>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
+                            <ButtonAnimate className={classes.buttonAnimate}>
+                                <Ideas setPipelineFilter={setPipelineFilter} />
+                            </ButtonAnimate>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
+                            <ButtonAnimate className={classes.buttonAnimate}>
+                                <Pipeline setPipelineFilter={setPipelineFilter} />
+                            </ButtonAnimate>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
+                            <ButtonAnimate className={classes.buttonAnimate}>
+                                <Development setPipelineFilter={setPipelineFilter} />
+                            </ButtonAnimate>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
+                            <ButtonAnimate className={classes.buttonAnimate}>
+                                <Production setPipelineFilter={setPipelineFilter} />
+                            </ButtonAnimate>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <Table processes={processes.processes} pipelineFilter={pipelineFilter} />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
-                        <ButtonAnimate className={classes.buttonAnimate}>
-                            <Ideas />
-                        </ButtonAnimate>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
-                        <ButtonAnimate className={classes.buttonAnimate}>
-                            <Pipeline />
-                        </ButtonAnimate>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
-                        <ButtonAnimate className={classes.buttonAnimate}>
-                            <Development />
-                        </ButtonAnimate>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
-                        <ButtonAnimate className={classes.buttonAnimate}>
-                            <Production />
-                        </ButtonAnimate>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <Table processes={processes.processes} />
-                    </Grid>
-                </Grid>
-            </Container>
+                </Container>
+                : <NoProcesses
+                    primaryText={'No process ideas'}
+                    secondaryText={'Add some of your ideas to unleash the full potential of the app!'}
+                />}
         </Page>
     );
 }

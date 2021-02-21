@@ -26,7 +26,7 @@ function ProcessDashboardView() {
     const theme = useTheme()
     const { auth, profile } = useSelector(state => state.firebase);
     const displayName = auth.displayName || profile.displayName;
-
+    // profile has the displayName when the user first signs up and auth doesn't
     const [dashboard, setDashboard] = useState(null)
     const [error, setError] = useState(false)
     const { userId } = useContext(Context)

@@ -48,10 +48,9 @@ function ThreeYearProjectionsTable({
 }) {
   const classes = useStyles();
 
-
   const rows = [
     { category: 'Cost Without Automation', yearOne: y1_with_no_auto_total, yearTwo: y2_with_no_auto_total, yearThree: y3_with_no_auto_total },
-    { category: 'Cost With Automation', yearOne: y1_with_auto_total, yearTwo: y2_with_auto_total, yearThree: y3_with_auto_total },
+    { category: 'Cost With Automation', yearOne: y1_with_auto_total, yearTwo: y1_with_auto_total, yearThree: y3_with_auto_total },
     { category: 'Savings', yearOne: y1_savings_total, yearTwo: y2_savings_total, yearThree: y3_savings_total }
   ]
 

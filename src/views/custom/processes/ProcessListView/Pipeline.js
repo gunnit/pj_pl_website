@@ -37,17 +37,14 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-NewUsers.propTypes = {
-  className: PropTypes.string
-};
 
 const TOTAL = 31;
 
-function NewUsers({ className, ...other }) {
+function NewUsers({ setPipelineFilter, className, ...other }) {
   const classes = useStyles();
 
   return (
-    <Card className={clsx(classes.root, className)} {...other}>
+    <Card className={clsx(classes.root, className)} {...other} onClick={() => setPipelineFilter('Pipeline')}>
       <div className={classes.icon}>
         <Icon icon={rocket11} width={24} height={24} />
       </div>

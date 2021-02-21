@@ -40,12 +40,12 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Ideas({ className, ...other }) {
+export default function Ideas({ setPipelineFilter, className, ...other }) {
   const classes = useStyles();
   const total = 70;
 
   return (
-    <Card className={clsx(classes.root, className)} {...other}>
+    <Card className={clsx(classes.root, className)} {...other} onClick={() => setPipelineFilter('Idea')}>
       <div className={classes.icon}>
         <Icon icon={ideaIcon} width={24} height={24} />
       </div>
