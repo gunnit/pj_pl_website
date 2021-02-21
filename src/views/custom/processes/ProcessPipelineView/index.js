@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography, Card, CardHeader, CardContent } from '@material-ui/core';
@@ -34,7 +37,15 @@ function ProcessPipelineView() {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/pipeline_report/${userId}`)
+                    const token = await firebase.auth().currentUser.getIdToken(true);
+
+                    const res = await fetch(`${apiBaseUrl}/pipeline_report/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+
+
                     setPipeline(await res.json())
                 } catch (e) {
                     setError(true)

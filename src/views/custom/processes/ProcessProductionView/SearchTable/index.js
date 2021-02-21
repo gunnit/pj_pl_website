@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import ToolbarTable from './ToolbarTable';
@@ -170,6 +173,7 @@ export default function ProductionTable({ processes }) {
 
   const moveStage = async (currentStage, futureStage) => {
     try {
+      const token = await firebase.auth().currentUser.getIdToken(true);
 
       // currentProcessId will be the ID of the process that was clicked on
       await fetch(`${apiBaseUrl}/change_status/${currentProcessId}`, {
@@ -179,8 +183,8 @@ export default function ProductionTable({ processes }) {
         }),
         headers: {
           "Content-Type": 'application/json',
+          "Authorization": token
         }
-        // Authorization###
       })
 
       // Change navbar numbers

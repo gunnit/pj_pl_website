@@ -31,14 +31,17 @@ const ADMIN_EMAILS = ['demo@minimals.cc'];
 
 function FirebaseProvider({ children }) {
   const { profile } = useSelector(state => state.firebase);
-  const { userEmail, setUserEmail, setUserId, setProcessCounts } = useContext(Context)
+  const { userEmail, setUserEmail, setUserId, setProcessCounts, token, setToken } = useContext(Context)
 
   useEffect(() => {
     const Initialise = async () => {
       try {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
           // console.log(user)
           // const token = await firebase.auth().currentUser.getIdToken(true);
+          // setToken(token)
+
+
           if (user && user.email) {
             setUserEmail(user.email)
           }
@@ -70,7 +73,11 @@ function FirebaseProvider({ children }) {
     // If user email from Firebase has been stored in the context, check for user in database using that email
     if (userEmail) {
 
+
       (async () => {
+
+        const token = await firebase.auth().currentUser.getIdToken(true);
+
         const res = await fetch(`${apiBaseUrl}/register/`, {
           method: 'POST',
           body: JSON.stringify({
@@ -79,8 +86,8 @@ function FirebaseProvider({ children }) {
           }),
           headers: {
             "Content-Type": 'application/json',
+            "Authorization": token
           }
-          // Authorization###
         })
         const { id, process_counts } = await res.json()
 

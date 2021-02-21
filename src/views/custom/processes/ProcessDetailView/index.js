@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useContext, useEffect } from 'react';
 import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
@@ -63,8 +66,13 @@ export default function ProcessDetailView() {
 
                 (async function () {
                     try {
-                        const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId || storedProcessId}`)
+                        const token = await firebase.auth().currentUser.getIdToken(true);
 
+                        const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId || storedProcessId}`, {
+                            headers: {
+                                'Authorization': token
+                            }
+                        })
                         setProcessDetails(await res.json())
                     } catch (e) {
                         setError(true)

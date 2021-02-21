@@ -232,20 +232,18 @@ export default function ProcessTable({ processes, pipelineFilter }) {
                 <TableBody>
                   {filteredProcesses
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-
-                      const {
-                        id,
-                        process_name,
-                        priority,
-                        alignment,
-                        automationScore,
-                        costWithoutAutomation,
-                        costWithAutomation,
-                        oneYearSavings,
-                        threeYearSavings,
-                        dateCreated
-                      } = row;
+                    .map(({
+                      id,
+                      process_name,
+                      priority,
+                      alignment,
+                      process_score: automationScore,
+                      costWithoutAutomation,
+                      costWithAutomation,
+                      oneYearSavings,
+                      threeYearSavings,
+                      date_created: dateCreated
+                    }, index) => {
 
                       const isItemSelected = selected.indexOf(process_name) !== -1;
                       const labelId = `enhanced-table-checkbox-${index}`;
@@ -268,19 +266,19 @@ export default function ProcessTable({ processes, pipelineFilter }) {
                           >
                             {process_name}
                           </TableCell>
-                          <TableCell align="right">{priority}</TableCell>
+                          <TableCell align="right">{priority || 'Not completed'}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                              {alignment}
+                              {alignment || 'Not completed'}
                             </MLabel>
                           </TableCell>
-                          <TableCell align="right">{automationScore}</TableCell>
-                          <TableCell align="right">{costWithoutAutomation}</TableCell>
-                          <TableCell align="right">{costWithAutomation}</TableCell>
-                          <TableCell align="right">{oneYearSavings}</TableCell>
+                          <TableCell align="right">{automationScore || 'Not completed'}</TableCell>
+                          <TableCell align="right">{costWithoutAutomation || 'Not completed'}</TableCell>
+                          <TableCell align="right">{costWithAutomation || 'Not completed'}</TableCell>
+                          <TableCell align="right">{oneYearSavings || 'Not completed'}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
-                              {threeYearSavings}
+                              {threeYearSavings || 'Not completed'}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{dateCreated}</TableCell>

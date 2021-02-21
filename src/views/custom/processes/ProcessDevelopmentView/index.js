@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
@@ -36,7 +39,13 @@ function ProcessDevelopmentView() {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/development_report/${userId}`)
+                    const token = await firebase.auth().currentUser.getIdToken(true);
+                    // console.log(token)
+                    const res = await fetch(`${apiBaseUrl}/development_report/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
                     setDevelopment(await res.json())
                 } catch (e) {
                     setError(true)

@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Page from 'components/Page';
@@ -197,9 +200,14 @@ export default function UpdateProcessView() {
   useEffect(() => {
     // fetch applications from database
     (async function () {
-      const res = await fetch(`${apiBaseUrl}/applications/`)
       // map over applications in jsx
+      const token = await firebase.auth().currentUser.getIdToken(true);
 
+      const res = await fetch(`${apiBaseUrl}/applications`, {
+        headers: {
+          'Authorization': token
+        }
+      })
       setApplications(await res.json())
     })()
 
@@ -301,7 +309,14 @@ export default function UpdateProcessView() {
       }
 
       (async function () {
-        const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId || storedProcessId}`)
+        const token = await firebase.auth().currentUser.getIdToken(true);
+
+        const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId || storedProcessId}`, {
+          headers: {
+            'Authorization': token
+          }
+        })
+
         const {
           process_name,
           process_L2_process_name,
@@ -418,6 +433,8 @@ export default function UpdateProcessView() {
       setPending(true)
 
       try {
+        const token = await firebase.auth().currentUser.getIdToken(true);
+
         const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId}`, {
           method: 'PUT',
           body: JSON.stringify({
@@ -428,8 +445,8 @@ export default function UpdateProcessView() {
           }),
           headers: {
             "Content-Type": 'application/json',
+            "Authorization": token
           }
-          // Authorization###
         })
 
         setActiveStep(prevActiveStep => prevActiveStep + 1);

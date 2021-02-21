@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import Welcome from './Welcome';
 import Page from 'components/Page';
@@ -21,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     root: {}
 }));
 
-function ProcessDashboardView() {
+export default function ProcessDashboardView() {
     const classes = useStyles();
     const theme = useTheme()
     const { auth, profile } = useSelector(state => state.firebase);
@@ -37,8 +40,13 @@ function ProcessDashboardView() {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/dashboard/${userId}`)
+                    const token = await firebase.auth().currentUser.getIdToken(true);
 
+                    const res = await fetch(`${apiBaseUrl}/dashboard/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
                     setDashboard(await res.json())
                 } catch (e) {
                     setError(true)
@@ -189,5 +197,3 @@ function ProcessDashboardView() {
         </Page>
     );
 }
-
-export default ProcessDashboardView;

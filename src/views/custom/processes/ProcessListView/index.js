@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import Page from 'components/Page';
 import Ideas from './Ideas';
@@ -38,7 +41,13 @@ export default function ProcessListView() {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/process_list/${userId}`)
+                    const token = await firebase.auth().currentUser.getIdToken(true);
+
+                    const res = await fetch(`${apiBaseUrl}/process_list/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
                     setProcesses(await res.json())
                 } catch (e) {
                     setError(true)

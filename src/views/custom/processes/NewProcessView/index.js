@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Page from 'components/Page';
@@ -195,8 +198,14 @@ export default function NewProcessView() {
   useEffect(() => {
     // fetch applications from database
     (async function () {
-      const res = await fetch(`${apiBaseUrl}/applications/`)
       // map over applications in jsx
+      const token = await firebase.auth().currentUser.getIdToken(true);
+
+      const res = await fetch(`${apiBaseUrl}/applications/`, {
+        headers: {
+          'Authorization': token
+        }
+      })
 
       setApplications(await res.json())
     })()
@@ -308,6 +317,8 @@ export default function NewProcessView() {
       setPending(true)
 
       try {
+        const token = await firebase.auth().currentUser.getIdToken(true);
+
         const res = await fetch(`${apiBaseUrl}/create_process/`, {
           method: 'POST',
           body: JSON.stringify({
@@ -318,8 +329,8 @@ export default function NewProcessView() {
           }),
           headers: {
             "Content-Type": 'application/json',
+            "Authorization": token
           }
-          // Authorization###
         })
 
         // Pipeline value is lower case in the context

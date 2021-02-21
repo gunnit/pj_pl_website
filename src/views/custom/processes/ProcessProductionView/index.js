@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
@@ -33,7 +36,15 @@ function ProcessProductionView() {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/production_report/${userId}`)
+                    const token = await firebase.auth().currentUser.getIdToken(true);
+
+                    const res = await fetch(`${apiBaseUrl}/production_report/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+
+
                     setProduction(await res.json())
                 } catch (e) {
                     setError(true)

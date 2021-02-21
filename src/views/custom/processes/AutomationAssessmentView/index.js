@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Page from 'components/Page';
@@ -270,8 +273,13 @@ export default function AutomationAssessmentView() {
             (async function () {
                 // get questions
                 // In the future will have the user select the category and use that category
+                const token = await firebase.auth().currentUser.getIdToken(true);
 
-                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}`)
+                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}`, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
 
                 const { questions } = await res.json()
 

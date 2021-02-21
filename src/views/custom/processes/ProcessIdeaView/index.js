@@ -1,3 +1,6 @@
+import 'firebase/auth';
+import 'firebase/firestore';
+import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
@@ -32,8 +35,13 @@ function ProcessIdeaView() {
 
             (async function () {
                 try {
-                    const res = await fetch(`${apiBaseUrl}/ideas/${userId}`)
+                    const token = await firebase.auth().currentUser.getIdToken(true);
 
+                    const res = await fetch(`${apiBaseUrl}/ideas/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
                     setIdeas(await res.json())
                 } catch (e) {
                     setError(true)
