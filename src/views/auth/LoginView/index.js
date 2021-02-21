@@ -80,8 +80,8 @@ function LoginView() {
 
   const formik = useFormik({
     initialValues: {
-      email: 'demo@minimals.cc',
-      password: 'demo1234',
+      email: '',
+      password: '',
       remember: true
     },
     validationSchema: LoginSchema,
@@ -155,17 +155,9 @@ function LoginView() {
           <SocialLogin firebase={firebase} />
 
           <Divider className={classes.divider}>
-            <Typography variant="body2" color="textSecondary">
-              OR
-            </Typography>
+
           </Divider>
 
-          <Box sx={{ mb: 5 }}>
-            <Alert severity="info">
-              Use email : <strong>demo@minimals.cc</strong> / password :
-              <strong>&nbsp;demo1234</strong>
-            </Alert>
-          </Box>
 
           <LoginForm formik={formik} />
 
