@@ -47,13 +47,21 @@ export default function AutomationScores({ processDetails: { score, details } })
         setExpanded(isExpanded ? panel : false);
     };
 
-    // Supervisor Number: NONE 10.00
+    // score.avg_score_bottlenecks
 
-    // Data Gathering Footprint: ONE 8.00
+    // score.tot_score_dataquality
 
-    // Time for execution: QUARTER OR LESS FREQUENTLY 2.00
+    // score.tot_score_datacomplexity
 
-    // Staff Shuffling Present: OFTEN 4.00
+    // score.tot_score_technology
+
+    // score.tot_score_transformation
+
+    // score.tot_score_driversforchange
+
+    // score.tot_score_scalability
+
+
 
 
     const accordions = [
@@ -114,7 +122,43 @@ export default function AutomationScores({ processDetails: { score, details } })
                     </Typography>
                 </>
             ),
-        }
+        },
+        {
+            value: `panel0`,
+            heading: `Accordion0`,
+            subHeading: score.tot_score_dataquality,
+            text: ''
+        },
+        {
+            value: `panel0`,
+            heading: `Accordion0`,
+            subHeading: score.tot_score_datacomplexity,
+            text: ''
+        },
+        {
+            value: `panel0`,
+            heading: `Accordion0`,
+            subHeading: score.tot_score_technology,
+            text: ''
+        },
+        {
+            value: `panel0`,
+            heading: `Accordion0`,
+            subHeading: score.tot_score_transformation,
+            text: ''
+        },
+        {
+            value: `panel0`,
+            heading: `Accordion0`,
+            subHeading: score.tot_score_driversforchange,
+            text: ''
+        },
+        {
+            value: `panel0`,
+            heading: `Accordion0`,
+            subHeading: score.tot_score_scalability,
+            text: ''
+        },
     ]
 
     return (

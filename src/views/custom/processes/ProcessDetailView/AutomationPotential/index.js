@@ -57,7 +57,7 @@ export default function AutomationPotential({ processDetails }) {
                     <AutomationScores processDetails={processDetails} />
                 </Grid>
                 <Grid item lg={6}>
-                    <RadarChartCard />
+                    <RadarChartCard score={processDetails.score} />
                 </Grid>
                 <Grid item lg={12}>
                     <AutomationScoreDescriptionCard />
