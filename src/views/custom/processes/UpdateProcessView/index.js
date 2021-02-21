@@ -33,6 +33,7 @@ import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
+import Page500View from 'views/errors/Page500View';
 
 // ----------------------------------------------------------------------
 
@@ -189,6 +190,7 @@ export default function UpdateProcessView() {
   const [applications, setApplications] = useState([])
 
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   const [openDialog, setOpenDialog] = useState(false)
 
@@ -289,92 +291,108 @@ export default function UpdateProcessView() {
 
   useEffect(() => {
 
-    (async function () {
-      const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId}`)
-      const {
-        process_name,
-        process_L2_process_name,
-        overview,
-        description,
-        pipline: pipeline,
-        process_critical,
-        process_type,
-        business_unit,
-        function: functionKey,
-        process_documentation_available,
-        nature_of_process,
-        test_env_available,
-        team,
-        sponsor,
-        process_SME,
-        process_SME_email,
-        process_SME_tel,
-        owner_name,
-        owner_email,
-        process_objective,
-        saving_target_explanation,
-        num_of_manual_steps,
-        note,
-        cost_reduction,
-        reduce_process_duration,
-        improve_accuracy,
-        enable_audit_trail,
-        enable_scalability,
-        improve_security,
-        client_satisfaction,
-        improve_consistency,
-        improve_reliability,
-        increase_retention,
-        applications_tec,
-      } = await res.json()
 
-      formik.setValues({
-        process_name,
-        process_L2_process_name,
-        overview,
-        description,
-        pipeline,
-        process_critical,
-        process_type,
-        business_unit,
-        function: functionKey,
-        process_documentation_available,
-        nature_of_process,
-        test_env_available,
-        team,
-        sponsor,
-        process_SME,
-        process_SME_email,
-        process_SME_tel,
-        owner_name,
-        owner_email,
-        process_objective,
-        saving_target_explanation,
-        num_of_manual_steps,
-        note,
-      })
+    try {
 
-      setSliderValues({
-        cost_reduction: parseInt(cost_reduction),
-        reduce_process_duration: parseInt(reduce_process_duration),
-        improve_accuracy: parseInt(improve_accuracy),
-        enable_audit_trail: parseInt(enable_audit_trail),
-        enable_scalability: parseInt(enable_scalability),
-        improve_security: parseInt(improve_security),
-        client_satisfaction: parseInt(client_satisfaction),
-        improve_consistency: parseInt(improve_consistency),
-        improve_reliability: parseInt(improve_reliability),
-        increase_retention: parseInt(increase_retention),
-      })
+      let storedProcessId;
+
+      if (!currentProcessId) {
+        storedProcessId = localStorage.getItem('currentProcessId')
+      }
+
+      (async function () {
+        const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId || storedProcessId}`)
+        const {
+          process_name,
+          process_L2_process_name,
+          overview,
+          description,
+          pipline: pipeline,
+          process_critical,
+          process_type,
+          business_unit,
+          function: functionKey,
+          process_documentation_available,
+          nature_of_process,
+          test_env_available,
+          team,
+          sponsor,
+          process_SME,
+          process_SME_email,
+          process_SME_tel,
+          owner_name,
+          owner_email,
+          process_objective,
+          saving_target_explanation,
+          num_of_manual_steps,
+          note,
+          cost_reduction,
+          reduce_process_duration,
+          improve_accuracy,
+          enable_audit_trail,
+          enable_scalability,
+          improve_security,
+          client_satisfaction,
+          improve_consistency,
+          improve_reliability,
+          increase_retention,
+          applications_tec,
+        } = await res.json()
+
+        formik.setValues({
+          process_name,
+          process_L2_process_name,
+          overview,
+          description,
+          pipeline,
+          process_critical,
+          process_type,
+          business_unit,
+          function: functionKey,
+          process_documentation_available,
+          nature_of_process,
+          test_env_available,
+          team,
+          sponsor,
+          process_SME,
+          process_SME_email,
+          process_SME_tel,
+          owner_name,
+          owner_email,
+          process_objective,
+          saving_target_explanation,
+          num_of_manual_steps,
+          note,
+        })
+
+        setSliderValues({
+          cost_reduction: parseInt(cost_reduction),
+          reduce_process_duration: parseInt(reduce_process_duration),
+          improve_accuracy: parseInt(improve_accuracy),
+          enable_audit_trail: parseInt(enable_audit_trail),
+          enable_scalability: parseInt(enable_scalability),
+          improve_security: parseInt(improve_security),
+          client_satisfaction: parseInt(client_satisfaction),
+          improve_consistency: parseInt(improve_consistency),
+          improve_reliability: parseInt(improve_reliability),
+          increase_retention: parseInt(increase_retention),
+        })
 
 
-      setCheckboxValues(new Set([...applications_tec]))
+        setCheckboxValues(new Set([...applications_tec]))
 
-      setLoading(false)
+        setLoading(false)
 
-      // If pipeline changes, update navbar numbers
+        // If pipeline changes, update navbar numbers
 
-    })()
+      })()
+
+
+    } catch (e) {
+      setError(true)
+    }
+
+
 
   }, [])
 
@@ -419,6 +437,7 @@ export default function UpdateProcessView() {
 
 
       } catch (e) {
+        setError(true)
         console.error(e)
       }
 
@@ -450,10 +469,15 @@ export default function UpdateProcessView() {
     }
   }
 
+  if (error) {
+    return <Page500View />
+  }
 
   if (loading) {
     return <LoadingScreen />
   }
+
+
 
   return (
     <Page title="New Process" className={classes.root}>

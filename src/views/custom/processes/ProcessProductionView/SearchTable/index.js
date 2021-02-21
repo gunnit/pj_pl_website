@@ -213,6 +213,8 @@ export default function ProductionTable({ processes }) {
 
     // Context to get the process details if the user clicks to view the process details
     setCurrentProcessId(id)
+    localStorage.setItem('currentProcessId', id)
+
   };
   const handleClose = (option) => {
     setOpen(null);
@@ -225,6 +227,8 @@ export default function ProductionTable({ processes }) {
   const handleOpenDialog = (name, currentStage, nextStage, forward, id) => {
     setOpenDialog({ name, currentStage, nextStage, forward })
     setCurrentProcessId(id)
+    localStorage.setItem('currentProcessId', id)
+
   }
 
   const emptyRows =

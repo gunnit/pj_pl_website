@@ -76,6 +76,7 @@ function Account() {
       await firebase.logout();
       setUserId(null)
       setProcessCounts({})
+      localStorage.removeItem('currentProcessId')
       if (isMountedRef.current) {
         history.push('/');
         handleClose();

@@ -52,18 +52,29 @@ export default function ProcessDetailView() {
 
     useEffect(() => {
 
-        if (currentProcessId && userId) {
+        try {
+            let storedProcessId;
 
-            (async function () {
-                try {
-                    const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId}`)
+            if (!currentProcessId) {
+                storedProcessId = localStorage.getItem('currentProcessId')
+            }
 
-                    setProcessDetails(await res.json())
-                } catch (e) {
-                    setError(true)
-                }
-            })()
+            if ((currentProcessId || storedProcessId) && userId) {
+
+                (async function () {
+                    try {
+                        const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId || storedProcessId}`)
+
+                        setProcessDetails(await res.json())
+                    } catch (e) {
+                        setError(true)
+                    }
+                })()
+            }
+        } catch (e) {
+            setError(true)
         }
+
 
     }, [currentProcessId, userId])
 

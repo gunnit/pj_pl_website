@@ -178,6 +178,8 @@ export default function ProcessTable({ processes }) {
 
     // Context to get the process details if the user clicks to view the process details
     setCurrentProcessId(id)
+    localStorage.setItem('currentProcessId', id)
+
   };
   const handleClose = (option) => {
     setOpen(null);

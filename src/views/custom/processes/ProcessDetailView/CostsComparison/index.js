@@ -1,16 +1,56 @@
 import React from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box, Card, Typography, Container, Grid, Button } from '@material-ui/core';
+import { PATH_APP } from 'routes/paths';
 import CostWithoutAutomation from './CostWithoutAutomation';
 import CostWithAutomation from './CostWithAutomation';
 import GenericBoxInfoCostsComparison from './GenericBoxInfoCostsComparison';
 import GenericBoxInfoDevelopment from './GenericBoxInfoDevelopment';
 import GenericBoxInfo from './GenericBoxInfo';
 import ComparisonChartCard from './ComparisonChartCard';
+import { Link as RouterLink } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
-
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(3),
+    },
+}));
 
 function CostsComparison({ processDetails }) {
+    const classes = useStyles();
+
+
+    if (processDetails.assumptions.current_process_cost_calc === 0) {
+        return (
+            <Card className={classes.root}>
+                <Box
+                    component="img"
+                    alt="welcome"
+                    src={''}
+                    sx={{
+                        p: 2,
+                        height: 205,
+                        margin: { xs: 'auto', md: 'inherit' }
+                    }}
+                />
+                <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                        Add your current and future costs to see a breakdown and comparison of your costs and savings.
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        Gain a quantitative perspective on the feasability of implementing your process with a comprehensive cost breakdown. Adding your costs will further unlock insights into quarterly and yearly projections, metrics, and different KPI's.
+                    </Typography>
+                </Box>
+                <Button variant='contained' color='info' to={PATH_APP.processes.costAssessment} component={RouterLink}>Add Costs</Button>
+            </Card>
+        )
+    }
+
+
 
     return (
         <Container maxWidth="xl">

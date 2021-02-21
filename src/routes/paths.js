@@ -50,6 +50,7 @@ export const PATH_APP = {
     details: path(ROOTS.app, '/processes/details'),
     update: path(ROOTS.app, '/processes/update'),
     automationAssessment: path(ROOTS.app, '/processes/automation-assessment'),
+    costAssessment: path(ROOTS.app, '/processes/cost-assessment'),
   },
   coe: {
     vision: path(ROOTS.app, '/coe/vision'),

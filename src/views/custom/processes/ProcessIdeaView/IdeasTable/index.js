@@ -178,6 +178,8 @@ export default function IdeasTable({ processes }) {
 
     // Context to get the process details if the user clicks to view the process details
     setCurrentProcessId(id)
+    localStorage.setItem('currentProcessId', id)
+
   };
   const handleClose = (option) => {
     setOpen(null);
@@ -210,6 +212,8 @@ export default function IdeasTable({ processes }) {
   const handleOpenDialogClick = (process_name, id) => {
     setOpenDialogName(process_name)
     setCurrentProcessId(id)
+    localStorage.setItem('currentProcessId', id)
+
   }
 
   const moveToPipelineClick = async () => {

@@ -333,6 +333,7 @@ export default function NewProcessView() {
 
         // Store ID of created process in context in case the user decides to view it
         setCurrentProcessId(id)
+        localStorage.setItem('currentProcessId', id)
 
       } catch (e) {
         console.error(e)

@@ -1,5 +1,11 @@
 Things to add:
 
+Serializers, pictures,
+
+Cost without automation cost comparison tab
+
+3 year projection breakeven tab
+
 When assessment is complete, it should redirect to the automation potential tab
 
 Automation questions group by subgroup order by created date
