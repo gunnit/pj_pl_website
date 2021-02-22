@@ -1,6 +1,8 @@
 Things to add:
 
-Fix filter on all tables
+firebase json file?
+
+Make sure everything works in every table
 
 Some kind of indicator to the user while process is deleting
 

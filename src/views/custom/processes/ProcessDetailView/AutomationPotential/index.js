@@ -24,31 +24,31 @@ export default function AutomationPotential({ processDetails }) {
     const classes = useStyles();
 
 
-    // if (processDetails.median_score_potential === '0.00') {
-    //     return (
-    //         <Card className={classes.root}>
-    //             <Box
-    //                 component="img"
-    //                 alt="welcome"
-    //                 src={''}
-    //                 sx={{
-    //                     p: 2,
-    //                     height: 205,
-    //                     margin: { xs: 'auto', md: 'inherit' }
-    //                 }}
-    //             />
-    //             <Box sx={{ flexGrow: 1 }}>
-    //                 <Typography variant="h6" gutterBottom>
-    //                     Complete the process automation potential assessment
-    //                 </Typography>
-    //                 <Typography variant="subtitle1" color="textSecondary">
-    //                     The automation potential assessment will help you determine in a qualitative way if the process is a good candidate for automation.
-    //                 </Typography>
-    //             </Box>
-    //             <Button variant='contained' color='info' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
-    //         </Card>
-    //     )
-    // }
+    if (processDetails.median_score_potential === '0.00') {
+        return (
+            <Card className={classes.root}>
+                <Box
+                    component="img"
+                    alt="welcome"
+                    src={''}
+                    sx={{
+                        p: 2,
+                        height: 205,
+                        margin: { xs: 'auto', md: 'inherit' }
+                    }}
+                />
+                <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                        Complete the process automation potential assessment
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        The automation potential assessment will help you determine in a qualitative way if the process is a good candidate for automation.
+                    </Typography>
+                </Box>
+                <Button variant='contained' color='info' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
+            </Card>
+        )
+    }
 
     return (
         <Container maxWidth="xl">

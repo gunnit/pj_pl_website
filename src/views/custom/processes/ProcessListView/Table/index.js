@@ -1,5 +1,4 @@
-import 'firebase/auth';
-import firebase from 'firebase/app';
+import { fDate } from 'utils/formatTime';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import { Icon } from '@iconify/react';
@@ -322,7 +321,7 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
                               {threeYearSavings || 'Not completed'}
                             </MLabel>
                           </TableCell>
-                          <TableCell align="right">{date_created}</TableCell>
+                          <TableCell align="right">{fDate(date_created)}</TableCell>
                           <TableCell align="right">
                             <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                               <Icon

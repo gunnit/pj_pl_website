@@ -282,9 +282,7 @@ export default function AutomationAssessmentView() {
                 })
 
                 const { questions } = await res.json()
-
-
-
+                console.log(questions)
                 // Store subgroups. This requires subgroups to be in the correct order from the database
 
                 const foundSubgroups = new Set()
@@ -306,6 +304,9 @@ export default function AutomationAssessmentView() {
                 const questionsSortedBySubgroup = {}
 
                 questions.forEach(question => {
+
+                    formik.initalValues[question.id] = ''
+
                     if (questionsSortedBySubgroup[question.subgroup]) {
                         questionsSortedBySubgroup[question.subgroup].push(question)
                     } else {
