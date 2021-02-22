@@ -275,7 +275,8 @@ export default function AutomationAssessmentView() {
                 if (!currentProcessId) {
                     storedProcessId = localStorage.getItem('currentProcessId')
                 }
-                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}/${currentProcessId}`, {
+
+                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}/${currentProcessId || storedProcessId}`, {
                     headers: {
                         'Authorization': token
                     }
@@ -283,8 +284,63 @@ export default function AutomationAssessmentView() {
 
                 const { questions, process_details } = await res.json()
 
-                console.log(process_details)
 
+                const initialValues = {
+                    'Multiple Data Sources': process_details.multiple_data_sources,
+                    'Demand Fluctuation': process_details.demand_fluctuation,
+                    'Execution Frequency': process_details.frequency,
+                    'Real Time': process_details.real_time,
+                    'Supervisor Number': process_details.supervisor_number,
+                    'Gathering Footprint': process_details.data_gathering_footprint,
+                    'Time For Execution': process_details.time_for_execution,
+                    'Staff Shuffling Present': process_details.shuffle_staffing,
+
+                    'Historic Data': process_details.historical_data,
+                    'Data Standardization': process_details.data_standardization,
+                    'Incorrect Data': process_details.incorrect_data,
+                    'Reconciliation': process_details.reconciliation,
+                    'Data Rework': process_details.data_rework,
+                    'Number of Applications': process_details.application,
+
+                    'Hand Structured Input': process_details.hand_structured,
+                    'Hand Unstructured Input:': process_details.hand_unstructured,
+                    'Computer Structured Input': process_details.computer_structured,
+                    'Computer Unstructured Input': process_details.computer_unstructured,
+                    'Verbal Communication': process_details.verbal_app,
+                    'Instant Communication': process_details.im_app,
+
+                    'Technology Stability': process_details.tech_stability,
+                    'Future Tech Changes': process_details.tech_changes,
+                    'Security Restrictions': process_details.security_restrictions,
+                    'Citrix App': process_details.citrix_app,
+                    'Mainframe App': process_details.mainframe_app,
+                    'Sap Screen': process_details.sap_screen,
+
+                    // applications_tec , 
+
+                    'Rule Based': process_details.rule_type,
+                    'Transactional': process_details.transactional,
+                    'Process Stability': process_details.process_stability,
+                    'Swivel Activities': process_details.swivel,
+                    'Clear Process Objectives': process_details.process_objectives,
+                    'Stable Rules': process_details.stable_rules,
+                    'Number Of Transactions': process_details.number_transactions,
+                    'External Factors': process_details.external_factors,
+
+                    'Number of Employees': process_details.employee_num,
+                    'Number of FTE': process_details.fte_num,
+                    'Employee Knowledge of Process': process_details.fte_expl,
+                    'Employee Compensation': process_details.salary,
+                    'Pain Point': process_details.pain_points,
+                    'Rework Done': process_details.reworks_done,
+                    'End to End execution': process_details.end_toend,
+                    'Application Error': process_details.app_errors,
+                    'Regulatory Requirements': process_details.reg_req,
+                    'Process Standardization': process_details.process_standardization,
+                    'Document Procedures': process_details.documented_procedures,
+                    'Multiple Teams': process_details.multiple_teams,
+                    'Process Owners': process_details.process_owners,
+                }
 
                 // Store subgroups. This requires subgroups to be in the correct order from the database
 
@@ -306,14 +362,14 @@ export default function AutomationAssessmentView() {
 
                 const questionsSortedBySubgroup = {}
 
-                const initialValues = {}
+                // const initialValues = {}
 
                 questions.forEach(question => {
 
                     // Future version:
                     // initialValues[question.id] = '' not sure about data type for future version
 
-                    initialValues[question.title] = '0'
+                    // initialValues[question.title] = '0'
 
                     if (questionsSortedBySubgroup[question.subgroup]) {
                         questionsSortedBySubgroup[question.subgroup].push(question)
@@ -385,7 +441,7 @@ export default function AutomationAssessmentView() {
         )
     }
 
-    if (!subgroups || !questions) {
+    if (!subgroups || !questions || !Object.keys(formikInitialValues).length) {
         return <LoadingScreen />
     }
 

@@ -1,5 +1,7 @@
 Things to add:
 
+Applications_tec in ProcessDetail in updateDetails view?
+
 Automation assessment take again button placement and styling
 
 fte_expl check this, check updateDetails in general
