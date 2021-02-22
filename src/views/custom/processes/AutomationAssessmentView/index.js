@@ -2,7 +2,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import { Form, FormikProvider, useFormik, Formik } from 'formik';
 import Page from 'components/Page';
 import React, { useState, useEffect, useContext } from 'react';
 import clsx from 'clsx';
@@ -180,6 +180,7 @@ export default function AutomationAssessmentView() {
     const { enqueueSnackbar } = useSnackbar();
 
     const [questions, setQuestions] = useState(null)
+    const [formikInitialValues, setFormikInitialValues] = useState({})
     const [subgroups, setSubgroups] = useState(null)
     const [openDialog, setOpenDialog] = useState(null);
 
@@ -202,36 +203,37 @@ export default function AutomationAssessmentView() {
         // pipeline: Yup.string().required('Pipeline is required'),
     });
 
-    const formik = useFormik({
-        initialValues: {
+    // const formik = useFormik({
+    //     initialValues: {},
+    //     enableReinitialize: true,
+    //     validationSchema: AutomationAssessmentSchema,
+    //     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
+    //         try {
+    //             // await fakeRequest(500);
+    //             resetForm();
+    //             setSubmitting(false);
+    //             enqueueSnackbar('Post success', { variant: 'success' });
+    //         } catch (error) {
+    //             console.log(error);
+    //             setSubmitting(false);
+    //             setErrors({ afterSubmit: error.code });
+    //         }
+    //     },
+    //     validateOnMount: true
+    // });
 
-        },
-        validationSchema: AutomationAssessmentSchema,
-        onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
-            try {
-                // await fakeRequest(500);
-                resetForm();
-                setSubmitting(false);
-                enqueueSnackbar('Post success', { variant: 'success' });
-            } catch (error) {
-                console.log(error);
-                setSubmitting(false);
-                setErrors({ afterSubmit: error.code });
-            }
-        },
-        validateOnMount: true
-    });
+
 
     const handleNext = async () => {
         if (activeStep < subgroups.length - 1) {
 
             setActiveStep(prevActiveStep => prevActiveStep + 1);
 
-        } else if (formik.isValid) {
+        } else {
 
             setPending(true)
             try {
-                console.log(formik.values)
+
                 // const res = await fetch(`${apiBaseUrl}/create_process/`, {
                 //     method: 'POST',
                 //     body: JSON.stringify({
@@ -282,7 +284,7 @@ export default function AutomationAssessmentView() {
                 })
 
                 const { questions } = await res.json()
-                console.log(questions)
+                // console.log(questions)
                 // Store subgroups. This requires subgroups to be in the correct order from the database
 
                 const foundSubgroups = new Set()
@@ -303,9 +305,11 @@ export default function AutomationAssessmentView() {
 
                 const questionsSortedBySubgroup = {}
 
+                const initialValues = {}
+
                 questions.forEach(question => {
 
-                    formik.initalValues[question.id] = ''
+                    initialValues[question.id] = ''
 
                     if (questionsSortedBySubgroup[question.subgroup]) {
                         questionsSortedBySubgroup[question.subgroup].push(question)
@@ -314,7 +318,8 @@ export default function AutomationAssessmentView() {
 
                     }
                 })
-
+                // console.log(initialValues)
+                setFormikInitialValues(initialValues)
                 setQuestions(questionsSortedBySubgroup)
 
 
@@ -330,33 +335,44 @@ export default function AutomationAssessmentView() {
     function getStepContent(step) {
         // step is a certain subgroup
         return (
-            <>
-                {questions[step].map(question => {
+            <Formik
+                enableReinitialize
+                initialValues={formikInitialValues}
+            // validateOnMount
+            >
+                {({ handleChange, values }) => {
                     return (
                         <>
-                            <Typography variant="subtitle2" gutterBottom>
-                                {question.title}
-                            </Typography >
-                            <TextField
-                                select
-                                fullWidth
-                                variant="outlined"
-                                label={question.question}
-                                {...formik.getFieldProps(question.title)}
-                                // Select fields need formik.handleChange for formik to detect its value
-                                onChange={formik.handleChange}
-                                className={classes.margin}
-                            >
-                                {question.answers.map(answer => (
-                                    <MenuItem key={answer.text} value={answer.value}>
-                                        {answer.text}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                            {questions[step].map(question => {
+                                return (
+                                    <>
+                                        <Typography key={question.id.toString()} variant="subtitle1" gutterBottom>
+                                            {question.question}
+                                        </Typography >
+                                        <TextField
+                                            select
+                                            fullWidth
+                                            variant="outlined"
+                                            label={question.title}
+                                            onChange={handleChange}
+                                            // Formik uses the name as the key to keep track of the field in the values object like this: values[name]
+                                            name={question.id}
+                                            value={values[question.id]}
+                                            className={classes.margin}
+                                        >
+                                            {question.answers.map((answer, i) => (
+                                                <MenuItem key={`${answer.text}${i}`} value={answer.value}>
+                                                    {answer.text}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </>
+                                )
+                            })}
                         </>
                     )
-                })}
-            </>
+                }}
+            </Formik>
         )
     }
 
@@ -423,7 +439,11 @@ export default function AutomationAssessmentView() {
                                         }}
                                     >
                                         <Typography className={classes.instructions}>
+                                            {/* <FormikProvider value={formik}> */}
+
                                             {getStepContent(subgroups[activeStep])}
+
+                                            {/* </FormikProvider> */}
                                         </Typography>
                                     </Box>
 

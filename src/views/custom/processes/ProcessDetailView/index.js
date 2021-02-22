@@ -117,16 +117,11 @@ export default function ProcessDetailView() {
                                 />
                             ))}
                         </TabList>
-                        <ButtonGroup variant='contained'>
-                            <Button variant="contained" color='info' component={RouterLink} to={PATH_APP.processes.update}>
-                                <EditIcon />
-                                {/* Update Process */}
-                            </Button>
-                            <Button color='inherit' variant="contained" component={RouterLink} to={''}>
-                                <ArchiveIcon />
-                                {/* Archive Process */}
-                            </Button>
-                        </ButtonGroup>
+
+                        <Button variant="contained" color='info' component={RouterLink} to={PATH_APP.processes.update}>
+                            <EditIcon />
+                            {/* Update Process */}
+                        </Button>
                     </Box>
                     <TabPanel value={'1'}>
                         <Details processDetails={processDetails} />

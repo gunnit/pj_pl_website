@@ -1,5 +1,7 @@
 Things to add:
 
+Required fields in assessment created by users?
+
 firebase json file?
 
 Make sure everything works in every table
