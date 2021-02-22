@@ -270,14 +270,22 @@ export default function AutomationAssessmentView() {
                 // In the future will have the user select the category and use that category
                 const token = await firebase.auth().currentUser.getIdToken(true);
 
-                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}`, {
+
+                let storedProcessId;
+                if (!currentProcessId) {
+                    storedProcessId = localStorage.getItem('currentProcessId')
+                }
+                const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}/${currentProcessId}`, {
                     headers: {
                         'Authorization': token
                     }
                 })
 
-                const { questions } = await res.json()
-                // console.log(questions)
+                const { questions, process_details } = await res.json()
+
+                console.log(process_details)
+
+
                 // Store subgroups. This requires subgroups to be in the correct order from the database
 
                 const foundSubgroups = new Set()

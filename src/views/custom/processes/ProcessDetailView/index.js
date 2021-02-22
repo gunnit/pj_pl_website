@@ -118,7 +118,7 @@ export default function ProcessDetailView() {
                             ))}
                         </TabList>
 
-                        <Button variant="contained" color='info' component={RouterLink} to={PATH_APP.processes.update}>
+                        <Button variant="contained" color='secondary' component={RouterLink} to={PATH_APP.processes.update}>
                             <EditIcon />
                             {/* Update Process */}
                         </Button>

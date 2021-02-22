@@ -45,7 +45,7 @@ export default function AutomationPotential({ processDetails }) {
                         The automation potential assessment will help you determine in a qualitative way if the process is a good candidate for automation.
                     </Typography>
                 </Box>
-                <Button variant='contained' color='info' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
+                <Button variant='contained' color='secondary' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
             </Card>
         )
     }
