@@ -1,5 +1,7 @@
 Things to add:
 
+Accounts receivable l2 process name
+
 Serializers, pictures, alt text for images
 
 Cost without automation cost comparison tab

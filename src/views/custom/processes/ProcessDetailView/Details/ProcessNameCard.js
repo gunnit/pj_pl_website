@@ -30,18 +30,16 @@ const useStyles = makeStyles(theme => ({
 }));
 // ----------------------------------------------------------------------
 
-Welcome.propTypes = {
-  className: PropTypes.string
-};
 
-function Welcome({ className, ...other }) {
+
+export default function ProcessNameCard({ process_name, process_L2_process_name, className, ...other }) {
   const classes = useStyles();
 
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <CardContent className={classes.content}>
         <Box component="h4" sx={{ pb: 1, typography: 'h4', color: 'grey.800' }}>
-          Process Name
+          {process_name}
         </Box>
 
         <Box
@@ -65,5 +63,3 @@ function Welcome({ className, ...other }) {
     </Card>
   );
 }
-
-export default Welcome;

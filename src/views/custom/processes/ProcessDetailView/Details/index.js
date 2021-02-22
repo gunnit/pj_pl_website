@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Grid } from '@material-ui/core';
 import CustomizedStepper from './CustomizedStepper';
-import Welcome from './Welcome';
+import ProcessNameCard from './ProcessNameCard';
 import GenericBoxInfoDetails from './GenericBoxInfoDetails';
 import ProcessDescription from './ProcessDescription';
 
 
-function Details({ processDetails }) {
+export default function Details({ processDetails }) {
+
 
     return (
         <Container maxWidth="xl">
@@ -16,14 +17,28 @@ function Details({ processDetails }) {
                         <CustomizedStepper pipeline={processDetails.process.pipline} />
                     </Grid>
                     <Grid item xs={12} md={12}>
-                        <Welcome />
-                        {/* <WeeklySales /> */}
+                        <ProcessNameCard
+                            process_name={processDetails.process.process_name}
+                            process_L2_process_name={processDetails.process.process_L2_process_name}
+                        />
                     </Grid>
-                    {/* <Grid item xs={12} md={12}>
-                            <WeeklySales />
-                        </Grid> */}
                     <Grid item md={12} lg={12}>
-                        <ProcessDescription />
+                        <ProcessDescription
+                            overview={processDetails.process.overview}
+                            description={processDetails.process.description}
+                            process_type={processDetails.process.process_type}
+                            process_critical={processDetails.process.process_critical}
+                            nature_of_process={processDetails.process.nature_of_process}
+                            sponsor={processDetails.process.sponsor}
+                            owner_name={processDetails.process.owner_name}
+                            owner_email={processDetails.process.owner_email}
+                            process_SME={processDetails.process.process_SME}
+                            process_SME_email={processDetails.process.process_SME_email}
+                            team={processDetails.process.team}
+                            date_created={processDetails.process.date_created}
+                            test_env_available={processDetails.process.test_env_available}
+                            process_documentation_available={processDetails.process.process_documentation_available}
+                        />
                     </Grid>
                 </Grid>
                 <Grid item container spacing={3} md={4} alignContent='flex-start'>
@@ -52,5 +67,3 @@ function Details({ processDetails }) {
 
     );
 }
-
-export default Details;
