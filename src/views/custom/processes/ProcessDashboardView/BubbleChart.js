@@ -26,8 +26,8 @@ export default function BubbleChart({ data, className, ...other }) {
     return {
       name: process.process_name,
       data: [[process.process_score,
-      process.processassumptions.total_net_benefit + (i + 1) * 10,
-      process.processobjectives.total_alignment_score_coverted + (i + 1) * 10]]
+      process.processassumptions.total_net_benefit,
+      process.processobjectives.total_alignment_score_coverted]]
     }
   })
 

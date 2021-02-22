@@ -1,9 +1,12 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Card, CardHeader, Box } from '@material-ui/core';
+import Context from 'context/Context';
+import { useHistory } from 'react-router-dom';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -19,6 +22,10 @@ BubbleChart.propTypes = {
 
 function BubbleChart({ processes, className, ...other }) {
   const classes = useStyles();
+  const history = useHistory()
+
+  const { setCurrentProcessId } = useContext(Context)
+
 
   const chartData = processes.map((process, i) => {
     return {
@@ -47,8 +54,9 @@ function BubbleChart({ processes, className, ...other }) {
       fontFamily: theme.typography.fontFamily,
       events: {
         dataPointSelection: (event, chartContext, config) => {
-          // Series index should correspond to the process
-          console.log(config)
+          // config.seriesIndex is the same as the index of the process in the original array, giving the process that was clicked on
+          setCurrentProcessId(processes[config.seriesIndex].id)
+          history.push(PATH_APP.processes.details)
         }
       }
     },
