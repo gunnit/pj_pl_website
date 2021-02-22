@@ -224,13 +224,15 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
     if (pipelineFilter) {
       return process.pipline === pipelineFilter
     } else {
+      // If pipelineFilter is falsy, don't filter, just return true for everything
       return true
     }
   });
 
 
+
   filteredProcesses = applySortFilter(
-    processes,
+    filteredProcesses,
     getComparator(order, orderBy),
     filterName
   );

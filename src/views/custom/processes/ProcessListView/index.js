@@ -33,7 +33,7 @@ export default function ProcessListView() {
     const [error, setError] = useState(false)
     const [pipelineFilter, setPipelineFilter] = useState('')
 
-    const { userId, currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
+    const { userId, currentProcessId, setProcessCounts } = useContext(Context)
 
 
     useEffect(() => {
@@ -70,7 +70,6 @@ export default function ProcessListView() {
 
     const handleDeleteProcess = async () => {
 
-
         const token = await firebase.auth().currentUser.getIdToken(true);
 
         const res = await fetch(`${apiBaseUrl}/delete_process/${currentProcessId}`, {
@@ -88,8 +87,6 @@ export default function ProcessListView() {
 
         // Update number on navbar
         setProcessCounts(previous => ({ ...previous, [pipeline]: previous[pipeline] - 1 }))
-
-
 
     }
 

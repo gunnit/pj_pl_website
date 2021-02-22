@@ -1,5 +1,11 @@
 Things to add:
 
+Fix filter on all tables
+
+Some kind of indicator to the user while process is deleting
+
+Add process redirect instead of button? Another button for add another process?
+
 More comments
 
 Add process name to are you sure you want to delete
