@@ -56,6 +56,7 @@ function BubbleChart({ processes, className, ...other }) {
         dataPointSelection: (event, chartContext, config) => {
           // config.seriesIndex is the same as the index of the process in the original array, giving the process that was clicked on
           setCurrentProcessId(processes[config.seriesIndex].id)
+          localStorage.setItem('currentProcessId', processes[config.seriesIndex].id)
           history.push(PATH_APP.processes.details)
         }
       }

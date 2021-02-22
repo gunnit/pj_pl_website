@@ -201,6 +201,8 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
 
     // Context to get the process details if the user clicks to view the process details
     setCurrentProcessId(id)
+
+    // So the currentProcessId can persist in case the user reloads while viewing a page that needs a currentProcessId
     localStorage.setItem('currentProcessId', id)
 
   };

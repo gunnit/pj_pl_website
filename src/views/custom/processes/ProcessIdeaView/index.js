@@ -61,69 +61,70 @@ function ProcessIdeaView() {
 
     return (
         <Page title="Idea Dashboard" className={classes.root}>
-            {ideas.processes_idea.length ? <Container maxWidth="xl">
-                <Box sx={{ pb: 5 }}>
-                    <Typography variant="h4" gutterBottom>Idea Dashboard</Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        Gain insight and understand the potential in your automation ideas
+            {ideas.processes_idea.length
+                ? <Container maxWidth="xl">
+                    <Box sx={{ pb: 5 }}>
+                        <Typography variant="h4" gutterBottom>Idea Dashboard</Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            Gain insight and understand the potential in your automation ideas
                     </Typography>
-                </Box>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets1 amount={ideas.strongly_suggested_for_automation} total={ideas.processes_idea.length} />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets2 amount={ideas.suggested_for_automation} total={ideas.processes_idea.length} />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4} lg={4}>
-                        <Widgets3 amount={ideas.not_suggested_for_automation} total={ideas.processes_idea.length} />
-                    </Grid>
+                    </Box>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                            <Widgets1 amount={ideas.strongly_suggested_for_automation} total={ideas.processes_idea.length} />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                            <Widgets2 amount={ideas.suggested_for_automation} total={ideas.processes_idea.length} />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                            <Widgets3 amount={ideas.not_suggested_for_automation} total={ideas.processes_idea.length} />
+                        </Grid>
 
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <IdeasTable processes={ideas.processes_idea} />
-                    </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <IdeasTable processes={ideas.processes_idea} />
+                        </Grid>
 
-                    <Grid item lg={12}>
-                        <IdeasPerFunction data={[
-                            ideas.count_function_processes_finance,
-                            ideas.count_function_processes_inventory,
-                            ideas.count_function_processes_production,
-                            ideas.count_function_processes_supply_chain,
-                            ideas.count_function_processes_procurement,
-                            ideas.count_function_processes_accounting,
-                            ideas.count_function_processes_HR,
-                            ideas.count_function_processes_legal,
-                            ideas.count_function_processes_marketing,
-                            ideas.count_function_processes_sales,
-                            ideas.count_function_processes_customer_services,
-                            ideas.count_function_processes_development,
-                            ideas.count_function_processes_IT,
-                            ideas.count_function_processes_other,
-                            ideas.count_function_processes_notanswered,
-                        ]} />
+                        <Grid item lg={12}>
+                            <IdeasPerFunction data={[
+                                ideas.count_function_processes_finance,
+                                ideas.count_function_processes_inventory,
+                                ideas.count_function_processes_production,
+                                ideas.count_function_processes_supply_chain,
+                                ideas.count_function_processes_procurement,
+                                ideas.count_function_processes_accounting,
+                                ideas.count_function_processes_HR,
+                                ideas.count_function_processes_legal,
+                                ideas.count_function_processes_marketing,
+                                ideas.count_function_processes_sales,
+                                ideas.count_function_processes_customer_services,
+                                ideas.count_function_processes_development,
+                                ideas.count_function_processes_IT,
+                                ideas.count_function_processes_other,
+                                ideas.count_function_processes_notanswered,
+                            ]} />
+                        </Grid>
+                        <Grid item lg={6}>
+                            <ProcessCriticality
+                                data={[
+                                    ideas.count_criticality_processes_idea_extremely,
+                                    ideas.count_criticality_processes_idea_very,
+                                    ideas.count_criticality_processes_idea_moderately,
+                                    ideas.count_criticality_processes_idea_slightly,
+                                    ideas.count_criticality_processes_idea_notatall,
+                                    ideas.count_criticality_processes_idea_notanswered,
+                                ]}
+                            />
+                        </Grid>
+                        <Grid item lg={6}>
+                            <NatureOfProcess data={[
+                                ideas.count_natureofprocess_processes_idea_entirely_repetitive,
+                                ideas.count_natureofprocess_processes_idea_semi_repetitive,
+                                ideas.count_natureofprocess_processes_idea_not_repetitive,
+                                ideas.count_natureofprocess_processes_idea_blank_repetitive,
+                            ]} />
+                        </Grid>
                     </Grid>
-                    <Grid item lg={6}>
-                        <ProcessCriticality
-                            data={[
-                                ideas.count_criticality_processes_idea_extremely,
-                                ideas.count_criticality_processes_idea_very,
-                                ideas.count_criticality_processes_idea_moderately,
-                                ideas.count_criticality_processes_idea_slightly,
-                                ideas.count_criticality_processes_idea_notatall,
-                                ideas.count_criticality_processes_idea_notanswered,
-                            ]}
-                        />
-                    </Grid>
-                    <Grid item lg={6}>
-                        <NatureOfProcess data={[
-                            ideas.count_natureofprocess_processes_idea_entirely_repetitive,
-                            ideas.count_natureofprocess_processes_idea_semi_repetitive,
-                            ideas.count_natureofprocess_processes_idea_not_repetitive,
-                            ideas.count_natureofprocess_processes_idea_blank_repetitive,
-                        ]} />
-                    </Grid>
-                </Grid>
-            </Container>
+                </Container>
                 : <NoProcesses
                     primaryText={'No process ideas'}
                     secondaryText={'Add some of your ideas to unleash the full potential of the app!'}

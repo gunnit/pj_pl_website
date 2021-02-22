@@ -60,23 +60,30 @@ export default function ProcessDetailView() {
 
             if (!currentProcessId) {
                 storedProcessId = localStorage.getItem('currentProcessId')
+                // If there is no currentProcessId in context or local storage, the page cannot load
+                if (!storedProcessId) {
+                    throw storedProcessId
+                }
             }
+
 
             if ((currentProcessId || storedProcessId) && userId) {
 
                 (async function () {
-                    try {
-                        const token = await firebase.auth().currentUser.getIdToken(true);
 
-                        const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId || storedProcessId}`, {
-                            headers: {
-                                'Authorization': token
-                            }
-                        })
+                    const token = await firebase.auth().currentUser.getIdToken(true);
+
+                    const res = await fetch(`${apiBaseUrl}/process_view/${currentProcessId || storedProcessId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                    if (res.ok) {
                         setProcessDetails(await res.json())
-                    } catch (e) {
-                        setError(true)
+                    } else {
+                        throw res
                     }
+
                 })()
             }
         } catch (e) {
@@ -97,7 +104,7 @@ export default function ProcessDetailView() {
 
 
     return (
-        <Page title="Dashboard" className={classes.root}>
+        <Page title="Process Details" className={classes.root}>
             <Container maxWidth="xl">
                 <TabContext value={value}>
                     <Box sx={{ pb: 5 }} className={classes.topArea}>

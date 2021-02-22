@@ -51,6 +51,7 @@ export default function BubbleChart({ data, className, ...other }) {
         dataPointSelection: (event, chartContext, config) => {
           // config.seriesIndex is the same as the index of the process in the original array, giving the process that was clicked on
           setCurrentProcessId(data[config.seriesIndex].id)
+          localStorage.setItem('currentProcessId', data[config.seriesIndex].id)
           history.push(PATH_APP.processes.details)
         }
       }

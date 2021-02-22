@@ -306,6 +306,10 @@ export default function UpdateProcessView() {
 
       if (!currentProcessId) {
         storedProcessId = localStorage.getItem('currentProcessId')
+        // If there is no currentProcessId in context or local storage, the page cannot load
+        if (!storedProcessId) {
+          setError(true)
+        }
       }
 
       (async function () {
@@ -316,6 +320,10 @@ export default function UpdateProcessView() {
             'Authorization': token
           }
         })
+
+        if (!res.ok) {
+          throw res
+        }
 
         const {
           process_name,
