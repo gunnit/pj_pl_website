@@ -1,3 +1,5 @@
+import 'firebase/auth';
+import firebase from 'firebase/app';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import { Icon } from '@iconify/react';
@@ -24,63 +26,69 @@ import {
   TablePagination,
   Menu,
   MenuItem,
+  Dialog,
+  Typography,
+  Button
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
+import { apiBaseUrl } from 'config';
 import { LegendToggleRounded } from '@material-ui/icons';
 // ----------------------------------------------------------------------
 
+
+
 const TABLE_HEAD = [
   {
-    id: 'name',
+    id: 'process_name',
     numeric: false,
     disablePadding: true,
     label: 'Name'
   },
   {
-    id: 'priority',
+    id: 'total_net_benefit', // process_net_benefit?
     numeric: true,
     disablePadding: false,
     label: 'Priority'
   },
   {
-    id: 'alignment',
+    id: 'total_alignment_score_coverted',
     numeric: true,
     disablePadding: false,
     label: 'Alignment'
   },
   {
-    id: 'automation score',
+    id: 'process_score',
     numeric: true,
     disablePadding: false,
     label: 'Automation Score'
   },
   {
-    id: 'cost without automation',
+    id: 'current_process_cost_calc',
     numeric: true,
     disablePadding: false,
     label: 'Cost Without Automation'
   },
   {
-    id: 'cost with automation',
+    id: 'tot_future_process_cost',
     numeric: true,
     disablePadding: false,
     label: 'Cost With Automation'
   },
   {
-    id: '1-year savings',
+    id: 'one_year_savings',
     numeric: true,
     disablePadding: false,
     label: '1-year savings'
   },
   {
-    id: '3-year savings',
+    id: '3-year savings', // ?
     numeric: true,
     disablePadding: false,
     label: '3-year savings'
   },
   {
-    id: 'date created',
+    id: 'date_created',
     numeric: true,
     disablePadding: false,
     label: 'Date Created'
@@ -102,6 +110,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
+
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -109,12 +118,14 @@ function getComparator(order, orderBy) {
 
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
+
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
 
+  // Search
   if (query) {
     array = filter(array, _product => {
       return _product.process_name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
@@ -129,7 +140,17 @@ const useStyles = makeStyles(theme => ({
   sortSpan: visuallyHidden,
   routerLink: {
     textDecoration: 'none'
-  }
+  },
+  centerText: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  dialog: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -143,7 +164,9 @@ export default function ProcessTable({ processes, pipelineFilter }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-  const { setCurrentProcessId } = useContext(Context)
+  const [openDialog, setOpenDialog] = useState(null);
+
+  const { currentProcessId, setCurrentProcessId } = useContext(Context)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -188,20 +211,49 @@ export default function ProcessTable({ processes, pipelineFilter }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
-  let filteredProcesses = applySortFilter(
-    processes,
-    getComparator(order, orderBy),
-    filterName
-  );
+  let filteredProcesses = processes.filter((process, i) => {
 
-  filteredProcesses = filteredProcesses.filter(process => {
+    // Set keys on process object instead of in nested objects so the sort function can find them
+    processes[i].process_net_benefit = process.processassumptions.process_net_benefit
+    processes[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
+    processes[i].current_process_cost_calc = process.processassumptions.current_process_cost_calc
+    processes[i].tot_future_process_cost = process.processassumptions.tot_future_process_cost
+    processes[i].total_net_benefit = process.processassumptions.total_net_benefit
+    processes[i].one_year_savings = process.processassumptions.total_net_benefit
+
     if (pipelineFilter) {
       return process.pipline === pipelineFilter
     } else {
       return true
     }
-
   });
+
+
+  filteredProcesses = applySortFilter(
+    processes,
+    getComparator(order, orderBy),
+    filterName
+  );
+
+
+  const handleCloseDelete = () => {
+    setOpen(null)
+    setOpenDialog(true)
+  }
+
+  const handleDeleteClick = async () => {
+
+    const token = await firebase.auth().currentUser.getIdToken(true);
+
+    const res = await fetch(`${apiBaseUrl}/delete_process/${currentProcessId}`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization": token
+      }
+    })
+
+
+  }
 
 
   const isProductNotFound = filteredProcesses.length === 0;
@@ -235,14 +287,13 @@ export default function ProcessTable({ processes, pipelineFilter }) {
                     .map(({
                       id,
                       process_name,
-                      priority,
-                      alignment,
+                      total_alignment_score_coverted,
                       process_score: automationScore,
-                      costWithoutAutomation,
-                      costWithAutomation,
-                      oneYearSavings,
-                      threeYearSavings,
-                      date_created: dateCreated
+                      current_process_cost_calc,
+                      tot_future_process_cost,
+                      total_net_benefit,
+                      threeYearSavings, // need to change this
+                      date_created
                     }, index) => {
 
                       const isItemSelected = selected.indexOf(process_name) !== -1;
@@ -266,22 +317,22 @@ export default function ProcessTable({ processes, pipelineFilter }) {
                           >
                             {process_name}
                           </TableCell>
-                          <TableCell align="right">{priority || 'Not completed'}</TableCell>
+                          <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color="info">
-                              {alignment || 'Not completed'}
+                              {total_alignment_score_coverted || 'Not completed'}
                             </MLabel>
                           </TableCell>
                           <TableCell align="right">{automationScore || 'Not completed'}</TableCell>
-                          <TableCell align="right">{costWithoutAutomation || 'Not completed'}</TableCell>
-                          <TableCell align="right">{costWithAutomation || 'Not completed'}</TableCell>
-                          <TableCell align="right">{oneYearSavings || 'Not completed'}</TableCell>
+                          <TableCell align="right">{current_process_cost_calc || 'Not completed'}</TableCell>
+                          <TableCell align="right">{tot_future_process_cost || 'Not completed'}</TableCell>
+                          <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
                           <TableCell align="right">
                             <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
                               {threeYearSavings || 'Not completed'}
                             </MLabel>
                           </TableCell>
-                          <TableCell align="right">{dateCreated}</TableCell>
+                          <TableCell align="right">{date_created}</TableCell>
                           <TableCell align="right">
                             <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                               <Icon
@@ -324,9 +375,9 @@ export default function ProcessTable({ processes, pipelineFilter }) {
           >
             {[{ text: 'View details', path: PATH_APP.processes.details },
             { text: 'Update', path: PATH_APP.processes.update },
-            { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
-              <RouterLink to={option.path} className={classes.routerLink}>
-                <MenuItem key={option.text} onClick={handleClose}>
+            { text: 'Delete' }].map(option => (
+              <RouterLink to={option.path && option.path} className={classes.routerLink}>
+                <MenuItem key={option.text} onClick={option.text === 'Delete' ? handleCloseDelete : handleClose}>
                   {option.text}
                 </MenuItem>
               </RouterLink>
@@ -342,6 +393,26 @@ export default function ProcessTable({ processes, pipelineFilter }) {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
+
+          <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+            {openDialog
+              && <>
+                <Card className={classes.dialog}>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" gutterBottom className={classes.centerText}>
+                      Are you sure?
+                    </Typography>
+                    <Typography variant="subtitle1" color='textSecondary' className={classes.centerText}>
+                      Deleting this process will result in permanently removing all data associated with this process.
+                    </Typography>
+                  </Box>
+
+                  <Button onClick={handleDeleteClick} variant='contained'>Permanently Delete</Button>
+                </Card>
+              </>}
+          </Dialog>
+
+
         </Card>
       </Container>
     </Page >

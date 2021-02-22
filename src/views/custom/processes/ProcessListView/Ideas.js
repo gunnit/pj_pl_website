@@ -17,7 +17,10 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.darker,
     backgroundColor: theme.palette.primary.lighter,
     // minWidth: 240
-    width: '100%'
+    width: '100%',
+    '&:hover': {
+      cursor: 'default'
+    }
   },
   icon: {
     margin: 'auto',

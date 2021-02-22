@@ -1,10 +1,18 @@
 Things to add:
 
+Fetch data sooner in various places?
+
+Priority in tables confusing - low, medium, or high based on a number the user doesn't know? Also why is the program telling me instead of me deciding that? Priority is very subjective. Having the same numbers for everybody doesn't make sense
+
+Sort by name not working
+
+total_net_benefit vs process_net_benefit
+
 Maybe add dialog popup confirm for clicking on bubble chart
 
 Accounts receivable l2 process name
 
-Serializers, pictures, alt text for images
+Serializers, pictures, alt text for images, add hover cursor, date formatting
 
 Cost without automation cost comparison tab
 

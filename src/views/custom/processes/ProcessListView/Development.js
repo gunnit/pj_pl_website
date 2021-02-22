@@ -16,7 +16,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5, 0),
     color: theme.palette.warning.darker,
     backgroundColor: theme.palette.warning.lighter,
-    width: '100%'
+    width: '100%',
+    '&:hover': {
+      cursor: 'default'
+    }
   },
   icon: {
     margin: 'auto',

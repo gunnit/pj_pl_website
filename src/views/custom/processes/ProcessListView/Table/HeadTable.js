@@ -24,11 +24,8 @@ function HeadTable({
   order,
   classes,
   orderBy,
-  rowCount,
   headLabel,
-  numSelected,
   onRequestSort,
-  onSelectAllClick
 }) {
   const createSortHandler = property => event => {
     onRequestSort(event, property);
