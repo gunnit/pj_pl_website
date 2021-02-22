@@ -1,5 +1,7 @@
 Things to add:
 
+fte_expl check this, check updateDetails in general
+
 Required fields in assessment created by users?
 
 firebase json file?

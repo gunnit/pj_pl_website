@@ -1,5 +1,4 @@
 import 'firebase/auth';
-import 'firebase/firestore';
 import firebase from 'firebase/app';
 import * as Yup from 'yup';
 import { Form, FormikProvider, useFormik, Formik } from 'formik';
@@ -181,6 +180,7 @@ export default function AutomationAssessmentView() {
 
     const [questions, setQuestions] = useState(null)
     const [formikInitialValues, setFormikInitialValues] = useState({})
+    const [formikValues, setFormikValues] = useState({})
     const [subgroups, setSubgroups] = useState(null)
     const [openDialog, setOpenDialog] = useState(null);
 
@@ -234,31 +234,24 @@ export default function AutomationAssessmentView() {
             setPending(true)
             try {
 
-                // const res = await fetch(`${apiBaseUrl}/create_process/`, {
-                //     method: 'POST',
-                //     body: JSON.stringify({
-                //         ...formik.values,
-                //         ...sliderValues,
-                //         applications: [...checkboxValues],
-                //         customer_id: userId
-                //     }),
-                //     headers: {
-                //         "Content-Type": 'application/json',
-                //     }
-                //     // Authorization###
-                // })
+                const token = await firebase.auth().currentUser.getIdToken(true);
 
-                // // Pipeline value is lower case in the context
-                // const lowerCasePipeline = formik.values.pipeline.toLowerCase()
-                // // processCounts in context needs to be updated for navbar numbers
-                // setProcessCounts(previous => ({ ...previous, [lowerCasePipeline]: previous[lowerCasePipeline] + 1 }))
+                let storedProcessId;
+                if (!currentProcessId) {
+                    storedProcessId = localStorage.getItem('currentProcessId')
+                }
+
+                const res = await fetch(`${apiBaseUrl}/update_details/${currentProcessId || storedProcessId}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify(formikValues),
+                    headers: {
+                        "Content-Type": 'application/json',
+                        'Authorization': token
+                    }
+                })
 
                 setActiveStep(prevActiveStep => prevActiveStep + 1);
 
-                // const { id } = await res.json()
-
-                // // Store ID of created process in context in case the user decides to view it
-                // setCurrentProcessId(id)
 
             } catch (e) {
                 console.error(e)
@@ -309,7 +302,10 @@ export default function AutomationAssessmentView() {
 
                 questions.forEach(question => {
 
-                    initialValues[question.id] = ''
+                    // Future version:
+                    // initialValues[question.id] = '' not sure about data type for future version
+
+                    initialValues[question.title] = '0'
 
                     if (questionsSortedBySubgroup[question.subgroup]) {
                         questionsSortedBySubgroup[question.subgroup].push(question)
@@ -354,14 +350,19 @@ export default function AutomationAssessmentView() {
                                             fullWidth
                                             variant="outlined"
                                             label={question.title}
-                                            onChange={handleChange}
+                                            onChange={(e) => {
+                                                handleChange(e)
+                                                setFormikValues(values)
+                                            }}
                                             // Formik uses the name as the key to keep track of the field in the values object like this: values[name]
-                                            name={question.id}
-                                            value={values[question.id]}
+                                            // In the future, name and value will be question.id so it is unique but for right now the title is easier to work with
+                                            name={question.title}
+                                            value={values[question.title]}
                                             className={classes.margin}
                                         >
                                             {question.answers.map((answer, i) => (
-                                                <MenuItem key={`${answer.text}${i}`} value={answer.value}>
+                                                // database expects value as a string
+                                                <MenuItem key={`${answer.text}${i}`} value={answer.value.toString()}>
                                                     {answer.text}
                                                 </MenuItem>
                                             ))}
