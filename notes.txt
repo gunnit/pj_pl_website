@@ -1,5 +1,7 @@
 Things to add:
 
+Maybe add dialog popup confirm for clicking on bubble chart
+
 Accounts receivable l2 process name
 
 Serializers, pictures, alt text for images

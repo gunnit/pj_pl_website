@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Card, CardHeader, Box } from '@material-ui/core';
+import Context from 'context/Context';
+import { useHistory } from 'react-router-dom';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -16,18 +18,16 @@ const useStyles = makeStyles(() => ({
 
 export default function BubbleChart({ data, className, ...other }) {
   const classes = useStyles();
+  const history = useHistory()
 
-  // process_score
-  // processassumptions.process_net_benefit
-  // processobjectives.total_alignment_score_graph
-
+  const { setCurrentProcessId } = useContext(Context)
 
   const chartData = data.map((process, i) => {
     return {
       name: process.process_name,
       data: [[process.process_score,
-      process.processassumptions.total_net_benefit,
-      process.processobjectives.total_alignment_score_coverted]]
+      process.processassumptions.total_net_benefit + (i + 1) * 10,
+      process.processobjectives.total_alignment_score_coverted + (i + 1) * 10]]
     }
   })
 
@@ -49,8 +49,9 @@ export default function BubbleChart({ data, className, ...other }) {
       fontFamily: theme.typography.fontFamily,
       events: {
         dataPointSelection: (event, chartContext, config) => {
-          // Series index should correspond to the process
-          console.log(config)
+          // config.seriesIndex is the same as the index of the process in the original array, giving the process that was clicked on
+          setCurrentProcessId(data[config.seriesIndex].id)
+          history.push(PATH_APP.processes.details)
         }
       }
     },
