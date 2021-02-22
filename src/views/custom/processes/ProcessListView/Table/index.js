@@ -155,7 +155,7 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-export default function ProcessTable({ processes, pipelineFilter }) {
+export default function ProcessTable({ processes, handleDeleteProcess, pipelineFilter }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -166,7 +166,7 @@ export default function ProcessTable({ processes, pipelineFilter }) {
   const [isOpen, setOpen] = useState(null);
   const [openDialog, setOpenDialog] = useState(null);
 
-  const { currentProcessId, setCurrentProcessId } = useContext(Context)
+  const { setCurrentProcessId } = useContext(Context)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -239,20 +239,6 @@ export default function ProcessTable({ processes, pipelineFilter }) {
   const handleCloseDelete = () => {
     setOpen(null)
     setOpenDialog(true)
-  }
-
-  const handleDeleteClick = async () => {
-
-    const token = await firebase.auth().currentUser.getIdToken(true);
-
-    const res = await fetch(`${apiBaseUrl}/delete_process/${currentProcessId}`, {
-      method: 'DELETE',
-      headers: {
-        "Authorization": token
-      }
-    })
-
-
   }
 
 
@@ -400,14 +386,17 @@ export default function ProcessTable({ processes, pipelineFilter }) {
                 <Card className={classes.dialog}>
                   <Box sx={{ flexGrow: 1 }}>
                     <Typography variant="h5" gutterBottom className={classes.centerText}>
-                      Are you sure?
+                      Are you sure you want to delete this process?
                     </Typography>
-                    <Typography variant="subtitle1" color='textSecondary' className={classes.centerText}>
+                    <Typography gutterBottom variant="subtitle1" color='textSecondary' className={classes.centerText}>
                       Deleting this process will result in permanently removing all data associated with this process.
                     </Typography>
                   </Box>
 
-                  <Button onClick={handleDeleteClick} variant='contained'>Permanently Delete</Button>
+                  <Button onClick={() => {
+                    handleDeleteProcess()
+                    setOpenDialog(false)
+                  }} variant='contained'>Permanently Delete</Button>
                 </Card>
               </>}
           </Dialog>

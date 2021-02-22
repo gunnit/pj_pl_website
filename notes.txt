@@ -1,5 +1,13 @@
 Things to add:
 
+More comments
+
+Add process name to are you sure you want to delete
+
+Delete process dialog styling
+
+if res.ok? Is it good to catch errors for user experience?
+
 Fetch data sooner in various places?
 
 Priority in tables confusing - low, medium, or high based on a number the user doesn't know? Also why is the program telling me instead of me deciding that? Priority is very subjective. Having the same numbers for everybody doesn't make sense

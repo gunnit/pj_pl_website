@@ -238,8 +238,8 @@ export default function IdeasTable({ processes }) {
       // Change navbar numbers
       setProcessCounts(previous => ({
         ...previous,
-        idea: previous.idea - 1,
-        pipeline: previous.pipeline + 1
+        Idea: previous.Idea - 1,
+        Pipeline: previous.Pipeline + 1
       }))
 
 

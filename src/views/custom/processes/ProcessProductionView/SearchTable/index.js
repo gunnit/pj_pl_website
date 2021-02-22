@@ -190,8 +190,8 @@ export default function ProductionTable({ processes }) {
       // Change navbar numbers
       setProcessCounts(previous => ({
         ...previous,
-        [currentStage.toLowerCase()]: previous[currentStage.toLowerCase()] - 1,
-        [futureStage.toLowerCase()]: previous[futureStage.toLowerCase()] + 1
+        [currentStage]: previous[currentStage] - 1,
+        [futureStage]: previous[futureStage] + 1
       }))
 
 

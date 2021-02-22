@@ -333,10 +333,8 @@ export default function NewProcessView() {
           }
         })
 
-        // Pipeline value is lower case in the context
-        const lowerCasePipeline = formik.values.pipeline.toLowerCase()
         // processCounts in context needs to be updated for navbar numbers
-        setProcessCounts(previous => ({ ...previous, [lowerCasePipeline]: previous[lowerCasePipeline] + 1 }))
+        setProcessCounts(previous => ({ ...previous, [formik.values.pipeline]: previous[formik.values.pipeline] + 1 }))
 
         setActiveStep(prevActiveStep => prevActiveStep + 1);
 

@@ -31,9 +31,10 @@ export default function ProcessListView() {
 
     const [processes, setProcesses] = useState(null)
     const [error, setError] = useState(false)
-    const { userId } = useContext(Context)
-
     const [pipelineFilter, setPipelineFilter] = useState('')
+
+    const { userId, currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
+
 
     useEffect(() => {
 
@@ -64,6 +65,37 @@ export default function ProcessListView() {
     if (!processes) {
         return <LoadingScreen />
     }
+
+
+
+    const handleDeleteProcess = async () => {
+
+
+        const token = await firebase.auth().currentUser.getIdToken(true);
+
+        const res = await fetch(`${apiBaseUrl}/delete_process/${currentProcessId}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": token
+            }
+        })
+        const { pipeline } = await res.json()
+
+        // Remove deleted process from state
+        // These names are confusing
+        const newProcessesArray = processes.processes.filter(process => process.id !== currentProcessId)
+        setProcesses({ ...processes, processes: newProcessesArray })
+
+        // Update number on navbar
+        setProcessCounts(previous => ({ ...previous, [pipeline]: previous[pipeline] - 1 }))
+
+
+
+    }
+
+
+
+
 
     return (
         <Page title="All Processes" className={classes.root}>
@@ -99,7 +131,7 @@ export default function ProcessListView() {
                             </ButtonAnimate>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <Table processes={processes.processes} pipelineFilter={pipelineFilter} />
+                            <Table processes={processes.processes} handleDeleteProcess={handleDeleteProcess} pipelineFilter={pipelineFilter} />
                         </Grid>
                     </Grid>
                 </Container>

@@ -169,12 +169,12 @@ function NavItem({
         {isSubItem ? <span className={classes.subIcon} /> : icon}
       </ListItemIcon>
       <ListItemText disableTypography primary={title} />
-      {title === 'ideas' && processCounts.idea}
-      {title === 'pipeline' && processCounts.pipeline}
-      {title === 'development' && processCounts.development}
-      {title === 'production' && processCounts.production}
+      {title === 'ideas' && processCounts.Idea}
+      {title === 'pipeline' && processCounts.Pipeline}
+      {title === 'development' && processCounts.Development}
+      {title === 'production' && processCounts.Production}
       {(Object.keys(processCounts).length === 4 && title === 'list of processes')
-        && processCounts.idea + processCounts.pipeline + processCounts.development + processCounts.production}
+        && processCounts.Idea + processCounts.Pipeline + processCounts.Development + processCounts.Production}
       {/* {info && info} */}
     </ListItem>
   );
