@@ -131,7 +131,9 @@ function applySortFilter(array, comparator, query) {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    width: '100%',
+  },
   sortSpan: visuallyHidden,
   routerLink: {
     textDecoration: 'none'
@@ -262,8 +264,8 @@ export default function DevelopmentTable({ processes }) {
   const isProductNotFound = filteredProcesses.length === 0;
 
   return (
-    <Container>
-      <Card className={classes.card}>
+    <Container className={classes.root}>
+      <Card className={classes.card} className={classes.root}>
         <ToolbarTable
           numSelected={selected.length}
           filterName={filterName}

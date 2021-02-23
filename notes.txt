@@ -1,5 +1,20 @@
 Things to add:
 
+Config weights - weights are part of the question, there should be an edit questions page 
+and changing weights of existing questions is one part of that. Or it can be how it is on the original
+for now
+
+potential_page.html object keys?
+
+Changing questions changing data
+
+Edit objectives?
+
+
+Back to process button? Or is back in browser enough?
+
+View details should be one click instead of open menu then click
+
 Submit button texts
 
 Cards that are clickable and cards that aren't look the same

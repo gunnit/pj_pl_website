@@ -23,32 +23,40 @@ const useStyles = makeStyles(theme => ({
 export default function AutomationPotential({ processDetails }) {
     const classes = useStyles();
 
+    console.log('score', processDetails.score)
+    console.log('details', processDetails.details)
 
-    if (processDetails.median_score_potential === '0.00') {
-        return (
-            <Card className={classes.root}>
-                <Box
-                    component="img"
-                    alt="welcome"
-                    src={''}
-                    sx={{
-                        p: 2,
-                        height: 205,
-                        margin: { xs: 'auto', md: 'inherit' }
-                    }}
-                />
-                <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" gutterBottom>
-                        Complete the process automation potential assessment
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        The automation potential assessment will help you determine in a qualitative way if the process is a good candidate for automation.
-                    </Typography>
-                </Box>
-                <Button variant='contained' color='secondary' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
-            </Card>
-        )
-    }
+    // some other conditional that actually checks for what it's supposed to
+    // if (processDetails.median_score_potential === '0.00') {
+    //     return (
+    //         <Card className={classes.root}>
+    //             <Box
+    //                 component="img"
+    //                 alt="welcome"
+    //                 src={''}
+    //                 sx={{
+    //                     p: 2,
+    //                     height: 205,
+    //                     margin: { xs: 'auto', md: 'inherit' }
+    //                 }}
+    //             />
+    //             <Box sx={{ flexGrow: 1 }}>
+    //                 <Typography variant="h6" gutterBottom>
+    //                     Complete the process automation potential assessment
+    //                 </Typography>
+    //                 <Typography variant="subtitle1" color="textSecondary">
+    //                     The automation potential assessment will help you determine in a qualitative way if the process is a good candidate for automation.
+    //                 </Typography>
+    //             </Box>
+    //             <Button variant='contained' color='secondary' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
+    //         </Card>
+    //     )
+    // }
+
+    // scores are calculated by multiplying the weight for the question by the value of the answer
+    // subgroup score is the average of the scores for that subgroup
+
+    // alignment is from sliders on process form compared to sliders on company objectives
 
     return (
         <Container maxWidth="xl">
