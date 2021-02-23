@@ -370,9 +370,9 @@ export default function CostAssessmentView() {
                     }
                 })
 
-                // if (!res.ok) {
-                //     throw res
-                // }
+                if (!res.ok) {
+                    throw res
+                }
 
                 setActiveStep(prevActiveStep => prevActiveStep + 1);
 

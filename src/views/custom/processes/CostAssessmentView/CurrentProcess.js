@@ -26,13 +26,9 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
     const classes = useStyles();
     const {
         errors,
-        values,
         touched,
         handleSubmit,
-        isSubmitting,
-        setFieldValue,
         getFieldProps,
-        handleChange
     } = formik;
 
 
