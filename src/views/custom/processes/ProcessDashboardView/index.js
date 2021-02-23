@@ -167,7 +167,7 @@ export default function ProcessDashboardView() {
                         <Grid item xs={12} md={3} lg={3} >
                             <BottomCard
                                 title={'Assess your Organization'}
-                                description={'Assess the organizational design that best supports delivery of your RPA capability and aligns with your corportate strategy and culture.'}
+                                description={'Assess the organizational design that best supports delivery of your RPA capability and aligns with your corporate strategy and culture.'}
                                 imagePath={'/static/images/process/undraw_solution_mindset_34bi.svg'}
                                 clickPath={''}
                             />
@@ -175,7 +175,7 @@ export default function ProcessDashboardView() {
                         <Grid item xs={12} md={3} lg={3} >
                             <BottomCard
                                 title={'Govern the pipeline'}
-                                description={'Assess and select processes to build a sustainable automation pipeline and implement governacne for a secured and digital workforce.'}
+                                description={'Assess and select processes to build a sustainable automation pipeline and implement governance for a secured and digital workforce.'}
                                 imagePath={'/static/images/process/undraw_Booking_re_gw4j.svg'}
                                 clickPath={''}
                             />
