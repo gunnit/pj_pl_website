@@ -1,5 +1,4 @@
 import 'firebase/auth';
-import 'firebase/firestore';
 import firebase from 'firebase/app';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -443,7 +442,12 @@ export default function UpdateProcessView() {
       try {
         const token = await firebase.auth().currentUser.getIdToken(true);
 
-        const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId}`, {
+        let storedProcessId;
+        if (!currentProcessId) {
+          storedProcessId = localStorage.getItem('currentProcessId')
+        }
+
+        const res = await fetch(`${apiBaseUrl}/update_process/${currentProcessId || storedProcessId}`, {
           method: 'PUT',
           body: JSON.stringify({
             ...formik.values,
@@ -457,9 +461,11 @@ export default function UpdateProcessView() {
           }
         })
 
+        if (!res.ok) {
+          throw res
+        }
+
         setActiveStep(prevActiveStep => prevActiveStep + 1);
-
-
 
       } catch (e) {
         setError(true)
