@@ -42,15 +42,21 @@ function CircleChart({
   ...other
 }) {
 
-  console.log(net_benefit_sum_idea)
-  console.log(net_benefit_sum_pipeline)
-  console.log(net_benefit_sum_development)
-  console.log(net_benefit_sum_production)
+  // console.log(net_benefit_sum_idea)
+  // console.log(net_benefit_sum_pipeline)
+  // console.log(net_benefit_sum_development)
+  // console.log(net_benefit_sum_production)
 
 
   const classes = useStyles();
   const theme = useTheme();
-  const chartData = [net_benefit_sum_idea, net_benefit_sum_pipeline, net_benefit_sum_development, net_benefit_sum_production];
+  const chartData = [
+    net_benefit_sum_idea.sum ? net_benefit_sum_idea.sum : net_benefit_sum_idea,
+    net_benefit_sum_pipeline.sum ? net_benefit_sum_pipeline.sum : net_benefit_sum_pipeline,
+    net_benefit_sum_development.sum ? net_benefit_sum_development.sum : net_benefit_sum_development,
+    net_benefit_sum_production.sum ? net_benefit_sum_production.sum : net_benefit_sum_production,
+
+  ];
   const chartOptions = merge(ApexChartsOption(), {
     labels: ['Ideas', 'Pipeline', 'Development', 'Production'],
     legend: { floating: true, horizontalAlign: 'center' },
@@ -108,7 +114,7 @@ function CircleChart({
           value: { offsetY: 16 },
           total: {
             formatter: function (w) {
-              return fNumber(2324);
+              return fNumber(2324); // change this
             }
           }
         }
