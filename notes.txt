@@ -1,5 +1,7 @@
 Things to add:
 
+If the stepper is clickable it needs to be made unclickable after submitting or not be on the page or redirect
+
 Integer out of range error when submitting forms
 
 See if there are any unused variables in cost form

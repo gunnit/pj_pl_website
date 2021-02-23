@@ -51,7 +51,6 @@ function CostsComparison({ processDetails }) {
     }
 
 
-
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>

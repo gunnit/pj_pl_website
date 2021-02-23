@@ -18,6 +18,8 @@ export default function CostWithoutAutomation({ data: {
     development_cost,
 } }) {
 
+
+
     const chartData = [
         { name: 'License', data: [licence_cost] },
         { name: 'Infrastructure', data: [tot_infrastructure_cost] },

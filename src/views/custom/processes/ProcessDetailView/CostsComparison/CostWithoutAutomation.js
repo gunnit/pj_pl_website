@@ -13,15 +13,16 @@ import {
 
 
 export default function CostWithoutAutomation({ data: {
-    // current_employee_cost,
+    current_employee_cost,
     infrastructure_costs,
     support_cost,
     other_cost,
 }
 }) {
 
+
     const chartData = [
-        // { name: 'Employee Costs', data: [current_employee_cost] },
+        { name: 'Employee Costs', data: [current_employee_cost] },
         { name: 'Infrastructure', data: [infrastructure_costs] },
         { name: 'Maintenance', data: [support_cost] },
         { name: 'Other Costs', data: [other_cost] }

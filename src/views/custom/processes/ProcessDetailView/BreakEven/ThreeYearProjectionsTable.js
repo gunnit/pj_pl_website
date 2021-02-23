@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 // ----------------------------------------------------------------------
 
-function ThreeYearProjectionsTable({
+export default function ThreeYearProjectionsTable({
   data: {
     y1_savings_total,
     y1_with_auto_total,
@@ -72,8 +72,8 @@ function ThreeYearProjectionsTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.name} className={classes.hideLastBorder}>
+            {rows.map((row, i) => (
+              <TableRow key={`${row.name}${i}`} className={classes.hideLastBorder}>
                 <TableCell component="th" scope="row">
                   {row.category}
                 </TableCell>
@@ -111,5 +111,3 @@ function ThreeYearProjectionsTable({
     </Card>
   );
 }
-
-export default ThreeYearProjectionsTable;

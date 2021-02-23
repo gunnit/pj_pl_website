@@ -172,9 +172,9 @@ export default function QuarterlyCashFlow({ data: {
                                         // align='right'
                                         style={{ top: 56, minWidth: 50 }}
                                     />
-                                    {COLUMNS.map(column => (
+                                    {COLUMNS.map((column, i) => (
                                         <TableCell
-                                            key={column.id}
+                                            key={`${column.id}${i}`}
                                             align={column.align}
                                             style={{ top: 56, minWidth: column.minWidth }}
                                         >
@@ -188,7 +188,7 @@ export default function QuarterlyCashFlow({ data: {
                             <TableBody>
                                 {rows.map((row, i) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={`${row.code}${i}`}>
                                             {i === 0
                                                 && <TableCell align='left'>
                                                     Cost Without Automation
@@ -201,9 +201,9 @@ export default function QuarterlyCashFlow({ data: {
                                                 && <TableCell align='left'>
                                                     Savings
                                                    </TableCell>}
-                                            {row.cells.map(cell => {
+                                            {row.cells.map((cell, i) => {
                                                 return (
-                                                    <TableCell key={cell}
+                                                    <TableCell key={`${cell}${i}`}
                                                     // align={column.align}
                                                     >
                                                         {/* {column.format && typeof value === 'number'
