@@ -86,7 +86,13 @@ const TABLE_HEAD = [
     label: 'Owner'
   },
   {
-    id: ''
+    id: 'options'
+  },
+  {
+    id: 'back'
+  },
+  {
+    id: 'forward'
   }
 ];
 

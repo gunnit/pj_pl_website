@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import React, { useState, useContext, useEffect } from 'react';
 import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
-import { Tab, Container, Box, Button, ButtonGroup } from '@material-ui/core';
+import { Tab, Container, Box, Button, ButtonGroup, Tooltip } from '@material-ui/core';
 import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
@@ -22,6 +22,8 @@ import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import Page500View from 'views/errors/Page500View';
 import LoadingScreen from 'components/LoadingScreen';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
 const SIMPLE_TAB = [
@@ -117,11 +119,27 @@ export default function ProcessDetailView() {
                                 />
                             ))}
                         </TabList>
+                        <ButtonGroup>
 
-                        <Button variant="contained" color='secondary' component={RouterLink} to={PATH_APP.processes.update}>
-                            <EditIcon />
-                            {/* Update Process */}
-                        </Button>
+                            <Tooltip title="Update Process Details" arrow placement='top'>
+                                <Button variant="contained" color='secondary' component={RouterLink} to={PATH_APP.processes.update}>
+                                    <EditIcon />
+                                    {/* Update Process */}
+                                </Button>
+                            </Tooltip>
+                            <Tooltip title="Update Automation Assessment" arrow placement='top'>
+                                <Button variant="contained" color='inherit' component={RouterLink} to={PATH_APP.processes.automationAssessment}>
+                                    {/* Update Automation Assessment */}
+                                    <AssessmentIcon />
+                                </Button>
+                            </Tooltip>
+                            <Tooltip title="Update Costs" arrow placement='top'>
+                                <Button variant="contained" color='warning' component={RouterLink} to={PATH_APP.processes.costAssessment}>
+                                    {/* Update Costs */}
+                                    <AttachMoneyIcon />
+                                </Button>
+                            </Tooltip>
+                        </ButtonGroup>
                     </Box>
                     <TabPanel value={'1'}>
                         <Details processDetails={processDetails} />

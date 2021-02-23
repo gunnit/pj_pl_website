@@ -5,8 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     TextField,
     MenuItem,
+    InputAdornment
 } from '@material-ui/core';
-
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -51,6 +54,11 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.completion_time && errors.completion_time)}
                     // helperText={touched.completion_time && errors.completion_time}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">minutes</InputAdornment>,
+                    }}
+
                 />
 
                 <TextField
@@ -62,6 +70,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.cases_worked && errors.cases_worked)}
                     // helperText={touched.cases_worked && errors.cases_worked}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><WorkOutlineIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">cases</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -73,6 +85,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.working_days && errors.working_days)}
                     // helperText={touched.working_days && errors.working_days}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">days</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -84,6 +100,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.working_hours_per_day && errors.working_hours_per_day)}
                     // helperText={touched.working_hours_per_day && errors.working_hours_per_day}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">hours</InputAdornment>,
+                    }}
                 />
 
 
@@ -96,6 +116,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.infrastructure_costs && errors.infrastructure_costs)}
                     // helperText={touched.infrastructure_costs && errors.infrastructure_costs}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -107,6 +131,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.support_cost && errors.support_cost)}
                     // helperText={touched.support_cost && errors.support_cost}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -118,6 +146,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.other_cost && errors.other_cost)}
                     // helperText={touched.other_cost && errors.other_cost}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
 
@@ -130,6 +162,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.average_fte_cost && errors.average_fte_cost)}
                     // helperText={touched.average_fte_cost && errors.average_fte_cost}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
 

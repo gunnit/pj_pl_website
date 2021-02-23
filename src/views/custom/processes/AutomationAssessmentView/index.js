@@ -519,7 +519,7 @@ export default function AutomationAssessmentView() {
                                             className={classes.button}
                                         >
                                             Back
-                    </Button>
+                                        </Button>
                                         {activeStep !== subgroups.length - 1
                                             ? <Button
                                                 disabled={pending}
@@ -528,7 +528,7 @@ export default function AutomationAssessmentView() {
                                                 className={classes.button}
                                             >
                                                 Next
-                      </Button>
+                                            </Button>
                                             : <LoadingButton
                                                 pending={pending}
                                                 variant="contained"
@@ -537,7 +537,7 @@ export default function AutomationAssessmentView() {
                                             // startIcon={<AlarmIcon />}
                                             >
                                                 Save
-                      </LoadingButton>}
+                                            </LoadingButton>}
                                     </Box>
                                 </div>
                             )}

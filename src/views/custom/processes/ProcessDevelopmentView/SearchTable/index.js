@@ -86,7 +86,13 @@ const TABLE_HEAD = [
     label: 'Owner'
   },
   {
-    id: ''
+    id: 'options'
+  },
+  {
+    id: 'back'
+  },
+  {
+    id: 'forward'
   }
 ];
 
@@ -336,15 +342,7 @@ export default function DevelopmentTable({ processes }) {
                             />
                           </IconButton>
                         </TableCell>
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
-                            <Icon
-                              icon={ArrowForwardIcon}
-                              width={20}
-                              height={20}
-                            />
-                          </IconButton>
-                        </TableCell>
+
                         <TableCell align="right">
                           <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
                             <ArrowBackIcon />

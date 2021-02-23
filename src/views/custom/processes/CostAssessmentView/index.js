@@ -436,7 +436,7 @@ export default function CostAssessmentView() {
 
 
     return (
-        <Page title="New Process" className={classes.root}>
+        <Page title="Cost Assessment" className={classes.root}>
             <Container>
                 <Grid container justifyContent='space-between'>
                     <Grid item container className={classes.buttonContainer} spacing={3}>
