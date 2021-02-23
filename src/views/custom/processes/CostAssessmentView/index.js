@@ -25,6 +25,7 @@ import {
     Grid,
     Dialog,
     Card,
+    StepButton,
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
@@ -50,14 +51,16 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(3),
+    },
+    step: {
+        // '&:hover': {
+        //     cursor: 'pointer'
+        // }
     }
 }));
 
 // ----------------------------------------------------------------------
 
-function getSteps() {
-    return ['Current Process', 'Development', 'License', 'Infrastructure'];
-}
 
 const useQontoStepIconStyles = makeStyles({
     root: {
@@ -187,7 +190,28 @@ export default function CostAssessmentView() {
 
     const [activeStep, setActiveStep] = useState(0);
     const [pending, setPending] = useState(false)
-    const steps = getSteps();
+    const steps = [
+        {
+            label:
+                'Current Process',
+            step: 0
+        },
+        {
+            label:
+                'Development',
+            step: 1
+        },
+        {
+            label:
+                'License',
+            step: 2
+        },
+        {
+            label:
+                'Infrastructure',
+            step: 3
+        },
+    ];
 
     const handleBack = () => {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -433,9 +457,9 @@ export default function CostAssessmentView() {
                         activeStep={activeStep}
                         connector={<ColorlibConnector />}
                     >
-                        {steps.map(label => (
+                        {steps.map(({ label, step }) => (
                             <Step key={label}>
-                                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                                <StepButton onClick={() => setActiveStep(step)} StepIconComponent={ColorlibStepIcon}>{label}</StepButton>
                             </Step>
                         ))}
                     </Stepper>
