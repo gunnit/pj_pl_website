@@ -157,12 +157,12 @@ export default function ProductionTable({ processes }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-  const [openDialog, setOpenDialog] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const { currentProcessId, setCurrentProcessId, setProcessCounts } = useContext(Context)
 
   const handleCloseDialog = value => {
-    setOpenDialog(null);
+    setOpenDialog(false);
   };
 
   const handleRequestSort = (event, property) => {

@@ -189,10 +189,10 @@ export default function NewProcessView() {
   })
   const [checkboxValues, setCheckboxValues] = useState(new Set())
   const [applications, setApplications] = useState([])
-  const [openDialog, setOpenDialog] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleCloseDialog = value => {
-    setOpenDialog(null);
+    setOpenDialog(false);
   };
 
   useEffect(() => {

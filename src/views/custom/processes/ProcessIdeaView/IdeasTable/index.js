@@ -159,7 +159,7 @@ export default function IdeasTable({ processes }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-  const [openDialogName, setOpenDialogName] = useState(null);
+  const [openDialogName, setOpenDialogName] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
 
@@ -173,7 +173,7 @@ export default function IdeasTable({ processes }) {
   };
 
   const handleCloseDialog = value => {
-    setOpenDialogName(null);
+    setOpenDialogName(false);
   };
 
   const handleOpen = (event, id) => {

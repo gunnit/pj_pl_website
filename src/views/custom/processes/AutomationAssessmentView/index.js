@@ -182,10 +182,10 @@ export default function AutomationAssessmentView() {
     const [formikInitialValues, setFormikInitialValues] = useState({})
     const [formikValues, setFormikValues] = useState({})
     const [subgroups, setSubgroups] = useState(null)
-    const [openDialog, setOpenDialog] = useState(null);
+    const [openDialog, setOpenDialog] = useState(false);
 
     const handleCloseDialog = value => {
-        setOpenDialog(null);
+        setOpenDialog(false);
     };
 
 

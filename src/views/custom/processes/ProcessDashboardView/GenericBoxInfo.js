@@ -47,18 +47,12 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         right: theme.spacing(-3),
         color: theme.palette.common.white
-      }
+    }
 }));
 
 // ----------------------------------------------------------------------
 
-GenericBoxInfo.propTypes = {
-    className: PropTypes.string,
-    numberOfItems: PropTypes.number,
-    infoType: PropTypes.string,
-    mainNumber: PropTypes.number,
-    secondaryNumber: PropTypes.number,
-};
+
 
 
 function GenericBoxInfo({ className, numberOfItems, infoType, mainNumber, secondaryNumber, chartColor, ...other }) {

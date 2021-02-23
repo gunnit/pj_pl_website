@@ -163,7 +163,7 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
-  const [openDialog, setOpenDialog] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const { setCurrentProcessId } = useContext(Context)
 

@@ -42,9 +42,11 @@ function CircleChart({
   ...other
 }) {
 
+
+
   const classes = useStyles();
   const theme = useTheme();
-  const chartData = [net_benefit_sum_idea, net_benefit_sum_pipeline, net_benefit_sum_development, net_benefit_sum_production];
+  const chartData = [net_benefit_sum_idea ? net_benefit_sum_idea.sum : 0, net_benefit_sum_pipeline ? net_benefit_sum_pipeline.sum : 0, net_benefit_sum_development ? net_benefit_sum_development.sum : 0, net_benefit_sum_production ? net_benefit_sum_production.sum : 0];
   const chartOptions = merge(ApexChartsOption(), {
     labels: ['Ideas', 'Pipeline', 'Development', 'Production'],
     legend: { floating: true, horizontalAlign: 'center' },
