@@ -10,6 +10,7 @@ import { PATH_APP } from 'routes/paths'
 
 const useStyles = makeStyles(theme => ({
   root: {
+    height: '100%',
     boxShadow: 'none',
     textAlign: 'center',
     backgroundColor: theme.palette.primary.lighter,

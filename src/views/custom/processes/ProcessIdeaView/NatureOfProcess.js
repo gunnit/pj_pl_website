@@ -13,7 +13,9 @@ import { ApexChartsOption } from 'components/Charts/Apexcharts';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
-    root: {},
+    root: {
+        height: '100%'
+    },
     content: {
         height: 420,
         display: 'flex',

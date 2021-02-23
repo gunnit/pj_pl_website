@@ -1,5 +1,11 @@
 Things to add:
 
+Submit button texts
+
+Cards that are clickable and cards that aren't look the same
+
+Details page layout at 80% zoom
+
 Update process query
 
 If the stepper is clickable it needs to be made unclickable after submitting or not be on the page or redirect
@@ -175,7 +181,7 @@ See if Recharts axes can be fixed
 "Made by processlenz.com"
 
 
-
+Buy template
 
 
 

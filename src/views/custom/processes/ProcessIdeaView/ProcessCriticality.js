@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { merge } from 'lodash';
 import {
     Card,
@@ -10,9 +11,16 @@ import ReactApexChart from 'react-apexcharts';
 import { ApexChartsOption } from 'components/Charts/Apexcharts';
 
 // ----------------------------------------------------------------------
+const useStyles = makeStyles(theme => ({
+    root: {
+        height: '100%'
+    },
+}));
+
 
 
 function ProcessCriticality({ data }) {
+    const classes = useStyles()
     const chartOptions = merge(ApexChartsOption(), {
         plotOptions: { bar: { columnWidth: '14%', endingShape: 'rounded' } },
         stroke: { show: false },
@@ -31,7 +39,7 @@ function ProcessCriticality({ data }) {
         }
     });
     return (
-        <Card>
+        <Card className={classes.root}>
             <CardHeader title="Process Criticality" />
             <CardContent>
                 <ReactApexChart

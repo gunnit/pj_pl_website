@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         alignItems: 'center',
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        height: '100%',
     },
 }));
 

@@ -35,6 +35,7 @@ import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
+import AlarmIcon from '@material-ui/icons/Alarm';
 
 // ----------------------------------------------------------------------
 
@@ -439,22 +440,24 @@ export default function NewProcessView() {
                     >
                       Back
                     </Button>
-                    <Button
-                      disabled={pending}
-                      variant="contained"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Create' : 'Next'}
-                    </Button>
-                    {/* <LoadingButton
-                      pending={pending}
-                      variant="contained"
-                      pendingPosition="start"
-                      startIcon={<AlarmIcon />}
-                    >
-                      Save
-          </LoadingButton> */}
+                    {activeStep !== steps.length - 1
+                      ? <Button
+                        disabled={pending}
+                        variant="contained"
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                        Next
+                      </Button>
+                      : <LoadingButton
+                        pending={pending}
+                        variant="contained"
+                        onClick={handleNext}
+                        pendingPosition="center"
+                      // startIcon={<AlarmIcon />}
+                      >
+                        Save
+                      </LoadingButton>}
                   </Box>
                 </div>
               )}

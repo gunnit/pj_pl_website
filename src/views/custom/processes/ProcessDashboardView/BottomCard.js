@@ -15,10 +15,12 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         padding: theme.spacing(3),
         textDecoration: 'none',
-        width: '100%'
+        width: '100%',
+        height: '100%',
     },
     buttonAnimate: {
-        width: '100%'
+        width: '100%',
+        height: '100%',
     }
 }));
 

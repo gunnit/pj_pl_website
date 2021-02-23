@@ -19,12 +19,6 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-GenericBoxInfo.propTypes = {
-    className: PropTypes.string,
-    description: PropTypes.string,
-    imagePath: PropTypes.string,
-    clickPath: PropTypes.string,
-};
 
 
 function GenericBoxInfo({ className, description, imagePath, clickPath, ...other }) {

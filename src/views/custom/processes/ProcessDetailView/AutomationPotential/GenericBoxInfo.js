@@ -13,7 +13,11 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         padding: theme.spacing(3),
         textDecoration: 'none',
+        height: '100%',
     },
+    buttonAnimate: {
+        height: '100%',
+    }
 }));
 
 // ----------------------------------------------------------------------
@@ -24,7 +28,7 @@ function GenericBoxInfo({ className, title, description, imagePath, clickPath, .
 
 
     return (
-        <ButtonAnimate>
+        <ButtonAnimate className={classes.buttonAnimate}>
             <Card className={clsx(classes.root, className)} {...other} component={RouterLink} to={clickPath}>
                 {/* <CardHeader title={title} /> */}
                 <Box sx={{ flexGrow: 1 }}>

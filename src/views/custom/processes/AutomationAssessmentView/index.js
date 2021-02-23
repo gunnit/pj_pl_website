@@ -520,22 +520,24 @@ export default function AutomationAssessmentView() {
                                         >
                                             Back
                     </Button>
-                                        <Button
-                                            disabled={pending}
-                                            variant="contained"
-                                            onClick={handleNext}
-                                            className={classes.button}
-                                        >
-                                            {activeStep === subgroups.length - 1 ? 'Submit' : 'Next'}
-                                        </Button>
-                                        {/* <LoadingButton
-                      pending={pending}
-                      variant="contained"
-                      pendingPosition="start"
-                      startIcon={<AlarmIcon />}
-                    >
-                      Save
-          </LoadingButton> */}
+                                        {activeStep !== subgroups.length - 1
+                                            ? <Button
+                                                disabled={pending}
+                                                variant="contained"
+                                                onClick={handleNext}
+                                                className={classes.button}
+                                            >
+                                                Next
+                      </Button>
+                                            : <LoadingButton
+                                                pending={pending}
+                                                variant="contained"
+                                                onClick={handleNext}
+                                                pendingPosition="center"
+                                            // startIcon={<AlarmIcon />}
+                                            >
+                                                Save
+                      </LoadingButton>}
                                     </Box>
                                 </div>
                             )}

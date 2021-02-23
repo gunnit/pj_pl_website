@@ -10,26 +10,14 @@ import {
 
 // ----------------------------------------------------------------------
 
-HeadTable.propTypes = {
-  order: PropTypes.oneOf(['asc', 'desc']),
-  classes: PropTypes.object,
-  orderBy: PropTypes.string,
-  rowCount: PropTypes.number,
-  headLabel: PropTypes.array,
-  numSelected: PropTypes.number,
-  onRequestSort: PropTypes.func,
-  onSelectAllClick: PropTypes.func
-};
+
 
 function HeadTable({
   order,
   classes,
   orderBy,
-  rowCount,
   headLabel,
-  numSelected,
   onRequestSort,
-  onSelectAllClick
 }) {
   const createSortHandler = property => event => {
     onRequestSort(event, property);
@@ -38,9 +26,9 @@ function HeadTable({
   return (
     <TableHead>
       <TableRow>
-        {headLabel.map(headCell => (
+        {headLabel.map((headCell, i) => (
           <TableCell
-            key={headCell.id}
+            key={`${headCell.id}${i}`}
             align={headCell.alignRight ? 'right' : 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
           >

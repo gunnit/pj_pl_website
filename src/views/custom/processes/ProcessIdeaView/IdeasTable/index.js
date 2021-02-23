@@ -93,10 +93,10 @@ const TABLE_HEAD = [
     label: 'Owner'
   },
   {
-    id: ''
+    id: 'blank1'
   },
   {
-    id: ''
+    id: 'blank2'
   }
 ];
 
@@ -297,7 +297,7 @@ export default function IdeasTable({ processes }) {
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={`${id}${index}`}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
@@ -378,7 +378,7 @@ export default function IdeasTable({ processes }) {
           {[{ text: 'View details', path: PATH_APP.processes.details },
           { text: 'Update', path: PATH_APP.processes.update },
           { text: 'Delete', path: '' }].map(option => (
-            <RouterLink to={option.path} className={classes.routerLink}>
+            <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
               <MenuItem key={option.text} onClick={handleClose}>
                 {option.text}
               </MenuItem>

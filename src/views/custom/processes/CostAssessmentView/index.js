@@ -507,23 +507,24 @@ export default function CostAssessmentView() {
                                         >
                                             Back
                     </Button>
-                                        <Button
-                                            disabled={pending}
-                                            variant="contained"
-                                            onClick={handleNext}
-                                            className={classes.button}
-                                            color='secondary'
-                                        >
-                                            {activeStep === steps.length - 1 ? 'Save' : 'Next'}
-                                        </Button>
-                                        {/* <LoadingButton
-                      pending={pending}
-                      variant="contained"
-                      pendingPosition="start"
-                      startIcon={<AlarmIcon />}
-                    >
-                      Save
-          </LoadingButton> */}
+                                        {activeStep !== steps.length - 1
+                                            ? <Button
+                                                disabled={pending}
+                                                variant="contained"
+                                                onClick={handleNext}
+                                                className={classes.button}
+                                            >
+                                                Next
+                                                </Button>
+                                            : <LoadingButton
+                                                pending={pending}
+                                                variant="contained"
+                                                onClick={handleNext}
+                                                pendingPosition="center"
+                                            // startIcon={<AlarmIcon />}
+                                            >
+                                                Save
+                                                </LoadingButton>}
                                     </Box>
                                 </div>
                             )}
