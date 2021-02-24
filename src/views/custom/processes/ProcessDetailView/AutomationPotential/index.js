@@ -23,8 +23,6 @@ const useStyles = makeStyles(theme => ({
 export default function AutomationPotential({ processDetails }) {
     const classes = useStyles();
 
-    console.log('score', processDetails.score)
-    console.log('details', processDetails.details)
 
     // some other conditional that actually checks for what it's supposed to
     if (!processDetails.scores.length) {
