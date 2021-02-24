@@ -1,5 +1,31 @@
 Things to add:
 
+Find out what needs to be changed
+
+
+
+
+
+See if there's a reason not to have subgroup on Score model
+
+How to test average scores per subgroup?
+
+Sharing assessment results with other people since it takes a long time?
+
+Should there be a way to save the results of a particular assessment?
+
+Snackbar after form submission?
+
+Back button should also be disabled after form submission
+
+Typos in assessment questions
+
+Automation assessment not every textfield is getting filled with initial value
+
+ProcessLenz UI Kit
+
+Should the alignment take into account the actual results? How do you know if the process will actually achieve the goals you want?
+
 Config weights - weights are part of the question, there should be an edit questions page 
 and changing weights of existing questions is one part of that. Or it can be how it is on the original
 for now
