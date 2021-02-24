@@ -24,7 +24,7 @@ export default function AutomationPotential({ processDetails }) {
     const classes = useStyles();
 
 
-    // some other conditional that actually checks for what it's supposed to
+    // If there are no scores, it means no questions on the form have been answered
     if (!processDetails.scores.length) {
         return (
             <Card className={classes.root}>
@@ -51,8 +51,6 @@ export default function AutomationPotential({ processDetails }) {
         )
     }
 
-    // scores are calculated by multiplying the weight for the question by the value of the answer
-    // subgroup score is the average of the scores for that subgroup
 
     // alignment is from sliders on process form compared to sliders on company objectives
 
@@ -60,10 +58,10 @@ export default function AutomationPotential({ processDetails }) {
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 <Grid item lg={6}>
-                    <AutomationScores processDetails={processDetails} />
+                    <AutomationScores scores={processDetails.scores} average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup} />
                 </Grid>
                 <Grid item lg={6}>
-                    <RadarChartCard score={processDetails.score} median_score_potential={processDetails.median_score_potential} />
+                    <RadarChartCard average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup} />
                 </Grid>
                 <Grid item lg={12}>
                     <AutomationScoreDescriptionCard processDetails={processDetails} />

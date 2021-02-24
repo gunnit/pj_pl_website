@@ -11,6 +11,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import { MLabel } from '@material-extend';
+import { fData } from 'utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -31,25 +32,24 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RadarChartCard({ score, median_score_potential }) {
+export default function RadarChartCard({ average_scores_per_subgroup }) {
     const classes = useStyles();
 
     const theme = useTheme();
 
+
+    // This is so the chart data and category labels will be based on the same order. In the future, the subgroups should have a specific order every time
+    const subgroups = Object.keys(average_scores_per_subgroup)
+
     const CHART_DATA = [
         {
             name: 'Series 1',
-            data: [
-                score.avg_score_bottlenecks,
-                score.tot_score_dataquality,
-                score.tot_score_datacomplexity,
-                score.tot_score_technology,
-                score.tot_score_transformation,
-                score.tot_score_driversforchange,
-                score.tot_score_scalability,
-            ]
+            data: subgroups.map(subgroup => average_scores_per_subgroup[subgroup].average)
         },
     ];
+
+    const totalAverageOfSubgroups = Object.values(average_scores_per_subgroup).reduce((currentSum, subgroup) => (currentSum + parseFloat(subgroup.average)), 0) / subgroups.length
+
 
 
     const chartOptions = merge(ApexChartsOption(), {
@@ -57,15 +57,7 @@ export default function RadarChartCard({ score, median_score_potential }) {
         fill: { opacity: 0.48 },
         legend: { position: 'bottom', horizontalAlign: 'center' },
         xaxis: {
-            categories: [
-                'Bottlenecks',
-                'Data Quality',
-                'Data Complexity',
-                'Technology',
-                'Transformation',
-                'Drivers for Change',
-                'Scalability',
-            ],
+            categories: subgroups,
             labels: {
                 style: {
                     colors: [
@@ -87,7 +79,7 @@ export default function RadarChartCard({ score, median_score_potential }) {
                 <div className={classes.cardHeader}>
                     <Typography>Automation Score:</Typography>
                     <MLabel className={classes.cardLabel} variant="filled" color={"primary"}>
-                        {median_score_potential}
+                        {totalAverageOfSubgroups.toFixed(2)}
                     </MLabel>
                 </div>
             } />

@@ -39,7 +39,7 @@ const ACCORDIONS = [...Array(4)].map((accordion, index) => {
 });
 
 
-export default function AutomationScores({ processDetails: { score, details } }) {
+export default function AutomationScores({ scores, average_scores_per_subgroup }) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
 
@@ -68,56 +68,56 @@ export default function AutomationScores({ processDetails: { score, details } })
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.avg_score_bottlenecks,
+            subHeading: 'score.avg_score_bottlenecks',
             text: (
                 <>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Multiple Data Sources:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.multiple_data_sources}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Demand Fluctuation:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.demand_fluctuation}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Execution Frequency:
                         <Typography variant='subtitle1'>not answered</Typography>
                         <MLabel variant="filled" color={"primary"}>
-                            {details.frequency}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Real Time:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.real_time}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Supervisor Number:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.supervisor_number}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Data Gathering Footprint:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.data_gathering_footprint}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Time for execution:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.time_for_execution}
+
                         </MLabel>
                     </Typography>
                     <Typography gutterBottom variant='subtitle2' color='textSecondary'>
                         Staff Shuffling Present:
                         <MLabel variant="filled" color={"primary"}>
-                            {details.shuffle_staffing}
+
                         </MLabel>
                     </Typography>
                 </>
@@ -126,37 +126,37 @@ export default function AutomationScores({ processDetails: { score, details } })
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.tot_score_dataquality,
+            subHeading: 'score.tot_score_dataquality',
             text: ''
         },
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.tot_score_datacomplexity,
+            subHeading: 'score.tot_score_datacomplexity',
             text: ''
         },
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.tot_score_technology,
+            subHeading: 'score.tot_score_technology',
             text: ''
         },
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.tot_score_transformation,
+            subHeading: 'score.tot_score_transformation',
             text: ''
         },
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.tot_score_driversforchange,
+            subHeading: 'score.tot_score_driversforchange',
             text: ''
         },
         {
             value: `panel0`,
             heading: `Accordion0`,
-            subHeading: score.tot_score_scalability,
+            subHeading: 'score.tot_score_scalability',
             text: ''
         },
     ]
