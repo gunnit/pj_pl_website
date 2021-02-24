@@ -5,8 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     TextField,
     MenuItem,
+    InputAdornment
 } from '@material-ui/core';
-
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -54,6 +57,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.robot_license_cost && errors.robot_license_cost)}
                     // helperText={touched.robot_license_cost && errors.robot_license_cost}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -65,6 +72,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.robot_working_days_per_year && errors.robot_working_days_per_year)}
                     // helperText={touched.robot_working_days_per_year && errors.robot_working_days_per_year}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">days</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -76,6 +87,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.robot_working_hours_per_day && errors.robot_working_hours_per_day)}
                     // helperText={touched.robot_working_hours_per_day && errors.robot_working_hours_per_day}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">hours</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -87,6 +102,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.completion_time_robot && errors.completion_time_robot)}
                     // helperText={touched.completion_time_robot && errors.completion_time_robot}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">minutes</InputAdornment>,
+                    }}
                 />
 
 

@@ -312,7 +312,7 @@ export default function DevelopmentTable({ processes }) {
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={`${id}${index}`}
                         tabIndex={-1}
                         className={classes.row}
                       >
@@ -394,7 +394,7 @@ export default function DevelopmentTable({ processes }) {
           {[{ text: 'View details', path: PATH_APP.processes.details },
           { text: 'Update', path: PATH_APP.processes.update },
           { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
-            <RouterLink to={option.path} className={classes.routerLink}>
+            <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
               <MenuItem key={option.text} onClick={handleClose}>
                 {option.text}
               </MenuItem>

@@ -143,10 +143,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function createData(id, moveToPipeline, process_name, alignment, process_critical, process_objective, num_of_manual_steps, nature_of_process, test_env_available, owner_name) {
-  return { id, moveToPipeline, process_name, alignment, process_critical, process_objective, num_of_manual_steps, nature_of_process, test_env_available, owner_name };
-}
-
 
 export default function IdeasTable({ processes }) {
   const classes = useStyles();
@@ -254,14 +250,14 @@ export default function IdeasTable({ processes }) {
   const isProductNotFound = filteredProcesses.length === 0;
 
   return (
-    <Container>
+    <Container className={classes.root}>
       <Card className={classes.card}>
         <ToolbarTable
           numSelected={selected.length}
           filterName={filterName}
           onFilterName={handleFilterByName}
         />
-        <Scrollbars>
+        <Scrollbars className={classes.root}>
           <TableContainer component={Box} sx={{ minWidth: 800 }}>
             <Table>
               <HeadTable

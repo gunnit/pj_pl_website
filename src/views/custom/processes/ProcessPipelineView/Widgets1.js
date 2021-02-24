@@ -44,7 +44,7 @@ function Widgets1({ className, total, amount, ...other }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const chartData = [44];
+  const chartData = [(amount / total * 100).toFixed(0)];
   const chartOptions = merge(ApexChartsOption(), {
     chart: { sparkline: { enabled: true } },
     legend: { show: false },
@@ -74,7 +74,7 @@ function Widgets1({ className, total, amount, ...other }) {
         options={chartOptions}
       />
       <Box sx={{ ml: 3, color: 'white' }}>
-      <Typography variant="h4"> {fNumber(amount)} {amount !== 1 ? 'processes' : 'process'}</Typography>
+        <Typography variant="h4">{fNumber(amount)} {amount !== 1 ? 'processes' : 'process'}</Typography>
         <Box sx={{ typography: 'body2', opacity: 0.72 }}>Suggested to move to development</Box>
       </Box>
       <Icon icon={thumbsUp} className={classes.icon} />

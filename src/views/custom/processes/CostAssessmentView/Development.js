@@ -5,8 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     TextField,
     MenuItem,
+    InputAdornment
 } from '@material-ui/core';
-
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import WorkOutlineIcon from '@material-ui/icons/WorkOutline';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -55,6 +58,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.internal_developer_cost && errors.internal_developer_cost)}
                     // helperText={touched.internal_developer_cost && errors.internal_developer_cost}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -78,6 +85,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.average_developer_cost && errors.average_developer_cost)}
                     // helperText={touched.average_developer_cost && errors.average_developer_cost}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+                    }}
                 />
 
                 <TextField
@@ -100,6 +111,10 @@ export default function UpdateProcessFormCharacteristics({ formik, className, ..
                     error={Boolean(touched.required_process_days && errors.required_process_days)}
                     // helperText={touched.required_process_days && errors.required_process_days}
                     className={classes.margin}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start"><ScheduleIcon /></InputAdornment>,
+                        endAdornment: <InputAdornment position="end">days</InputAdornment>,
+                    }}
                 />
 
                 <TextField

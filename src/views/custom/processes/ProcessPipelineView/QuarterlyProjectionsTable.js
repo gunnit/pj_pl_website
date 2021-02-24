@@ -44,9 +44,9 @@ export default function QuarterlyCashFlow({ data: {
 
 
   const rows = [
-    { cells: total_process_quarter_ideas_with_automation },
-    { cells: total_process_quarter_ideas_with_no_automation },
-    { cells: total_process_quarter_ideas_saving },
+    { cells: total_process_quarter_ideas_with_automation, id: 'withAutomation' },
+    { cells: total_process_quarter_ideas_with_no_automation, id: 'withoutAutomation' },
+    { cells: total_process_quarter_ideas_saving, id: 'savings' },
   ]
 
 
@@ -69,7 +69,7 @@ export default function QuarterlyCashFlow({ data: {
                     classes={{ head: classes.tableHead }}
                   >
                     Year 1
-                                    </TableCell>
+                  </TableCell>
                   <TableCell
                     align="left"
                     colSpan={3}
@@ -81,7 +81,7 @@ export default function QuarterlyCashFlow({ data: {
                     classes={{ head: classes.tableHead }}
                   >
                     Year 2
-                                    </TableCell>
+                  </TableCell>
                   <TableCell
                     align="right"
                     colSpan={3}
@@ -109,7 +109,7 @@ export default function QuarterlyCashFlow({ data: {
               <TableBody>
                 {rows.map((row, i) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       {i === 0
                         && <TableCell align='left'>
                           Cost Without Automation
@@ -122,9 +122,9 @@ export default function QuarterlyCashFlow({ data: {
                         && <TableCell align='left'>
                           Savings
                                                    </TableCell>}
-                      {row.cells.map(cell => {
+                      {row.cells.map((cell, i) => {
                         return (
-                          <TableCell key={cell}
+                          <TableCell key={`${cell}${i}`}
                           // align={column.align}
                           >
                             {/* {column.format && typeof value === 'number'
