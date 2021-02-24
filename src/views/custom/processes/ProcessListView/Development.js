@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
     )} 0%, ${alpha(theme.palette.warning.dark, 0.24)} 100%)`
   }
 }));
-
 // ----------------------------------------------------------------------
 
 

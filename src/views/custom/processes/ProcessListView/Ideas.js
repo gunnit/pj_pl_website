@@ -14,9 +14,8 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     textAlign: 'center',
     padding: theme.spacing(5, 0),
-    color: theme.palette.primary.darker,
-    backgroundColor: theme.palette.primary.lighter,
-    // minWidth: 240
+    color: theme.palette.info.darker,
+    backgroundColor: theme.palette.info.lighter,
     width: '100%',
     '&:hover': {
       cursor: 'default'
@@ -31,11 +30,11 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(8),
     justifyContent: 'center',
     marginBottom: theme.spacing(3),
-    color: theme.palette.primary.dark,
+    color: theme.palette.info.dark,
     backgroundImage: `linear-gradient(135deg, ${alpha(
-      theme.palette.primary.dark,
+      theme.palette.info.dark,
       0
-    )} 0%, ${alpha(theme.palette.primary.dark, 0.24)} 100%)`
+    )} 0%, ${alpha(theme.palette.info.dark, 0.24)} 100%)`
   }
 }));
 

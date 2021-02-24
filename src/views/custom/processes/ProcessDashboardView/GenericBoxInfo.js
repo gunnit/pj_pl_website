@@ -1,9 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import ideaIcon from '@iconify-icons/el/idea';
-import { fNumber, fPercent } from 'utils/formatNumber';
+import { fNumber } from 'utils/formatNumber';
 import trendingUpFill from '@iconify-icons/eva/trending-up-fill';
 import trendingDownFill from '@iconify-icons/eva/trending-down-fill';
 import { useTheme, alpha, makeStyles } from '@material-ui/core/styles';
@@ -43,10 +42,10 @@ const useStyles = makeStyles(theme => ({
     icon: {
         width: 120,
         height: 120,
-        opacity: 0.12,
+        opacity: 0.6,
         position: 'absolute',
-        right: theme.spacing(-3),
-        color: theme.palette.common.white
+        right: theme.spacing(3),
+        // color: theme.palette.common.white
     }
 }));
 
@@ -55,15 +54,17 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function GenericBoxInfo({ className, numberOfItems, infoType, mainNumber, secondaryNumber, chartColor, ...other }) {
+function GenericBoxInfo({
+    className,
+    numberOfItems,
+    infoType,
+    mainNumber,
+    secondaryNumber,
+    iconColor,
+    icon,
+    ...other
+}) {
     const classes = useStyles();
-    const theme = useTheme();
-
-    const chartData = [{
-        data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19].map(num => {
-            return Math.random() * num
-        })
-    }];
 
 
     return (
@@ -96,12 +97,12 @@ function GenericBoxInfo({ className, numberOfItems, infoType, mainNumber, second
                         {secondaryNumber}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="span">
-                        &nbsp;number of processes
+                        &nbsp;processes
                     </Typography>
                 </div>
             </Box>
 
-            <Icon icon={ideaIcon} className={classes.icon} />
+            <Icon icon={icon} className={classes.icon} color={iconColor} />
         </Card>
     );
 }

@@ -19,6 +19,12 @@ import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import Page500View from 'views/errors/Page500View';
 import { PATH_APP } from 'routes/paths';
+import ideaIcon from '@iconify-icons/el/idea';
+import rocket11 from '@iconify-icons/maki/rocket-11';
+import gearsIcon from '@iconify-icons/whh/gears';
+import raceflagIcon from '@iconify-icons/whh/raceflag';
+
+
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -91,7 +97,8 @@ export default function ProcessDashboardView() {
                                     infoType={'Ideas'}
                                     mainNumber={dashboard.net_benefit_sum_idea}
                                     secondaryNumber={dashboard.processes_idea_count}
-                                    chartColor={theme.palette.primary.main}
+                                    iconColor={theme.palette.info.main}
+                                    icon={ideaIcon}
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
@@ -100,7 +107,8 @@ export default function ProcessDashboardView() {
                                     infoType={'Pipeline'}
                                     mainNumber={dashboard.net_benefit_sum_pipeline}
                                     secondaryNumber={dashboard.processes_pipeline_count}
-                                    chartColor={theme.palette.info.main}
+                                    iconColor={theme.palette.error.main}
+                                    icon={rocket11}
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
@@ -109,7 +117,8 @@ export default function ProcessDashboardView() {
                                     infoType={'Development'}
                                     mainNumber={dashboard.net_benefit_sum_development}
                                     secondaryNumber={dashboard.processes_development_count}
-                                    chartColor={theme.palette.warning.main}
+                                    iconColor={theme.palette.warning.main}
+                                    icon={gearsIcon}
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
@@ -118,7 +127,8 @@ export default function ProcessDashboardView() {
                                     infoType={'Production'}
                                     mainNumber={dashboard.net_benefit_sum_production}
                                     secondaryNumber={dashboard.processes_production_count}
-                                    chartColor={theme.palette.error.main}
+                                    iconColor={theme.palette.primary.main}
+                                    icon={raceflagIcon}
                                 />
                             </Grid>
                         </Grid>
