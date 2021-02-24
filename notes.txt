@@ -4,8 +4,9 @@ See if anything else needs to be changed
 
 Profile?
 
+Select field stuck on option?
 
-
+Loading screen and top line thing?
 
 See if there's a reason not to have subgroup on Score model
 

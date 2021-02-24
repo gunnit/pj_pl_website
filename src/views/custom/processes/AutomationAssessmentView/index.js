@@ -182,8 +182,10 @@ export default function AutomationAssessmentView() {
     const [formikInitialValues, setFormikInitialValues] = useState({})
     const [formikValues, setFormikValues] = useState({})
     const [weights, setWeights] = useState({})
+    const [answerTexts, setAnswerTexts] = useState({})
     const [subgroups, setSubgroups] = useState(null)
     const [openDialog, setOpenDialog] = useState(false);
+    const [scoreSubgroups, setScoreSubgroups] = useState({})
 
     const handleCloseDialog = value => {
         setOpenDialog(false);
@@ -244,7 +246,7 @@ export default function AutomationAssessmentView() {
 
                 const res = await fetch(`${apiBaseUrl}/automation_assessment/${userId}/${currentProcessId || storedProcessId}`, {
                     method: 'POST',
-                    body: JSON.stringify({ ...formikValues, weights: { ...weights } }),
+                    body: JSON.stringify({ ...formikValues, weights, answerTexts, scoreSubgroups }),
                     headers: {
                         "Content-Type": 'application/json',
                         'Authorization': token
@@ -315,12 +317,19 @@ export default function AutomationAssessmentView() {
 
                 const weights = {}
 
+                const answerTexts = {}
+
+                const scoreSubgroups = {}
+
                 questions.forEach(question => {
 
                     if (question.score) {
                         initialValues[question.id] = question.score.answer // this is a number as a string
+                        answerTexts[question.id] = question.score.answer_text // display text of the answer. ex: "Yes", "No", "Often"
+                        scoreSubgroups[question.id] = question.subgroup // store subgroup in a way that can be matched to score easily
                     } else {
                         initialValues[question.id] = '0'
+                        answerTexts[question.id] = 'Not Answered'
                     }
 
                     weights[question.id] = question.weight
@@ -336,6 +345,8 @@ export default function AutomationAssessmentView() {
                 setFormikInitialValues(initialValues)
                 setQuestions(questionsSortedBySubgroup)
                 setWeights(weights)
+                setAnswerTexts(answerTexts)
+                setScoreSubgroups(scoreSubgroups)
 
             })()
         }
@@ -370,9 +381,16 @@ export default function AutomationAssessmentView() {
                                             label={question.title}
                                             onChange={(e) => {
                                                 handleChange(e)
+
                                                 // Why? I think it had to do with scope and not wanting to rearrange everything
-                                                setFormikValues(values)
-                                                // setAnswerTexts(previous => ({...previous, }))
+                                                setFormikValues({ ...values, [question.id]: e.target.value })
+
+                                                // Don't know how else to get the text of the answer aside from looking through the answers array and matching it to the value
+                                                const answerText = question.answers.filter(answer => {
+                                                    return answer.value.toString() === e.target.value
+                                                })[0].text
+
+                                                setAnswerTexts(previous => ({ ...previous, [question.id]: answerText }))
                                             }}
                                             // Formik uses the name as the key to keep track of the field in the values object like this: values[name]
                                             name={question.id}
@@ -380,7 +398,6 @@ export default function AutomationAssessmentView() {
                                             className={classes.margin}
                                         >
                                             {question.answers.map((answer, i) => (
-                                                // database expects value as a string
                                                 <MenuItem key={`${answer.text}${i}`} value={answer.value.toString()}>
                                                     {answer.text}
                                                 </MenuItem>
