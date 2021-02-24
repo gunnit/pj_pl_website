@@ -67,6 +67,7 @@ export const PATH_APP = {
     likedProcesses: path(ROOTS.app, '/discovery/liked-processes'),
     taxonomy: path(ROOTS.app, '/discovery/taxonomy'),
     processSearch: path(ROOTS.app, '/discovery/process-search'),
+    category: path(ROOTS.app, '/discovery/category'),
   },
 };
 

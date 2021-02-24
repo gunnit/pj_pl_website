@@ -18,7 +18,7 @@ import LoadingScreen from 'components/LoadingScreen';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import Page500View from 'views/errors/Page500View';
-
+import { PATH_APP } from 'routes/paths';
 
 const useStyles = makeStyles(theme => ({
     root: {}
@@ -161,7 +161,7 @@ export default function ProcessDashboardView() {
                                 title={'Define a Vision'}
                                 description={'Create a vision for your digital workforce based on organizational strategy and goals, that support long term intelligent automation processes.'}
                                 imagePath={'/static/images/process/undraw_statistic_chart_38b6.svg'}
-                                clickPath={''}
+                                clickPath={PATH_APP.processes.new}
                             />
                         </Grid>
                         <Grid item xs={12} md={3} lg={3} >

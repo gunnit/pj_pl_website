@@ -20,6 +20,7 @@ import TaxonomyView from 'views/custom/discovery/TaxonomyView';
 import ProcessSearchView from 'views/custom/discovery/ProcessSearchView';
 import AutomationAssessmentView from 'views/custom/processes/AutomationAssessmentView';
 import CostAssessmentView from 'views/custom/processes/CostAssessmentView';
+import CategoryView from 'views/custom/discovery/CategoryView';
 
 // ----------------------------------------------------------------------
 
@@ -139,6 +140,11 @@ const AppRoutes = {
       exact: true,
       path: PATH_APP.discovery.processSearch,
       component: ProcessSearchView
+    },
+    {
+      exact: true,
+      path: PATH_APP.discovery.category,
+      component: CategoryView
     },
     {
       exact: true,
