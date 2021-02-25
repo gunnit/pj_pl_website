@@ -19,6 +19,8 @@ import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
 import LoadingScreen from 'components/LoadingScreen';
 import Page500View from 'views/errors/Page500View';
+import { useSnackbar } from 'notistack';
+
 
 
 // ----------------------------------------------------------------------
@@ -54,6 +56,9 @@ export default function ObjectivesView() {
     const [pending, setPending] = useState(false)
     const [error, setError] = useState(false)
 
+    const { enqueueSnackbar } = useSnackbar();
+
+
     const { userId } = useContext(Context)
 
     useEffect(() => {
@@ -77,6 +82,8 @@ export default function ObjectivesView() {
                     setSliderValues(await res.json())
 
                 })()
+
+
             }
 
 
@@ -109,6 +116,9 @@ export default function ObjectivesView() {
             if (!res.ok) {
                 throw res
             }
+
+            setPending(false)
+            enqueueSnackbar('Saved!', { variant: 'success' })
 
         } catch (e) {
             setError(true)
