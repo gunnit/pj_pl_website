@@ -71,12 +71,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Direct Cost Reduction</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.cost_reduction}
+                    defaultValue={parseInt(sliderValues.cost_reduction)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, cost_reduction: value }))}
                 />
@@ -90,12 +90,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Reduce Process Duration</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.reduce_process_duration}
+                    defaultValue={parseInt(sliderValues.reduce_process_duration)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, reduce_process_duration: value }))}
                 />
@@ -109,12 +109,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Improve Accuracy</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.improve_accuracy}
+                    defaultValue={parseInt(sliderValues.improve_accuracy)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_accuracy: value }))}
                 />
@@ -129,12 +129,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Improve Audit Trail</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.enable_audit_trail}
+                    defaultValue={parseInt(sliderValues.enable_audit_trail)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_audit_trail: value }))}
                 />
@@ -149,12 +149,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Enable Scalability of Automation</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.enable_scalability}
+                    defaultValue={parseInt(sliderValues.enable_scalability)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_scalability: value }))}
                 />
@@ -170,12 +170,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Security</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.improve_security}
+                    defaultValue={parseInt(sliderValues.improve_security)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_security: value }))}
                 />
@@ -189,12 +189,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Improve Consistency</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.improve_consistency}
+                    defaultValue={parseInt(sliderValues.improve_consistency)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_consistency: value }))}
                 />
@@ -208,12 +208,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Improve Reliability</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.improve_reliability}
+                    defaultValue={parseInt(sliderValues.improve_reliability)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_reliability: value }))}
                 />
@@ -229,12 +229,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Client Satisfaction</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.client_satisfaction}
+                    defaultValue={parseInt(sliderValues.client_satisfaction)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, client_satisfaction: value }))}
                 />
@@ -250,12 +250,12 @@ export default function UpdateProcessFormRequirements({ formik, onOpenPreview, a
                 <Typography gutterBottom>Increase Retention</Typography>
                 <Slider
                     color='secondary'
-                    defaultValue={sliderValues.increase_retention}
+                    defaultValue={parseInt(sliderValues.increase_retention)}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, increase_retention: value }))}
                 />

@@ -89,7 +89,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, cost_reduction: value }))}
                 />
@@ -107,7 +107,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, reduce_process_duration: value }))}
                 />
@@ -125,7 +125,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_accuracy: value }))}
                 />
@@ -144,7 +144,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_audit_trail: value }))}
                 />
@@ -163,7 +163,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_scalability: value }))}
                 />
@@ -183,7 +183,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_security: value }))}
                 />
@@ -201,7 +201,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_consistency: value }))}
                 />
@@ -219,7 +219,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_reliability: value }))}
                 />
@@ -239,7 +239,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, client_satisfaction: value }))}
                 />
@@ -259,7 +259,7 @@ function NewProcessFormRequirements({ formik, onOpenPreview, applications, setSl
                     valueLabelDisplay="auto"
                     step={1}
                     marks
-                    min={1}
+                    min={0}
                     max={10}
                     onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, increase_retention: value }))}
                 />

@@ -18,6 +18,7 @@ import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
 import LoadingScreen from 'components/LoadingScreen';
+import Page500View from 'views/errors/Page500View';
 
 
 // ----------------------------------------------------------------------
@@ -49,24 +50,59 @@ function valuetext(value) {
 export default function ObjectivesView() {
     const classes = useStyles()
 
-    const [sliderValues, setSliderValues] = useState({
-        cost_reduction: 7,
-        reduce_process_duration: 7,
-        improve_accuracy: 7,
-        enable_audit_trail: 7,
-        enable_scalability: 7,
-        improve_security: 7,
-        client_satisfaction: 7,
-        improve_consistency: 7,
-        improve_reliability: 7,
-        increase_retention: 7
-    })
+    const [sliderValues, setSliderValues] = useState(null)
     const [pending, setPending] = useState(false)
+    const [error, setError] = useState(false)
+
+    const { userId } = useContext(Context)
+
+    useEffect(() => {
+        try {
+
+            if (userId) {
+                (async function () {
+
+                    const token = await firebase.auth().currentUser.getIdToken(true);
+
+                    const res = await fetch(`${apiBaseUrl}/company_objectives/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+
+                    if (!res.ok) {
+                        throw res
+                    }
+
+                    setSliderValues(await res.json())
+
+                })()
+            }
+
+
+
+        } catch (e) {
+            setError(true)
+        }
+
+    }, [userId])
+
 
     const handleSave = () => {
         setPending(true)
 
+
+
     }
+
+    if (error) {
+        return <Page500View />
+    }
+
+    if (!sliderValues) {
+        return <LoadingScreen />
+    }
+
 
 
     return (
@@ -83,12 +119,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Direct Cost Reduction</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.cost_reduction)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, cost_reduction: value }))}
                         />
@@ -103,12 +139,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Reduce Process Duration</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.reduce_process_duration)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, reduce_process_duration: value }))}
                         />
@@ -124,12 +160,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Improve Accuracy</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.improve_accuracy)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_accuracy: value }))}
                         />
@@ -146,12 +182,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Improve Audit Trail</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.enable_audit_trail)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_audit_trail: value }))}
                         />
@@ -167,12 +203,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Enable Scalability of Automation</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.enable_scalability)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, enable_scalability: value }))}
                         />
@@ -190,12 +226,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Security</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.improve_security)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_security: value }))}
                         />
@@ -211,12 +247,12 @@ export default function ObjectivesView() {
                         <Typography gutterBottom>Improve Consistency</Typography>
                         <Slider
                             className={classes.slider}
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.improve_consistency)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_consistency: value }))}
                         />
@@ -230,12 +266,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Improve Reliability</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.improve_reliability)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, improve_reliability: value }))}
                         />
@@ -253,12 +289,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Client Satisfaction</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.client_satisfaction)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, client_satisfaction: value }))}
                         />
@@ -274,12 +310,12 @@ export default function ObjectivesView() {
 
                         <Typography gutterBottom>Increase Retention</Typography>
                         <Slider
-                            defaultValue={7}
+                            defaultValue={parseInt(sliderValues.increase_retention)}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
                             marks
-                            min={1}
+                            min={0}
                             max={10}
                             onChangeCommitted={(e, value) => setSliderValues(sliderValues => ({ ...sliderValues, increase_retention: value }))}
                         />
