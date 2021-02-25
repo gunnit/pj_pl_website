@@ -298,163 +298,161 @@ export default function DevelopmentTable({ processes }) {
   const isProductNotFound = filteredProcesses.length === 0;
 
   return (
-    <Container className={classes.root}>
-      <Card className={classes.card} className={classes.root}>
-        <ToolbarTable
-          numSelected={selected.length}
-          filterName={filterName}
-          onFilterName={handleFilterByName}
-        />
+    <Card className={classes.card} className={classes.root}>
+      <ToolbarTable
+        numSelected={selected.length}
+        filterName={filterName}
+        onFilterName={handleFilterByName}
+      />
 
-        <Scrollbars>
-          <TableContainer component={Box} sx={{ minWidth: 800 }}>
-            <Table>
-              <HeadTable
-                order={order}
-                classes={classes}
-                orderBy={orderBy}
-                headLabel={TABLE_HEAD}
-                rowCount={processes.length}
-                numSelected={selected.length}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                {filteredProcesses
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(({
-                    id,
-                    pipline: pipeline,
-                    final_process_score,
-                    process_name,
-                    processobjectives: {
-                      total_alignment_score_coverted
-                    },
-                    process_score,
-                    processassumptions: {
-                      current_process_cost_calc, // cost without automation
-                      tot_future_process_cost,
-                      total_net_benefit, // cost with automation
-                    },
-                    business_unit,
-                    function: processFunction, // because function is a reserved word
-                  }, index) => {
+      <Scrollbars>
+        <TableContainer component={Box} sx={{ minWidth: 800 }}>
+          <Table>
+            <HeadTable
+              order={order}
+              classes={classes}
+              orderBy={orderBy}
+              headLabel={TABLE_HEAD}
+              rowCount={processes.length}
+              numSelected={selected.length}
+              onRequestSort={handleRequestSort}
+            />
+            <TableBody>
+              {filteredProcesses
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(({
+                  id,
+                  pipline: pipeline,
+                  final_process_score,
+                  process_name,
+                  processobjectives: {
+                    total_alignment_score_coverted
+                  },
+                  process_score,
+                  processassumptions: {
+                    current_process_cost_calc, // cost without automation
+                    tot_future_process_cost,
+                    total_net_benefit, // cost with automation
+                  },
+                  business_unit,
+                  function: processFunction, // because function is a reserved word
+                }, index) => {
 
-                    // Overall Rating	Process Name	Objective Alignment	Automation Score	Cost Without Automation	Cost With Automation	Saving	Owner
+                  // Overall Rating	Process Name	Objective Alignment	Automation Score	Cost Without Automation	Cost With Automation	Saving	Owner
 
-                    const labelId = `enhanced-table-checkbox-${index}`;
+                  const labelId = `enhanced-table-checkbox-${index}`;
 
-                    return (
-                      <TableRow
-                        hover
-                        key={`${id}${index}`}
-                        tabIndex={-1}
-                        className={classes.row}
+                  return (
+                    <TableRow
+                      hover
+                      key={`${id}${index}`}
+                      tabIndex={-1}
+                      className={classes.row}
+                    >
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
                       >
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                        >
-                          {/* >= 20 means suggested to move to development, >= 10 means evaluate before moving to development, otherwise not suggested */}
-                          {final_process_score >= 20 ? 'Move' : final_process_score >= 10 ? 'Evaluate' : 'Not suggested'}
-                        </TableCell>
-                        <TableCell align="right">{process_name}</TableCell>
-                        <TableCell align="right">
-                          <MLabel variant="filled" color="info">
-                            {total_alignment_score_coverted}
-                          </MLabel>
-                        </TableCell>
-                        <TableCell align="right">{process_score === 0 ? 'Not completed' : process_score}</TableCell>
-                        <TableCell align="right">{current_process_cost_calc}</TableCell>
-                        <TableCell align="right">{tot_future_process_cost}</TableCell>
-                        <TableCell align="right">
-                          <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : "error"}>
-                            {total_net_benefit}
-                          </MLabel>
-                        </TableCell>
-                        {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
-                        <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
-                            <Icon
-                              icon={moreVerticalFill}
-                              width={20}
-                              height={20}
-                            />
-                          </IconButton>
-                        </TableCell>
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
-                            <ArrowBackIcon />
-                          </IconButton>
-                        </TableCell>
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findNextStage(pipeline), true, id)}>
-                            <ArrowForwardIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-              {isProductNotFound && (
-                <TableBody>
-                  <TableRow>
-                    <TableCell align="center" colSpan={6}>
-                      <Box sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
+                        {/* >= 20 means suggested to move to development, >= 10 means evaluate before moving to development, otherwise not suggested */}
+                        {final_process_score >= 20 ? 'Move' : final_process_score >= 10 ? 'Evaluate' : 'Not suggested'}
+                      </TableCell>
+                      <TableCell align="right">{process_name}</TableCell>
+                      <TableCell align="right">
+                        <MLabel variant="filled" color="info">
+                          {total_alignment_score_coverted}
+                        </MLabel>
+                      </TableCell>
+                      <TableCell align="right">{process_score === 0 ? 'Not completed' : process_score}</TableCell>
+                      <TableCell align="right">{current_process_cost_calc}</TableCell>
+                      <TableCell align="right">{tot_future_process_cost}</TableCell>
+                      <TableCell align="right">
+                        <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : "error"}>
+                          {total_net_benefit}
+                        </MLabel>
+                      </TableCell>
+                      {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
+                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
+                      <TableCell align="right">
+                        <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                          <Icon
+                            icon={moreVerticalFill}
+                            width={20}
+                            height={20}
+                          />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell align="right">
+                        <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
+                          <ArrowBackIcon />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell align="right">
+                        <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findNextStage(pipeline), true, id)}>
+                          <ArrowForwardIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
               )}
-            </Table>
-          </TableContainer>
-        </Scrollbars>
+            </TableBody>
+            {isProductNotFound && (
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center" colSpan={6}>
+                    <Box sx={{ py: 3 }}>
+                      <SearchNotFound searchQuery={filterName} />
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            )}
+          </Table>
+        </TableContainer>
+      </Scrollbars>
 
-        <Menu
-          keepMounted
-          id="simple-menu"
-          anchorEl={isOpen}
-          onClose={handleClose}
-          open={Boolean(isOpen)}
-        >
-          {[{ text: 'View details', path: PATH_APP.processes.details },
-          { text: 'Update', path: PATH_APP.processes.update },
-          { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
-            <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
-              <MenuItem key={option.text} onClick={handleClose}>
-                {option.text}
-              </MenuItem>
-            </RouterLink>
-          ))}
-        </Menu>
+      <Menu
+        keepMounted
+        id="simple-menu"
+        anchorEl={isOpen}
+        onClose={handleClose}
+        open={Boolean(isOpen)}
+      >
+        {[{ text: 'View details', path: PATH_APP.processes.details },
+        { text: 'Update', path: PATH_APP.processes.update },
+        { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+          <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
+            <MenuItem key={option.text} onClick={handleClose}>
+              {option.text}
+            </MenuItem>
+          </RouterLink>
+        ))}
+      </Menu>
 
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={processes.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={processes.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
 
-        <Dialog open={!!openDialog} onClose={() => handleCloseDialog()}>
-          {openDialog &&
-            <>
-              <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage} phase?</DialogTitle>
-              <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
-              <Button color='error'>Cancel</Button>
-            </>}
-        </Dialog>
-      </Card>
-    </Container>
+      <Dialog open={!!openDialog} onClose={() => handleCloseDialog()}>
+        {openDialog &&
+          <>
+            <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage} phase?</DialogTitle>
+            <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
+            <Button color='error'>Cancel</Button>
+          </>}
+      </Dialog>
+    </Card>
   );
 }

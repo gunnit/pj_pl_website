@@ -3,13 +3,14 @@ import firebase from 'firebase/app';
 import React, { useState, useEffect, useContext } from 'react';
 import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { PATH_WIKI } from 'routes/paths';
 import Table from './Table';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 import Page500View from 'views/errors/Page500View';
 import LoadingScreen from 'components/LoadingScreen';
+import TopCard from './TopCard';
 
 // ----------------------------------------------------------------------
 
@@ -73,7 +74,14 @@ export default function CategoryView() {
     return (
         <Page title="Process Taxonomy" className={classes.root}>
             <Container maxWidth="xl">
-                <Table glossary={glossary} />
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <TopCard title={glossary[0].process_type} />
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Table glossary={glossary} />
+                    </Grid>
+                </Grid>
             </Container>
         </Page>
     );

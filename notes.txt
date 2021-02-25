@@ -1,5 +1,10 @@
 Things to add:
 
+
+What to on top card on category view?
+
+Slider starting at 0 fix error
+
 Owner column in tables is a combination of two things so how to sort
 
 Test tables with better data
@@ -17,6 +22,8 @@ Subgroup and question and maybe answer orders
 Order scores by question ID
 
 Profile?
+
+Related tasks - related how? subtasks?
 
 right margin welcome back text
 

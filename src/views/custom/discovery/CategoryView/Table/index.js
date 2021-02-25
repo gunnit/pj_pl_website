@@ -45,7 +45,7 @@ const TABLE_HEAD = [
     label: 'Hierarchy ID'
   },
   {
-    id: 'process_type',
+    id: 'process_element',
     numeric: false,
     disablePadding: true,
     label: 'Name'
@@ -66,7 +66,7 @@ const TABLE_HEAD = [
     id: 'recommendedforautomation change this ',
     numeric: false,
     disablePadding: true,
-    label: 'Recommended for automation'
+    label: 'Likes'
   },
 ];
 
@@ -108,20 +108,8 @@ function applySortFilter(array, comparator, query) {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {},
-  sortSpan: visuallyHidden,
-  routerLink: {
-    textDecoration: 'none'
-  },
-  centerText: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  dialog: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(3),
+  root: {
+    width: '100%'
   },
 }));
 
@@ -201,120 +189,101 @@ export default function GlossaryTable({ glossary }) {
 
   const isProductNotFound = filteredGlossary.length === 0;
 
-  console.log(glossary)
 
 
 
 
   return (
-    <Container>
-      <Card className={classes.card}>
-        <ToolbarTable
-          numSelected={selected.length}
-          filterName={filterName}
-          onFilterName={handleFilterByName}
-        />
+    <Card className={classes.root}>
+      <ToolbarTable
+        numSelected={selected.length}
+        filterName={filterName}
+        onFilterName={handleFilterByName}
+      />
 
-        <Scrollbars>
-          <TableContainer component={Box} sx={{ minWidth: 800 }}>
-            <Table>
-              <HeadTable
-                order={order}
-                classes={classes}
-                orderBy={orderBy}
-                headLabel={TABLE_HEAD}
-                rowCount={glossary.length}
-                numSelected={selected.length}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                {filteredGlossary
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(({
-                    id,
-                    hierarchy_id,
-                    process_type,
-                    definition,
-                    metric
-                  }, index) => {
+      <Scrollbars>
+        <TableContainer component={Box} sx={{ minWidth: 800 }}>
+          <Table>
+            <HeadTable
+              order={order}
+              classes={classes}
+              orderBy={orderBy}
+              headLabel={TABLE_HEAD}
+              rowCount={glossary.length}
+              numSelected={selected.length}
+              onRequestSort={handleRequestSort}
+            />
+            <TableBody>
+              {filteredGlossary
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(({
+                  id,
+                  hierarchy_id,
+                  process_element,
+                  definition,
+                  metric
+                }, index) => {
 
-                    const isItemSelected = selected.indexOf(process_type) !== -1;
-                    const labelId = `enhanced-table-checkbox-${index}`;
+                  const isItemSelected = selected.indexOf(process_element) !== -1;
+                  const labelId = `enhanced-table-checkbox-${index}`;
 
-                    return (
-                      <TableRow
-                        hover
-                        key={id}
-                        tabIndex={-1}
-                        role="checkbox"
-                        selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                        className={classes.row}
+                  return (
+                    <TableRow
+                      hover
+                      key={id}
+                      tabIndex={-1}
+                      role="checkbox"
+                      selected={isItemSelected}
+                      aria-checked={isItemSelected}
+                      className={classes.row}
+                    >
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
                       >
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                        >
-                          {hierarchy_id}
-                        </TableCell>
-                        <TableCell>{process_type}</TableCell>
-                        <TableCell>{definition}</TableCell>
-                        <TableCell>{metric}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-              {isProductNotFound && (
-                <TableBody>
-                  <TableRow>
-                    <TableCell align="center" colSpan={6}>
-                      <Box sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
+                        {hierarchy_id}
+                      </TableCell>
+                      <TableCell>{process_element}</TableCell>
+                      <TableCell>{definition}</TableCell>
+                      <TableCell>{metric}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
               )}
-            </Table>
-          </TableContainer>
-        </Scrollbars>
+            </TableBody>
+            {isProductNotFound && (
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center" colSpan={6}>
+                    <Box sx={{ py: 3 }}>
+                      <SearchNotFound searchQuery={filterName} />
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            )}
+          </Table>
+        </TableContainer>
+      </Scrollbars>
 
-        <Menu
-          keepMounted
-          id="simple-menu"
-          anchorEl={isOpen}
-          onClose={handleClose}
-          open={Boolean(isOpen)}
-        >
-          {[{ text: 'View details', path: PATH_APP.processes.details },
-          { text: 'Update', path: PATH_APP.processes.update },
-          { text: 'Delete' }].map(option => (
-            <RouterLink to={option.path && option.path} className={classes.routerLink}>
-              <MenuItem key={option.text} onClick={option.text === 'Delete' ? handleCloseDelete : handleClose}>
-                {option.text}
-              </MenuItem>
-            </RouterLink>
-          ))}
-        </Menu>
 
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={glossary.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={glossary.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
 
-        {/* <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+      {/* <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
           {openDialog
             && <>
               <Card className={classes.dialog}>
@@ -336,7 +305,6 @@ export default function GlossaryTable({ glossary }) {
         </Dialog> */}
 
 
-      </Card>
-    </Container>
+    </Card>
   );
 }

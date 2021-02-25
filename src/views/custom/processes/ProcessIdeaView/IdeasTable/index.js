@@ -135,7 +135,9 @@ function applySortFilter(array, comparator, query) {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    width: '100%'
+  },
   sortSpan: visuallyHidden,
   routerLink: {
     textDecoration: 'none'
@@ -266,8 +268,8 @@ export default function IdeasTable({ processes }) {
 
 
   return (
-    <Container className={classes.root}>
-      <Card className={classes.card}>
+    <>
+      <Card className={classes.root}>
         <ToolbarTable
           numSelected={selected.length}
           filterName={filterName}
@@ -432,7 +434,6 @@ export default function IdeasTable({ processes }) {
             <Button color='error'>Cancel</Button>
           </>}
       </Dialog> */}
-
-    </Container>
+    </>
   );
 }

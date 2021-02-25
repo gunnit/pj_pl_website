@@ -145,7 +145,9 @@ function applySortFilter(array, comparator, query) {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    width: '100%'
+  },
   sortSpan: visuallyHidden,
   routerLink: {
     textDecoration: 'none'
@@ -286,158 +288,156 @@ export default function DevelopmentTable({ processes }) {
   const isProductNotFound = filteredProcesses.length === 0;
 
   return (
-    <Container>
-      <Card className={classes.card}>
-        <ToolbarTable
-          numSelected={selected.length}
-          filterName={filterName}
-          onFilterName={handleFilterByName}
-        />
+    <Card className={classes.root}>
+      <ToolbarTable
+        numSelected={selected.length}
+        filterName={filterName}
+        onFilterName={handleFilterByName}
+      />
 
-        <Scrollbars>
-          <TableContainer component={Box} sx={{ minWidth: 800 }}>
-            <Table>
-              <HeadTable
-                order={order}
-                classes={classes}
-                orderBy={orderBy}
-                headLabel={TABLE_HEAD}
-                rowCount={processes.length}
-                numSelected={selected.length}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                {filteredProcesses
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(({
-                    id,
-                    pipline: pipeline,
-                    process_name,
-                    is_past_due,
-                    start_development,
-                    predicted_go_live_date,
-                    processassumptions: {
-                      required_process_days,
-                      total_development_cost,
-                    },
-                    test_env_available,
-                    business_unit,
-                    function: processFunction,
-                  }, index) => {
+      <Scrollbars>
+        <TableContainer component={Box} sx={{ minWidth: 800 }}>
+          <Table>
+            <HeadTable
+              order={order}
+              classes={classes}
+              orderBy={orderBy}
+              headLabel={TABLE_HEAD}
+              rowCount={processes.length}
+              numSelected={selected.length}
+              onRequestSort={handleRequestSort}
+            />
+            <TableBody>
+              {filteredProcesses
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(({
+                  id,
+                  pipline: pipeline,
+                  process_name,
+                  is_past_due,
+                  start_development,
+                  predicted_go_live_date,
+                  processassumptions: {
+                    required_process_days,
+                    total_development_cost,
+                  },
+                  test_env_available,
+                  business_unit,
+                  function: processFunction,
+                }, index) => {
 
-                    const labelId = `enhanced-table-checkbox-${index}`;
+                  const labelId = `enhanced-table-checkbox-${index}`;
 
-                    return (
-                      <TableRow
-                        hover
-                        key={id}
-                        tabIndex={-1}
-                        className={classes.row}
+                  return (
+                    <TableRow
+                      hover
+                      key={id}
+                      tabIndex={-1}
+                      className={classes.row}
+                    >
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
                       >
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                        >
-                          {is_past_due ? 'Running late' : 'On track'}
-                        </TableCell>
-                        <TableCell align="right">{process_name}</TableCell>
-                        <TableCell align="right">{start_development}</TableCell>
-                        <TableCell align="right">{predicted_go_live_date}</TableCell>
-                        <TableCell align="right">
-                          <MLabel variant="filled" color="info">
-                            {required_process_days === 0 ? 'Not completed' : required_process_days}
-                          </MLabel>
-                        </TableCell>
-                        <TableCell align="right">
-                          <MLabel variant="filled" color="info">
-                            {total_development_cost === 0 ? 'Not completed' : total_development_cost}
-                          </MLabel>
-                        </TableCell>
-                        <TableCell align="right">{test_env_available}</TableCell>
-                        <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
-                            <Icon
-                              icon={moreVerticalFill}
-                              width={20}
-                              height={20}
-                            />
-                          </IconButton>
-                        </TableCell>
+                        {is_past_due ? 'Running late' : 'On track'}
+                      </TableCell>
+                      <TableCell align="right">{process_name}</TableCell>
+                      <TableCell align="right">{start_development}</TableCell>
+                      <TableCell align="right">{predicted_go_live_date}</TableCell>
+                      <TableCell align="right">
+                        <MLabel variant="filled" color="info">
+                          {required_process_days === 0 ? 'Not completed' : required_process_days}
+                        </MLabel>
+                      </TableCell>
+                      <TableCell align="right">
+                        <MLabel variant="filled" color="info">
+                          {total_development_cost === 0 ? 'Not completed' : total_development_cost}
+                        </MLabel>
+                      </TableCell>
+                      <TableCell align="right">{test_env_available}</TableCell>
+                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
+                      <TableCell align="right">
+                        <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
+                          <Icon
+                            icon={moreVerticalFill}
+                            width={20}
+                            height={20}
+                          />
+                        </IconButton>
+                      </TableCell>
 
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
-                            <ArrowBackIcon />
-                          </IconButton>
-                        </TableCell>
-                        <TableCell align="right">
-                          <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findNextStage(pipeline), true, id)}>
-                            <ArrowForwardIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-              {isProductNotFound && (
-                <TableBody>
-                  <TableRow>
-                    <TableCell align="center" colSpan={6}>
-                      <Box sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
+                      <TableCell align="right">
+                        <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findPreviousStage(pipeline), false, id)}>
+                          <ArrowBackIcon />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell align="right">
+                        <IconButton className={classes.margin} onClick={() => handleOpenDialog(process_name, pipeline, findNextStage(pipeline), true, id)}>
+                          <ArrowForwardIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
               )}
-            </Table>
-          </TableContainer>
-        </Scrollbars>
+            </TableBody>
+            {isProductNotFound && (
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center" colSpan={6}>
+                    <Box sx={{ py: 3 }}>
+                      <SearchNotFound searchQuery={filterName} />
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            )}
+          </Table>
+        </TableContainer>
+      </Scrollbars>
 
-        <Menu
-          keepMounted
-          id="simple-menu"
-          anchorEl={isOpen}
-          onClose={handleClose}
-          open={Boolean(isOpen)}
-        >
-          {[{ text: 'View details', path: PATH_APP.processes.details },
-          { text: 'Update', path: PATH_APP.processes.update },
-          { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
-            <RouterLink to={option.path} className={classes.routerLink}>
-              <MenuItem key={option.text} onClick={handleClose}>
-                {option.text}
-              </MenuItem>
-            </RouterLink>
-          ))}
-        </Menu>
+      <Menu
+        keepMounted
+        id="simple-menu"
+        anchorEl={isOpen}
+        onClose={handleClose}
+        open={Boolean(isOpen)}
+      >
+        {[{ text: 'View details', path: PATH_APP.processes.details },
+        { text: 'Update', path: PATH_APP.processes.update },
+        { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+          <RouterLink to={option.path} className={classes.routerLink}>
+            <MenuItem key={option.text} onClick={handleClose}>
+              {option.text}
+            </MenuItem>
+          </RouterLink>
+        ))}
+      </Menu>
 
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={processes.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={processes.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
 
-        <Dialog open={!!openDialog} onClose={() => handleCloseDialog()}>
-          {openDialog &&
-            <>
-              <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage} phase?</DialogTitle>
-              <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
-              <Button color='error'>Cancel</Button>
-            </>}
-        </Dialog>
-      </Card>
-    </Container>
+      <Dialog open={!!openDialog} onClose={() => handleCloseDialog()}>
+        {openDialog &&
+          <>
+            <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage} phase?</DialogTitle>
+            <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
+            <Button color='error'>Cancel</Button>
+          </>}
+      </Dialog>
+    </Card>
   );
 }
