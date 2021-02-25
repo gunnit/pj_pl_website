@@ -71,56 +71,17 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
             subHeading: 'score.avg_score_bottlenecks',
             text: (
                 <>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Multiple Data Sources:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Demand Fluctuation:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Execution Frequency:
-                        <Typography variant='subtitle1'>not answered</Typography>
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Real Time:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Supervisor Number:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Data Gathering Footprint:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Time for execution:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
-                    <Typography gutterBottom variant='subtitle2' color='textSecondary'>
-                        Staff Shuffling Present:
-                        <MLabel variant="filled" color={"primary"}>
-
-                        </MLabel>
-                    </Typography>
+                    {Object.keys(average_scores_per_subgroup).map(subgroup => {
+                        return (
+                            <Typography key={subgroup} gutterBottom variant='subtitle2' color='textSecondary'>
+                                {subgroup}
+                                <MLabel variant="filled" color={"primary"}>
+                                    {average_scores_per_subgroup[subgroup]}
+                                </MLabel>
+                            </Typography>)
+                    })}
                 </>
+
             ),
         },
         {
@@ -165,30 +126,29 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
         <Card>
             <CardHeader title="Controlled" />
             <CardContent>
-                {accordions.map(item => (
-                    <Accordion
-                        key={item.value}
-                        expanded={expanded === item.value}
-                        onChange={handleChange(item.value)}
-                    >
-                        <AccordionSummary
-                            expandIcon={
-                                <Icon icon={arrowIosDownwardFill} width={20} height={20} />
-                            }
+                {Object.keys(average_scores_per_subgroup).map(subgroup => {
+                    return (
+                        <Accordion
+                            key={subgroup}
+                            expanded={expanded === subgroup}
+                            onChange={handleChange(subgroup)}
                         >
-                            <Typography variant="subtitle1" className={classes.heading}>
-                                {item.heading}
-                            </Typography>
-                            {/* <Typography color="textSecondary" noWrap>
-              {item.subHeading}
-            </Typography> */}
-                            <MLabel>{item.subHeading}</MLabel>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography>{item.text}</Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                ))}
+                            <AccordionSummary
+                                expandIcon={
+                                    <Icon icon={arrowIosDownwardFill} width={20} height={20} />
+                                }
+                            >
+                                <Typography variant="subtitle1" className={classes.heading}>
+                                    {subgroup}
+                                </Typography>
+                                <MLabel>{parseFloat(average_scores_per_subgroup[subgroup].average).toFixed(2)}</MLabel>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>Scores for each subgroup</Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                    )
+                })}
             </CardContent>
         </Card>
     );

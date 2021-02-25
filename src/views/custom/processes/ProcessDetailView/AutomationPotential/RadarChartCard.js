@@ -43,7 +43,7 @@ export default function RadarChartCard({ average_scores_per_subgroup }) {
 
     const CHART_DATA = [
         {
-            name: 'Series 1',
+            name: 'Subgroups',
             data: subgroups.map(subgroup => average_scores_per_subgroup[subgroup].average)
         },
     ];
