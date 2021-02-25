@@ -69,6 +69,9 @@ export const PATH_APP = {
     processSearch: path(ROOTS.app, '/discovery/process-search'),
     category: path(ROOTS.app, '/discovery/category'),
   },
+  user: {
+    objectives: path(ROOTS.app, '/user/objectives'),
+  }
 };
 
 

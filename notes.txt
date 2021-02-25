@@ -10,6 +10,8 @@ Order scores by question ID
 
 Profile?
 
+right margin welcome back text
+
 Select field stuck on option?
 
 Loading screen and top line thing?
@@ -25,6 +27,8 @@ Should there be a way to save the results of a particular assessment?
 Snackbar after form submission?
 
 Back button should also be disabled after form submission
+
+Test all screen sizes
 
 Typos in assessment questions
 

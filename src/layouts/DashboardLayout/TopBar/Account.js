@@ -8,11 +8,13 @@ import { useFirebase } from 'react-redux-firebase';
 import PopoverMenu from 'components/PopoverMenu';
 import useIsMountedRef from 'hooks/useIsMountedRef';
 import homeFill from '@iconify-icons/eva/home-fill';
+import personFill from '@iconify-icons/eva/person-fill';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography } from '@material-ui/core';
 import { MIconButton } from '@material-extend';
 import Context from 'context/Context';
+import { PATH_APP } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -20,6 +22,11 @@ const MENU_OPTIONS = [
     label: 'Home',
     icon: homeFill,
     linkTo: '/'
+  },
+  {
+    label: 'Objectives',
+    icon: personFill,
+    linkTo: PATH_APP.user.objectives
   },
 ];
 

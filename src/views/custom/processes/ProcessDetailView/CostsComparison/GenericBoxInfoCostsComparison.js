@@ -11,7 +11,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         alignItems: 'center',
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        width: '100%',
+        height: '100%'
     },
     trending: {
         display: 'flex',
