@@ -88,9 +88,31 @@ export default function ObjectivesView() {
     }, [userId])
 
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setPending(true)
 
+        try {
+
+            const token = await firebase.auth().currentUser.getIdToken(true);
+
+            const res = await fetch(`${apiBaseUrl}/company_objectives/${userId}`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    ...sliderValues,
+                }),
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Authorization": token
+                }
+            })
+
+            if (!res.ok) {
+                throw res
+            }
+
+        } catch (e) {
+            setError(true)
+        }
 
 
     }
