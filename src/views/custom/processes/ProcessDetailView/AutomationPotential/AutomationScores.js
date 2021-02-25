@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import arrowIosDownwardFill from '@iconify-icons/eva/arrow-ios-downward-fill';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -38,6 +38,8 @@ const ACCORDIONS = [...Array(4)].map((accordion, index) => {
     };
 });
 
+// Need same array of subgroups as assessment (which is based on question ID) to determine order
+
 
 export default function AutomationScores({ scores, average_scores_per_subgroup }) {
     const classes = useStyles();
@@ -48,81 +50,40 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
     };
 
 
-    const accordions = [
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.avg_score_bottlenecks',
-            text: (
-                <>
-                    {Object.keys(average_scores_per_subgroup).map(subgroup => {
-                        return (
-                            <Typography key={subgroup} gutterBottom variant='subtitle2' color='textSecondary'>
-                                {subgroup}
-                                <MLabel variant="filled" color={"primary"}>
-                                    {average_scores_per_subgroup[subgroup]}
-                                </MLabel>
-                            </Typography>)
-                    })}
-                </>
 
-            ),
-        },
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.tot_score_dataquality',
-            text: ''
-        },
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.tot_score_datacomplexity',
-            text: ''
-        },
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.tot_score_technology',
-            text: ''
-        },
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.tot_score_transformation',
-            text: ''
-        },
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.tot_score_driversforchange',
-            text: ''
-        },
-        {
-            value: `panel0`,
-            heading: `Accordion0`,
-            subHeading: 'score.tot_score_scalability',
-            text: ''
-        },
-    ]
+    // What is the best place to do this? Front end, back end, query? Front end doesn't affect loading time I think
 
-    // What is the best place to do this? Front end, back end, query?
+    const scoresGroupedBySubgroup = {}
 
-    const scoresSortedBySubgroup = {}
+    // need array of subgroups as well for the order
+
+    const subgroupSet = new Set()
+
+    const subgroupsSortedByQuestionId = []
 
     scores.forEach(score => {
-        if (scoresSortedBySubgroup[score.subgroup]) {
-            scoresSortedBySubgroup[score.subgroup].push(score)
+
+        if (!subgroupSet.has(score.subgroup)) {
+            subgroupSet.add(score.subgroup)
+            subgroupsSortedByQuestionId.push(score.subgroup)
+        }
+
+        if (scoresGroupedBySubgroup[score.subgroup]) {
+            scoresGroupedBySubgroup[score.subgroup].push(score)
         } else {
-            scoresSortedBySubgroup[score.subgroup] = [score]
+            scoresGroupedBySubgroup[score.subgroup] = [score]
         }
     })
 
+
+    // Tried doing this in a useEffect to avoid doing it on every render, and it causes flickering on load
+
+
     return (
         <Card>
-            <CardHeader title="Controlled" />
+            <CardHeader title="Scores" />
             <CardContent>
-                {Object.keys(average_scores_per_subgroup).map(subgroup => {
+                {subgroupsSortedByQuestionId.map(subgroup => {
                     return (
                         <Accordion
                             key={subgroup}
@@ -140,10 +101,10 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
                                 <MLabel>{parseFloat(average_scores_per_subgroup[subgroup].average).toFixed(2)}</MLabel>
                             </AccordionSummary>
                             <AccordionDetails>
-                                {scoresSortedBySubgroup[subgroup].map(score => {
+                                {scoresGroupedBySubgroup[subgroup].map(score => {
                                     // needs the title of the question
                                     return (
-                                        <>
+                                        <>  <div>{score.question}</div>
                                             <div>{score.answer_text}</div>
                                             <div>{score.value}</div>
                                         </>
