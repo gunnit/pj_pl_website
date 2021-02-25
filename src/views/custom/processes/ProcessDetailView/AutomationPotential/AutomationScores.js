@@ -22,6 +22,34 @@ const useStyles = makeStyles(theme => ({
     },
     margin: {
         marginBottom: theme.spacing(3)
+    },
+    accordionText: {
+        display: 'flex',
+        marginBottom: theme.spacing(1),
+        justifyContent: 'space-between',
+        alignItems: 'space-between'
+    },
+    first: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+    },
+    second: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    third: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end'
+    },
+    container: {
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
+    item: {
+        marginBottom: theme.spacing(2)
     }
 }));
 
@@ -81,7 +109,6 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
 
     return (
         <Card>
-            <CardHeader title="Scores" />
             <CardContent>
                 {subgroupsSortedByQuestionId.map(subgroup => {
                     return (
@@ -101,15 +128,44 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
                                 <MLabel>{parseFloat(average_scores_per_subgroup[subgroup].average).toFixed(2)}</MLabel>
                             </AccordionSummary>
                             <AccordionDetails>
-                                {scoresGroupedBySubgroup[subgroup].map(score => {
-                                    // needs the title of the question
-                                    return (
-                                        <>  <div>{score.question}</div>
-                                            <div>{score.answer_text}</div>
-                                            <div>{score.value}</div>
-                                        </>
-                                    )
-                                })}
+                                <div className={classes.container}>
+                                    <div className={classes.first}>
+                                        {scoresGroupedBySubgroup[subgroup].map(score => {
+                                            // needs the title of the question
+                                            return (
+                                                <>
+                                                    <Typography className={classes.item} variant='subtitle2' color='textSecondary'>{score.question}:</Typography>
+                                                    {/* <MLabel>{score.answer_text}</MLabel>
+                                            <MLabel>{score.value}</MLabel> */}
+                                                </>
+                                            )
+                                        })}
+                                    </div>
+                                    <div className={classes.second}>
+                                        {scoresGroupedBySubgroup[subgroup].map(score => {
+                                            // needs the title of the question
+                                            return (
+                                                <>
+                                                    {/* <Typography variant='subtitle2' color='textSecondary'>{score.question}:</Typography> */}
+                                                    <MLabel className={classes.item}>{score.answer_text}</MLabel>
+                                                    {/* <MLabel>{score.value}</MLabel> */}
+                                                </>
+                                            )
+                                        })}
+                                    </div>
+                                    <div className={classes.third}>
+                                        {scoresGroupedBySubgroup[subgroup].map(score => {
+                                            // needs the title of the question
+                                            return (
+                                                <>
+                                                    {/* <Typography variant='subtitle2' color='textSecondary'>{score.question}:</Typography>
+                                            <MLabel>{score.answer_text}</MLabel> */}
+                                                    <MLabel className={classes.item}>{score.value}</MLabel>
+                                                </>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
                             </AccordionDetails>
                         </Accordion>
                     )
