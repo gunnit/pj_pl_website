@@ -56,7 +56,7 @@ function Welcome({ displayName, className, ...other }) {
             margin: { xs: 'auto', md: 'inherit' }
           }}
         />
-        <Box component="h4" sx={{ pb: 1, typography: 'h4', color: 'grey.800' }}>
+        <Box component="h4" sx={{ pb: 1, typography: 'h4', color: 'grey.800', mr: 1 }}>
           Welcome back, {!displayName ? '...' : displayName}!
         </Box>
 

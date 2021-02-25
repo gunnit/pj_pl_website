@@ -10,7 +10,9 @@ import { PATH_APP } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {
+    height: '100%'
+  }
 }));
 
 // ----------------------------------------------------------------------
@@ -93,14 +95,20 @@ export default function BubbleChart({ data, className, ...other }) {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { show: false },
+      categories: ['Automation Potential'],
+
       labels: {
-        show: true
+        show: true,
+        offsetX: 50,
       },
       tickAmount: 5,
     },
 
     yaxis: {
-      decimalsInFloat: 2
+      decimalsInFloat: 2,
+      labels: {
+        show: true
+      }
     },
 
     tooltip: {
