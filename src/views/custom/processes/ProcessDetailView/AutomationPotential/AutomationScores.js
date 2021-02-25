@@ -47,22 +47,6 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
         setExpanded(isExpanded ? panel : false);
     };
 
-    // score.avg_score_bottlenecks
-
-    // score.tot_score_dataquality
-
-    // score.tot_score_datacomplexity
-
-    // score.tot_score_technology
-
-    // score.tot_score_transformation
-
-    // score.tot_score_driversforchange
-
-    // score.tot_score_scalability
-
-
-
 
     const accordions = [
         {
@@ -122,6 +106,18 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
         },
     ]
 
+    // What is the best place to do this? Front end, back end, query?
+
+    const scoresSortedBySubgroup = {}
+
+    scores.forEach(score => {
+        if (scoresSortedBySubgroup[score.subgroup]) {
+            scoresSortedBySubgroup[score.subgroup].push(score)
+        } else {
+            scoresSortedBySubgroup[score.subgroup] = [score]
+        }
+    })
+
     return (
         <Card>
             <CardHeader title="Controlled" />
@@ -144,7 +140,15 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
                                 <MLabel>{parseFloat(average_scores_per_subgroup[subgroup].average).toFixed(2)}</MLabel>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography>Scores for each subgroup</Typography>
+                                {scoresSortedBySubgroup[subgroup].map(score => {
+                                    // needs the title of the question
+                                    return (
+                                        <>
+                                            <div>{score.answer_text}</div>
+                                            <div>{score.value}</div>
+                                        </>
+                                    )
+                                })}
                             </AccordionDetails>
                         </Accordion>
                     )
