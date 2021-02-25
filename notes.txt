@@ -1,8 +1,5 @@
 Things to add:
 
-Ideas table - search works, sort doesn't, needs data
-Production table - search works, sort doesn't
-
 Owner column in tables is a combination of two things so how to sort
 
 Test tables with better data

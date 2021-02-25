@@ -39,55 +39,55 @@ import { apiBaseUrl } from 'config';
 
 const TABLE_HEAD = [
   {
-    id: 'moveToPipeline',
+    id: 'initial_process_score',
     numeric: false,
     disablePadding: true,
     label: 'Move to Pipeline',
   },
   {
-    id: 'name',
+    id: 'process_name',
     numeric: true,
     disablePadding: false,
     label: 'Name'
   },
   {
-    id: 'alignment',
+    id: 'total_alignment_score_coverted',
     numeric: true,
     disablePadding: false,
     label: 'Alignment'
   },
   {
-    id: 'processCritical',
+    id: 'process_critical',
     numeric: true,
     disablePadding: false,
     label: 'Process Critical'
   },
   {
-    id: 'savingsGoal',
+    id: 'process_objective',
     numeric: true,
     disablePadding: false,
     label: 'Savings Goal'
   },
   {
-    id: 'numberOfSteps',
+    id: 'num_of_manual_steps',
     numeric: true,
     disablePadding: false,
     label: 'Number of Steps'
   },
   {
-    id: 'natureOfProcess',
+    id: 'nature_of_process',
     numeric: true,
     disablePadding: false,
     label: 'Nature of Process'
   },
   {
-    id: 'testEnvironment',
+    id: 'test_env_available',
     numeric: true,
     disablePadding: false,
     label: 'Test Environment'
   },
   {
-    id: 'owner',
+    id: 'business_unit',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
@@ -244,25 +244,18 @@ export default function IdeasTable({ processes }) {
   }
 
 
-  // processes.forEach((process, i) => {
 
-  //   // Set keys on process object instead of in nested objects so the sort function can find them
-  //   processes[i].process_net_benefit = process.processassumptions.process_net_benefit
-  //   processes[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
-  //   processes[i].current_process_cost_calc = process.processassumptions.current_process_cost_calc
-  //   processes[i].tot_future_process_cost = process.processassumptions.tot_future_process_cost
-  //   processes[i].total_net_benefit = process.processassumptions.total_net_benefit
-  //   processes[i].one_year_savings = process.processassumptions.total_net_benefit
+  const processCopy = [...processes]
+  processCopy.forEach((process, i) => {
 
+    // Nested object keys need to be set on process so sort function can find them
+    processCopy[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
 
-
-
-  // });
-
+  })
 
 
   const filteredProcesses = applySortFilter(
-    processes,
+    processCopy,
     getComparator(order, orderBy),
     filterName
   );
@@ -298,15 +291,18 @@ export default function IdeasTable({ processes }) {
                   .map((row, index) => {
                     const {
                       id,
-                      moveToPipeline,
+                      initial_process_score,
                       process_name,
-                      alignment,
+                      processobjectives: {
+                        total_alignment_score_coverted
+                      },
                       process_critical,
                       process_objective,
                       num_of_manual_steps,
                       nature_of_process,
                       test_env_available,
-                      owner_name,
+                      business_unit,
+                      function: processFunction,
                     } = row;
 
                     const isItemSelected = selected.indexOf(process_name) !== -1;
@@ -329,27 +325,29 @@ export default function IdeasTable({ processes }) {
                           scope="row"
                           padding="none"
                         >
-                          {moveToPipeline || ''}
+                          {initial_process_score >= 8 ? 'Suggested' : initial_process_score >= 5 ? 'Evaluate before moving' : 'Not suggested'}
                         </TableCell>
 
                         <TableCell align="right">{process_name || ''}</TableCell>
                         <TableCell align="right">
-                          {alignment
-                            && <MLabel variant="filled" color="info">
-                              {alignment}
-                            </MLabel>}
+                          {total_alignment_score_coverted
+                            ? <MLabel variant="filled" color="info">
+                              {total_alignment_score_coverted}
+                            </MLabel>
+                            : 'Not completed'}
                         </TableCell>
-                        <TableCell align="right">{process_critical || ''}</TableCell>
+                        <TableCell align="right">{process_critical || 'Not completed'}</TableCell>
                         <TableCell align="right">
-                          {process_objective && <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
-                            {process_objective}
-                          </MLabel>}
+                          {process_objective
+                            ? <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
+                              {process_objective}
+                            </MLabel>
+                            : 'Not completed'}
                         </TableCell>
-                        <TableCell align="right">{num_of_manual_steps || ''}</TableCell>
-                        <TableCell align="right">{nature_of_process || ''}</TableCell>
-                        <TableCell align="right">{test_env_available || ''}</TableCell>
-                        <TableCell align="right">{owner_name || ''}</TableCell>
-                        <TableCell align="right">
+                        <TableCell align="right">{num_of_manual_steps || 'Not completed'}</TableCell>
+                        <TableCell align="right">{nature_of_process || 'Not completed'}</TableCell>
+                        <TableCell align="right">{test_env_available || 'Not completed'}</TableCell>
+                        <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>                        <TableCell align="right">
                           <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                             <Icon
                               icon={moreVerticalFill}
