@@ -25,6 +25,7 @@ export default function BubbleChart({ data, className, ...other }) {
   const { setCurrentProcessId } = useContext(Context)
 
   const chartData = data.map((process, i) => {
+
     return {
       name: process.process_name,
       data: [[process.process_score,

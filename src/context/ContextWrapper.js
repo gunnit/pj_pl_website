@@ -8,6 +8,7 @@ export default function ContextWrapper({ children }) {
     const [currentProcessId, setCurrentProcessId] = useState(null)
     const [processCounts, setProcessCounts] = useState({})
     const [token, setToken] = useState(null)
+    const [currentTaxonomy, setCurrentTaxonomy] = useState(null)
 
     return (
         <Context.Provider value={{
@@ -15,7 +16,8 @@ export default function ContextWrapper({ children }) {
             userId, setUserId,
             currentProcessId, setCurrentProcessId,
             processCounts, setProcessCounts,
-            token, setToken
+            token, setToken,
+            currentTaxonomy, setCurrentTaxonomy
         }}>
             {children}
         </Context.Provider>

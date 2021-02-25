@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ButtonAnimate } from 'components/Animate';
-
+import { PATH_APP } from 'routes/paths';
+import Context from 'context/Context';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -17,7 +17,10 @@ const useStyles = makeStyles(theme => ({
         height: '100%'
     },
     buttonAnimate: {
-        height: '100%'
+        height: '100%',
+        '&:hover': {
+            cursor: 'pointer'
+        }
     }
 }));
 
@@ -25,13 +28,21 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function GenericBoxInfo({ className, description, imagePath, clickPath, ...other }) {
+function GenericBoxInfo({ className, description, imagePath, ...other }) {
     const classes = useStyles();
+    const history = useHistory()
 
+    const { setCurrentTaxonomy } = useContext(Context)
+
+    const handleClick = async () => {
+        setCurrentTaxonomy(description)
+        localStorage.setItem('currentTaxonomy', description)
+        history.push(PATH_APP.discovery.category)
+    }
 
     return (
-        <ButtonAnimate className={classes.buttonAnimate}>
-            <Card className={clsx(classes.root, className)} {...other} component={RouterLink} to={clickPath}>
+        <ButtonAnimate className={classes.buttonAnimate} onClick={handleClick}>
+            <Card className={clsx(classes.root, className)} {...other}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Typography variant="h6" gutterBottom>
                         {description}
