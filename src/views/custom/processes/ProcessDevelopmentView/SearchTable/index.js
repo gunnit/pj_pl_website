@@ -36,51 +36,65 @@ import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 
+
+// process_name,
+//   is_past_due,
+//   start_development,
+//   predicted_go_live_date,
+//   processassumptions: {
+//   required_process_days,
+//     total_development_cost,
+//                     },
+// test_env_available,
+//   business_unit,
+//   function: processFunction,
+
+
 const TABLE_HEAD = [
   {
-    id: 'overallRating',
+    id: 'is_past_due',
     numeric: false,
     disablePadding: true,
     label: 'Status'
   },
   {
-    id: 'name',
+    id: 'process_name',
     numeric: true,
     disablePadding: false,
     label: 'Name'
   },
   {
-    id: 'alignment',
+    id: 'start_development',
     numeric: true,
     disablePadding: false,
     label: 'Development Start'
   },
   {
-    id: 'automationScore',
+    id: 'predicted_go_live_date',
     numeric: true,
     disablePadding: false,
     label: 'Planned End Date'
   },
   {
-    id: 'savingsGoal',
+    id: 'required_process_days',
     numeric: true,
     disablePadding: false,
     label: 'Development Days'
   },
   {
-    id: 'numberOfSteps',
+    id: 'total_development_cost',
     numeric: true,
     disablePadding: false,
     label: 'Development Cost'
   },
   {
-    id: 'natureOfProcess',
+    id: 'test_env_available',
     numeric: true,
     disablePadding: false,
     label: 'Test Environment'
   },
   {
-    id: 'testEnvironment',
+    id: 'business_unit',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
@@ -253,8 +267,18 @@ export default function DevelopmentTable({ processes }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
+  const processCopy = [...processes]
+  processCopy.forEach((process, i) => {
+
+    // Nested object keys need to be set on process so sort function can find them
+    processCopy[i].required_process_days = process.processassumptions.required_process_days
+    processCopy[i].total_development_cost = process.processassumptions.total_development_cost
+
+  })
+
+
   const filteredProcesses = applySortFilter(
-    processes,
+    processCopy,
     getComparator(order, orderBy),
     filterName
   );

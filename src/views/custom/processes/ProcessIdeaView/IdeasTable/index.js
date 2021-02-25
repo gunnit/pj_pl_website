@@ -202,11 +202,7 @@ export default function IdeasTable({ processes }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
-  const filteredProcesses = applySortFilter(
-    processes,
-    getComparator(order, orderBy),
-    filterName
-  );
+
 
   const handleOpenDialogClick = (process_name, id) => {
     setOpenDialogName(process_name)
@@ -247,7 +243,34 @@ export default function IdeasTable({ processes }) {
     }
   }
 
+
+  // processes.forEach((process, i) => {
+
+  //   // Set keys on process object instead of in nested objects so the sort function can find them
+  //   processes[i].process_net_benefit = process.processassumptions.process_net_benefit
+  //   processes[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
+  //   processes[i].current_process_cost_calc = process.processassumptions.current_process_cost_calc
+  //   processes[i].tot_future_process_cost = process.processassumptions.tot_future_process_cost
+  //   processes[i].total_net_benefit = process.processassumptions.total_net_benefit
+  //   processes[i].one_year_savings = process.processassumptions.total_net_benefit
+
+
+
+
+  // });
+
+
+
+  const filteredProcesses = applySortFilter(
+    processes,
+    getComparator(order, orderBy),
+    filterName
+  );
+
+
   const isProductNotFound = filteredProcesses.length === 0;
+
+
 
   return (
     <Container className={classes.root}>

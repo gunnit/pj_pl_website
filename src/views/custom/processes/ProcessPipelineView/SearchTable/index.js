@@ -36,6 +36,22 @@ import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 
+
+// pipline: pipeline,
+//   final_process_score,
+//   process_name,
+//   processobjectives: {
+//   total_alignment_score_coverted
+// },
+// process_score,
+//   processassumptions: {
+//   current_process_cost_calc, // cost without automation
+//     tot_future_process_cost,
+//     total_net_benefit, // cost with automation
+//                     },
+// business_unit,
+//   function: processFunction, //
+
 const TABLE_HEAD = [
   {
     id: 'overallRating',
@@ -44,43 +60,43 @@ const TABLE_HEAD = [
     label: 'Overall Rating'
   },
   {
-    id: 'name',
+    id: 'process_name',
     numeric: true,
     disablePadding: false,
     label: 'Name'
   },
   {
-    id: 'alignment',
+    id: 'total_alignment_score_coverted',
     numeric: true,
     disablePadding: false,
     label: 'Objective Alignment'
   },
   {
-    id: 'automationScore',
+    id: 'process_score',
     numeric: true,
     disablePadding: false,
     label: 'Automation Score'
   },
   {
-    id: 'savingsGoal',
+    id: 'current_process_cost_calc',
     numeric: true,
     disablePadding: false,
     label: 'Cost Without Automation'
   },
   {
-    id: 'numberOfSteps',
+    id: 'tot_future_process_cost',
     numeric: true,
     disablePadding: false,
     label: 'Cost With Automation'
   },
   {
-    id: 'natureOfProcess',
+    id: 'total_net_benefit',
     numeric: true,
     disablePadding: false,
     label: 'Savings'
   },
   {
-    id: 'testEnvironment',
+    id: 'business_unit',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
@@ -108,6 +124,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
+  console.log(order, orderBy)
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -120,6 +137,8 @@ function applySortFilter(array, comparator, query) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
+
+
 
   if (query) {
     array = filter(array, _product => {
@@ -255,11 +274,26 @@ export default function DevelopmentTable({ processes }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
+
+  const processCopy = [...processes]
+  processCopy.forEach((process, i) => {
+
+    // Nested object keys need to be set on process so sort function can find them
+    processCopy[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
+    processCopy[i].current_process_cost_calc = process.processassumptions.current_process_cost_calc
+    processCopy[i].tot_future_process_cost = process.processassumptions.tot_future_process_cost
+    processCopy[i].total_net_benefit = process.processassumptions.total_net_benefit
+
+  })
+
+
   const filteredProcesses = applySortFilter(
-    processes,
+    processCopy,
     getComparator(order, orderBy),
     filterName
   );
+
+
 
   const isProductNotFound = filteredProcesses.length === 0;
 

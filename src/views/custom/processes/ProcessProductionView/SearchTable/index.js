@@ -35,53 +35,56 @@ import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 
-{/* <th>Production Date</th>
-                     <th>Process Name</th>
-                     <th>Automation Score</th>
-                     <th>Cost Without Automation</th>
-                     <th>Cost With Automation</th>
-                     <th>Saving</th>                     
-                     <th>Owner</th> */}
+// pipline_development: pipeline_development,
+//   process_name,
+//   process_score,
+//   processassumptions: {
+//   total_current_process_cost,
+//     total_future_cost,
+//     total_net_benefit
+// },
+// business_unit,
+//   function: processFunction,
 
 const TABLE_HEAD = [
   {
-    id: 'productionDate',
+    id: 'pipeline_development',
     numeric: false,
     disablePadding: true,
     label: 'Production Date'
   },
   {
-    id: 'name',
+    id: 'process_name',
     numeric: true,
     disablePadding: false,
     label: 'Name'
   },
   {
-    id: 'automationScore',
+    id: 'process_score',
     numeric: true,
     disablePadding: false,
     label: 'Automation Score'
   },
   {
-    id: 'costWithoutAutomation',
+    id: 'total_current_process_cost',
     numeric: true,
     disablePadding: false,
     label: 'Cost Without Automation'
   },
   {
-    id: 'costWithAutomation',
+    id: 'total_future_cost',
     numeric: true,
     disablePadding: false,
     label: 'Cost With Automation'
   },
   {
-    id: 'savings',
+    id: 'total_net_benefit',
     numeric: true,
     disablePadding: false,
     label: 'Savings'
   },
   {
-    id: 'owner',
+    id: 'business_unit',
     numeric: true,
     disablePadding: false,
     label: 'Owner'
@@ -241,8 +244,20 @@ export default function ProductionTable({ processes }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
+
+  const processCopy = [...processes]
+  processCopy.forEach((process, i) => {
+
+    // Nested object keys need to be set on process so sort function can find them
+    processCopy[i].total_current_process_cost = process.processassumptions.current_process_cost_calc
+    processCopy[i].total_future_cost = process.processassumptions.tot_future_process_cost
+    processCopy[i].total_net_benefit = process.processassumptions.total_net_benefit
+
+  })
+
+
   const filteredProcesses = applySortFilter(
-    processes,
+    processCopy,
     getComparator(order, orderBy),
     filterName
   );

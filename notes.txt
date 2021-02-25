@@ -1,6 +1,17 @@
 Things to add:
 
+Ideas table - search works, sort doesn't, needs data
+Production table - search works, sort doesn't
+
+Owner column in tables is a combination of two things so how to sort
+
+Test tables with better data
+
+Message on loading screen? 
+
 Can you fill out the cost form and still have it not show up?
+
+total_alignment_score_coverted needs to be replaced
 
 See if anything else needs to be changed
 
@@ -23,6 +34,8 @@ How to test average scores per subgroup?
 Sharing assessment results with other people since it takes a long time?
 
 Should there be a way to save the results of a particular assessment?
+
+Tables have two scrollbars on small screens
 
 Snackbar after form submission?
 

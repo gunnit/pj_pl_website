@@ -109,7 +109,6 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -212,15 +211,17 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - processes.length) : 0;
 
-  let filteredProcesses = processes.filter((process, i) => {
+
+  const processCopy = [...processes]
+  let filteredProcesses = processCopy.filter((process, i) => {
 
     // Set keys on process object instead of in nested objects so the sort function can find them
-    processes[i].process_net_benefit = process.processassumptions.process_net_benefit
-    processes[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
-    processes[i].current_process_cost_calc = process.processassumptions.current_process_cost_calc
-    processes[i].tot_future_process_cost = process.processassumptions.tot_future_process_cost
-    processes[i].total_net_benefit = process.processassumptions.total_net_benefit
-    processes[i].one_year_savings = process.processassumptions.total_net_benefit
+    processCopy[i].process_net_benefit = process.processassumptions.process_net_benefit
+    processCopy[i].total_alignment_score_coverted = process.processobjectives.total_alignment_score_coverted
+    processCopy[i].current_process_cost_calc = process.processassumptions.current_process_cost_calc
+    processCopy[i].tot_future_process_cost = process.processassumptions.tot_future_process_cost
+    processCopy[i].total_net_benefit = process.processassumptions.total_net_benefit
+    processCopy[i].one_year_savings = process.processassumptions.total_net_benefit
 
     if (pipelineFilter) {
       return process.pipline === pipelineFilter
