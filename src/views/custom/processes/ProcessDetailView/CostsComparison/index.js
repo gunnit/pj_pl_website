@@ -7,7 +7,7 @@ import CostWithAutomation from './CostWithAutomation';
 import GenericBoxInfoCostsComparison from './GenericBoxInfoCostsComparison';
 import GenericBoxInfoDevelopment from './GenericBoxInfoDevelopment';
 import GenericBoxInfo from './GenericBoxInfo';
-import ComparisonChartCard from './ComparisonChartCard';
+import CostsComparisonColumns from './CostsComparisonColumns';
 import { Link as RouterLink } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ function CostsComparison({ processDetails }) {
                     <GenericBoxInfoDevelopment infoType={'Development Costs (One Time)'} />
                 </Grid>
                 <Grid item lg={12}>
-                    <ComparisonChartCard />
+                    <CostsComparisonColumns assumptions={processDetails.assumptions} />
                 </Grid>
                 <Grid item lg={6}>
                     <GenericBoxInfo

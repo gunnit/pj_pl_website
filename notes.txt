@@ -1,5 +1,7 @@
 Things to add:
 
+Can you fill out the cost form and still have it not show up?
+
 See if anything else needs to be changed
 
 Subgroup and question and maybe answer orders
