@@ -326,12 +326,12 @@ export default function AutomationAssessmentView() {
                     if (question.score) {
                         initialValues[question.id] = question.score.answer // this is a number as a string
                         answerTexts[question.id] = question.score.answer_text // display text of the answer. ex: "Yes", "No", "Often"
-                        scoreSubgroups[question.id] = question.subgroup // store subgroup in a way that can be matched to score easily
                     } else {
                         initialValues[question.id] = '0'
                         answerTexts[question.id] = 'Not Answered'
+                        // store subgroup in a way that can be matched to score easily
                     }
-
+                    scoreSubgroups[question.id] = question.subgroup // store subgroup in a way that can be matched to score easily
                     weights[question.id] = question.weight
 
                     if (questionsSortedBySubgroup[question.subgroup]) {

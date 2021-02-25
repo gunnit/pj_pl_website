@@ -39,62 +39,35 @@ import { LegendToggleRounded } from '@material-ui/icons';
 
 const TABLE_HEAD = [
   {
-    id: 'process_name',
+    id: 'hierarchy_id',
+    numeric: false,
+    disablePadding: true,
+    label: 'Hierarchy ID'
+  },
+  {
+    id: 'process_type',
     numeric: false,
     disablePadding: true,
     label: 'Name'
   },
   {
-    id: 'total_net_benefit', // process_net_benefit?
-    numeric: true,
-    disablePadding: false,
-    label: 'Priority'
+    id: 'definition',
+    numeric: false,
+    disablePadding: true,
+    label: 'Definition'
   },
   {
-    id: 'total_alignment_score_coverted',
-    numeric: true,
-    disablePadding: false,
-    label: 'Alignment'
+    id: 'metric',
+    numeric: false,
+    disablePadding: true,
+    label: 'Metric Available'
   },
   {
-    id: 'process_score',
-    numeric: true,
-    disablePadding: false,
-    label: 'Automation Score'
+    id: 'recommendedforautomation change this ',
+    numeric: false,
+    disablePadding: true,
+    label: 'Recommended for automation'
   },
-  {
-    id: 'current_process_cost_calc',
-    numeric: true,
-    disablePadding: false,
-    label: 'Cost Without Automation'
-  },
-  {
-    id: 'tot_future_process_cost',
-    numeric: true,
-    disablePadding: false,
-    label: 'Cost With Automation'
-  },
-  {
-    id: 'one_year_savings',
-    numeric: true,
-    disablePadding: false,
-    label: '1-year savings'
-  },
-  {
-    id: '3-year savings', // ?
-    numeric: true,
-    disablePadding: false,
-    label: '3-year savings'
-  },
-  {
-    id: 'date_created',
-    numeric: true,
-    disablePadding: false,
-    label: 'Date Created'
-  },
-  {
-    id: ''
-  }
 ];
 
 
@@ -228,6 +201,11 @@ export default function GlossaryTable({ glossary }) {
 
   const isProductNotFound = filteredGlossary.length === 0;
 
+  console.log(glossary)
+
+
+
+
   return (
     <Container>
       <Card className={classes.card}>
@@ -254,17 +232,13 @@ export default function GlossaryTable({ glossary }) {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(({
                     id,
-                    process_name,
-                    total_alignment_score_coverted,
-                    process_score: automationScore,
-                    current_process_cost_calc,
-                    tot_future_process_cost,
-                    total_net_benefit,
-                    threeYearSavings, // need to change this
-                    date_created
+                    hierarchy_id,
+                    process_type,
+                    definition,
+                    metric
                   }, index) => {
 
-                    const isItemSelected = selected.indexOf(process_name) !== -1;
+                    const isItemSelected = selected.indexOf(process_type) !== -1;
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
@@ -283,33 +257,11 @@ export default function GlossaryTable({ glossary }) {
                           scope="row"
                           padding="none"
                         >
-                          {process_name}
+                          {hierarchy_id}
                         </TableCell>
-                        <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
-                        <TableCell align="right">
-                          <MLabel variant="filled" color="info">
-                            {total_alignment_score_coverted || 'Not completed'}
-                          </MLabel>
-                        </TableCell>
-                        <TableCell align="right">{automationScore || 'Not completed'}</TableCell>
-                        <TableCell align="right">{current_process_cost_calc || 'Not completed'}</TableCell>
-                        <TableCell align="right">{tot_future_process_cost || 'Not completed'}</TableCell>
-                        <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
-                        <TableCell align="right">
-                          <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
-                            {threeYearSavings || 'Not completed'}
-                          </MLabel>
-                        </TableCell>
-                        {/* <TableCell align="right">{fDate(date_created)}</TableCell> */}
-                        <TableCell align="right">
-                          {/* <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
-                            <Icon
-                              icon={moreVerticalFill}
-                              width={20}
-                              height={20}
-                            />
-                          </IconButton> */}
-                        </TableCell>
+                        <TableCell>{process_type}</TableCell>
+                        <TableCell>{definition}</TableCell>
+                        <TableCell>{metric}</TableCell>
                       </TableRow>
                     );
                   })}
