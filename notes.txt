@@ -2,6 +2,8 @@ Things to add:
 
 PrimaryKeyRelatedField many to many taking a long time?
 
+Maybe stop using localStorage
+
 Dashboard with new user/no processes
 
 Last three squares on taxonomy view don't work

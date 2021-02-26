@@ -30,10 +30,10 @@ export default function BubbleChart({ data, className, ...other }) {
       name: process.process_name,
       data: [[process.process_score,
       process.processassumptions.total_net_benefit,
-      process.processobjectives.total_alignment_score_coverted]]
+      process.processobjectives.total_alignment_score_coverted + 5]]
     }
   })
-
+  console.log(chartData)
   const theme = useTheme()
 
   const chartOptions = {
@@ -96,11 +96,11 @@ export default function BubbleChart({ data, className, ...other }) {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { show: false },
-      categories: ['Automation Potential'],
+      // categories: ['Automation Potential'],
 
       labels: {
         show: true,
-        offsetX: 50,
+        // offsetX: 50,
       },
       tickAmount: 5,
     },
@@ -114,21 +114,36 @@ export default function BubbleChart({ data, className, ...other }) {
 
     tooltip: {
       x: {
-        show: false
+        show: false,
+        formatter: function (w) {
+          return `Automation Potential: ${w}`
+        }
       },
       y: {
-        show: false
+        show: true,
+        formatter: function (w) {
+          return w < 0 ? `-$${-w} savings` : `$${w} savings`
+        }
       },
       z: {
-        title: 'Alignment'
-      }
+        title: 'Alignment Score:'
+      },
       // enabled: false
       // custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-      //   return `<Typography>tooltip</Typography>`
+      //   console.log(series)
+      //   console.log(seriesIndex)
+      //   console.log(dataPointIndex)
+      //   console.log(w)
+      //   if (series[seriesIndex] < 0) {
+      //     return `<div>-$${-series[seriesIndex]} in savings</div>`
+      //   } else {
+      //     return `<div>$${series[seriesIndex]} in savings</div>`
+      //   }
+
       // },
-      // marker: {
-      //   show: false
-      // }
+      marker: {
+        show: false
+      }
 
     },
 

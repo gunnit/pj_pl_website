@@ -99,7 +99,7 @@ export default function GroupView() {
                     <Typography variant='h4'>Metrics</Typography>
                     {group.metrics.map(({ metric_name, formula, formula_units }) => {
                         return (
-                            <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <Grid key={metric_name} item xs={12} sm={12} md={12} lg={12}>
                                 <MetricCard
                                     metric_name={metric_name}
                                     formula={formula}
@@ -110,7 +110,7 @@ export default function GroupView() {
                     })}
                     {group.query_glossary_process_group.map(({ process_element_id, process_element, definition }) => {
                         return (
-                            <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
                                 <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
                             </Grid>
                         )
