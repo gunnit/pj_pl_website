@@ -1,9 +1,8 @@
 import clsx from 'clsx';
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Card, CardHeader, Box } from '@material-ui/core';
+import { Card, CardHeader, Box, Typography } from '@material-ui/core';
 import Context from 'context/Context';
 import { useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
@@ -11,31 +10,30 @@ import { PATH_APP } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {
+    height: '100%'
+  }
 }));
 
 // ----------------------------------------------------------------------
 
-BubbleChart.propTypes = {
-  className: PropTypes.string
-};
 
-function BubbleChart({ processes, className, ...other }) {
+export default function BubbleChart({ processes, className, ...other }) {
   const classes = useStyles();
   const history = useHistory()
 
   const { setCurrentProcessId } = useContext(Context)
 
-
   const chartData = processes.map((process, i) => {
+
     return {
       name: process.process_name,
       data: [[process.process_score,
       process.processassumptions.total_net_benefit,
-      process.processobjectives.total_alignment_score_coverted]]
+      process.processobjectives.total_alignment_score_coverted + 5]]
     }
   })
-
+  console.log(chartData)
   const theme = useTheme()
 
   const chartOptions = {
@@ -98,20 +96,55 @@ function BubbleChart({ processes, className, ...other }) {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { show: false },
+      // categories: ['Automation Potential'],
+
       labels: {
-        show: true
+        show: true,
+        // offsetX: 50,
       },
       tickAmount: 5,
     },
 
     yaxis: {
-      decimalsInFloat: 2
+      decimalsInFloat: 2,
+      labels: {
+        show: true
+      }
     },
 
     tooltip: {
       x: {
+        show: false,
+        formatter: function (w) {
+          return `Automation Potential: ${w}`
+        }
+      },
+      y: {
+        show: true,
+        formatter: function (w) {
+          return w < 0 ? `-$${-w} savings` : `$${w} savings`
+        }
+      },
+      z: {
+        title: 'Alignment Score:'
+      },
+      // enabled: false
+      // custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+      //   console.log(series)
+      //   console.log(seriesIndex)
+      //   console.log(dataPointIndex)
+      //   console.log(w)
+      //   if (series[seriesIndex] < 0) {
+      //     return `<div>-$${-series[seriesIndex]} in savings</div>`
+      //   } else {
+      //     return `<div>$${series[seriesIndex]} in savings</div>`
+      //   }
+
+      // },
+      marker: {
         show: false
       }
+
     },
 
     legend: {
@@ -133,5 +166,3 @@ function BubbleChart({ processes, className, ...other }) {
     </Card>
   );
 }
-
-export default BubbleChart;

@@ -2,9 +2,13 @@ Things to add:
 
 PrimaryKeyRelatedField many to many taking a long time?
 
+.apexcharts-marker class:hover might cover too many things
+
 Maybe stop using localStorage
 
 Dashboard with new user/no processes
+
+Maybe cursor pointer on bubble chart
 
 Last three squares on taxonomy view don't work
 
