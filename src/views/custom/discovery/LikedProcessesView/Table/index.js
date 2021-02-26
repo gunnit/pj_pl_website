@@ -1,5 +1,3 @@
-import 'firebase/auth';
-import firebase from 'firebase/app';
 import { fDate } from 'utils/formatTime';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
@@ -35,8 +33,7 @@ import {
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import { LegendToggleRounded } from '@material-ui/icons';
 // ----------------------------------------------------------------------
 
 
@@ -119,9 +116,6 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       cursor: 'pointer'
     }
-  },
-  likeCell: {
-    display: 'flex'
   }
 }));
 
@@ -138,7 +132,7 @@ export default function GlossaryTable({ glossary }) {
   const [isOpen, setOpen] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 
-  const { setTaxonomyGroupId, userId } = useContext(Context)
+  const { setTaxonomyGroupId } = useContext(Context)
 
   const history = useHistory()
 
@@ -206,28 +200,12 @@ export default function GlossaryTable({ glossary }) {
 
 
 
-  const handleClick = (process_element_id) => {
+  const handleClick = async (process_element_id) => {
     setTaxonomyGroupId(process_element_id)
     localStorage.setItem('taxonomyGroupId', process_element_id)
     history.push(PATH_APP.discovery.group)
-  }
-
-  const handleLikeClick = async (process_element_id) => {
-
-    const token = await firebase.auth().currentUser.getIdToken(true);
-
-    await fetch(`${apiBaseUrl}/like-this-process/${userId}/${process_element_id}`, {
-      method: 'POST',
-      // body: JSON.stringify({}),
-      headers: {
-        // "Content-Type": 'application/json',
-        "Authorization": token
-      }
-    })
 
   }
-
-
 
   return (
     <Card className={classes.root}>
@@ -283,18 +261,10 @@ export default function GlossaryTable({ glossary }) {
                         {hierarchy_id}
                       </TableCell>
 
-                      <TableCell>
-                        <ButtonAnimate className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>
-                          {process_element}
-                        </ButtonAnimate>
-                      </TableCell>
+                      <TableCell><ButtonAnimate className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>{process_element}</ButtonAnimate></TableCell>
 
                       <TableCell>{definition}</TableCell>
                       <TableCell>{metric}</TableCell>
-                      <TableCell className={classes.likeCell}>
-                        <ThumbUpIcon onClick={() => handleLikeClick(process_element_id)} />
-                        <ThumbDownIcon onClick={() => handleLikeClick(process_element_id)} />
-                      </TableCell>
                     </TableRow>
                   );
                 })}

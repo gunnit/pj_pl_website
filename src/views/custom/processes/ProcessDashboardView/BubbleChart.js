@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { useContext } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Card, CardHeader, Box } from '@material-ui/core';
+import { Card, CardHeader, Box, Typography } from '@material-ui/core';
 import Context from 'context/Context';
 import { useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
@@ -115,7 +115,21 @@ export default function BubbleChart({ data, className, ...other }) {
     tooltip: {
       x: {
         show: false
+      },
+      y: {
+        show: false
+      },
+      z: {
+        title: 'Alignment'
       }
+      // enabled: false
+      // custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+      //   return `<Typography>tooltip</Typography>`
+      // },
+      // marker: {
+      //   show: false
+      // }
+
     },
 
     legend: {
