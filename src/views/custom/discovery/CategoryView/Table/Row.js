@@ -105,11 +105,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%'
     },
-    clickableCell: {
-        '&:hover': {
-            cursor: 'pointer'
-        }
-    },
     likeCell: {
         display: 'flex',
         flexDirection: 'column',
@@ -117,7 +112,21 @@ const useStyles = makeStyles(theme => ({
     },
     likeButtons: {
         display: 'flex',
-    }
+    },
+    buttonAnimate: {
+        // display: 'flex',
+        height: '100%',
+        width: '100%',
+    },
+    highlight: {
+    },
+    clickableCell: {
+        '&:hover': {
+            backgroundColor: `${theme.palette.warning.lighter} !important`,
+            cursor: 'pointer'
+        },
+
+    },
 }));
 
 // ----------------------------------------------------------------------
@@ -226,12 +235,15 @@ export default function Row({
 
 
     return (
+
         <TableRow
-            hover
+            // hover
+
             key={id}
             tabIndex={-1}
             role="checkbox"
-            className={classes.row}
+
+
         >
             <TableCell
                 component="th"
@@ -241,13 +253,11 @@ export default function Row({
             >
                 {hierarchy_id}
             </TableCell>
-
-            <TableCell>
-                <ButtonAnimate className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>
-                    {process_element}
-                </ButtonAnimate>
+            {/* <ButtonAnimate className={classes.buttonAnimate}> */}
+            <TableCell className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>
+                {process_element}
             </TableCell>
-
+            {/* </ButtonAnimate> */}
             <TableCell>{definition}</TableCell>
             <TableCell>{metric}</TableCell>
             <TableCell className={classes.likeCell}>
