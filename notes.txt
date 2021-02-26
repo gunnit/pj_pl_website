@@ -1,8 +1,12 @@
 Things to add:
 
+Glossary table correct rows?
+
+Make sure likes line up
+
 PrimaryKeyRelatedField many to many taking a long time?
 
-.apexcharts-marker class:hover might cover too many things
+Bubble chart dots could be bigger on hover
 
 Maybe stop using localStorage
 

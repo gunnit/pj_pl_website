@@ -21,49 +21,52 @@ const useStyles = makeStyles(theme => ({
 export default function CategoryView() {
     const classes = useStyles();
 
-    const { currentTaxonomy } = useContext(Context)
+    const { currentTaxonomy, userId } = useContext(Context)
 
     const [error, setError] = useState(false)
     const [glossary, setGlossary] = useState(null)
 
     useEffect(() => {
 
+        if (userId) {
 
 
-        (async function () {
+            (async function () {
 
-            try {
-
-
-                let storedTaxonomy;
-                if (!currentTaxonomy) {
-                    storedTaxonomy = localStorage.getItem('currentTaxonomy')
-                }
-
-                const token = await firebase.auth().currentUser.getIdToken(true);
+                try {
 
 
-                const res = await fetch(`${apiBaseUrl}/wiki/${currentTaxonomy || storedTaxonomy}`, {
-                    headers: {
-                        'Authorization': token
+                    let storedTaxonomy;
+                    if (!currentTaxonomy) {
+                        storedTaxonomy = localStorage.getItem('currentTaxonomy')
                     }
-                })
 
-                if (!res.ok) {
+                    const token = await firebase.auth().currentUser.getIdToken(true);
 
-                    throw res
+
+                    const res = await fetch(`${apiBaseUrl}/wiki/${currentTaxonomy || storedTaxonomy}/${userId}`, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+
+                    if (!res.ok) {
+
+                        throw res
+                    }
+
+                    const { glossary, user_liked, process_group_field } = await res.json()
+
+                    setGlossary(glossary.map((entry, i) => ({ ...entry, user_liked: user_liked[i] })))
+
+                } catch (e) {
+                    setError(true)
                 }
+            })()
 
-                // const { glossary } = await res.json()
+        }
 
-                setGlossary((await res.json()).glossary)
-            } catch (e) {
-                setError(true)
-            }
-        })()
-
-
-    }, [currentTaxonomy])
+    }, [currentTaxonomy, userId])
 
     if (error) {
         return <Page500View />

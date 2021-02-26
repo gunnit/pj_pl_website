@@ -1,3 +1,4 @@
+import './BubbleChart.css';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import ReactApexChart from 'react-apexcharts';

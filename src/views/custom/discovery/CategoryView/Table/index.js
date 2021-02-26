@@ -19,13 +19,15 @@ import {
   TableCell,
   TableContainer,
   TablePagination,
-  ButtonGroup
+  Typography,
 } from '@material-ui/core';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { MIconButton } from '@material-extend';
+import { useSnackbar } from 'notistack';
+import Row from './Row';
 // ----------------------------------------------------------------------
 
 
@@ -110,7 +112,12 @@ const useStyles = makeStyles(theme => ({
     }
   },
   likeCell: {
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  likeButtons: {
+    display: 'flex',
   }
 }));
 
@@ -201,7 +208,14 @@ export default function GlossaryTable({ glossary }) {
     history.push(PATH_APP.discovery.group)
   }
 
-  const handleLikeClick = async (process_element_id) => {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleLikeClick = async (process_element_id, like) => {
+    if (like) {
+      enqueueSnackbar('Added to Liked Processes', { variant: 'success' })
+    } else {
+      enqueueSnackbar('Removed from Liked Processes', { variant: 'error' })
+    }
 
     const token = await firebase.auth().currentUser.getIdToken(true);
 
@@ -213,6 +227,9 @@ export default function GlossaryTable({ glossary }) {
         "Authorization": token
       }
     })
+
+
+
 
   }
 
@@ -248,51 +265,25 @@ export default function GlossaryTable({ glossary }) {
                   definition,
                   metric,
                   process_element_id,
-                  liked
+                  liked,
+                  user_liked
                 }, index) => {
 
-                  const isItemSelected = selected.indexOf(process_element) !== -1;
+                  // const isItemSelected = selected.indexOf(process_element) !== -1;
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      key={id}
-                      tabIndex={-1}
-                      role="checkbox"
-                      selected={isItemSelected}
-                      aria-checked={isItemSelected}
-                      className={classes.row}
-                    >
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {hierarchy_id}
-                      </TableCell>
-
-                      <TableCell>
-                        <ButtonAnimate className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>
-                          {process_element}
-                        </ButtonAnimate>
-                      </TableCell>
-
-                      <TableCell>{definition}</TableCell>
-                      <TableCell>{metric}</TableCell>
-                      <TableCell className={classes.likeCell}>
-                        {/* <ButtonGroup variant='contained'> */}
-                        <MIconButton>
-                          <ThumbUpIcon onClick={() => handleLikeClick(process_element_id)} />
-                        </MIconButton>
-                        <MIconButton>
-                          <ThumbDownIcon onClick={() => handleLikeClick(process_element_id)} />
-                        </MIconButton>
-                        {liked.length}
-                        {/* </ButtonGroup> */}
-                      </TableCell>
-                    </TableRow>
+                    <Row
+                      id={id}
+                      hierarchy_id={hierarchy_id}
+                      process_element={process_element}
+                      definition={definition}
+                      metric={metric}
+                      process_element_id={process_element_id}
+                      liked={liked}
+                      user_liked={user_liked}
+                      labelId={labelId}
+                    />
                   );
                 })}
               {emptyRows > 0 && (
