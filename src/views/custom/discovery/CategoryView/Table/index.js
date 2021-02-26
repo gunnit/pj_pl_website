@@ -248,6 +248,7 @@ export default function GlossaryTable({ glossary }) {
                   definition,
                   metric,
                   process_element_id,
+                  liked
                 }, index) => {
 
                   const isItemSelected = selected.indexOf(process_element) !== -1;
@@ -288,6 +289,7 @@ export default function GlossaryTable({ glossary }) {
                         <MIconButton>
                           <ThumbDownIcon onClick={() => handleLikeClick(process_element_id)} />
                         </MIconButton>
+                        {liked.length}
                         {/* </ButtonGroup> */}
                       </TableCell>
                     </TableRow>
