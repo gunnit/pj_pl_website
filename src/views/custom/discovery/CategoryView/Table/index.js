@@ -1,6 +1,7 @@
 import { fDate } from 'utils/formatTime';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
+import { ButtonAnimate } from 'components/Animate';
 import { Icon } from '@iconify/react';
 import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
@@ -8,7 +9,7 @@ import { PATH_APP } from 'routes/paths';
 import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import SearchNotFound from 'components/SearchNotFound';
-import { Link as RouterLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { makeStyles } from '@material-ui/core/styles';
@@ -100,7 +101,7 @@ function applySortFilter(array, comparator, query) {
   // Search
   if (query) {
     array = filter(array, _product => {
-      return _product.process_name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return _product.process_element.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
     return array;
   }
@@ -111,6 +112,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
+  clickableCell: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
 }));
 
 // ----------------------------------------------------------------------
@@ -121,11 +127,14 @@ export default function GlossaryTable({ glossary }) {
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [filterName, setFilterName] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(-1);
   const [orderBy, setOrderBy] = useState('createdAt');
   const [isOpen, setOpen] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 
+  const { setTaxonomyGroupId } = useContext(Context)
+
+  const history = useHistory()
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -191,7 +200,12 @@ export default function GlossaryTable({ glossary }) {
 
 
 
+  const handleClick = async (process_element_id) => {
+    setTaxonomyGroupId(process_element_id)
+    localStorage.setItem('taxonomyGroupId', process_element_id)
+    history.push(PATH_APP.discovery.group)
 
+  }
 
   return (
     <Card className={classes.root}>
@@ -221,7 +235,8 @@ export default function GlossaryTable({ glossary }) {
                   hierarchy_id,
                   process_element,
                   definition,
-                  metric
+                  metric,
+                  process_element_id,
                 }, index) => {
 
                   const isItemSelected = selected.indexOf(process_element) !== -1;
@@ -245,7 +260,9 @@ export default function GlossaryTable({ glossary }) {
                       >
                         {hierarchy_id}
                       </TableCell>
-                      <TableCell>{process_element}</TableCell>
+
+                      <TableCell><ButtonAnimate className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>{process_element}</ButtonAnimate></TableCell>
+
                       <TableCell>{definition}</TableCell>
                       <TableCell>{metric}</TableCell>
                     </TableRow>
@@ -305,6 +322,6 @@ export default function GlossaryTable({ glossary }) {
         </Dialog> */}
 
 
-    </Card>
+    </Card >
   );
 }

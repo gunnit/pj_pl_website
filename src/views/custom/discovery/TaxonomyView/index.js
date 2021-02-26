@@ -36,7 +36,7 @@ function TaxonomyView() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                         <GenericBoxInfo
-                            description={'Market and Sell Products'}
+                            description={'Market and Sell Products and Services'}
                             imagePath={'/static/images/taxonomy/undraw_Marketing_re_7f1g.svg'}
                         />
                     </Grid>

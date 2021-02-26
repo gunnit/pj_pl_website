@@ -68,6 +68,7 @@ export const PATH_APP = {
     taxonomy: path(ROOTS.app, '/discovery/taxonomy'),
     processSearch: path(ROOTS.app, '/discovery/process-search'),
     category: path(ROOTS.app, '/discovery/category'),
+    group: path(ROOTS.app, '/discovery/group'),
   },
   user: {
     objectives: path(ROOTS.app, '/user/objectives'),

@@ -1,5 +1,10 @@
 Things to add:
 
+Last three squares on taxonomy view don't work
+
+Test history.push instead of link speed
+
+Table headings move around when sorting
 
 What to on top card on category view?
 

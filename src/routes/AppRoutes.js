@@ -21,6 +21,7 @@ import ProcessSearchView from 'views/custom/discovery/ProcessSearchView';
 import AutomationAssessmentView from 'views/custom/processes/AutomationAssessmentView';
 import CostAssessmentView from 'views/custom/processes/CostAssessmentView';
 import CategoryView from 'views/custom/discovery/CategoryView';
+import GroupView from 'views/custom/discovery/GroupView';
 import ObjectivesView from 'views/custom/user/ObjectivesView';
 
 // ----------------------------------------------------------------------
@@ -149,9 +150,15 @@ const AppRoutes = {
     },
     {
       exact: true,
+      path: PATH_APP.discovery.group,
+      component: GroupView
+    },
+    {
+      exact: true,
       path: PATH_APP.user.objectives,
       component: ObjectivesView
     },
+
     {
       exact: true,
       path: PATH_APP.root,
