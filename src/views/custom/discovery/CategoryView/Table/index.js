@@ -19,11 +19,13 @@ import {
   TableCell,
   TableContainer,
   TablePagination,
+  ButtonGroup
 } from '@material-ui/core';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import { MIconButton } from '@material-extend';
 // ----------------------------------------------------------------------
 
 
@@ -279,8 +281,14 @@ export default function GlossaryTable({ glossary }) {
                       <TableCell>{definition}</TableCell>
                       <TableCell>{metric}</TableCell>
                       <TableCell className={classes.likeCell}>
-                        <ThumbUpIcon onClick={() => handleLikeClick(process_element_id)} />
-                        <ThumbDownIcon onClick={() => handleLikeClick(process_element_id)} />
+                        {/* <ButtonGroup variant='contained'> */}
+                        <MIconButton>
+                          <ThumbUpIcon onClick={() => handleLikeClick(process_element_id)} />
+                        </MIconButton>
+                        <MIconButton>
+                          <ThumbDownIcon onClick={() => handleLikeClick(process_element_id)} />
+                        </MIconButton>
+                        {/* </ButtonGroup> */}
                       </TableCell>
                     </TableRow>
                   );
