@@ -232,11 +232,13 @@ export default function GlossaryTable({ glossary }) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(({
                   id,
-                  hierarchy_id,
-                  process_element,
-                  definition,
-                  metric,
-                  process_element_id,
+                  processtaxonomy: {
+                    hierarchy_id,
+                    process_element,
+                    definition,
+                    metric,
+                    process_element_id,
+                  },
                 }, index) => {
 
                   const isItemSelected = selected.indexOf(process_element) !== -1;
