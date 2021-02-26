@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fShortenNumber } from 'utils/formatNumber';
+import { fNumber } from 'utils/formatNumber';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 
@@ -37,37 +37,26 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-GenericBoxInfoDetails.propTypes = {
-    className: PropTypes.string,
-    numberOfItems: PropTypes.number,
-    infoType: PropTypes.string,
-    mainNumber: PropTypes.number,
-    secondaryText: PropTypes.string,
-};
 
-
-function GenericBoxInfoDetails({ className, numberOfItems, infoType, mainNumber, secondaryText, ...other }) {
+function GenericBoxInfoProduction({ className, numberOfItems, infoType, mainNumber, ...other }) {
     const classes = useStyles();
 
 
     return (
         <Card className={clsx(classes.root, className)} {...other}>
             <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="subtitle2" gutterBottom color='textSecondary'>
+                <Typography variant="subtitle2" gutterBottom>
                     {/* {numberOfItems !== 1 ? `${numberOfItems} ${infoType}` : `${numberOfItems} ${infoType.slice(0, infoType.length - 1)}`} */}
                     {/* {`${infoType}: ${numberOfItems}`} */}
                     {infoType}
                 </Typography>
                 <Typography variant="h3" gutterBottom>
-                    {/* {mainInfo} */}
-                    {fShortenNumber(mainNumber)}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="span">
-                    {secondaryText}
+                    {/* Move the minus sign outside of the $ if it's negative */}
+                    {mainNumber < 0 ? `-$${fNumber(-mainNumber)}` : `$${fNumber(mainNumber)}`}
                 </Typography>
             </Box>
         </Card>
     );
 }
 
-export default GenericBoxInfoDetails;
+export default GenericBoxInfoProduction;

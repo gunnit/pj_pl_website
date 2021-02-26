@@ -32,14 +32,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RadarChartCard({ average_scores_per_subgroup }) {
+export default function RadarChartCard({ average_scores_per_subgroup, totalAverageOfSubgroups, subgroups }) {
     const classes = useStyles();
 
     const theme = useTheme();
 
-
-    // This is so the chart data and category labels will be based on the same order. In the future, the subgroups should have a specific order every time
-    const subgroups = Object.keys(average_scores_per_subgroup)
 
     const CHART_DATA = [
         {
@@ -48,7 +45,7 @@ export default function RadarChartCard({ average_scores_per_subgroup }) {
         },
     ];
 
-    const totalAverageOfSubgroups = Object.values(average_scores_per_subgroup).reduce((currentSum, subgroup) => (currentSum + parseFloat(subgroup.average)), 0) / subgroups.length
+
 
 
 

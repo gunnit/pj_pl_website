@@ -1,8 +1,14 @@
 Things to add:
 
+process_net_benefit or total_net_benefit for details box?
+
+automation score description complexity vs score confusing
+
 Glossary table correct rows?
 
 Make sure likes line up
+
+Make total average of subgroups easier to work with
 
 PrimaryKeyRelatedField many to many taking a long time?
 

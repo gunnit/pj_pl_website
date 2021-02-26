@@ -52,7 +52,10 @@ export default function AutomationPotential({ processDetails }) {
     }
 
 
-    // alignment is from sliders on process form compared to sliders on company objectives
+    // This is so the chart data and category labels will be based on the same order. In the future, the subgroups should have a specific order every time
+    const subgroups = Object.keys(processDetails.process.average_scores_per_subgroup)
+    const totalAverageOfSubgroups = Object.values(processDetails.process.average_scores_per_subgroup).reduce((currentSum, subgroup) => (currentSum + parseFloat(subgroup.average)), 0) / subgroups.length
+
 
     return (
         <Container maxWidth="xl">
@@ -61,10 +64,17 @@ export default function AutomationPotential({ processDetails }) {
                     <AutomationScores scores={processDetails.scores} average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup} />
                 </Grid>
                 <Grid item lg={6}>
-                    <RadarChartCard average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup} />
+                    <RadarChartCard
+                        average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup}
+                        subgroups={subgroups}
+                        totalAverageOfSubgroups={totalAverageOfSubgroups}
+                    />
                 </Grid>
                 <Grid item lg={12}>
-                    <AutomationScoreDescriptionCard processDetails={processDetails} />
+                    <AutomationScoreDescriptionCard
+                        processDetails={processDetails}
+                        totalAverageOfSubgroups={totalAverageOfSubgroups}
+                    />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4}>
                     <GenericBoxInfo

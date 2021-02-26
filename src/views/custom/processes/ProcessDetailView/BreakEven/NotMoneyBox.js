@@ -37,13 +37,6 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-GenericBoxInfoProduction.propTypes = {
-    className: PropTypes.string,
-    numberOfItems: PropTypes.number,
-    infoType: PropTypes.string,
-    mainNumber: PropTypes.number,
-};
-
 
 function GenericBoxInfoProduction({ className, numberOfItems, infoType, mainNumber, ...other }) {
     const classes = useStyles();
@@ -58,7 +51,7 @@ function GenericBoxInfoProduction({ className, numberOfItems, infoType, mainNumb
                     {infoType}
                 </Typography>
                 <Typography variant="h3" gutterBottom>
-                    {`$${fNumber(mainNumber)}`}
+                    {fNumber(mainNumber)}
                 </Typography>
             </Box>
         </Card>

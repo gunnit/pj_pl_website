@@ -127,7 +127,10 @@ export default function BubbleChart({ data, className, ...other }) {
         }
       },
       z: {
-        title: 'Alignment Score:'
+        title: 'Alignment Score:',
+        formatter: function (w) {
+          return w - 5
+        }
       },
       // enabled: false
       // custom: function ({ series, seriesIndex, dataPointIndex, w }) {
