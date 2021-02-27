@@ -103,9 +103,6 @@ export default function ProcessDetailView() {
         return <LoadingScreen />
     }
 
-    const totalAverageOfSubgroups = Object.values(processDetails.process.average_scores_per_subgroup).reduce((currentSum, subgroup) => (currentSum + parseFloat(subgroup.average)), 0)
-        / Object.keys(processDetails.process.average_scores_per_subgroup).length
-
 
     return (
         <Page title="Process Details" className={classes.root}>
@@ -144,7 +141,7 @@ export default function ProcessDetailView() {
                         </ButtonGroup>
                     </Box>
                     <TabPanel value={'1'}>
-                        <Details processDetails={processDetails} totalAverageOfSubgroups={totalAverageOfSubgroups} />
+                        <Details processDetails={processDetails} />
                     </TabPanel>
                     <TabPanel value={'2'}>
                         <AutomationPotential processDetails={processDetails} />

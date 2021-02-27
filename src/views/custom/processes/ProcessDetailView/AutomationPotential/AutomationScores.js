@@ -134,7 +134,7 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
                                             // needs the title of the question
                                             return (
                                                 <>
-                                                    <Typography className={classes.item} variant='subtitle2' color='textSecondary'>{score.question}:</Typography>
+                                                    <Typography key={score.question} className={classes.item} variant='subtitle2' color='textSecondary'>{score.question}:</Typography>
                                                     {/* <MLabel>{score.answer_text}</MLabel>
                                             <MLabel>{score.value}</MLabel> */}
                                                 </>

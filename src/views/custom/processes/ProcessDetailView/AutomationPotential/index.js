@@ -54,26 +54,29 @@ export default function AutomationPotential({ processDetails }) {
 
     // This is so the chart data and category labels will be based on the same order. In the future, the subgroups should have a specific order every time
     const subgroups = Object.keys(processDetails.process.average_scores_per_subgroup)
-    const totalAverageOfSubgroups = Object.values(processDetails.process.average_scores_per_subgroup).reduce((currentSum, subgroup) => (currentSum + parseFloat(subgroup.average)), 0) / subgroups.length
+
 
 
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 <Grid item lg={6}>
-                    <AutomationScores scores={processDetails.scores} average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup} />
+                    <AutomationScores
+                        scores={processDetails.scores}
+                        average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup}
+                    />
                 </Grid>
                 <Grid item lg={6}>
                     <RadarChartCard
                         average_scores_per_subgroup={processDetails.process.average_scores_per_subgroup}
                         subgroups={subgroups}
-                        totalAverageOfSubgroups={totalAverageOfSubgroups}
+                        average_automation_score={processDetails.process.average_automation_score}
                     />
                 </Grid>
                 <Grid item lg={12}>
                     <AutomationScoreDescriptionCard
                         processDetails={processDetails}
-                        totalAverageOfSubgroups={totalAverageOfSubgroups}
+                        average_automation_score={processDetails.process.average_automation_score}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4}>

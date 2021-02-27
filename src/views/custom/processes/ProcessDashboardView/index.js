@@ -6,7 +6,7 @@ import Welcome from './Welcome';
 import WelcomeNoProcesses from './WelcomeNoProcesses';
 import Page from 'components/Page';
 import { useSelector } from 'react-redux';
-import BubbleChart from './BubbleChart';
+import BubbleChart from '../BubbleChart';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Grid } from '@material-ui/core';
 import GenericBoxInfo from './GenericBoxInfo';

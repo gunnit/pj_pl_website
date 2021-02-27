@@ -95,7 +95,7 @@ export default function GroupView() {
             <Container maxWidth="xl">
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <TopCard title={group.glossary.process_element} />
+                        <TopCard title={group.glossary.process_element} body={group.glossary.definition} />
                     </Grid>
                     <Grid container item xs={12} sm={12} md={12} lg={12} spacing={3}>
                         {!group.metrics.length

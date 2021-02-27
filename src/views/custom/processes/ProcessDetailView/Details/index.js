@@ -6,7 +6,7 @@ import GenericBoxInfoDetails from './GenericBoxInfoDetails';
 import ProcessDescription from './ProcessDescription';
 
 
-export default function Details({ processDetails, totalAverageOfSubgroups }) {
+export default function Details({ processDetails }) {
 
 
     return (
@@ -45,7 +45,7 @@ export default function Details({ processDetails, totalAverageOfSubgroups }) {
                     <Grid item xs={12} md={12} lg={12}>
                         <GenericBoxInfoDetails
                             infoType={'Automation Potential'}
-                            mainNumber={totalAverageOfSubgroups}
+                            mainNumber={processDetails.process.average_automation_score}
                             secondaryText={'score'}
                         />
                     </Grid>

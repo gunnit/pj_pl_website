@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RadarChartCard({ average_scores_per_subgroup, totalAverageOfSubgroups, subgroups }) {
+export default function RadarChartCard({ average_scores_per_subgroup, average_automation_score, subgroups }) {
     const classes = useStyles();
 
     const theme = useTheme();
@@ -76,7 +76,7 @@ export default function RadarChartCard({ average_scores_per_subgroup, totalAvera
                 <div className={classes.cardHeader}>
                     <Typography>Automation Score:</Typography>
                     <MLabel className={classes.cardLabel} variant="filled" color={"primary"}>
-                        {totalAverageOfSubgroups.toFixed(2)}
+                        {average_automation_score}
                     </MLabel>
                 </div>
             } />

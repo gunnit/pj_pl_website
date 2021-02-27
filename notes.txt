@@ -1,12 +1,28 @@
 Things to add:
 
+What properties are being calculated every time something is retrieved that could be done once and saved?
+
+Cost calculations need to be correct
+
+Needs to run faster where possible
+
+Needs to have analytics
+
+
+
+Maybe write tests to check all calculations
+
 What to display when there are no tasks on progress page
 
 Automation potential cards lead to taxonomy maybe
 
 What to show for circle chart when there are processes but no savings or negative savings?
 
+Use average_automation_score instead of calculating it on front end
+
 Favicon
+
+Make bubble chart one component
 
 Dashboard boxes when no processes in that phase?
 

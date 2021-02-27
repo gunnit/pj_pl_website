@@ -25,16 +25,18 @@ export default function BubbleChart({ data, className, ...other }) {
 
   const { setCurrentProcessId } = useContext(Context)
 
-  const chartData = data.map((process, i) => {
 
+
+
+  const chartData = data.map((process, i) => {
     return {
       name: process.process_name,
-      data: [[process.process_score,
+      data: [[process.average_automation_score,
       process.processassumptions.total_net_benefit,
       process.processobjectives.total_alignment_score_coverted + 5]]
     }
   })
-  console.log(chartData)
+
   const theme = useTheme()
 
   const chartOptions = {
@@ -132,19 +134,6 @@ export default function BubbleChart({ data, className, ...other }) {
           return w - 5
         }
       },
-      // enabled: false
-      // custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-      //   console.log(series)
-      //   console.log(seriesIndex)
-      //   console.log(dataPointIndex)
-      //   console.log(w)
-      //   if (series[seriesIndex] < 0) {
-      //     return `<div>-$${-series[seriesIndex]} in savings</div>`
-      //   } else {
-      //     return `<div>$${series[seriesIndex]} in savings</div>`
-      //   }
-
-      // },
       marker: {
         show: false
       }

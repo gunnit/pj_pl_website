@@ -13,7 +13,7 @@ import ColumnSingleChart from './ColumnSingleChart';
 import QuarterlyProjectionsTable from './QuarterlyProjectionsTable';
 import BreakEvenChart from './BreakEvenChart';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
-import BubbleChart from './BubbleChart';
+import BubbleChart from '../BubbleChart';
 import NoProcesses from '../NoProcesses';
 import Page500View from 'views/errors/Page500View';
 import { apiBaseUrl } from 'config';
@@ -63,6 +63,7 @@ function ProcessPipelineView() {
         return <LoadingScreen />
     }
 
+
     return (
         <Page title="Pipeline Dashboard" className={classes.root}>
             {pipeline.processes_idea.length
@@ -90,7 +91,7 @@ function ProcessPipelineView() {
                             <Table processes={pipeline.processes_idea} />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <BubbleChart processes={pipeline.processes_idea} />
+                            <BubbleChart data={pipeline.processes_idea} />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Card>

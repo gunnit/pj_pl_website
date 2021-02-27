@@ -24,17 +24,17 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function AutomationScoreDescriptionCard({ processDetails, totalAverageOfSubgroups }) {
+function AutomationScoreDescriptionCard({ processDetails, average_automation_score }) {
     const classes = useStyles();
 
 
-    if (totalAverageOfSubgroups <= 3) {
+    if (average_automation_score <= 3) {
         return (
             <Card>
                 <CardHeader title={
                     <>
                         <Typography variant='subtitle2'>Automation Score</Typography>
-                        <Typography variant='h3'>{totalAverageOfSubgroups}</Typography>
+                        <Typography variant='h3'>{average_automation_score}</Typography>
                         <MLabel color='error'>Low</MLabel>
                     </>
                 } />
@@ -51,13 +51,13 @@ function AutomationScoreDescriptionCard({ processDetails, totalAverageOfSubgroup
 
             </Card>
         );
-    } else if (totalAverageOfSubgroups <= 6) {
+    } else if (average_automation_score <= 6) {
         return (
             <Card>
                 <CardHeader title={
                     <>
                         <Typography variant='subtitle2'>Automation Score</Typography>
-                        <Typography variant='h3'>{totalAverageOfSubgroups.toFixed(2)}</Typography>
+                        <Typography variant='h3'>{average_automation_score}</Typography>
                         <MLabel color='warning'>Medium</MLabel>
                     </>
                 } />
@@ -80,7 +80,7 @@ function AutomationScoreDescriptionCard({ processDetails, totalAverageOfSubgroup
                 <CardHeader title={
                     <>
                         <Typography variant='subtitle2'>Automation Score</Typography>
-                        <Typography variant='h3'>{totalAverageOfSubgroups}</Typography>
+                        <Typography variant='h3'>{average_automation_score}</Typography>
                         <MLabel color='success'>High</MLabel>
                     </>
                 } />
