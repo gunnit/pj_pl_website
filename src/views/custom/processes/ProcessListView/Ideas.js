@@ -42,16 +42,15 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Ideas({ setPipelineFilter, className, ...other }) {
+export default function Ideas({ number, setPipelineFilter, className, ...other }) {
   const classes = useStyles();
-  const total = 70;
 
   return (
     <Card className={clsx(classes.root, className)} {...other} onClick={() => setPipelineFilter('Idea')}>
       <div className={classes.icon}>
         <Icon icon={ideaIcon} width={24} height={24} />
       </div>
-      <Typography variant="h3">{fShortenNumber(total)}</Typography>
+      <Typography variant="h3">{fShortenNumber(number)}</Typography>
       <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Ideas</Box>
     </Card>
   );

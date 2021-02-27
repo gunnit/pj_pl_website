@@ -7,7 +7,7 @@ import Ideas from './Ideas';
 import Pipeline from './Pipeline';
 import Development from './Development';
 import Production from './Production';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 import Table from './Table'
 import { ButtonAnimate } from 'components/Animate';
@@ -17,6 +17,9 @@ import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import LoadingScreen from 'components/LoadingScreen';
 import NoProcesses from '../NoProcesses';
+import ideaIcon from '@iconify-icons/el/idea';
+import rocket11 from '@iconify-icons/maki/rocket-11';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +30,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ProcessListView() {
-    const classes = useStyles();
+    const classes = useStyles()
+    const theme = useTheme()
 
     const [processes, setProcesses] = useState(null)
     const [error, setError] = useState(false)
@@ -104,27 +108,27 @@ export default function ProcessListView() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
                             <ButtonAnimate className={classes.buttonAnimate}>
-                                <ShowAllProcesses setPipelineFilter={setPipelineFilter} />
+                                <ShowAllProcesses number={processes.processes.length} setPipelineFilter={setPipelineFilter} />
                             </ButtonAnimate>
                         </Grid>
                         <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
                             <ButtonAnimate className={classes.buttonAnimate}>
-                                <Ideas setPipelineFilter={setPipelineFilter} />
+                                <Ideas number={processes.processes_in_idea} setPipelineFilter={setPipelineFilter} />
                             </ButtonAnimate>
                         </Grid>
                         <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
                             <ButtonAnimate className={classes.buttonAnimate}>
-                                <Pipeline setPipelineFilter={setPipelineFilter} />
+                                <Pipeline number={processes.processes_in_pipline} setPipelineFilter={setPipelineFilter} />
                             </ButtonAnimate>
                         </Grid>
                         <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
                             <ButtonAnimate className={classes.buttonAnimate}>
-                                <Development setPipelineFilter={setPipelineFilter} />
+                                <Development number={processes.processes_in_development} setPipelineFilter={setPipelineFilter} />
                             </ButtonAnimate>
                         </Grid>
                         <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
                             <ButtonAnimate className={classes.buttonAnimate}>
-                                <Production setPipelineFilter={setPipelineFilter} />
+                                <Production number={processes.processes_in_deployment} setPipelineFilter={setPipelineFilter} />
                             </ButtonAnimate>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>

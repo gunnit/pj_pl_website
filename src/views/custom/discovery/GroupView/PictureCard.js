@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { alpha, makeStyles } from '@material-ui/core/styles';
+import { alpha, makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   Card,
   Grid,
@@ -62,12 +62,10 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-function UserItem({ process_element_id, title, body, image }) {
+export default function PictureCard({ hierarchy_id, process_element_id, title, body, image }) {
   const classes = useStyles();
-
+  const theme = useTheme()
   const { setTaxonomyGroupId } = useContext(Context)
-
-
 
   const handleClick = async () => {
     setTaxonomyGroupId(process_element_id)
@@ -86,15 +84,18 @@ function UserItem({ process_element_id, title, body, image }) {
           className={classes.avatarShape}
         /> */}
           <Avatar
+
             sx={{
               width: 64,
               height: 64,
               zIndex: 11,
               position: 'absolute',
-              transform: 'translateY(-50%)'
+              transform: 'translateY(-50%)',
+              color: theme.palette.text.primary,
             }}
           >
             <PageviewIcon />
+            {/* {hierarchy_id} */}
           </Avatar>
           <CardMedia
             component="img"
@@ -108,8 +109,8 @@ function UserItem({ process_element_id, title, body, image }) {
         </div>
 
         <CardContent className={classes.cardContent}>
-          <Typography variant="subtitle1" align="center">
-            {title}
+          <Typography variant="subtitle1" align="center" gutterBottom>
+            {hierarchy_id} - {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" align="center">
             {body}
@@ -119,5 +120,3 @@ function UserItem({ process_element_id, title, body, image }) {
     </ButtonAnimate>
   );
 }
-
-export default UserItem;

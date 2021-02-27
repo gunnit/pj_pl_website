@@ -42,16 +42,15 @@ const useStyles = makeStyles(theme => ({
 // ----------------------------------------------------------------------
 
 
-export default function Production({ setPipelineFilter, className, ...other }) {
+export default function ShowAllProcesses({ number, setPipelineFilter, className, ...other }) {
     const classes = useStyles();
-    const total = 234;
 
     return (
         <Card className={clsx(classes.root, className)} {...other} onClick={() => setPipelineFilter('')}>
             <div className={classes.icon}>
                 <Icon icon={bugFilled} width={24} height={24} />
             </div>
-            <Typography variant="h3">{fShortenNumber(total)}</Typography>
+            <Typography variant="h3">{fShortenNumber(number)}</Typography>
             <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Show All</Box>
         </Card>
     );

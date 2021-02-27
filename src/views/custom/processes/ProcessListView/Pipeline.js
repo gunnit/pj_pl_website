@@ -41,9 +41,8 @@ const useStyles = makeStyles(theme => ({
 // ----------------------------------------------------------------------
 
 
-const TOTAL = 31;
 
-function NewUsers({ setPipelineFilter, className, ...other }) {
+export default function Pipeline({ setPipelineFilter, number, className, ...other }) {
   const classes = useStyles();
 
   return (
@@ -51,10 +50,8 @@ function NewUsers({ setPipelineFilter, className, ...other }) {
       <div className={classes.icon}>
         <Icon icon={rocket11} width={24} height={24} />
       </div>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(number)}</Typography>
       <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>Pipeline</Box>
     </Card>
   );
 }
-
-export default NewUsers;

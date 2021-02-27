@@ -1,10 +1,12 @@
 import clsx from 'clsx';
 import React from 'react';
 import { Icon } from '@iconify/react';
+import ideaIcon from '@iconify-icons/el/idea';
 import { fShortenNumber } from 'utils/formatNumber';
+import androidFilled from '@iconify-icons/ant-design/android-filled';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
-import { ButtonAnimate } from 'components/Animate';
+
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -12,9 +14,12 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     textAlign: 'center',
     padding: theme.spacing(5, 0),
-    // color: theme.palette.info.darker,
-    // backgroundColor: theme.palette.info.lighter,
-    minWidth: 200
+    color: theme.palette.info.darker,
+    backgroundColor: theme.palette.info.lighter,
+    width: '100%',
+    '&:hover': {
+      cursor: 'default'
+    }
   },
   icon: {
     margin: 'auto',
@@ -36,18 +41,17 @@ const useStyles = makeStyles(theme => ({
 // ----------------------------------------------------------------------
 
 
-export default function ProcessListBox({ number, label, icon, color, backgroundColor, iconColor, backgroundImageColor, className, ...other }) {
+
+export default function ProcessListBox({ title, number, color, icon, setPipelineFilter, className, ...other }) {
   const classes = useStyles();
 
   return (
-    <ButtonAnimate>
-      <Card className={clsx(classes.root, className)} style={{ color, backgroundColor }} {...other}>
-        <div className={classes.icon}>
-          <Icon icon={icon} width={24} height={24} />
-        </div>
-        <Typography variant="h3">{fShortenNumber(number)}</Typography>
-        <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>{label}</Box>
-      </Card >
-    </ButtonAnimate>
+    <Card className={clsx(classes.root, className)} {...other} onClick={() => setPipelineFilter('Idea')}>
+      <div className={classes.icon}>
+        <Icon icon={icon} width={24} height={24} />
+      </div>
+      <Typography variant="h3">{fShortenNumber(total)}</Typography>
+      <Box sx={{ opacity: 0.72, typography: 'subtitle2' }}>{title}</Box>
+    </Card>
   );
 }

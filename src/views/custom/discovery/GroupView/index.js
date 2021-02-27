@@ -95,7 +95,7 @@ export default function GroupView() {
             <Container maxWidth="xl">
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <TopCard title={group.glossary.process_element} body={group.glossary.definition} />
+                        <TopCard hierarchy_id={group.glossary.hierarchy_id} title={group.glossary.process_element} body={group.glossary.definition} />
                     </Grid>
                     <Grid container item xs={12} sm={12} md={12} lg={12} spacing={3}>
                         {!group.metrics.length
@@ -126,10 +126,10 @@ export default function GroupView() {
                                 <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
                                     <Typography variant='h4'>Related processes</Typography>
                                 </Grid>
-                                {group.query_glossary_process_group.map(({ process_element_id, process_element, definition }) => {
+                                {group.query_glossary_process_group.map(({ hierarchy_id, process_element_id, process_element, definition }) => {
                                     return (
                                         <Grid item xs={12} sm={12} md={4} lg={4} spacing={3}>
-                                            <PictureCard process_element_id={process_element_id} title={process_element} body={definition} />
+                                            <PictureCard hierarchy_id={hierarchy_id} process_element_id={process_element_id} title={process_element} body={definition} />
                                         </Grid>
                                         // <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
                                         //     <ListCard process_element_id={process_element_id} title={process_element} body={definition} />

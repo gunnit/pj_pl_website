@@ -8,12 +8,12 @@ const useStyles = makeStyles(theme => ({
     root: {}
 }));
 
-export default function TopCard({ title, body }) {
+export default function TopCard({ hierarchy_id, title, body, }) {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
-            <CardHeader title={title} />
+            <CardHeader title={`${hierarchy_id} - ${title}`} />
             <CardContent>
                 <Grid container spacing={3}>
                     <Grid item md={8} lg={8}>

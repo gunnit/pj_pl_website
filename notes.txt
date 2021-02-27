@@ -58,6 +58,8 @@ Maybe cursor pointer on bubble chart
 
 Last three squares on taxonomy view don't work
 
+Table when nothing found in certain stage on list view maybe customize
+
 Test history.push instead of link speed
 
 Table headings move around when sorting
