@@ -96,25 +96,45 @@ export default function GroupView() {
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <TopCard title={group.glossary.process_element} />
                     </Grid>
-                    <Typography variant='h4'>Metrics</Typography>
-                    {group.metrics.map(({ metric_name, formula, formula_units }) => {
-                        return (
-                            <Grid key={metric_name} item xs={12} sm={12} md={12} lg={12}>
-                                <MetricCard
-                                    metric_name={metric_name}
-                                    formula={formula}
-                                    formula_units={formula_units}
-                                />
-                            </Grid>
-                        )
-                    })}
-                    {group.query_glossary_process_group.map(({ process_element_id, process_element, definition }) => {
-                        return (
-                            <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
-                                <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
-                            </Grid>
-                        )
-                    })}
+                    <Grid container item xs={12} sm={12} md={12} lg={12} spacing={3}>
+                        {!group.metrics.length
+                            ? <Typography variant='h4'>No metrics found</Typography>
+                            :
+                            <>
+                                <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
+                                    <Typography variant='h4'>Metrics</Typography>
+                                </Grid>
+                                {group.metrics.map(({ metric_name, formula, formula_units }) => {
+                                    return (
+                                        <Grid key={metric_name} item xs={12} sm={12} md={12} lg={12}>
+                                            <MetricCard
+                                                metric_name={metric_name}
+                                                formula={formula}
+                                                formula_units={formula_units}
+                                            />
+                                        </Grid>
+                                    )
+                                })}
+                            </>}
+                    </Grid>
+                    <Grid container item xs={12} sm={12} md={12} lg={12} spacing={3}>
+
+                        {!group.query_glossary_process_group.length
+                            ? <Typography variant='h4'>No related processes found</Typography>
+                            : <>
+                                <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
+                                    <Typography variant='h4'>Related processes</Typography>
+                                </Grid>
+                                {group.query_glossary_process_group.map(({ process_element_id, process_element, definition }) => {
+                                    return (
+                                        <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
+                                            <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
+                                        </Grid>
+                                    )
+                                })}
+                            </>
+                        }
+                    </Grid>
                 </Grid>
             </Container>
         </Page>

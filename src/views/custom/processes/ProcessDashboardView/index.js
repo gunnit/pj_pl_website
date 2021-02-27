@@ -224,7 +224,7 @@ export default function ProcessDashboardView() {
                             title={'Assess your Organization'}
                             description={'Assess the organizational design that best supports delivery of your RPA capability and aligns with your corporate strategy and culture.'}
                             imagePath={'/static/images/process/undraw_solution_mindset_34bi.svg'}
-                            clickPath={''}
+                            clickPath={PATH_APP.user.objectives}
                         />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >
@@ -240,7 +240,7 @@ export default function ProcessDashboardView() {
                             title={'Consult the Wiki'}
                             description={'Discover your next process from our process database, benchmark your operations against industry standards and understand your process metrics.'}
                             imagePath={'/static/images/process/undraw_Web_search_re_efla.svg'}
-                            clickPath={''}
+                            clickPath={PATH_APP.discovery.taxonomy}
                         />
                     </Grid>
                 </Grid>

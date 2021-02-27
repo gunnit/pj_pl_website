@@ -1,5 +1,9 @@
 Things to add:
 
+What to display when there are no tasks on progress page
+
+Automation potential cards lead to taxonomy maybe
+
 What to show for circle chart when there are processes but no savings or negative savings?
 
 Dashboard boxes when no processes in that phase?

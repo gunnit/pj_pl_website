@@ -1,17 +1,14 @@
-import { fDate } from 'utils/formatTime';
+import 'firebase/auth';
+import firebase from 'firebase/app';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import { ButtonAnimate } from 'components/Animate';
-import { Icon } from '@iconify/react';
-import Page from 'components/Page';
 import ToolbarTable from './ToolbarTable';
 import { PATH_APP } from 'routes/paths';
 import React, { useState, useContext } from 'react';
-import { visuallyHidden } from '@material-ui/utils';
 import SearchNotFound from 'components/SearchNotFound';
 import { useHistory } from 'react-router-dom';
 import Scrollbars from 'components/Scrollbars';
-import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -20,25 +17,25 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  Container,
-  IconButton,
   TableContainer,
   TablePagination,
-  Menu,
-  MenuItem,
-  Dialog,
   Typography,
-  Button
 } from '@material-ui/core';
-import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
-import { LegendToggleRounded } from '@material-ui/icons';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import { MIconButton } from '@material-extend';
+import { useSnackbar } from 'notistack';
+import Row from './Row';
 // ----------------------------------------------------------------------
 
 
 
 const TABLE_HEAD = [
+  {
+    id: 'click',
+  },
   {
     id: 'hierarchy_id',
     numeric: false,
@@ -116,6 +113,14 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       cursor: 'pointer'
     }
+  },
+  likeCell: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  likeButtons: {
+    display: 'flex',
   }
 }));
 
@@ -128,11 +133,11 @@ export default function GlossaryTable({ glossary }) {
   const [selected, setSelected] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(-1);
-  const [orderBy, setOrderBy] = useState('createdAt');
+  const [orderBy, setOrderBy] = useState('hierarchy_id');
   const [isOpen, setOpen] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 
-  const { setTaxonomyGroupId } = useContext(Context)
+  const { setTaxonomyGroupId, userId } = useContext(Context)
 
   const history = useHistory()
 
@@ -200,12 +205,38 @@ export default function GlossaryTable({ glossary }) {
 
 
 
-  const handleClick = async (process_element_id) => {
+  const handleClick = (process_element_id) => {
     setTaxonomyGroupId(process_element_id)
     localStorage.setItem('taxonomyGroupId', process_element_id)
     history.push(PATH_APP.discovery.group)
+  }
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleLikeClick = async (process_element_id, like) => {
+    if (like) {
+      enqueueSnackbar('Added to Liked Processes', { variant: 'success' })
+    } else {
+      enqueueSnackbar('Removed from Liked Processes', { variant: 'error' })
+    }
+
+    const token = await firebase.auth().currentUser.getIdToken(true);
+
+    await fetch(`${apiBaseUrl}/like-this-process/${userId}/${process_element_id}`, {
+      method: 'POST',
+      // body: JSON.stringify({}),
+      headers: {
+        // "Content-Type": 'application/json',
+        "Authorization": token
+      }
+    })
+
+
+
 
   }
+
+
 
   return (
     <Card className={classes.root}>
@@ -232,42 +263,30 @@ export default function GlossaryTable({ glossary }) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(({
                   id,
-                  processtaxonomy: {
-                    hierarchy_id,
-                    process_element,
-                    definition,
-                    metric,
-                    process_element_id,
-                  },
+                  hierarchy_id,
+                  process_element,
+                  definition,
+                  metric,
+                  process_element_id,
+                  liked,
+                  user_liked
                 }, index) => {
 
-                  const isItemSelected = selected.indexOf(process_element) !== -1;
+                  // const isItemSelected = selected.indexOf(process_element) !== -1;
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      key={id}
-                      tabIndex={-1}
-                      role="checkbox"
-                      selected={isItemSelected}
-                      aria-checked={isItemSelected}
-                      className={classes.row}
-                    >
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {hierarchy_id}
-                      </TableCell>
-
-                      <TableCell><ButtonAnimate className={classes.clickableCell} onClick={() => handleClick(process_element_id)}>{process_element}</ButtonAnimate></TableCell>
-
-                      <TableCell>{definition}</TableCell>
-                      <TableCell>{metric}</TableCell>
-                    </TableRow>
+                    <Row
+                      id={id}
+                      hierarchy_id={hierarchy_id}
+                      process_element={process_element}
+                      definition={definition}
+                      metric={metric}
+                      process_element_id={process_element_id}
+                      liked={liked}
+                      user_liked={user_liked}
+                      labelId={labelId}
+                    />
                   );
                 })}
               {emptyRows > 0 && (

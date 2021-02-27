@@ -34,6 +34,9 @@ import Row from './Row';
 
 const TABLE_HEAD = [
   {
+    id: 'click',
+  },
+  {
     id: 'hierarchy_id',
     numeric: false,
     disablePadding: true,
@@ -130,7 +133,7 @@ export default function GlossaryTable({ glossary }) {
   const [selected, setSelected] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(-1);
-  const [orderBy, setOrderBy] = useState('createdAt');
+  const [orderBy, setOrderBy] = useState('hierarchy_id');
   const [isOpen, setOpen] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 

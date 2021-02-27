@@ -25,6 +25,7 @@ export default function AllTasks({ tasks }) {
   const classes = useStyles();
 
 
+
   return (
     <Card>
       <CardHeader title="All Tasks" />

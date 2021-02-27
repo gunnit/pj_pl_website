@@ -9,7 +9,10 @@ import Context from 'context/Context';
 
 
 const useStyles = makeStyles(theme => ({
-    root: {}
+    root: {
+        height: '100%',
+        width: '100%'
+    }
 }));
 
 export default function ListCard({ process_element_id, title, body }) {
@@ -27,7 +30,7 @@ export default function ListCard({ process_element_id, title, body }) {
 
 
     return (
-        <ButtonAnimate onClick={handleClick}>
+        <ButtonAnimate className={classes.root} onClick={handleClick}>
             <Card className={classes.root}>
 
                 <CardHeader title={title} />
