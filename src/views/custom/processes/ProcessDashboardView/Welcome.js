@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     [theme.breakpoints.up('md')]: {
       padding: 0,
-      paddingLeft: theme.spacing(5)
+      paddingLeft: theme.spacing(5),
     },
   }
 }));
@@ -73,7 +73,7 @@ function Welcome({ displayName, className, ...other }) {
           <Button variant="contained" to={PATH_APP.processes.new} component={RouterLink}>
             New Process
         </Button>
-          <Button color='inherit' variant="contained" to={PATH_APP.processes.list} component={RouterLink}>
+          <Button color='warning' variant="contained" to={PATH_APP.processes.list} component={RouterLink}>
             Process List
         </Button>
         </ButtonGroup>

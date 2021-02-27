@@ -1,5 +1,17 @@
 Things to add:
 
+What to show for circle chart when there are processes but no savings or negative savings?
+
+Dashboard boxes when no processes in that phase?
+
+Button - yellow or gray?
+
+Welcome message for new users - what are you supposed to do first? are you creating a process or configuring your profile?
+
+Alignment calculation doesn't work when one of them is 0. 0/1 is a high alignment, not 0% alignment.
+1/2 isn't 50% alignment. It's almost 100% alignment.
+(10 - difference)/10?
+
 process_net_benefit or total_net_benefit for details box?
 
 automation score description complexity vs score confusing

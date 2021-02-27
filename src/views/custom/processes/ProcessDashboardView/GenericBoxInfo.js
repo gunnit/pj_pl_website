@@ -80,6 +80,7 @@ function GenericBoxInfo({
                     &nbsp;estimated savings
                 </Typography>
 
+
                 <div className={classes.trending}>
                     <div
                         className={clsx(classes.trendingIcon, {

@@ -7,12 +7,22 @@ import {
   CardHeader,
   CardContent,
 } from '@material-ui/core';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------------
 
 
+const useStyles = makeStyles(theme => ({
+  axisLabels: {
+    fill: theme.palette.text.primary,
+    fontSize: 14,
+  }
+}));
 
 export default function IdeasPerFunction({ data }) {
+  const theme = useTheme()
+  const classes = useStyles()
+
   const chartOptions = merge(ApexChartsOption(), {
     stroke: { show: false },
     plotOptions: {
@@ -38,15 +48,21 @@ export default function IdeasPerFunction({ data }) {
       ],
       labels: {
         style: {
-          colors: ['#F9FAFB']
+          colors: [theme.palette.text.primary],
+        },
+        formatter: function (value, timestamp, opts) {
+          return parseInt(value)
         }
-      }
+      },
+      tickAmount: 1,
     },
     yaxis: {
       labels: {
         style: {
-          colors: ['#F9FAFB']
-        }
+          // colors: [theme.palette.text.primary],
+          cssClass: classes.axisLabels
+        },
+
       }
     }
   });
@@ -57,12 +73,11 @@ export default function IdeasPerFunction({ data }) {
       <CardContent>
         <ReactApexChart
           type="bar"
-          height={320}
+          height={420}
           series={[{ data }]}
           options={chartOptions}
         />
       </CardContent>
     </Card>
-
   );
 }

@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-function CircleChart({
+export default function DonutChart({
   net_benefit_sum_idea,
   net_benefit_sum_pipeline,
   net_benefit_sum_development,
@@ -55,14 +55,15 @@ function CircleChart({
     net_benefit_sum_pipeline.sum ? net_benefit_sum_pipeline.sum : net_benefit_sum_pipeline,
     net_benefit_sum_development.sum ? net_benefit_sum_development.sum : net_benefit_sum_development,
     net_benefit_sum_production.sum ? net_benefit_sum_production.sum : net_benefit_sum_production,
-
   ];
+
   // const chartData = [
-  //   334000,
-  //   518000,
-  //   196000,
-  //   1200000,
+  //   0,
+  //   0,
+  //   0,
+  //   0
   // ]
+
   const chartOptions = merge(ApexChartsOption(), {
     // fill: {
     //   colors: [theme.palette.info.main, theme.palette.error.main, theme.palette.warning.main, theme.palette.primary.main,],
@@ -77,7 +78,9 @@ function CircleChart({
         donut: {
           size: '90%',
           labels: {
-
+            total: {
+              // show: false
+            }
             // value: {
             //   formatter: function (v) {
             //     return fShortenNumber(2248000); // change this
@@ -189,9 +192,3 @@ function CircleChart({
     </Card>
   );
 }
-
-CircleChart.propTypes = {
-  className: PropTypes.string
-};
-
-export default CircleChart;

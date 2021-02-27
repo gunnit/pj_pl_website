@@ -79,7 +79,13 @@ export default function ObjectivesView() {
                         throw res
                     }
 
-                    setSliderValues(await res.json())
+                    const sliderValues = await res.json()
+
+                    for (const slider in sliderValues) {
+                        sliderValues[slider] = parseInt(sliderValues[slider])
+                    }
+
+                    setSliderValues(sliderValues)
 
                 })()
 
