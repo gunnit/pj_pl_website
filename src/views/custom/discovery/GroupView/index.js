@@ -13,6 +13,7 @@ import LoadingScreen from 'components/LoadingScreen';
 import ListCard from './ListCard';
 import TopCard from './TopCard';
 import MetricCard from './MetricCard';
+import PictureCard from './PictureCard';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -127,14 +128,18 @@ export default function GroupView() {
                                 </Grid>
                                 {group.query_glossary_process_group.map(({ process_element_id, process_element, definition }) => {
                                     return (
-                                        <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
-                                            <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
+                                        <Grid item xs={12} sm={12} md={4} lg={4} spacing={3}>
+                                            <PictureCard process_element_id={process_element_id} title={process_element} body={definition} />
                                         </Grid>
+                                        // <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
+                                        //     <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
+                                        // </Grid>
                                     )
                                 })}
                             </>
                         }
                     </Grid>
+
                 </Grid>
             </Container>
         </Page>

@@ -6,6 +6,8 @@ Automation potential cards lead to taxonomy maybe
 
 What to show for circle chart when there are processes but no savings or negative savings?
 
+Favicon
+
 Dashboard boxes when no processes in that phase?
 
 Button - yellow or gray?
@@ -23,6 +25,8 @@ automation score description complexity vs score confusing
 Glossary table correct rows?
 
 Make sure likes line up
+
+Taxonomy - different icons for different categories?
 
 Make total average of subgroups easier to work with
 
