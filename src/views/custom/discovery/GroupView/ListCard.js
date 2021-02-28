@@ -25,7 +25,6 @@ export default function ListCard({ process_element_id, title, body }) {
     const handleClick = async () => {
         setTaxonomyGroupId(process_element_id)
         localStorage.setItem('taxonomyGroupId', process_element_id)
-        // history.push(PATH_APP.discovery.group)
     }
 
 

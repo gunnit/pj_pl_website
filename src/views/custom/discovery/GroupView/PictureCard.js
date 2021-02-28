@@ -62,6 +62,30 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
+const matchPicture = {
+  1: '/static/images/taxonomy/undraw_mindfulness_scgo.svg',
+  2: '/static/images/taxonomy/undraw_product_teardown_elol.svg',
+  3: '/static/images/taxonomy/undraw_Marketing_re_7f1g.svg',
+  4: '/static/images/taxonomy/undraw_On_the_way_re_swjt.svg',
+  5: '/static/images/taxonomy/undraw_tutorial_video_vtd1.svg',
+  6: '/static/images/taxonomy/undraw_reviews_lp8w.svg',
+  7: '/static/images/taxonomy/undraw_team_spirit_hrr4.svg',
+  8: '/static/images/taxonomy/undraw_programming_2svr.svg',
+  9: '/static/images/taxonomy/undraw_predictive_analytics_kf9n.svg',
+  10: '/static/images/taxonomy/undraw_add_to_cart_vkjp.svg',
+  11: '/static/images/taxonomy/undraw_warning_cyit.svg',
+  12: '/static/images/taxonomy/undraw_word_of_mouth_v1j9.svg',
+  13: '/static/images/taxonomy/undraw_Business_plan_re_0v81.svg',
+  14: '/static/images/taxonomy/undraw_clean_up_ucm0.svg',
+  15: '/static/images/taxonomy/undraw_Mind_map_re_nlb6.svg',
+  16: '/static/images/taxonomy/undraw_career_development_oqcb.svg',
+}
+
+
+
+
+
+
 export default function PictureCard({ hierarchy_id, process_element_id, title, body, image }) {
   const classes = useStyles();
   const theme = useTheme()
@@ -102,6 +126,8 @@ export default function PictureCard({ hierarchy_id, process_element_id, title, b
             title="cover"
             data-sizes="auto"
             src="/static/images/taxonomy/undraw_team_spirit_hrr4.svg"
+            // Gets picture based on first number of hierarchy ID
+            src={matchPicture[hierarchy_id.split('.')[0]]}
             // data-src={cover.small}
             // data-srcset={`${cover.small} 600w, ${cover.medium} 960w`}
             className={classes.cardMedia}
