@@ -53,7 +53,7 @@ function Page500View() {
           <Box
             component="img"
             alt="500"
-            src="/static/illustrations/illustration_500.svg"
+            src="/static/images/illustrations/illustration_500.svg"
             sx={{ width: '100%', maxHeight: 240, my: { xs: 5, sm: 10 } }}
           />
 

@@ -536,7 +536,7 @@ export default function AutomationAssessmentView() {
                                 <Box
                                     component="img"
                                     alt="reminders-image"
-                                    src={''}
+                                    src={'/static/images/process/undraw_Detailed_information_re_qmuc.svg'}
                                     sx={{
                                         p: 2,
                                         height: 205,
