@@ -16,11 +16,21 @@ import {
     CardContent,
     Breadcrumbs
 } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
-    root: {},
+    root: {
+        // textDecoration: 'none'
+    },
+    routerLink: {
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline'
+        }
+    },
     link: {
         display: 'flex',
         alignItems: 'center'
@@ -34,17 +44,17 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-export default function BreadcrumbsComponent() {
+export default function BreadcrumbsComponent({ process_type }) {
     const classes = useStyles();
 
     return (
-        <Breadcrumbs>
-            <Link color="inherit" href="/">
-                Material-UI
-                    </Link>
-            <Link color="inherit" href="#">
+        <Breadcrumbs className={classes.root}>
+            <RouterLink color="inherit" to={PATH_APP.discovery.category} className={classes.routerLink}>
+                {process_type}
+            </RouterLink>
+            <RouterLink color="inherit" to={PATH_APP.discovery.group} className={classes.routerLink}>
                 Core
-                    </Link>
+            </RouterLink>
             <Typography color="textPrimary">Breadcrumb</Typography>
         </Breadcrumbs>
 

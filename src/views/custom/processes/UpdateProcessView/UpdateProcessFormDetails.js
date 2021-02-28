@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function UpdateProcessFormDetails({ formik, className, ...other }) {
+export default function UpdateProcessFormDetails({ formik, triedToClickPast, className, ...other }) {
   const classes = useStyles();
   const {
     errors,
@@ -47,7 +47,7 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
           fullWidth
           label="Process Name"
           {...getFieldProps('process_name')}
-          error={Boolean(touched.name && errors.name)}
+          error={Boolean((touched.process_name || triedToClickPast) && errors.process_name)}
           // helperText={touched.name && errors.name}
           className={classes.margin}
         />
@@ -69,8 +69,8 @@ export default function UpdateProcessFormDetails({ formik, className, ...other }
           {...getFieldProps('pipeline')}
           // This select field needs formik.handleChange for formik to detect its value even though the other ones don't seem to need it for some reason
           onChange={formik.handleChange}
-          // helperText="Please select your currency"
           className={classes.margin}
+          error={Boolean((touched.pipeline || triedToClickPast) && errors.pipeline)}
         >
           {['Idea', 'Pipeline', 'Development', 'Production'].map(option => (
             <MenuItem key={option} value={option}>

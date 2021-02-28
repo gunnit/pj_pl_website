@@ -78,8 +78,11 @@ export default function GroupView() {
     return (
         <Page title="Process Taxonomy" className={classes.root}>
             <Container maxWidth="xl">
-                <Breadcrumbs />
+
                 <Grid container spacing={3}>
+                    <Grid item>
+                        <Breadcrumbs process_type={group.glossary.process_type} />
+                    </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <TopCard hierarchy_id={group.glossary.hierarchy_id} title={group.glossary.process_element} body={group.glossary.definition} />
                     </Grid>

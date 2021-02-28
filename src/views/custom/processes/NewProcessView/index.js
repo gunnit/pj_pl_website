@@ -367,13 +367,12 @@ export default function NewProcessView() {
   };
 
   const handleStepClick = step => {
-    if (activeStep === 0 && (formik.errors.name
+    if (activeStep === 0 && (formik.errors.process_name
       || formik.errors.pipeline)) {
       setTriedToClickPast(true)
     } else {
       setActiveStep(step)
     }
-
   }
 
 
