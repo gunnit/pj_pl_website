@@ -61,6 +61,15 @@ export default function UpdateProcessFormDetails({ formik, triedToClickPast, cla
           className={classes.margin}
         />
         <TextField
+          fullWidth
+          color='secondary'
+          label="Level 3 - Process Name"
+          {...getFieldProps('process_L3_process_name')}
+          error={Boolean(touched.process_L3_process_name && errors.process_L3_process_name)}
+          helperText={'Level 3 process name or taxonomy reference'}
+          className={classes.margin}
+        />
+        <TextField
           select
           color='secondary'
           fullWidth

@@ -12,11 +12,21 @@ Needs to have analytics
 
 Debug don't run with debug turned on in production, allowed hosts?
 
-Breadcrumbs
+Breadcrumbs need to look like they're working better. That whole page should probably have a loading screen
 
 Taxonomy picture cards all end up having the same picture
 
 Optimize queries
+
+Donut chart is confusing when there are negative numbers
+
+Estimated savings is based on savings goal?
+
+Should tables have the categories that are involved in the move to pipeline/development/whatever calculation?
+
+Scroll wheel input problem
+
+Number of manual steps - 0-9, 10-19, 20-29, 30-39, 40-49, 50+
 
 Maybe write tests to check all calculations
 

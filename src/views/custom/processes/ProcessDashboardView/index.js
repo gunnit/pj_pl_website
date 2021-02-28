@@ -139,7 +139,7 @@ export default function ProcessDashboardView() {
                             <GenericBoxInfo
                                 numberOfItems={19}
                                 infoType={'Ideas'}
-                                mainNumber={dashboard.net_benefit_sum_idea}
+                                mainNumber={dashboard.net_benefit_sum_idea ? dashboard.net_benefit_sum_idea.sum : 0}
                                 secondaryNumber={dashboard.processes_idea_count}
                                 iconColor={theme.palette.info.main}
                                 icon={ideaIcon}
@@ -149,7 +149,7 @@ export default function ProcessDashboardView() {
                             <GenericBoxInfo
                                 numberOfItems={14}
                                 infoType={'Pipeline'}
-                                mainNumber={dashboard.net_benefit_sum_pipeline}
+                                mainNumber={dashboard.net_benefit_sum_pipeline ? dashboard.net_benefit_sum_pipeline.sum : 0}
                                 secondaryNumber={dashboard.processes_pipeline_count}
                                 iconColor={theme.palette.error.main}
                                 icon={rocket11}
@@ -159,7 +159,7 @@ export default function ProcessDashboardView() {
                             <GenericBoxInfo
                                 numberOfItems={65}
                                 infoType={'Development'}
-                                mainNumber={dashboard.net_benefit_sum_development}
+                                mainNumber={dashboard.net_benefit_sum_development ? dashboard.net_benefit_sum_development.sum : 0}
                                 secondaryNumber={dashboard.processes_development_count}
                                 iconColor={theme.palette.warning.main}
                                 icon={gearsIcon}
@@ -169,7 +169,7 @@ export default function ProcessDashboardView() {
                             <GenericBoxInfo
                                 numberOfItems={43}
                                 infoType={'Production'}
-                                mainNumber={dashboard.net_benefit_sum_production}
+                                mainNumber={dashboard.net_benefit_sum_production ? dashboard.net_benefit_sum_production.sum : 0}
                                 secondaryNumber={dashboard.processes_production_count}
                                 iconColor={theme.palette.primary.main}
                                 icon={raceflagIcon}

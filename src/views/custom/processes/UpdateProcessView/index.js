@@ -268,6 +268,7 @@ export default function UpdateProcessView() {
     initialValues: {
       process_name: '',
       process_L2_process_name: '',
+      process_L3_process_name: '',
       overview: '',
       description: '',
       pipeline: '',
@@ -337,6 +338,7 @@ export default function UpdateProcessView() {
         const {
           process_name,
           process_L2_process_name,
+          process_L3_process_name,
           overview,
           description,
           pipline: pipeline,
@@ -374,6 +376,7 @@ export default function UpdateProcessView() {
         formik.setValues({
           process_name,
           process_L2_process_name,
+          process_L3_process_name,
           overview,
           description,
           pipeline,
@@ -619,18 +622,11 @@ export default function UpdateProcessView() {
                         variant="contained"
                         onClick={handleNext}
                         pendingPosition="center"
-                      // startIcon={<AlarmIcon />}
+                        color='secondary'
                       >
                         Save
                       </LoadingButton>}
-                    {/* <LoadingButton
-                      pending={pending}
-                      variant="contained"
-                      pendingPosition="start"
-                      startIcon={<AlarmIcon />}
-                    >
-                      Save
-          </LoadingButton> */}
+
                   </Box>
                 </div>
               )}

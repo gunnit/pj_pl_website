@@ -66,6 +66,7 @@ function GenericBoxInfo({
 }) {
     const classes = useStyles();
 
+    console.log(mainNumber)
 
     return (
         <Card className={clsx(classes.root, className)} {...other}>
@@ -74,7 +75,8 @@ function GenericBoxInfo({
                     {infoType}
                 </Typography>
                 <Typography variant="h3">
-                    {`$${fNumber(mainNumber)}`}
+                    {/* This is to put the negative sign outside of the dollar sign if the number is negative */}
+                    {mainNumber >= 0 ? `$${fNumber(mainNumber)}` : `-$${fNumber(-mainNumber)}`}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" gutterBottom>
                     &nbsp;estimated savings

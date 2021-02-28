@@ -37,7 +37,6 @@ function NatureOfProcess({ data }) {
         plotOptions: { pie: { donut: { size: '90%' } } }
     });
 
-
     return (
         <Card>
             <CardHeader title="Nature of Process" />
