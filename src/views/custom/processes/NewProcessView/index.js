@@ -473,20 +473,21 @@ export default function NewProcessView() {
                   <Typography variant="h5" gutterBottom>
                     A few simple reminders:
                 </Typography>
-                  <Typography variant="subtitle1" color='textSecondary'>
-                    Below is the process form, your starting point for creating a new process. The process is connected to all of the criteria of the process that make it unique. A process can have many different parameters. For now, let's focus on setting up the basic information. None of the fields are mandatory - input what you know and feel, but the more information you can collect the better results you will get. Have fun!
-                  </Typography>
-                </Box>
                 <Box
                   component="img"
                   alt="reminders-image"
-                  src={''}
+                  src={'/static/images/process/undraw_Detailed_information_re_qmuc.svg'}
                   sx={{
                     p: 2,
                     height: 205,
                     margin: { xs: 'auto', md: 'inherit' }
                   }}
                 />
+                  <Typography variant="subtitle1" color='textSecondary'>
+                    This is the process form, your starting point for creating a new process. The process is connected to all of the criteria of the process that make it unique. A process can have many different parameters. For now, let's focus on setting up the basic information. None of the fields are mandatory - input what you know and feel, but the more information you can collect the better results you will get. Have fun!
+                  </Typography>
+                </Box>
+                
               </Card>
             </>}
         </Dialog>

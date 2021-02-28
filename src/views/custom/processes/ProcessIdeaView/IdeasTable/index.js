@@ -334,7 +334,7 @@ export default function IdeasTable({ processes }) {
                         <TableCell align="right">
                           {total_alignment_score_coverted
                             ? <MLabel variant="filled" color="info">
-                              {total_alignment_score_coverted}
+                              {total_alignment_score_coverted}%
                             </MLabel>
                             : 'Not completed'}
                         </TableCell>
