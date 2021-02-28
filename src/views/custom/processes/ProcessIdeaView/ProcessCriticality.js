@@ -62,7 +62,7 @@ function ProcessCriticality({ data }) {
             },
 
             tickAmount: 1,
-        }
+        },
     });
     return (
         <Card className={classes.root}>

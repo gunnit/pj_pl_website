@@ -66,7 +66,6 @@ function GenericBoxInfo({
 }) {
     const classes = useStyles();
 
-    console.log(mainNumber)
 
     return (
         <Card className={clsx(classes.root, className)} {...other}>
@@ -81,7 +80,6 @@ function GenericBoxInfo({
                 <Typography variant="body2" color="textSecondary" gutterBottom>
                     &nbsp;estimated savings
                 </Typography>
-
 
                 <div className={classes.trending}>
                     <div

@@ -23,6 +23,7 @@ export default function IdeasPerFunction({ data }) {
   const theme = useTheme()
   const classes = useStyles()
 
+
   const chartOptions = merge(ApexChartsOption(), {
     stroke: { show: false },
     plotOptions: {
@@ -64,6 +65,14 @@ export default function IdeasPerFunction({ data }) {
         },
 
       }
+    },
+    tooltip: {
+      x: {
+        show: true
+      },
+      y: {
+        show: false
+      },
     }
   });
 
