@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import Block from 'components/Block';
 // import { PATH_APP } from 'routes/paths';
 // import HomeIcon from '@material-ui/icons/Home';
@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
+import Context from 'context/Context';
 
 // ----------------------------------------------------------------------
 
@@ -44,18 +45,35 @@ const useStyles = makeStyles(theme => ({
 
 // ----------------------------------------------------------------------
 
-export default function BreadcrumbsComponent({ process_type }) {
+export default function BreadcrumbsComponent({ process_type, hierarchy_id, previousGroups, setPreviousGroups }) {
     const classes = useStyles();
+
+
+    const { setTaxonomyGroupId } = useContext(Context)
+
+    const handleClick = (process_element_id) => {
+        setTaxonomyGroupId(process_element_id)
+        setPreviousGroups(previous => {
+            previous.pop()
+            return previous
+        })
+    }
 
     return (
         <Breadcrumbs className={classes.root}>
+
             <RouterLink color="inherit" to={PATH_APP.discovery.category} className={classes.routerLink}>
                 {process_type}
             </RouterLink>
-            <RouterLink color="inherit" to={PATH_APP.discovery.group} className={classes.routerLink}>
-                Core
-            </RouterLink>
-            <Typography color="textPrimary">Breadcrumb</Typography>
+
+            {previousGroups.map(process_element_id => {
+                return (
+                    <Typography color="inherit" onClick={() => handleClick(process_element_id)} className={classes.Typography}>
+                        {process_element_id}
+                    </Typography>
+                )
+            })}
+            <Typography color="textPrimary">{hierarchy_id}</Typography>
         </Breadcrumbs>
 
     );

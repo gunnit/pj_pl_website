@@ -64,6 +64,14 @@ function NewProcessFormDetails({ formik, className, triedToClickPast, ...other }
           className={classes.margin}
         />
         <TextField
+          fullWidth
+          label="Level 3 - Process Name"
+          {...getFieldProps('process_L3_process_name')}
+          error={Boolean(touched.process_L3_process_name && errors.process_L3_process_name)}
+          helperText={'Level 3 process name or taxonomy reference'}
+          className={classes.margin}
+        />
+        <TextField
           select
           fullWidth
           variant="outlined"

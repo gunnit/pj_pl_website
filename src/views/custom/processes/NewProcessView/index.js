@@ -266,6 +266,7 @@ export default function NewProcessView() {
     initialValues: {
       process_name: '',
       process_L2_process_name: '',
+      process_L3_process_name: '',
       overview: '',
       description: '',
       pipeline: '',
