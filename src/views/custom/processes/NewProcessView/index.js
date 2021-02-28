@@ -30,12 +30,11 @@ import {
 import NewProcessFormOwnership from './NewProcessFormOwnership';
 import NewProcessFormCharacteristics from './NewProcessFormCharacteristics';
 import NewProcessFormRequirements from './NewProcessFormRequirements';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
-import AlarmIcon from '@material-ui/icons/Alarm';
 
 // ----------------------------------------------------------------------
 
@@ -175,6 +174,7 @@ function ColorlibStepIcon(props) {
 
 export default function NewProcessView() {
   const classes = useStyles();
+  const history = useHistory()
   const { enqueueSnackbar } = useSnackbar();
   const [sliderValues, setSliderValues] = useState({
     cost_reduction: 7,
@@ -283,16 +283,16 @@ export default function NewProcessView() {
     },
     validationSchema: NewProcessSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
-      try {
-        // await fakeRequest(500);
-        resetForm();
-        setSubmitting(false);
-        enqueueSnackbar('Post success', { variant: 'success' });
-      } catch (error) {
-        console.log(error);
-        setSubmitting(false);
-        setErrors({ afterSubmit: error.code });
-      }
+      // try {
+      //   // await fakeRequest(500);
+      //   resetForm();
+      //   setSubmitting(false);
+      //   enqueueSnackbar('Post success', { variant: 'success' });
+      // } catch (error) {
+      //   console.log(error);
+      //   setSubmitting(false);
+      //   setErrors({ afterSubmit: error.code });
+      // }
     },
     validateOnMount: true
   });
@@ -337,13 +337,17 @@ export default function NewProcessView() {
         // processCounts in context needs to be updated for navbar numbers
         setProcessCounts(previous => ({ ...previous, [formik.values.pipeline]: previous[formik.values.pipeline] + 1 }))
 
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        // setActiveStep(prevActiveStep => prevActiveStep + 1);
 
         const { id } = await res.json()
 
         // Store ID of created process in context in case the user decides to view it
         setCurrentProcessId(id)
         localStorage.setItem('currentProcessId', id)
+
+        history.push(PATH_APP.processes.details)
+
+        enqueueSnackbar('Process created!', { variant: 'success' })
 
       } catch (e) {
         console.error(e)

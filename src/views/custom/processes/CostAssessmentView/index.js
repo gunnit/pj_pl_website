@@ -17,7 +17,6 @@ import {
     Container,
     Typography,
     Stepper,
-    StepLabel,
     Box,
     StepConnector,
     Step,
@@ -27,7 +26,7 @@ import {
     Card,
     StepButton,
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
@@ -177,6 +176,7 @@ function ColorlibStepIcon(props) {
 
 export default function CostAssessmentView() {
     const classes = useStyles();
+    const history = useHistory();
     const { enqueueSnackbar } = useSnackbar();
 
     const [loading, setLoading] = useState(true)
@@ -398,7 +398,13 @@ export default function CostAssessmentView() {
                     throw res
                 }
 
-                setActiveStep(prevActiveStep => prevActiveStep + 1);
+                // setActiveStep(prevActiveStep => prevActiveStep + 1);
+
+
+                history.push(PATH_APP.processes.details)
+
+                enqueueSnackbar('Costs updated', { variant: 'success' })
+
 
 
 

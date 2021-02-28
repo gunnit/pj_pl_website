@@ -18,8 +18,6 @@ Automation potential cards lead to taxonomy maybe
 
 What to show for circle chart when there are processes but no savings or negative savings?
 
-Use average_automation_score instead of calculating it on front end
-
 Favicon
 
 Make bubble chart one component
@@ -29,10 +27,6 @@ Dashboard boxes when no processes in that phase?
 Button - yellow or gray?
 
 Welcome message for new users - what are you supposed to do first? are you creating a process or configuring your profile?
-
-Alignment calculation doesn't work when one of them is 0. 0/1 is a high alignment, not 0% alignment.
-1/2 isn't 50% alignment. It's almost 100% alignment.
-(10 - difference)/10?
 
 process_net_benefit or total_net_benefit for details box?
 
@@ -54,8 +48,6 @@ Maybe stop using localStorage
 
 Dashboard with new user/no processes
 
-Maybe cursor pointer on bubble chart
-
 Last three squares on taxonomy view don't work
 
 Table when nothing found in certain stage on list view maybe customize
@@ -63,10 +55,6 @@ Table when nothing found in certain stage on list view maybe customize
 Test history.push instead of link speed
 
 Table headings move around when sorting
-
-What to on top card on category view?
-
-Slider starting at 0 fix error
 
 Owner column in tables is a combination of two things so how to sort
 
@@ -111,6 +99,8 @@ Back button should also be disabled after form submission
 Test all screen sizes
 
 Typos in assessment questions
+
+Exclamation points on things? Or not?
 
 Automation assessment not every textfield is getting filled with initial value
 

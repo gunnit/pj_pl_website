@@ -30,7 +30,7 @@ import UpdateProcessFormDetails from './UpdateProcessFormDetails';
 import UpdateProcessFormOwnership from './UpdateProcessFormOwnership';
 import UpdateProcessFormCharacteristics from './UpdateProcessFormCharacteristics';
 import UpdateProcessFormRequirements from './UpdateProcessFormRequirements';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
@@ -175,6 +175,7 @@ function ColorlibStepIcon(props) {
 
 export default function UpdateProcessView() {
   const classes = useStyles();
+  const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [sliderValues, setSliderValues] = useState({
     cost_reduction: 7,
@@ -465,7 +466,10 @@ export default function UpdateProcessView() {
           throw res
         }
 
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+
+        history.push(PATH_APP.processes.details)
+
+        enqueueSnackbar('Process updated', { variant: 'success' })
 
       } catch (e) {
         setError(true)

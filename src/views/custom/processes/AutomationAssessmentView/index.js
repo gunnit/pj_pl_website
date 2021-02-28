@@ -27,7 +27,7 @@ import {
     TextField,
     MenuItem,
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
@@ -176,6 +176,7 @@ function ColorlibStepIcon(props) {
 
 export default function AutomationAssessmentView() {
     const classes = useStyles();
+    const history = useHistory()
     const { enqueueSnackbar } = useSnackbar();
 
     const [questions, setQuestions] = useState(null)
@@ -257,7 +258,10 @@ export default function AutomationAssessmentView() {
                     throw res
                 }
 
-                setActiveStep(prevActiveStep => prevActiveStep + 1);
+                // setActiveStep(prevActiveStep => prevActiveStep + 1);
+                history.push(PATH_APP.processes.details)
+
+                enqueueSnackbar('Automation assessment updated', { variant: 'success' })
 
 
             } catch (e) {
