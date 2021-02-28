@@ -208,7 +208,7 @@ export default function ProcessDashboardView() {
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>
                         <RecentProcesses
-                            processes={dashboard.process_table}
+                            processes={dashboard.processes.slice(0, 10)}
                         />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >
