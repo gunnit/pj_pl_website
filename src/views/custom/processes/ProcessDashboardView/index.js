@@ -11,7 +11,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Grid } from '@material-ui/core';
 import GenericBoxInfo from './GenericBoxInfo';
 import CircleChart from './CircleChart'
-import IdeasPerFunction from './IdeasPerFunction';
+import IdeasPerFunction from '../IdeasPerFunction';
 import BottomCard from './BottomCard';
 import RecentProcesses from './RecentProcesses';
 import LoadingScreen from 'components/LoadingScreen';

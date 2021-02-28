@@ -1,5 +1,7 @@
 Things to add:
 
+Change allowed origins before deploying
+
 What properties are being calculated every time something is retrieved that could be done once and saved?
 
 Cost calculations need to be correct
@@ -9,6 +11,8 @@ Needs to run faster where possible
 Needs to have analytics
 
 Debug don't run with debug turned on in production, allowed hosts?
+
+Breadcrumbs
 
 Maybe write tests to check all calculations
 
@@ -20,11 +24,13 @@ What to show for circle chart when there are processes but no savings or negativ
 
 Favicon
 
-Make bubble chart one component
+Step label hover is a weird area
 
 Dashboard boxes when no processes in that phase?
 
 Button - yellow or gray?
+
+Maybe scroll to top when clicking next on form
 
 Welcome message for new users - what are you supposed to do first? are you creating a process or configuring your profile?
 

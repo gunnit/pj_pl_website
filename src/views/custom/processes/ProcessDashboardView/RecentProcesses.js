@@ -106,7 +106,7 @@ export default function RecentProcesses({ processes }) {
                     </MLabel>
                   </TableCell>
                   {/* Display business unit and/or business function depending on if they're there */}
-                  <TableCell align="right">{(business_unit && businessFunction) ? `${business_unit} - ${businessFunction}` : !!business_unit ? `${business_unit}` : !!businessFunction ? businessFunction : ''}</TableCell>
+                  <TableCell align="right">{(business_unit && businessFunction) ? `${business_unit} - ${businessFunction}` : !!business_unit ? `${business_unit}` : !!businessFunction ? businessFunction : 'Not completed'}</TableCell>
                   <TableCell align="right">
                     <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                       <Icon

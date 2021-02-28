@@ -25,6 +25,7 @@ import {
     Dialog,
     Card,
     StepButton,
+    StepLabel,
 } from '@material-ui/core';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
@@ -51,11 +52,12 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         padding: theme.spacing(3),
     },
-    step: {
-        // '&:hover': {
-        //     cursor: 'pointer'
-        // }
-    }
+    stepLabel: {
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
+
 }));
 
 // ----------------------------------------------------------------------
@@ -465,7 +467,7 @@ export default function CostAssessmentView() {
                     >
                         {steps.map(({ label, step }) => (
                             <Step key={label}>
-                                <StepButton onClick={() => setActiveStep(step)} StepIconComponent={ColorlibStepIcon}>{label}</StepButton>
+                                <StepLabel className={classes.stepLabel} onClick={() => setActiveStep(step)} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
                             </Step>
                         ))}
                     </Stepper>

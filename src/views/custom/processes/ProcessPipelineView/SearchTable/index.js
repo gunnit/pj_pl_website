@@ -373,7 +373,7 @@ export default function DevelopmentTable({ processes }) {
                         </MLabel>
                       </TableCell>
                       {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
-                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
+                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : 'Not completed'}</TableCell>
                       <TableCell align="right">
                         <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                           <Icon

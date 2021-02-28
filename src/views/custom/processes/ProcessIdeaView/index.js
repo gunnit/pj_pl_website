@@ -9,7 +9,7 @@ import Page from 'components/Page';
 import Widgets1 from './Widgets1';
 import Widgets2 from './Widgets2';
 import Widgets3 from './Widgets3';
-import IdeasPerFunction from './IdeasPerFunction';
+import IdeasPerFunction from '../IdeasPerFunction';
 import ProcessCriticality from './ProcessCriticality';
 import NatureOfProcess from './NatureOfProcess';
 import NoProcesses from '../NoProcesses';

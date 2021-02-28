@@ -48,11 +48,12 @@ export default function GroupView() {
                 })
 
                 if (!res.ok) {
-
                     throw res
                 }
 
                 setGroup(await res.json())
+
+                window.scrollTo(0, 0)
 
             })()
 
