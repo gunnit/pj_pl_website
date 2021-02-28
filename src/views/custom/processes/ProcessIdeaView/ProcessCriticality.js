@@ -18,6 +18,10 @@ const useStyles = makeStyles(theme => ({
     axisLabels: {
         fill: theme.palette.text.primary,
         fontSize: 14,
+    },
+    axisLabelsY: {
+        fill: theme.palette.text.primary,
+        fontSize: 14,
     }
 }));
 
@@ -44,18 +48,20 @@ function ProcessCriticality({ data }) {
                 },
 
             },
-            yaxis: {
-                labels: {
-                    style: {
-                        // colors: [theme.palette.text.primary],
-                        cssClass: classes.axisLabels
-                    },
-                    formatter: function (value, timestamp, opts) {
-                        return parseInt(value)
-                    }
+
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    // colors: [theme.palette.text.primary],
+                    cssClass: classes.axisLabelsY
                 },
-                tickAmount: 1,
-            }
+                formatter: function (value, timestamp, opts) {
+                    return parseInt(value)
+                },
+            },
+
+            tickAmount: 1,
         }
     });
     return (
