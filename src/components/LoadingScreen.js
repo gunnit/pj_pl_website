@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { makeStyles, alpha } from '@material-ui/core/styles';
 import { MCircularProgress } from '@material-extend';
-
+import { Box } from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 const TRANSITION = {
@@ -48,9 +48,9 @@ function LoadingScreen({ className, ...other }) {
 
   return (
     <div className={clsx(classes.root, className)} {...other}>
-      {/* <motion.div
+      <motion.div
         initial={{ rotateY: 0 }}
-        animate={{ rotateY: 360 }}
+        animate={{ rotateY: 0 }}
         transition={{
           duration: 2,
           ease: 'easeInOut',
@@ -58,7 +58,14 @@ function LoadingScreen({ className, ...other }) {
           repeatDelay: 1
         }}
       >
-        <MCircularProgress />
+        <Box
+          component="img"
+          alt="logo"
+          src="/static/images/brand/PNG File 2 (1).png"
+          height={64}
+          // className={className}
+          {...other}
+        />
 
       </motion.div>
 
@@ -86,8 +93,8 @@ function LoadingScreen({ className, ...other }) {
           loop: Infinity
         }}
         className={clsx(classes.box, classes.outside)}
-      /> */}
-      <MCircularProgress />
+      />
+      {/* <MCircularProgress /> */}
     </div>
   );
 }

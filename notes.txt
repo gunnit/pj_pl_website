@@ -16,6 +16,8 @@ Breadcrumbs
 
 Taxonomy picture cards all end up having the same picture
 
+Optimize queries
+
 Maybe write tests to check all calculations
 
 What to display when there are no tasks on progress page
