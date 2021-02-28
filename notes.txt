@@ -52,6 +52,8 @@ PrimaryKeyRelatedField many to many taking a long time?
 
 Bubble chart dots could be bigger on hover
 
+Breadcrumbs need to wait before rerendering
+
 Maybe stop using localStorage
 
 Dashboard with new user/no processes
