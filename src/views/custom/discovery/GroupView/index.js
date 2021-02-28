@@ -4,8 +4,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Page from 'components/Page';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Typography } from '@material-ui/core';
-import { PATH_WIKI } from 'routes/paths';
-// import Table from './Table';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 import Page500View from 'views/errors/Page500View';
@@ -14,6 +12,7 @@ import ListCard from './ListCard';
 import TopCard from './TopCard';
 import MetricCard from './MetricCard';
 import PictureCard from './PictureCard';
+import Breadcrumbs from './Breadcrumbs';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -73,26 +72,12 @@ export default function GroupView() {
         return <LoadingScreen />
     }
 
-    // comments: []
-    // count: 4
-    // dashboard_active_taxonomy: "show"
-    // dashboard_active_taxonomy_false: "false"
-    // dashboard_active_taxonomy_true: "true"
-    // glossary: { process_element: "Develop Vision and Strategy", definition: "Establishing a direction and vision for an organiz… organization is moving in the desired direction.", process_element_id: "10002", hierarchy_id: "1", level: "Category", … }
-    // metrics: (2)[{ … }, { … }]
-    // new_comment: null
-    // query_glossary_process_group: Array(4)
-    // 0: { process_element: "Develop and maintain business models", definition: "Establishing how an organization creates, delivers…an as required to reflect changing circumstances.", process_element_id: "20944", hierarchy_id: "1.4", level: "Process Group", … }
-    // 1: { process_element: "Define the business concept and long-term vision", definition: "Creating a conceptual framework of the organizatio…s and large-scale shifts in the market landscape.", process_element_id: "17040", hierarchy_id: "1.1", level: "Process Group", … }
-    // 2: { process_element: "Execute and measure strategic initiatives", definition: "Managing strategic initiatives, from development t…s, and formulate measures to assess their impact.", process_element_id: "10016", hierarchy_id: "1.3", level: "Process Group", … }
-    // 3: { process_element: "Develop business strategy", definition: "Developing an organization's mission statement, st… strategies at the functional and process levels.", process_element_id: "10015", hierarchy_id: "1.2", level: "Process Group", … }
-
-
 
 
     return (
         <Page title="Process Taxonomy" className={classes.root}>
             <Container maxWidth="xl">
+                <Breadcrumbs />
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <TopCard hierarchy_id={group.glossary.hierarchy_id} title={group.glossary.process_element} body={group.glossary.definition} />

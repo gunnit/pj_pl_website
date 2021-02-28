@@ -77,7 +77,7 @@ function FirebaseProvider({ children }) {
       (async () => {
 
         const token = await firebase.auth().currentUser.getIdToken(true);
-
+        console.log(token)
         const res = await fetch(`${apiBaseUrl}/register/`, {
           method: 'POST',
           body: JSON.stringify({
