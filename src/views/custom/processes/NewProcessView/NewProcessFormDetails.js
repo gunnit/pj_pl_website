@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormikProvider } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,7 +27,7 @@ NewProcessFormDetails.propTypes = {
   className: PropTypes.string
 };
 
-function NewProcessFormDetails({ formik, className, ...other }) {
+function NewProcessFormDetails({ formik, className, triedToClickPast, ...other }) {
   const classes = useStyles();
   const {
     errors,
@@ -51,8 +51,8 @@ function NewProcessFormDetails({ formik, className, ...other }) {
           fullWidth
           label="Process Name"
           {...getFieldProps('process_name')}
-          error={Boolean(touched.name && errors.name)}
-          // helperText={touched.name && errors.name}
+          error={Boolean((touched.process_name || triedToClickPast) && errors.process_name)}
+          // helperText={touched.process_name && errors.process_name}
           className={classes.margin}
         />
         <TextField
@@ -61,6 +61,14 @@ function NewProcessFormDetails({ formik, className, ...other }) {
           {...getFieldProps('process_L2_process_name')}
           error={Boolean(touched.process_L2_process_name && errors.process_L2_process_name)}
           helperText={'Level 2 process name or taxonomy reference'}
+          className={classes.margin}
+        />
+        <TextField
+          fullWidth
+          label="Level 3 - Process Name"
+          {...getFieldProps('process_L3_process_name')}
+          error={Boolean(touched.process_L3_process_name && errors.process_L3_process_name)}
+          helperText={'Level 3 process name or taxonomy reference'}
           className={classes.margin}
         />
         <TextField
@@ -73,6 +81,7 @@ function NewProcessFormDetails({ formik, className, ...other }) {
           onChange={formik.handleChange}
           // helperText="Please select your currency"
           className={classes.margin}
+          error={Boolean((touched.pipeline || triedToClickPast) && errors.pipeline)}
         >
           {['Idea', 'Pipeline', 'Development', 'Production'].map(option => (
             <MenuItem key={option} value={option}>

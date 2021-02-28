@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { merge } from 'lodash';
 import {
     Card,
@@ -15,12 +15,21 @@ const useStyles = makeStyles(theme => ({
     root: {
         height: '100%'
     },
+    axisLabels: {
+        fill: theme.palette.text.primary,
+        fontSize: 14,
+    },
+    axisLabelsY: {
+        fill: theme.palette.text.primary,
+        fontSize: 14,
+    }
 }));
 
 
 
 function ProcessCriticality({ data }) {
     const classes = useStyles()
+    const theme = useTheme()
     const chartOptions = merge(ApexChartsOption(), {
         plotOptions: { bar: { columnWidth: '14%', endingShape: 'rounded' } },
         stroke: { show: false },
@@ -32,10 +41,27 @@ function ProcessCriticality({ data }) {
                 'Slightly',
                 'Not at all',
                 'Not answered',
-            ]
-        },
-        tooltip: {
+            ],
+            labels: {
+                style: {
+                    cssClass: classes.axisLabels
+                },
 
+            },
+
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    // colors: [theme.palette.text.primary],
+                    cssClass: classes.axisLabelsY
+                },
+                formatter: function (value, timestamp, opts) {
+                    return parseInt(value)
+                },
+            },
+
+            tickAmount: 1,
         }
     });
     return (

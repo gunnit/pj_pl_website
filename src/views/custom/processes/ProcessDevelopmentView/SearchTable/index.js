@@ -357,7 +357,7 @@ export default function DevelopmentTable({ processes }) {
                         </MLabel>
                       </TableCell>
                       <TableCell align="right">{test_env_available}</TableCell>
-                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
+                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : 'Not completed'}</TableCell>
                       <TableCell align="right">
                         <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                           <Icon

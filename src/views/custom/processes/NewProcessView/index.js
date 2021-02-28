@@ -52,7 +52,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(3),
-  }
+  },
+  stepLabel: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -220,6 +225,8 @@ export default function NewProcessView() {
   const [activeStep, setActiveStep] = useState(0);
   const [pending, setPending] = useState(false)
   const steps = getSteps();
+  const [triedToClickPast, setTriedToClickPast] = useState(false)
+
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -259,6 +266,7 @@ export default function NewProcessView() {
     initialValues: {
       process_name: '',
       process_L2_process_name: '',
+      process_L3_process_name: '',
       overview: '',
       description: '',
       pipeline: '',
@@ -300,10 +308,12 @@ export default function NewProcessView() {
   const handleNext = async () => {
     if (activeStep === 0) {
 
-      if (!formik.errors.name
+      if (!formik.errors.process_name
         && !formik.errors.pipeline) {
 
         setActiveStep(prevActiveStep => prevActiveStep + 1);
+      } else {
+        setTriedToClickPast(true)
       }
     } else if (activeStep === 1) {
 
@@ -357,13 +367,21 @@ export default function NewProcessView() {
 
   };
 
+  const handleStepClick = step => {
+    if (activeStep === 0 && (formik.errors.process_name
+      || formik.errors.pipeline)) {
+      setTriedToClickPast(true)
+    } else {
+      setActiveStep(step)
+    }
+  }
 
 
   // Shows part of the form for each step
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <NewProcessFormDetails formik={formik} />;
+        return <NewProcessFormDetails formik={formik} triedToClickPast={triedToClickPast} />;
       case 1:
         return <NewProcessFormCharacteristics formik={formik} />;
       case 2:
@@ -394,9 +412,9 @@ export default function NewProcessView() {
             activeStep={activeStep}
             connector={<ColorlibConnector />}
           >
-            {steps.map(label => (
+            {steps.map((label, step) => (
               <Step key={label}>
-                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                <StepLabel className={classes.stepLabel} onClick={() => handleStepClick(step)} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>

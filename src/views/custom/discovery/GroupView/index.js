@@ -26,6 +26,7 @@ export default function GroupView() {
 
     const [error, setError] = useState(false)
     const [group, setGroup] = useState(null)
+    const [previousGroups, setPreviousGroups] = useState([])
 
     useEffect(() => {
 
@@ -48,11 +49,12 @@ export default function GroupView() {
                 })
 
                 if (!res.ok) {
-
                     throw res
                 }
+                const group = await res.json()
+                setGroup(group)
 
-                setGroup(await res.json())
+                window.scrollTo(0, 0)
 
             })()
 
@@ -77,16 +79,25 @@ export default function GroupView() {
     return (
         <Page title="Process Taxonomy" className={classes.root}>
             <Container maxWidth="xl">
-                <Breadcrumbs />
+
                 <Grid container spacing={3}>
+                    <Grid item>
+                        <Breadcrumbs
+                            process_type={group.glossary.process_type}
+                            hierarchy_id={group.glossary.hierarchy_id}
+                            previousGroups={previousGroups}
+                            setPreviousGroups={setPreviousGroups}
+                        />
+                    </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <TopCard hierarchy_id={group.glossary.hierarchy_id} title={group.glossary.process_element} body={group.glossary.definition} />
                     </Grid>
                     <Grid container item xs={12} sm={12} md={12} lg={12} spacing={3}>
                         {!group.metrics.length
-                            ? <Typography variant='h4'>No metrics found</Typography>
-                            :
-                            <>
+                            ? <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
+                                <Typography variant='h4'>No metrics found</Typography>
+                            </Grid>
+                            : <>
                                 <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
                                     <Typography variant='h4'>Metrics</Typography>
                                 </Grid>
@@ -106,7 +117,9 @@ export default function GroupView() {
                     <Grid container item xs={12} sm={12} md={12} lg={12} spacing={3}>
 
                         {!group.query_glossary_process_group.length
-                            ? <Typography variant='h4'>No related processes found</Typography>
+                            ? <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
+                                <Typography variant='h4'>No related processes found</Typography>
+                            </Grid>
                             : <>
                                 <Grid item xs={12} sm={12} md={12} lg={12} spacing={3}>
                                     <Typography variant='h4'>Related processes</Typography>
@@ -114,11 +127,15 @@ export default function GroupView() {
                                 {group.query_glossary_process_group.map(({ hierarchy_id, process_element_id, process_element, definition }) => {
                                     return (
                                         <Grid item xs={12} sm={12} md={4} lg={4} spacing={3}>
-                                            <PictureCard hierarchy_id={hierarchy_id} process_element_id={process_element_id} title={process_element} body={definition} />
+                                            <PictureCard
+                                                hierarchy_id={hierarchy_id}
+                                                process_element_id={process_element_id}
+                                                title={process_element}
+                                                body={definition}
+                                                currentGroup={group.glossary}
+                                                setPreviousGroups={setPreviousGroups}
+                                            />
                                         </Grid>
-                                        // <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
-                                        //     <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
-                                        // </Grid>
                                     )
                                 })}
                             </>

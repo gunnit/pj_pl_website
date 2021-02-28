@@ -358,23 +358,23 @@ export default function DevelopmentTable({ processes }) {
                         {/* >= 20 means suggested to move to development, >= 10 means evaluate before moving to development, otherwise not suggested */}
                         {final_process_score >= 20 ? 'Move' : final_process_score >= 10 ? 'Evaluate' : 'Not suggested'}
                       </TableCell>
-                      <TableCell align="right">{process_name}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">{process_name}</TableCell>
+                      <TableCell align="center">
                         <MLabel variant="filled" color="info">
                           {total_alignment_score_coverted}
                         </MLabel>
                       </TableCell>
-                      <TableCell align="right">{process_score === 0 ? 'Not completed' : process_score}</TableCell>
-                      <TableCell align="right">{current_process_cost_calc}</TableCell>
-                      <TableCell align="right">{tot_future_process_cost}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">{process_score === 0 ? 'Not completed' : process_score}</TableCell>
+                      <TableCell align="left">{current_process_cost_calc}</TableCell>
+                      <TableCell align="left">{tot_future_process_cost}</TableCell>
+                      <TableCell align="center">
                         <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : "error"}>
                           {total_net_benefit}
                         </MLabel>
                       </TableCell>
                       {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
-                      <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : 'Not completed'}</TableCell>
+                      <TableCell align="left">
                         <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                           <Icon
                             icon={moreVerticalFill}

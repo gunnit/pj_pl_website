@@ -57,7 +57,13 @@ const useStyles = makeStyles(theme => ({
     },
     helperText: {
         padding: theme.spacing(0, 2)
-    }
+    },
+    stepLabel: {
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
+
 }));
 
 // ----------------------------------------------------------------------
@@ -443,10 +449,9 @@ export default function AutomationAssessmentView() {
                         activeStep={activeStep}
                         connector={<ColorlibConnector />}
                     >
-                        {subgroups.map(label => (
+                        {subgroups.map((label, step) => (
                             <Step key={label}>
-                                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-                            </Step>
+                                <StepLabel className={classes.stepLabel} onClick={() => setActiveStep(step)} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>                            </Step>
                         ))}
                     </Stepper>
 

@@ -330,26 +330,27 @@ export default function IdeasTable({ processes }) {
                           {initial_process_score >= 8 ? 'Suggested' : initial_process_score >= 5 ? 'Evaluate before moving' : 'Not suggested'}
                         </TableCell>
 
-                        <TableCell align="right">{process_name || ''}</TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">{process_name || ''}</TableCell>
+                        <TableCell align="center">
                           {total_alignment_score_coverted
                             ? <MLabel variant="filled" color="info">
                               {total_alignment_score_coverted}%
                             </MLabel>
                             : 'Not completed'}
                         </TableCell>
-                        <TableCell align="right">{process_critical || 'Not completed'}</TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">{process_critical || 'Not completed'}</TableCell>
+                        <TableCell align="left">
                           {process_objective
                             ? <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
                               {process_objective}
                             </MLabel>
                             : 'Not completed'}
                         </TableCell>
-                        <TableCell align="right">{num_of_manual_steps || 'Not completed'}</TableCell>
-                        <TableCell align="right">{nature_of_process || 'Not completed'}</TableCell>
-                        <TableCell align="right">{test_env_available || 'Not completed'}</TableCell>
-                        <TableCell align="right">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : ''}</TableCell>                        <TableCell align="right">
+                        <TableCell align="left">{num_of_manual_steps || 'Not completed'}</TableCell>
+                        <TableCell align="left">{nature_of_process || 'Not completed'}</TableCell>
+                        <TableCell align="left">{test_env_available || 'Not completed'}</TableCell>
+                        <TableCell align="left">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : 'Not completed'}</TableCell>
+                        <TableCell align="right">
                           <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
                             <Icon
                               icon={moreVerticalFill}

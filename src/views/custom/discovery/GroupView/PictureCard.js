@@ -86,7 +86,7 @@ const matchPicture = {
 
 
 
-export default function PictureCard({ hierarchy_id, process_element_id, title, body, image }) {
+export default function PictureCard({ currentGroup, hierarchy_id, process_element_id, title, body, image, setPreviousGroups }) {
   const classes = useStyles();
   const theme = useTheme()
   const { setTaxonomyGroupId } = useContext(Context)
@@ -94,6 +94,8 @@ export default function PictureCard({ hierarchy_id, process_element_id, title, b
   const handleClick = async () => {
     setTaxonomyGroupId(process_element_id)
     localStorage.setItem('taxonomyGroupId', process_element_id)
+
+    setPreviousGroups(previous => ([...previous, currentGroup]))
   }
 
 

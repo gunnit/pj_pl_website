@@ -51,7 +51,13 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(3),
-  }
+  },
+  stepLabel: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+
 }));
 
 // ----------------------------------------------------------------------
@@ -220,6 +226,9 @@ export default function UpdateProcessView() {
   const [activeStep, setActiveStep] = useState(0);
   const [pending, setPending] = useState(false)
   const steps = getSteps();
+
+  const [triedToClickPast, setTriedToClickPast] = useState(false)
+
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
@@ -480,12 +489,22 @@ export default function UpdateProcessView() {
 
   };
 
+  const handleStepClick = step => {
+    if (activeStep === 0 && (formik.errors.process_name
+      || formik.errors.pipeline)) {
+      setTriedToClickPast(true)
+    } else {
+      setActiveStep(step)
+    }
+  }
+
+
 
   // Shows part of the form for each step
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <UpdateProcessFormDetails formik={formik} />;
+        return <UpdateProcessFormDetails formik={formik} triedToClickPast={triedToClickPast} />;
       case 1:
         return <UpdateProcessFormCharacteristics formik={formik} />;
       case 2:
@@ -536,10 +555,9 @@ export default function UpdateProcessView() {
             activeStep={activeStep}
             connector={<ColorlibConnector />}
           >
-            {steps.map(label => (
+            {steps.map((label, step) => (
               <Step key={label}>
-                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-              </Step>
+                <StepLabel className={classes.stepLabel} onClick={() => handleStepClick(step)} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>              </Step>
             ))}
           </Stepper>
 
