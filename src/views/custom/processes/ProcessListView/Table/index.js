@@ -31,9 +31,7 @@ import {
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
-import { apiBaseUrl } from 'config';
-import { LegendToggleRounded } from '@material-ui/icons';
-// ----------------------------------------------------------------------
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 
 
@@ -134,7 +132,9 @@ function applySortFilter(array, comparator, query) {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    width: '100%'
+  },
   sortSpan: visuallyHidden,
   routerLink: {
     textDecoration: 'none'
@@ -250,164 +250,168 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
 
   return (
     <Page title="All Processes" className={classes.root}>
-      <Container>
-        <Card className={classes.card}>
-          <ToolbarTable
-            numSelected={selected.length}
-            filterName={filterName}
-            onFilterName={handleFilterByName}
-          />
+      <Card className={classes.card}>
+        <ToolbarTable
+          numSelected={selected.length}
+          filterName={filterName}
+          onFilterName={handleFilterByName}
+        />
 
-          <Scrollbars>
-            <TableContainer component={Box} sx={{ minWidth: 800 }}>
-              <Table>
-                <HeadTable
-                  order={order}
-                  classes={classes}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={processes.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody>
-                  {filteredProcesses
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(({
-                      id,
-                      process_name,
-                      total_alignment_score_coverted,
-                      process_score: automationScore,
-                      current_process_cost_calc,
-                      tot_future_process_cost,
-                      total_net_benefit,
-                      threeYearSavings, // need to change this
-                      date_created
-                    }, index) => {
+        <Scrollbars>
+          <TableContainer component={Box} sx={{ minWidth: 800 }}>
+            <Table>
+              <HeadTable
+                order={order}
+                classes={classes}
+                orderBy={orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={processes.length}
+                numSelected={selected.length}
+                onRequestSort={handleRequestSort}
+                onSelectAllClick={handleSelectAllClick}
+              />
+              <TableBody>
+                {filteredProcesses
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(({
+                    id,
+                    process_name,
+                    total_alignment_score_coverted,
+                    process_score: automationScore,
+                    current_process_cost_calc,
+                    tot_future_process_cost,
+                    total_net_benefit,
+                    threeYearSavings, // need to change this
+                    date_created
+                  }, index) => {
 
-                      const isItemSelected = selected.indexOf(process_name) !== -1;
-                      const labelId = `enhanced-table-checkbox-${index}`;
+                    const isItemSelected = selected.indexOf(process_name) !== -1;
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                          className={classes.row}
+                    return (
+                      <TableRow
+                        hover
+                        key={id}
+                        tabIndex={-1}
+                        role="checkbox"
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
+                        className={classes.row}
+                      >
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
                         >
-                          <TableCell
-                            component="th"
-                            id={labelId}
-                            scope="row"
-                            padding="none"
+                          {process_name}
+                        </TableCell>
+                        <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
+                        <TableCell align="right">
+                          <MLabel variant="filled" color="info">
+                            {total_alignment_score_coverted || 'Not completed'}
+                          </MLabel>
+                        </TableCell>
+                        <TableCell align="right">{automationScore || 'Not completed'}</TableCell>
+                        <TableCell align="right">{current_process_cost_calc || 'Not completed'}</TableCell>
+                        <TableCell align="right">{tot_future_process_cost || 'Not completed'}</TableCell>
+                        <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
+                        <TableCell align="right">
+                          <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
+                            {threeYearSavings || 'Not completed'}
+                          </MLabel>
+                        </TableCell>
+                        <TableCell align="right">{fDate(date_created)}</TableCell>
+                        <TableCell align="right">
+                          <IconButton
+                            className={classes.margin}
+                            // onClick={(event) => handleOpen(event, id)}
+                            component={RouterLink}
+                            to={PATH_APP.processes.details}
                           >
-                            {process_name}
-                          </TableCell>
-                          <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
-                          <TableCell align="right">
-                            <MLabel variant="filled" color="info">
-                              {total_alignment_score_coverted || 'Not completed'}
-                            </MLabel>
-                          </TableCell>
-                          <TableCell align="right">{automationScore || 'Not completed'}</TableCell>
-                          <TableCell align="right">{current_process_cost_calc || 'Not completed'}</TableCell>
-                          <TableCell align="right">{tot_future_process_cost || 'Not completed'}</TableCell>
-                          <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
-                          <TableCell align="right">
-                            <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
-                              {threeYearSavings || 'Not completed'}
-                            </MLabel>
-                          </TableCell>
-                          <TableCell align="right">{fDate(date_created)}</TableCell>
-                          <TableCell align="right">
-                            <IconButton className={classes.margin} onClick={(event) => handleOpen(event, id)}>
-                              <Icon
-                                icon={moreVerticalFill}
-                                width={20}
-                                height={20}
-                              />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-                {isProductNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6}>
-                        <Box sx={{ py: 3 }}>
-                          <SearchNotFound searchQuery={filterName} />
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
+                            {/* <Icon
+                              icon={moreVerticalFill}
+                              width={20}
+                              height={20}
+                            /> */}
+                            <PageviewIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
                 )}
-              </Table>
-            </TableContainer>
-          </Scrollbars>
+              </TableBody>
+              {isProductNotFound && (
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center" colSpan={6}>
+                      <Box sx={{ py: 3 }}>
+                        <SearchNotFound searchQuery={filterName} />
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              )}
+            </Table>
+          </TableContainer>
+        </Scrollbars>
 
-          <Menu
-            keepMounted
-            id="simple-menu"
-            anchorEl={isOpen}
-            onClose={handleClose}
-            open={Boolean(isOpen)}
-          >
-            {[{ text: 'View details', path: PATH_APP.processes.details },
-            { text: 'Update', path: PATH_APP.processes.update },
-            { text: 'Delete' }].map(option => (
-              <RouterLink to={option.path && option.path} className={classes.routerLink}>
-                <MenuItem key={option.text} onClick={option.text === 'Delete' ? handleCloseDelete : handleClose}>
-                  {option.text}
-                </MenuItem>
-              </RouterLink>
-            ))}
-          </Menu>
+        {/* <Menu
+          keepMounted
+          id="simple-menu"
+          anchorEl={isOpen}
+          onClose={handleClose}
+          open={Boolean(isOpen)}
+        >
+          {[{ text: 'View details', path: PATH_APP.processes.details },
+          { text: 'Update', path: PATH_APP.processes.update },
+          { text: 'Delete' }].map(option => (
+            <RouterLink to={option.path && option.path} className={classes.routerLink}>
+              <MenuItem key={option.text} onClick={option.text === 'Delete' ? handleCloseDelete : handleClose}>
+                {option.text}
+              </MenuItem>
+            </RouterLink>
+          ))}
+        </Menu> */}
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={processes.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={processes.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
 
-          <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-            {openDialog
-              && <>
-                <Card className={classes.dialog}>
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h5" gutterBottom className={classes.centerText}>
-                      Are you sure you want to delete this process?
+        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+          {openDialog
+            && <>
+              <Card className={classes.dialog}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Typography variant="h5" gutterBottom className={classes.centerText}>
+                    Are you sure you want to delete this process?
                     </Typography>
-                    <Typography gutterBottom variant="subtitle1" color='textSecondary' className={classes.centerText}>
-                      Deleting this process will result in permanently removing all data associated with this process.
+                  <Typography gutterBottom variant="subtitle1" color='textSecondary' className={classes.centerText}>
+                    Deleting this process will result in permanently removing all data associated with this process.
                     </Typography>
-                  </Box>
+                </Box>
 
-                  <Button onClick={() => {
-                    handleDeleteProcess()
-                    setOpenDialog(false)
-                  }} variant='contained'>Permanently Delete</Button>
-                </Card>
-              </>}
-          </Dialog>
+                <Button onClick={() => {
+                  handleDeleteProcess()
+                  setOpenDialog(false)
+                }} variant='contained' color='error'>Permanently Delete</Button>
+              </Card>
+            </>}
+        </Dialog>
 
 
-        </Card>
-      </Container>
+      </Card>
     </Page >
   );
 }
