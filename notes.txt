@@ -84,6 +84,8 @@ Profile?
 
 Related tasks - related how? subtasks?
 
+Breadcrumbs cursor pointer causes flickering
+
 right margin welcome back text
 
 Select field stuck on option?

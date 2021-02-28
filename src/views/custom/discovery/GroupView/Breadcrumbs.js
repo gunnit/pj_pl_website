@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     routerLink: {
         textDecoration: 'none',
         '&:hover': {
-            textDecoration: 'underline'
+            textDecoration: 'underline',
+            cursor: 'pointer'
         }
     },
     link: {
@@ -51,12 +52,9 @@ export default function BreadcrumbsComponent({ process_type, hierarchy_id, previ
 
     const { setTaxonomyGroupId } = useContext(Context)
 
-    const handleClick = (process_element_id) => {
+    const handleClick = (process_element_id, index) => {
         setTaxonomyGroupId(process_element_id)
-        setPreviousGroups(previous => {
-            previous.pop()
-            return previous
-        })
+        setPreviousGroups(previous => previous.slice(0, index))
     }
 
     return (
@@ -66,10 +64,10 @@ export default function BreadcrumbsComponent({ process_type, hierarchy_id, previ
                 {process_type}
             </RouterLink>
 
-            {previousGroups.map(process_element_id => {
+            {previousGroups.map(({ process_element_id, hierarchy_id }, i) => {
                 return (
-                    <Typography color="inherit" onClick={() => handleClick(process_element_id)} className={classes.Typography}>
-                        {process_element_id}
+                    <Typography color="inherit" onClick={() => handleClick(process_element_id, i)} className={classes.routerLink}>
+                        {hierarchy_id}
                     </Typography>
                 )
             })}

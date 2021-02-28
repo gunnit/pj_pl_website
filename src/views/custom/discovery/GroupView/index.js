@@ -132,13 +132,10 @@ export default function GroupView() {
                                                 process_element_id={process_element_id}
                                                 title={process_element}
                                                 body={definition}
-                                                currentGroup={group.glossary.hierarchy_id}
+                                                currentGroup={group.glossary}
                                                 setPreviousGroups={setPreviousGroups}
                                             />
                                         </Grid>
-                                        // <Grid key={process_element} item xs={12} sm={12} md={12} lg={12}>
-                                        //     <ListCard process_element_id={process_element_id} title={process_element} body={definition} />
-                                        // </Grid>
                                     )
                                 })}
                             </>
