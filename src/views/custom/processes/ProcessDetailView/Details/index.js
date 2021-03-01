@@ -20,12 +20,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function Details({ processDetails, setProcessDetails }) {
+export default function Details({ processDetails, setProcessDetails, stage, setStage }) {
 
     const classes = useStyles()
 
     // Need this to be a hook so it can be updated when the stage changes without having to reload the whole page
-    const [stage, setStage] = useState(processDetails.process.pipline)
+
 
     return (
         <Container maxWidth="xl">

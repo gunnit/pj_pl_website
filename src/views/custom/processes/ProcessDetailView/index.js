@@ -57,6 +57,7 @@ export default function ProcessDetailView() {
     };
 
     const [processDetails, setProcessDetails] = useState(null)
+    const [stage, setStage] = useState(null)
     const [error, setError] = useState(false)
     const { userId, currentProcessId } = useContext(Context)
 
@@ -86,7 +87,9 @@ export default function ProcessDetailView() {
                         }
                     })
                     if (res.ok) {
-                        setProcessDetails(await res.json())
+                        const processDetails = await res.json()
+                        setProcessDetails(processDetails)
+                        setStage(processDetails.process.pipline)
                     } else {
                         throw res
                     }
@@ -104,7 +107,7 @@ export default function ProcessDetailView() {
         return <Page500View />
     }
 
-    if (!processDetails) {
+    if (!processDetails || !stage) {
         return <LoadingScreen />
     }
 
@@ -119,7 +122,7 @@ export default function ProcessDetailView() {
             <Container maxWidth="xl">
                 <TabContext value={value}>
                     <Box sx={{ pb: 5 }} className={classes.topArea}>
-                        {processDetails.process.pipline !== 'Idea'
+                        {stage !== 'Idea'
                             && <TabList onChange={handleChange}>
                                 {notIdeaTabs.map(tab => (
                                     <Tab
@@ -129,7 +132,7 @@ export default function ProcessDetailView() {
                                     />
                                 ))}
                             </TabList>}
-                        {processDetails.process.pipline === 'Idea'
+                        {stage === 'Idea'
                             && <TabList onChange={handleChange}>
                                 {ideaTabs.map(tab => (
                                     <Tab
@@ -161,7 +164,12 @@ export default function ProcessDetailView() {
                         </ButtonGroup>
                     </Box>
                     <TabPanel value={'1'}>
-                        <Details processDetails={processDetails} setProcessDetails={setProcessDetails} />
+                        <Details
+                            processDetails={processDetails}
+                            setProcessDetails={setProcessDetails}
+                            stage={stage}
+                            setStage={setStage}
+                        />
                     </TabPanel>
                     <TabPanel value={'2'}>
                         <AutomationPotential processDetails={processDetails} />
