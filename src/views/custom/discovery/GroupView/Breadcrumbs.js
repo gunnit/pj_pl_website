@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 // import Block from 'components/Block';
 // import { PATH_APP } from 'routes/paths';
 // import HomeIcon from '@material-ui/icons/Home';
@@ -52,9 +52,13 @@ export default function BreadcrumbsComponent({ process_type, hierarchy_id, previ
 
     const { setTaxonomyGroupId } = useContext(Context)
 
-    const handleClick = (process_element_id, index) => {
+    // const [currentCrumb, setCurrentCrumb] = useState(hierarchy_id)
+
+    const handleClick = (process_element_id, index, clicked_hierarchy_id) => {
         setTaxonomyGroupId(process_element_id)
         setPreviousGroups(previous => previous.slice(0, index))
+        // setCurrentCrumb(hierarchy_id)
+        hierarchy_id = clicked_hierarchy_id
     }
 
     return (
@@ -66,7 +70,7 @@ export default function BreadcrumbsComponent({ process_type, hierarchy_id, previ
 
             {previousGroups.map(({ process_element_id, hierarchy_id }, i) => {
                 return (
-                    <Typography color="inherit" onClick={() => handleClick(process_element_id, i)} className={classes.routerLink}>
+                    <Typography key={process_element_id} color="inherit" onClick={() => handleClick(process_element_id, i, hierarchy_id)} className={classes.routerLink}>
                         {hierarchy_id}
                     </Typography>
                 )

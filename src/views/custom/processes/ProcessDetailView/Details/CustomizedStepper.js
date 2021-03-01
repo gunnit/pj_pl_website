@@ -250,7 +250,12 @@ export default function CustomizedStepper({
           >
             {steps.map(label => (
               <Step key={label}>
-                <StepLabel className={classes.stepLabel} onClick={() => setOpenDialog(label)} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                <StepLabel className={label !== stage ? classes.stepLabel : ''} onClick={() => {
+                  if (label === stage) {
+                    return
+                  }
+                  setOpenDialog(label)
+                }} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
