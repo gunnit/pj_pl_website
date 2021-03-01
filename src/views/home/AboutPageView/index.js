@@ -25,7 +25,6 @@ function LandingPageView() {
 
       <div className={classes.content}>
         <HugePackElements />
-        <ListElements />
       </div>
     </Page>
   );
