@@ -20,6 +20,8 @@ Optimize queries
 
 Donut chart is confusing when there are negative numbers
 
+Dollar signs on detail boxes
+
 Logo doesn't fit the look of the app
 
 Estimated savings is based on savings goal?
