@@ -346,7 +346,8 @@ export default function IdeasTable({ processes }) {
                             </MLabel>
                             : 'Not completed'}
                         </TableCell>
-                        <TableCell align="left">{num_of_manual_steps || 'Not completed'}</TableCell>
+                        <TableCell align="left">
+                          {num_of_manual_steps || 'Not completed'}</TableCell>
                         <TableCell align="left">{nature_of_process || 'Not completed'}</TableCell>
                         <TableCell align="left">{test_env_available || 'Not completed'}</TableCell>
                         <TableCell align="left">{(business_unit && processFunction) ? `${business_unit} - ${processFunction}` : !!business_unit ? `${business_unit}` : !!processFunction ? processFunction : 'Not completed'}</TableCell>

@@ -93,10 +93,12 @@ export default function RecentProcesses({ processes }) {
                     {process_name}
                   </TableCell>
                   <TableCell align="right">
+                  <MLabel variant="filled" color={total_alignment_score_coverted > 0 ? "info" : "default"}>
                     {total_alignment_score_coverted}%
+                    </MLabel>
                   </TableCell>
                   <TableCell align="right">
-                    <MLabel variant="filled" color="info">
+                    <MLabel variant="filled" color={process_score > 0 ? "info" : "default"}>
                       {process_score !== 0 ? process_score : 'Not completed'}
                     </MLabel>
                   </TableCell>
