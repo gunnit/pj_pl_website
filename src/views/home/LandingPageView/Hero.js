@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { BASE_IMG } from 'utils/getImages';
-import { PATH_APP, PATH_HOME } from 'routes/paths';
+import { PATH_APP, PATH_PAGE } from 'routes/paths';
 import flashFill from '@iconify-icons/eva/flash-fill';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -136,7 +136,7 @@ function Hero({ className }) {
               </Box>
             </motion.div>
 
-            <motion.div variants={varFadeInRight} className={classes.link}>
+            {/* <motion.div variants={varFadeInRight} className={classes.link}>
               <Box
                 component="img"
                 alt="sketch icon"
@@ -151,21 +151,21 @@ function Hero({ className }) {
               >
                 Video Preview
               </Link>
-            </motion.div>
+            </motion.div> */}
 
             <motion.div variants={varFadeInRight}>
               <Button
                 size="large"
                 variant="contained"
                 component={RouterLink}
-                to={PATH_APP.main.dashboard}
+                to={PATH_PAGE.auth.register}
                 startIcon={<Icon icon={flashFill} width={20} height={20} />}
               >
-                Join Beta
+                Join Private BETA
               </Button>
             </motion.div>
 
-            <Box
+            {/* <Box
               sx={{
                 mt: 5,
                 display: 'flex',
@@ -189,7 +189,7 @@ function Hero({ className }) {
                 variants={varFadeInRight}
                 src="/static/images/icons/ic_m_sketch.svg"
               />
-            </Box>
+            </Box> */}
           </div>
         </Container>
       </motion.div>

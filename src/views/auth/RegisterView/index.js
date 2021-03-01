@@ -175,7 +175,7 @@ function RegisterView() {
 
           <Box sx={{ mt: 3 }}>
             <Typography variant="body2" align="center" color="textSecondary">
-              By register, I agree to Manimal&nbsp;
+              By register, I agree to the ProcessLenz&nbsp;
               <Link color="textPrimary" underline="always">
                 Terms of Service
               </Link>

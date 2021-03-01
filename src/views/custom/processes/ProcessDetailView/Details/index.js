@@ -44,6 +44,7 @@ export default function Details({ processDetails, setProcessDetails, stage, setS
                         <ProcessNameCard
                             process_name={processDetails.process.process_name}
                             process_L2_process_name={processDetails.process.process_L2_process_name}
+                            process_L3_process_name={processDetails.process.process_L3_process_name}
                         />
                     </Grid>
                     <Grid item md={12} lg={12}>

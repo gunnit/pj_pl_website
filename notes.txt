@@ -74,13 +74,21 @@ Maybe stop using localStorage
 
 Dashboard with new user/no processes
 
+Distinct? customer service
+
 Last three squares on taxonomy view don't work
+
+Form stepper icons make logo look like just another icon
 
 Table when nothing found in certain stage on list view maybe customize
 
 Test history.push instead of link speed
 
+Info on forms other than new process form needs to be changed
+
 Table headings move around when sorting
+
+Add margin under form steppers maybe
 
 Owner column in tables is a combination of two things so how to sort
 

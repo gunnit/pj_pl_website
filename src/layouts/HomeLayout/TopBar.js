@@ -5,7 +5,7 @@ import React, { useState, useRef } from 'react';
 import useOffSetTop from 'hooks/useOffSetTop';
 import PopoverMenu from 'components/PopoverMenu';
 import homeFill from '@iconify-icons/eva/home-fill';
-import { PATH_HOME } from 'routes/paths';
+import { PATH_HOME, PATH_PAGE } from 'routes/paths';
 import roundSpeed from '@iconify-icons/ic/round-speed';
 import menu2Fill from '@iconify-icons/eva/menu-2-fill';
 import roundStreetview from '@iconify-icons/ic/round-streetview';
@@ -30,9 +30,9 @@ import { MIconButton } from '@material-extend';
 
 const MENU_LINKS = [
   { title: 'Home', icon: homeFill, href: '/' },
-  { title: 'About', icon: roundStreetview, href: PATH_HOME.about },
-  { title: 'FAQ', icon: roundStreetview, href: PATH_HOME.faq },
-  { title: 'Dashboard', icon: roundSpeed, href: PATH_HOME.dashboard },
+  { title: 'About BETA', icon: roundStreetview, href: PATH_HOME.about },
+  // { title: 'FAQ', icon: roundStreetview, href: PATH_HOME.faq },
+  // { title: 'Dashboard', icon: roundSpeed, href: PATH_HOME.dashboard },
 ];
 
 const APP_BAR_MOBILE = 64;
@@ -180,10 +180,11 @@ function TopBar() {
           <Button
             underline="none"
             variant="contained"
-            component={Link}
-            href={PATH_HOME.purchase}
+            component={RouterLink}
+            // href={PATH_HOME.purchase}
+            to={PATH_PAGE.auth.register}
           >
-            Join Beta
+            Join BETA
           </Button>
 
           <Hidden mdUp>

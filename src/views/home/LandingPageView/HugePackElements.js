@@ -150,7 +150,7 @@ function HugePackElements({ className }) {
                   component={RouterLink}
                   to={PATH_HOME.components}
                 >
-                  Join Beta
+                  Join BETA
                 </Button>
               </MotionInView>
             </div>

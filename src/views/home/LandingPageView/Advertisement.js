@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BASE_IMG } from 'utils/getImages';
-import { PATH_HOME } from 'routes/paths';
+import { PATH_PAGE } from 'routes/paths';
 import { varFadeInDown, varFadeInUp, MotionInView } from 'components/Animate';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, Box, Container, Typography } from '@material-ui/core';
 import { MButton } from '../../../@material-extend';
-
+import { Link as RouterLink } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -83,10 +83,10 @@ function Advertisement({ className }) {
                 color="white"
                 underline="none"
                 variant="contained"
-                component={Link}
-                href={PATH_HOME.purchase}
+                component={RouterLink}
+                to={PATH_PAGE.auth.register}
               >
-                Join Beta Now
+                Join BETA Now
               </MButton>
             </MotionInView>
           </Box>

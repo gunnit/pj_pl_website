@@ -24,6 +24,8 @@ import Page500View from 'views/errors/Page500View';
 import LoadingScreen from 'components/LoadingScreen';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import { Page as PdfPage, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 
 
 const notIdeaTabs = [
@@ -48,6 +50,18 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const styles = StyleSheet.create({
+    page: {
+        flexDirection: 'row',
+        backgroundColor: '#E4E4E4'
+    },
+    section: {
+        margin: 10,
+        padding: 10,
+        flexGrow: 1
+    }
+});
+
 export default function ProcessDetailView() {
     const classes = useStyles();
     const [value, setValue] = useState('1');
@@ -59,6 +73,8 @@ export default function ProcessDetailView() {
     const [processDetails, setProcessDetails] = useState(null)
     const [stage, setStage] = useState(null)
     const [error, setError] = useState(false)
+    const [pdfView, setPdfView] = useState(false)
+
     const { userId, currentProcessId } = useContext(Context)
 
     useEffect(() => {
@@ -115,6 +131,23 @@ export default function ProcessDetailView() {
     // Pipeline: all tabs, next step take automation assessment, process operating metrics
     // Development:
     // Production:
+
+    // if (pdfView) {
+    //     return (
+    //         <PDFViewer>
+    //             <Document>
+    //                 <PdfPage size="A4" style={styles.page}>
+    //                     <View style={styles.section}>
+    //                         <Text>Section #1</Text>
+    //                     </View>
+    //                     <View style={styles.section}>
+    //                         <Text>Section #2</Text>
+    //                     </View>
+    //                 </PdfPage>
+    //             </Document>
+    //         </PDFViewer>
+    //     )
+    // }
 
 
     return (

@@ -237,30 +237,7 @@ export default function UpdateProcessView() {
   const NewProcessSchema = Yup.object().shape({
     // min and max lengths? no reason for minimum, they can always edit it
     process_name: Yup.string().required('Name is required'),
-    // process_L2_process_name: Yup.string().required('Level 2 Name is required'),
     pipeline: Yup.string().required('Pipeline is required'),
-    // overview: Yup.string().required('Overview is required'),
-    // description: Yup.string().required('Description is required'),
-    // processCritical: Yup.string().required('Process critical is required'),
-    // businessProcess: Yup.string().required('Business process is required'),
-    // businessUnit: Yup.string().required('Business unit is required'),
-    // businessFunction: Yup.string().required('Business function is required'),
-    // documentationAvailable: Yup.string().required('Documentation available is required'),
-    // natureOfProcess: Yup.string().required('Nature of process is required'),
-    // testEnvironmentAvailable: Yup.string().required('Test environment is required'),
-    // sponsor: Yup.string().required('Sponsor is required'),
-    // sme: Yup.string().required('SME is required'),
-    // smeEmail: Yup.string().email().required('SME Email is required'),
-    // ownerName: Yup.string().required('Owner name is required'),
-    // ownerEmail: Yup.string().required('Owner email is required'),
-    // savingsGoal: Yup.number().positive().required('Savings goal is required'),
-    // savingsGoalJustification: Yup.string().required('Savings goal justification is required'),
-    // manualSteps: Yup.string().required('Number of manual steps is required'),
-    // painPoints: Yup.string().required('Pain points are required'),
-
-    // content: Yup.string()
-    //   .min(1000)
-    //   .required('Content is required'),
 
   });
 

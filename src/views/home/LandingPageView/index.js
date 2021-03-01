@@ -7,6 +7,7 @@ import ProcessLenz from './Minimal';
 import Advertisement from './Advertisement';
 import CleanInterfaces from './CleanInterfaces';
 import HugePackElements from './HugePackElements';
+import BetaInfo from './BetaInfo';
 import { makeStyles } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------------
@@ -31,8 +32,9 @@ function LandingPageView() {
       <div className={classes.content}>
         <ProcessLenz />
         <HugePackElements />
+        <BetaInfo />
         <DarkMode />
-        <CleanInterfaces />
+        {/* <CleanInterfaces /> */}
         <Advertisement />
         <Footer />
       </div>
