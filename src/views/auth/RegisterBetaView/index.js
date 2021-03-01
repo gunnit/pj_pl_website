@@ -119,18 +119,19 @@ function RegisterView() {
         //   )
         // });
 
-        // const templateParams = {
-        //   name: 'James',
-        //   notes: 'Check this out!'
-        // };
+        const templateParams = {
+          to_name: 'James',
+          message: 'Check this out!'
+        };
 
-        // emailjs.send('service_ks16ogn', 'template_3562i9x', templateParams,
-        //   emailUserId)
-        //   .then(function (response) {
-        //     console.log('SUCCESS!', response.status, response.text);
-        //   }, function (error) {
-        //     console.log('FAILED...', error);
-        //   });
+        emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
+          emailUserId)
+          .then(function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+          }, function (error) {
+            console.log('FAILED...', error);
+          });
+
         setRegisteredForBeta(true)
 
         if (isMountedRef.current) {

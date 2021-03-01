@@ -131,7 +131,7 @@ function HugePackElements({ className }) {
 
               <MotionInView variants={textAnimate}>
                 <Typography variant="h2" paragraph>
-                  Made by RPA Specialists for RPA Specialists
+                  Made by RPA Specialists, for <br />RPA Specialists
                 </Typography>
               </MotionInView>
 
