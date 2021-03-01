@@ -262,14 +262,16 @@ export default function GlossaryTable({ glossary }) {
               {filteredGlossary
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(({
-                  id,
-                  hierarchy_id,
-                  process_element,
-                  definition,
-                  metric,
-                  process_element_id,
-                  liked,
-                  user_liked
+                  processtaxonomy: {
+                    id,
+                    hierarchy_id,
+                    process_element,
+                    definition,
+                    metric,
+                    process_element_id,
+                    liked,
+                    user_liked
+                  }
                 }, index) => {
 
                   // const isItemSelected = selected.indexOf(process_element) !== -1;
@@ -277,6 +279,7 @@ export default function GlossaryTable({ glossary }) {
 
                   return (
                     <Row
+                      key={process_element_id}
                       id={id}
                       hierarchy_id={hierarchy_id}
                       process_element={process_element}

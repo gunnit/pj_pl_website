@@ -46,6 +46,7 @@ export default function LikedProcessesView() {
                     }
 
                     setLiked((await res.json()).liked)
+                    // console.log(await res.json())
                 } catch (e) {
                     setError(true)
                 }
