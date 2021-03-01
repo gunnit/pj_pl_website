@@ -142,7 +142,7 @@ function HugePackElements({ className }) {
                 </Typography>
               </MotionInView>
 
-              <MotionInView variants={textAnimate} sx={{ mt: 5 }}>
+              {/* <MotionInView variants={textAnimate} sx={{ mt: 5 }}>
                 <Button
                   size="large"
                   color="inherit"
@@ -152,7 +152,7 @@ function HugePackElements({ className }) {
                 >
                   Join BETA
                 </Button>
-              </MotionInView>
+              </MotionInView> */}
             </div>
           </Grid>
 

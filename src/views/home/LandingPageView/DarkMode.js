@@ -159,12 +159,12 @@ function DarkMode({ className }) {
                 </Typography>
               </MotionInView>
 
-              <MotionInView variants={varFadeInRight}>
+              {/* <MotionInView variants={varFadeInRight}>
                 <ToggleSwitch
                   darkMode={darkMode}
                   onToggleTheme={onToggleTheme}
                 />
-              </MotionInView>
+              </MotionInView> */}
             </div>
           </Grid>
 
