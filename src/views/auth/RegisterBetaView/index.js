@@ -9,7 +9,6 @@ import closeFill from '@iconify-icons/eva/close-fill';
 import { Icon } from '@iconify/react';
 import { useSnackbar } from 'notistack';
 import { PATH_PAGE } from 'routes/paths';
-import SocialRegister from './SocialRegister';
 import { Link as RouterLink } from 'react-router-dom';
 import useIsMountedRef from 'hooks/useIsMountedRef';
 import { useFirebase, useFirestore } from 'react-redux-firebase';
