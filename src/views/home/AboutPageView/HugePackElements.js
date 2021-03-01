@@ -125,25 +125,23 @@ function HugePackElements({ className }) {
                   color="textSecondary"
                   gutterBottom
                 >
-                  HOW IT WORKS
+                  WHAT YOU NEED TO KNOW
                 </Typography>
               </MotionInView>
 
               <MotionInView variants={textAnimate}>
                 <Typography variant="h2" paragraph>
-                  Be Smart
+                  Made by RPA Specialists for RPA Specialists
                 </Typography>
               </MotionInView>
 
               <MotionInView variants={textAnimate}>
                 <Typography color="textSecondary">
-                  Be smart about how you invest your automation budget.
-                  Pick the right process in terms of feasibility and ROI.
-                  Track your process through its lifecycle and have a central hub where you can see all the information you need.
+                  ProcessLenz is excited to announce a new software that will simplify adopting and scaling digital automation. Designed to identify the best processes for your digital transformation journey at the early stages, our program allows you to save time and money, and generate real-time reporting for automation management and governance board meetings in just a few clicks. Do you want to eliminate the endless hours spent on preparing comprehensive presentations and reports and avoid making costly mistakes with the push of a button? Then, join our FREE private BETA now.
                 </Typography>
               </MotionInView>
 
-              <MotionInView variants={textAnimate} sx={{ mt: 5 }}>
+              {/* <MotionInView variants={textAnimate} sx={{ mt: 5 }}>
                 <Button
                   size="large"
                   color="inherit"
@@ -153,7 +151,7 @@ function HugePackElements({ className }) {
                 >
                   View All Components
                 </Button>
-              </MotionInView>
+              </MotionInView> */}
             </div>
           </Grid>
 

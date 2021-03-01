@@ -8,7 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { Suspense, Fragment, lazy, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LoginView from 'views/auth/LoginView';
-import RegisterView from 'views/auth/RegisterView';
+import RegisterBetaView from 'views/auth/RegisterBetaView';
 import ResetPasswordView from 'views/auth/ResetPasswordView';
 import VerifyCodeView from 'views/auth/VerifyCodeView';
 import Page404View from 'views/errors/Page404View';
@@ -116,12 +116,12 @@ const routes = [
     exact: true,
     guard: GuestProtect,
     path: PATH_PAGE.auth.register,
-    component: RegisterView
+    component: RegisterBetaView
   },
   {
     exact: true,
     path: PATH_PAGE.auth.registerUnprotected,
-    component: RegisterView
+    component: RegisterBetaView
   },
   {
     exact: true,

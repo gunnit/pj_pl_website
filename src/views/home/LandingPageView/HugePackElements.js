@@ -125,7 +125,7 @@ function HugePackElements({ className }) {
                   color="textSecondary"
                   gutterBottom
                 >
-                  GET FURTHER INVESTMENT
+                  INVEST SMART
                 </Typography>
               </MotionInView>
 
@@ -137,7 +137,7 @@ function HugePackElements({ className }) {
 
               <MotionInView variants={textAnimate}>
                 <Typography color="textSecondary">
-                  Be smart about how you invest your automation budget. Pick the right process in terms of complexity and ROI.
+                  ProcessLenz allows you to optimize your automation budget. Pick the right process in terms of complexity and ROI.
                   Track your process through its lifecycle and have a central hub where you can see all the information you need.
                 </Typography>
               </MotionInView>

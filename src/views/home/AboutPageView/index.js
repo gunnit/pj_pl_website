@@ -3,7 +3,7 @@ import Page from 'components/Page';
 import ListElements from './ListFile';
 import HugePackElements from './HugePackElements';
 import { makeStyles } from '@material-ui/core/styles';
-
+import BetaInfo from './BetaInfo';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +24,7 @@ function LandingPageView() {
     <Page title="ProcessLenz | Home" id="move_top" className={classes.root}>
 
       <div className={classes.content}>
+        <BetaInfo />
         <HugePackElements />
       </div>
     </Page>

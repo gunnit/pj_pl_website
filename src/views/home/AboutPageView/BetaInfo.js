@@ -125,7 +125,7 @@ function MinimalHelps({ className }) {
             <Container maxWidth="lg">
                 <div className={classes.heading}>
                     <MotionInView variants={varFadeInUp}>
-                        <Typography
+                        {/* <Typography
                             align="center"
                             display="block"
                             variant="overline"
@@ -133,12 +133,12 @@ function MinimalHelps({ className }) {
                             gutterBottom
                         >
                             HOW IT WORKS
-            </Typography>
+                    </Typography> */}
                     </MotionInView>
                     <MotionInView variants={varFadeInDown}>
                         <Typography variant="h2" align="center">
-                            ProcessLenz is built to help you scale digital transformation faster
-            </Typography>
+                            Help us better our software and receive full access to all of the application's features
+                    </Typography>
                     </MotionInView>
                 </div>
 

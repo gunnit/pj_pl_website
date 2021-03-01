@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import Section from './Section';
 import { useFormik } from 'formik';
@@ -23,7 +23,8 @@ import {
   Typography
 } from '@material-ui/core';
 import { MIconButton } from '@material-extend';
-
+import emailjs from 'emailjs-com';
+import { emailUserId } from 'config';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -70,6 +71,8 @@ function RegisterView() {
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
+  const [registeredForBeta, setRegisteredForBeta] = useState(false)
+
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'Too Short!')
@@ -95,27 +98,41 @@ function RegisterView() {
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
-        await firebase
-          .auth()
-          .createUserWithEmailAndPassword(values.email, values.password)
-          .then(res => {
-            firestore
-              .collection('users')
-              .doc(res.user.uid)
-              .set({
-                uid: res.user.uid,
-                email: values.email,
-                displayName: values.firstName + ' ' + values.lastName
-              });
-          });
-        enqueueSnackbar('Login success', {
-          variant: 'success',
-          action: key => (
-            <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Icon icon={closeFill} />
-            </MIconButton>
-          )
-        });
+        // await firebase
+        //   .auth()
+        //   .createUserWithEmailAndPassword(values.email, values.password)
+        //   .then(res => {
+        //     firestore
+        //       .collection('users')
+        //       .doc(res.user.uid)
+        //       .set({
+        //         uid: res.user.uid,
+        //         email: values.email,
+        //         displayName: values.firstName + ' ' + values.lastName
+        //       });
+        //   });
+        // enqueueSnackbar('Login success', {
+        //   variant: 'success',
+        //   action: key => (
+        //     <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+        //       <Icon icon={closeFill} />
+        //     </MIconButton>
+        //   )
+        // });
+
+        // const templateParams = {
+        //   name: 'James',
+        //   notes: 'Check this out!'
+        // };
+
+        // emailjs.send('service_ks16ogn', 'template_3562i9x', templateParams,
+        //   emailUserId)
+        //   .then(function (response) {
+        //     console.log('SUCCESS!', response.status, response.text);
+        //   }, function (error) {
+        //     console.log('FAILED...', error);
+        //   });
+        setRegisteredForBeta(true)
 
         if (isMountedRef.current) {
           setSubmitting(false);
@@ -135,7 +152,7 @@ function RegisterView() {
         <RouterLink to="/">
           <Logo />
         </RouterLink>
-        <Hidden smDown>
+        {/* <Hidden smDown>
           <Box sx={{ mt: { md: -2 }, typography: 'body2' }}>
             Already have an account? &nbsp;
             <Link
@@ -147,14 +164,14 @@ function RegisterView() {
               Login
             </Link>
           </Box>
-        </Hidden>
+        </Hidden> */}
       </header>
 
       <Hidden mdDown>
         <Section />
       </Hidden>
 
-      <Container>
+      {!registeredForBeta && <Container>
         <div className={classes.content}>
           <Typography variant="h4" gutterBottom>
             Get started absolutely free.
@@ -164,13 +181,13 @@ function RegisterView() {
           </Typography>
           <Box sx={{ mb: 5 }} />
 
-          <SocialRegister firebase={firebase} />
+          {/* <SocialRegister firebase={firebase} />
 
           <Divider className={classes.divider}>
             <Typography variant="body2" color="textSecondary">
               OR
             </Typography>
-          </Divider>
+          </Divider> */}
 
           <RegisterForm formik={formik} />
 
@@ -201,7 +218,30 @@ function RegisterView() {
             </Box>
           </Hidden>
         </div>
-      </Container>
+      </Container>}
+
+
+      {registeredForBeta && <Container>
+        <div className={classes.content}>
+          {/* <Box
+            component="img"
+            alt="welcome"
+            src="/static/images/illustrations/illustration_seo.svg"
+            sx={{
+              p: 2,
+              height: 280,
+              margin: { xs: 'auto', md: 'inherit' }
+            }}
+          /> */}
+          <Typography variant="h4" gutterBottom>
+            You're all set!
+          </Typography>
+          <Typography color="textSecondary">
+            A confirmation email has been sent. We will contact you soon.
+          </Typography>
+
+        </div>
+      </Container>}
     </Page>
   );
 }
