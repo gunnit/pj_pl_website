@@ -614,6 +614,7 @@ export default function UpdateProcessView() {
                         variant="contained"
                         onClick={handleNext}
                         className={classes.button}
+                        color='secondary'
                       >
                         Next
                       </Button>
