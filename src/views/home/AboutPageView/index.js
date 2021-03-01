@@ -24,8 +24,8 @@ function LandingPageView() {
     <Page title="ProcessLenz | Home" id="move_top" className={classes.root}>
 
       <div className={classes.content}>
-        <BetaInfo />
         <HugePackElements />
+        <BetaInfo />
       </div>
     </Page>
   );

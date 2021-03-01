@@ -124,13 +124,8 @@ function RegisterView() {
           message: 'Check this out!'
         };
 
-        emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
+        await emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
           emailUserId)
-          .then(function (response) {
-            console.log('SUCCESS!', response.status, response.text);
-          }, function (error) {
-            console.log('FAILED...', error);
-          });
 
         setRegisteredForBeta(true)
 
