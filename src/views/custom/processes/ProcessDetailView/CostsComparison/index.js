@@ -9,7 +9,9 @@ import GenericBoxInfoDevelopment from './GenericBoxInfoDevelopment';
 import GenericBoxInfo from './GenericBoxInfo';
 import CostsComparisonColumns from './CostsComparisonColumns';
 import { Link as RouterLink } from 'react-router-dom';
-// ----------------------------------------------------------------------
+import TakeCostAssessment from '../TakeCostAssessment';
+
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,27 +28,7 @@ function CostsComparison({ processDetails }) {
 
     if (processDetails.assumptions.current_process_cost_calc === 0) {
         return (
-            <Card className={classes.root}>
-                <Box
-                    component="img"
-                    alt="welcome"
-                    src={''}
-                    sx={{
-                        p: 2,
-                        height: 205,
-                        margin: { xs: 'auto', md: 'inherit' }
-                    }}
-                />
-                <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" gutterBottom>
-                        Add your current and future costs to see a breakdown and comparison of your costs and savings.
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        Gain a quantitative perspective on the feasability of implementing your process with a comprehensive cost breakdown. Adding your costs will further unlock insights into quarterly and yearly projections, metrics, and different KPI's.
-                    </Typography>
-                </Box>
-                <Button variant='contained' color='info' to={PATH_APP.processes.costAssessment} component={RouterLink}>Add Costs</Button>
-            </Card>
+            <TakeCostAssessment />
         )
     }
 

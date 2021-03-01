@@ -1,20 +1,44 @@
-import React from 'react';
-import { Container, Grid } from '@material-ui/core';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box, Card, Typography, Container, Grid, Button } from '@material-ui/core';
 import CustomizedStepper from './CustomizedStepper';
 import ProcessNameCard from './ProcessNameCard';
 import GenericBoxInfoDetails from './GenericBoxInfoDetails';
 import ProcessDescription from './ProcessDescription';
+import { Link as RouterLink } from 'react-router-dom';
+import { PATH_APP } from 'routes/paths';
+import SideContent from './SideContent';
 
 
-export default function Details({ processDetails }) {
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(3),
+    },
+}));
 
+
+export default function Details({ processDetails, setProcessDetails }) {
+
+    const classes = useStyles()
+
+    // Need this to be a hook so it can be updated when the stage changes without having to reload the whole page
+    const [stage, setStage] = useState(processDetails.process.pipline)
 
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 <Grid item container xs={12} md={8} lg={8} spacing={3} alignContent='flex-start'>
                     <Grid item xs={12} md={12}>
-                        <CustomizedStepper pipeline={processDetails.process.pipline} />
+                        <CustomizedStepper
+                            pipeline={processDetails.process.pipline}
+                            process_name={processDetails.process.process_name}
+                            stage={stage}
+                            setStage={setStage}
+                            setProcessDetails={setProcessDetails}
+                        />
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <ProcessNameCard
@@ -42,41 +66,7 @@ export default function Details({ processDetails }) {
                     </Grid>
                 </Grid>
                 <Grid item container spacing={3} xs={12} sm={4} md={4} lg={4} alignContent='flex-start'>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <GenericBoxInfoDetails
-                            infoType={'Automation Potential'}
-                            mainNumber={processDetails.process.average_automation_score}
-                            secondaryText={'score'}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <GenericBoxInfoDetails
-                            infoType={'Hours Saved'}
-                            mainNumber={processDetails.total_FTE_saved}
-                            secondaryText={'(in FTE) per year'}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <GenericBoxInfoDetails
-                            infoType={'Potential Savings'}
-                            mainNumber={processDetails.assumptions.process_net_benefit} // ? check this
-                            secondaryText={'per year'}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <GenericBoxInfoDetails
-                            infoType={'Cost With Automation'}
-                            mainNumber={processDetails.assumptions.tot_future_process_cost}
-                            secondaryText={'per year'}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <GenericBoxInfoDetails
-                            infoType={'Cost Without Automation'}
-                            mainNumber={processDetails.assumptions.current_process_cost_calc}
-                            secondaryText={'per year'}
-                        />
-                    </Grid>
+                    <SideContent processDetails={processDetails} stage={stage} />
                 </Grid>
             </Grid>
         </Container>

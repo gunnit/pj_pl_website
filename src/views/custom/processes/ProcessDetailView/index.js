@@ -26,11 +26,16 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
-const SIMPLE_TAB = [
+const notIdeaTabs = [
     { value: '1', icon: <PhoneIcon />, label: 'Details' },
     { value: '2', icon: <FavoriteIcon />, label: 'Automation Potential' },
     { value: '3', icon: <PersonPinIcon />, label: 'Costs Comparison' },
     { value: '4', icon: <PersonPinIcon />, label: 'Break-even' },
+    { value: '5', icon: <PersonPinIcon />, label: 'Progress' }
+];
+
+const ideaTabs = [
+    { value: '1', icon: <PhoneIcon />, label: 'Details' },
     { value: '5', icon: <PersonPinIcon />, label: 'Progress' }
 ];
 
@@ -103,23 +108,38 @@ export default function ProcessDetailView() {
         return <LoadingScreen />
     }
 
+    // Idea: Details and Progress, next step move to pipeline, side thing with alignment with company objectives, initial assessment criteria
+    // Pipeline: all tabs, next step take automation assessment, process operating metrics
+    // Development:
+    // Production:
+
 
     return (
         <Page title="Process Details" className={classes.root}>
             <Container maxWidth="xl">
                 <TabContext value={value}>
                     <Box sx={{ pb: 5 }} className={classes.topArea}>
-                        <TabList onChange={handleChange}>
-                            {SIMPLE_TAB.map(tab => (
-                                <Tab
-                                    key={tab.value}
-                                    label={tab.label}
-                                    value={tab.value}
-                                />
-                            ))}
-                        </TabList>
+                        {processDetails.process.pipline !== 'Idea'
+                            && <TabList onChange={handleChange}>
+                                {notIdeaTabs.map(tab => (
+                                    <Tab
+                                        key={tab.value}
+                                        label={tab.label}
+                                        value={tab.value}
+                                    />
+                                ))}
+                            </TabList>}
+                        {processDetails.process.pipline === 'Idea'
+                            && <TabList onChange={handleChange}>
+                                {ideaTabs.map(tab => (
+                                    <Tab
+                                        key={tab.value}
+                                        label={tab.label}
+                                        value={tab.value}
+                                    />
+                                ))}
+                            </TabList>}
                         <ButtonGroup>
-
                             <Tooltip title="Update Process Details" arrow placement='top'>
                                 <Button variant="contained" color='secondary' component={RouterLink} to={PATH_APP.processes.update}>
                                     <EditIcon />
@@ -141,7 +161,7 @@ export default function ProcessDetailView() {
                         </ButtonGroup>
                     </Box>
                     <TabPanel value={'1'}>
-                        <Details processDetails={processDetails} />
+                        <Details processDetails={processDetails} setProcessDetails={setProcessDetails} />
                     </TabPanel>
                     <TabPanel value={'2'}>
                         <AutomationPotential processDetails={processDetails} />

@@ -1,5 +1,4 @@
 import 'firebase/auth';
-import 'firebase/firestore';
 import firebase from 'firebase/app';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';

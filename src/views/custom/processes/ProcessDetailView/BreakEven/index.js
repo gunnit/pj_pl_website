@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Container } from '@material-ui/core';
+import { Box, Card, Typography, Container, Grid, Button } from '@material-ui/core';
 import BreakEvenAnalysis from './BreakEvenAnalysis';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import MoneyBox from './MoneyBox';
@@ -8,14 +8,30 @@ import NotMoneyBox from './NotMoneyBox';
 import ThreeYearProjectionsChart from './ThreeYearProjectionsChart';
 import ThreeYearROI from './ThreeYearROI';
 import QuarterlyCashFlow from './QuarterlyCashFlow';
+import { PATH_APP } from 'routes/paths';
+import { Link as RouterLink } from 'react-router-dom';
+import TakeCostAssessment from '../TakeCostAssessment';
+
 
 
 const useStyles = makeStyles(theme => ({
-    root: {}
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(3),
+    },
 }));
 
 export default function BreakEven({ processDetails }) {
     const classes = useStyles();
+
+
+    if (processDetails.assumptions.current_process_cost_calc === 0) {
+        return (
+            <TakeCostAssessment />
+        )
+    }
 
 
     return (

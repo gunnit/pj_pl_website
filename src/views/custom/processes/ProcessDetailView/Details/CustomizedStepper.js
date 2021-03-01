@@ -1,6 +1,10 @@
+import 'firebase/auth';
+import firebase from 'firebase/app';
+import Context from 'context/Context';
+import { apiBaseUrl } from 'config';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Check from '@material-ui/icons/Check';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {
@@ -10,6 +14,9 @@ import {
   StepConnector,
   Card,
   Box,
+  Dialog,
+  DialogTitle,
+  Button
 } from '@material-ui/core';
 import ideaIcon from '@iconify-icons/el/idea';
 import raceflagIcon from '@iconify-icons/whh/raceflag';
@@ -144,7 +151,12 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3)
   },
   button: { marginRight: theme.spacing(1) },
-  instructions: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) }
+  instructions: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) },
+  stepLabel: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
 }));
 
 function getSteps() {
@@ -164,29 +176,97 @@ function getActiveStep(pipeline) {
   }
 }
 
-export default function CustomizedStepper({ pipeline, className, ...other }) {
+export default function CustomizedStepper({
+  setProcessDetails,
+  stage,
+  pipeline,
+  process_name,
+  setStage,
+  className,
+  ...other
+}) {
+
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(getActiveStep(pipeline));
+
   const steps = getSteps();
+  const [openDialog, setOpenDialog] = useState('')
+
+  const { currentProcessId, setProcessCounts } = useContext(Context)
+
+  const moveStage = async (currentStage, futureStage) => {
+    setStage(futureStage)
+    setOpenDialog(false)
+    try {
+      const token = await firebase.auth().currentUser.getIdToken(true);
+
+      let storedProcessId;
+
+      if (!currentProcessId) {
+        storedProcessId = localStorage.getItem('currentProcessId')
+      }
+
+      // currentProcessId will be the ID of the process that was clicked on
+      const res = await fetch(`${apiBaseUrl}/change_status/${currentProcessId || storedProcessId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          pipeline_status: futureStage
+        }),
+        headers: {
+          "Content-Type": 'application/json',
+          "Authorization": token
+        }
+      })
+
+      // Change navbar numbers
+      setProcessCounts(previous => ({
+        ...previous,
+        [currentStage]: previous[currentStage] - 1,
+        [futureStage]: previous[futureStage] + 1
+      }))
+
+
+      // // Redirect to process detail page
+      // history.push(PATH_APP.processes.details)
+
+
+      const { pipline_development, predicted_go_live_date, start_development } = await res.json()
+
+      setProcessDetails(previous => ({ ...previous, process: { ...previous.process, pipline: futureStage, pipline_development, predicted_go_live_date, start_development } }))
+
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
 
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <Box sx={{ flexGrow: 1 }}>
         <div>
-
           <Stepper
             alternativeLabel
-            activeStep={activeStep}
+            activeStep={getActiveStep(stage)}
             connector={<ColorlibConnector />}
           >
             {steps.map(label => (
               <Step key={label}>
-                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                <StepLabel className={classes.stepLabel} onClick={() => setOpenDialog(label)} StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
         </div>
       </Box>
+
+      <Dialog open={openDialog} onClose={() => setOpenDialog('')}>
+        {openDialog &&
+          <>
+            <DialogTitle id="simple-dialog-title">Move {process_name} into {openDialog} phase?</DialogTitle>
+            <Button onClick={() => moveStage(pipeline, openDialog)}>Yes</Button>
+            <Button color='error'>Cancel</Button>
+          </>}
+      </Dialog>
+
+
     </Card>
   );
 }
