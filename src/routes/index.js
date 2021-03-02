@@ -9,6 +9,7 @@ import React, { Suspense, Fragment, lazy, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LoginView from 'views/auth/LoginView';
 import RegisterBetaView from 'views/auth/RegisterBetaView';
+// import RegisterView from 'views/auth/RegisterView';
 import ResetPasswordView from 'views/auth/ResetPasswordView';
 import VerifyCodeView from 'views/auth/VerifyCodeView';
 import Page404View from 'views/errors/Page404View';

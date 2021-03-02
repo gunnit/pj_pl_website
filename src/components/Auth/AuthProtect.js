@@ -14,7 +14,7 @@ AuthProtect.propTypes = {
 
 function AuthProtect({ children }) {
   const { auth } = useSelector(state => state.firebase);
-
+  console.log(auth)
   if (!isLoaded(auth)) {
     return <LoadingScreen />;
   }
@@ -22,6 +22,8 @@ function AuthProtect({ children }) {
   if (isEmpty(auth)) {
     return <Redirect to={PATH_PAGE.auth.login} />;
   }
+
+
 
   return children;
 }

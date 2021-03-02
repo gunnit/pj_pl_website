@@ -97,37 +97,42 @@ function RegisterView() {
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
-        // await firebase
-        //   .auth()
-        //   .createUserWithEmailAndPassword(values.email, values.password)
-        //   .then(res => {
-        //     firestore
-        //       .collection('users')
-        //       .doc(res.user.uid)
-        //       .set({
-        //         uid: res.user.uid,
-        //         email: values.email,
-        //         displayName: values.firstName + ' ' + values.lastName
-        //       });
+        await firebase
+          .auth()
+          .createUserWithEmailAndPassword(values.email, values.password)
+          .then(res => {
+            firestore
+              .collection('users')
+              .doc(res.user.uid)
+              .set({
+                uid: res.user.uid,
+                email: values.email,
+                displayName: values.firstName + ' ' + values.lastName,
+              });
+          });
+        enqueueSnackbar('Login successful', {
+          variant: 'success',
+          action: key => (
+            <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+              <Icon icon={closeFill} />
+            </MIconButton>
+          )
+        });
+
+        // const templateParams = {
+        //   to_name: 'James',
+        //   message: 'Check this out!'
+        // };
+
+        // emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
+        //   emailUserId)
+        //   .then(function (response) {
+        //     // console.log('SUCCESS!', response.status, response.text);
+        //   }, function (error) {
+        //     console.log('FAILED...', error);
         //   });
-        // enqueueSnackbar('Login success', {
-        //   variant: 'success',
-        //   action: key => (
-        //     <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-        //       <Icon icon={closeFill} />
-        //     </MIconButton>
-        //   )
-        // });
 
-        const templateParams = {
-          to_name: 'James',
-          message: 'Check this out!'
-        };
-
-        await emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
-          emailUserId)
-
-        setRegisteredForBeta(true)
+        // setRegisteredForBeta(true)
 
         if (isMountedRef.current) {
           setSubmitting(false);
@@ -147,7 +152,7 @@ function RegisterView() {
         <RouterLink to="/">
           <Logo />
         </RouterLink>
-        {/* <Hidden smDown>
+        <Hidden smDown>
           <Box sx={{ mt: { md: -2 }, typography: 'body2' }}>
             Already have an account? &nbsp;
             <Link
@@ -159,7 +164,7 @@ function RegisterView() {
               Login
             </Link>
           </Box>
-        </Hidden> */}
+        </Hidden>
       </header>
 
       <Hidden mdDown>
@@ -171,9 +176,9 @@ function RegisterView() {
           <Typography variant="h4" gutterBottom>
             Get started absolutely free.
           </Typography>
-          <Typography color="textSecondary">
+          {/* <Typography color="textSecondary">
             Free forever. No credit card needed.
-          </Typography>
+          </Typography> */}
           <Box sx={{ mb: 5 }} />
 
           {/* <SocialRegister firebase={firebase} />
