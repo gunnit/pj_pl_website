@@ -9,7 +9,6 @@ import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import NotistackProvider from './components/NotistackProvider';
 import FirebaseProvider from './components/Auth/FirebaseProvider';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-
 // ----------------------------------------------------------------------
 
 const history = createBrowserHistory();

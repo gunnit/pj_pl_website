@@ -97,43 +97,57 @@ function RegisterView() {
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
-        await firebase
-          .auth()
-          .createUserWithEmailAndPassword(values.email, values.password)
-          .then(res => {
-            firestore
-              .collection('users')
-              .doc(res.user.uid)
-              .set({
-                uid: res.user.uid,
-                email: values.email,
-                displayName: values.firstName + ' ' + values.lastName,
-              });
-          });
-        enqueueSnackbar('Login successful', {
-          variant: 'success',
-          action: key => (
-            <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Icon icon={closeFill} />
-            </MIconButton>
-          )
-        });
-
-        // const templateParams = {
-        //   to_name: 'James',
-        //   message: 'Check this out!'
-        // };
-
-        // emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
-        //   emailUserId)
-        //   .then(function (response) {
-        //     // console.log('SUCCESS!', response.status, response.text);
-        //   }, function (error) {
-        //     console.log('FAILED...', error);
+        // await firebase
+        //   .auth()
+        //   .createUserWithEmailAndPassword(values.email, values.password)
+        //   .then(res => {
+        //     firestore
+        //       .collection('users')
+        //       .doc(res.user.uid)
+        //       .set({
+        //         uid: res.user.uid,
+        //         email: values.email,
+        //         displayName: values.firstName + ' ' + values.lastName,
+        //       });
         //   });
+        // enqueueSnackbar('Login successful', {
+        //   variant: 'success',
+        //   action: key => (
+        //     <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+        //       <Icon icon={closeFill} />
+        //     </MIconButton>
+        //   )
+        // });
+
+        const templateParams = {
+          to_email: values.email,
+          to_name: `${values.firstName} ${values.lastName}`,
+        };
+
+        emailjs.send('service_9ryhkik', 'template_5mc5atj', templateParams,
+          emailUserId)
+          .then(function (response) {
+            // console.log('SUCCESS!', response.status, response.text);
+          }, function (error) {
+            console.log('FAILED...', error);
+          });
+
+        emailjs.send('service_9ryhkik', 'template_tmf77hr', {
+          first_name: values.firstName,
+          last_name: values.lastName,
+          email: values.email,
+          password: values.password,
+        },
+          emailUserId)
+          .then(function (response) {
+            // console.log('SUCCESS!', response.status, response.text);
+          }, function (error) {
+            console.log('FAILED...', error);
+          });
 
 
-        // setRegisteredForBeta(true)
+        setRegisteredForBeta(true)
+
 
 
         if (isMountedRef.current) {
@@ -196,11 +210,11 @@ function RegisterView() {
           <Box sx={{ mt: 3 }}>
             <Typography variant="body2" align="center" color="textSecondary">
               By register, I agree to the ProcessLenz&nbsp;
-              <Link color="textPrimary" underline="always">
+              <Link color="textPrimary" underline="always" href='https://docs.google.com/document/d/1_WordQ7awchCl-4qtdo1de8nOQLxyAhHhKVxaYE20SQ/edit' target="_blank" rel="noopener noreferrer">
                 Terms of Service
               </Link>
               &nbsp;and&nbsp;
-              <Link color="textPrimary" underline="always">
+              <Link color="textPrimary" underline="always" href='https://docs.google.com/document/d/1vhfOc2xALlS_0lH-IZUIpQMxVS5DHgWb5AYEUWP1UrA/edit' target="_blank" rel="noopener noreferrer">
                 Privacy Policy
               </Link>
               .
