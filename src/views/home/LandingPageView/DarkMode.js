@@ -172,12 +172,14 @@ function DarkMode({ className }) {
             <MotionInView variants={varZoomInOut}>
               <img
                 alt="theme mode"
-                data-src={darkMode ? getImgDark(720) : getImgLight(720)}
-                data-srcset={
-                  darkMode
-                    ? `${getImgDark(600)} 600w, ${getImgDark(1200)} 960w`
-                    : `${getImgLight(600)} 600w, ${getImgLight(1200)} 960w`
-                }
+                // data-src={darkMode ? getImgDark(720) : getImgLight(720)}
+                // data-srcset={
+                //   darkMode
+                //     ? `${getImgDark(600)} 600w, ${getImgDark(1200)} 960w`
+                //     : `${getImgLight(600)} 600w, ${getImgLight(1200)} 960w`
+                // }
+                data-src={'/static/images/brand/lightmode1.png'}
+                data-srcset={'/static/images/brand/lightmode1.png'}
                 className={clsx(classes.image, 'lazyload')}
               />
             </MotionInView>

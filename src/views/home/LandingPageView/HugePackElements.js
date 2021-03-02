@@ -108,9 +108,19 @@ function HugePackElements({ className }) {
     ? variantScreenRight
     : variantScreenRightMobile;
 
-  const getImg = (width, index) => `/static/images/brand/screen_light_${index !== 2 ? index : 0}A.png`
+  // const getImg = (width, index) => `/static/images/brand/screen_light_${index !== 2 ? index : 0}A.png`
   // `${BASE_IMG}w_${width}/v1611472901/upload_minimal/home/screen_${theme.palette.mode === 'light' ? 'light' : 'dark'
   // }_${index + 1}.png`;
+
+  function getImg(width, index) {
+    if (index === 0) {
+      return '/static/images/brand/screen_light_11.png'
+    } else if (index === 1) {
+      return '/static/images/brand/screen_light_22.png'
+    } else {
+      return '/static/images/brand/screen_light_3A (1).png'
+    }
+  }
 
   return (
     <div className={clsx(classes.root, className)}>

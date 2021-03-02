@@ -110,7 +110,8 @@ function Hero({ className }) {
           data-sizes="auto"
           // data-src={getImg(600)}
           // data-srcset={`${getImg(1200)} 600w, ${getImg(1600)} 960w`}
-          data-src={'/static/images/brand/taxonomy.png'}
+          data-src={'/static/images/brand/taxonomy11.png'}
+          data-srcset={'/static/images/brand/taxonomy11.png'}
           variants={varFadeInUp}
           className={clsx(classes.heroImg, 'lazyload')}
         />
