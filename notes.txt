@@ -1,5 +1,7 @@
 Things to add:
 
+Bulk insert when user signs up 
+
 Change allowed origins before deploying
 
 What properties are being calculated every time something is retrieved that could be done once and saved?
@@ -13,6 +15,8 @@ Needs to have analytics
 Debug don't run with debug turned on in production, allowed hosts?
 
 Breadcrumbs need to look like they're working better. That whole page should probably have a loading screen
+
+Supercharge automation thing doesn't look right because of background color above it
 
 Taxonomy picture cards all end up having the same picture
 
@@ -63,6 +67,7 @@ Make sure likes line up
 Taxonomy - different icons for different categories?
 
 Make total average of subgroups easier to work with
+
 
 PrimaryKeyRelatedField many to many taking a long time?
 

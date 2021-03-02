@@ -32,6 +32,8 @@ function LandingPageView() {
         <ProcessLenz />
         <HugePackElements />
         <DarkMode />
+
+
         {/* <CleanInterfaces /> */}
         <Advertisement />
         <Footer />

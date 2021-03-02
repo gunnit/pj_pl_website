@@ -108,8 +108,9 @@ function Hero({ className }) {
         <motion.img
           alt="product"
           data-sizes="auto"
-          data-src={getImg(600)}
-          data-srcset={`${getImg(1200)} 600w, ${getImg(1600)} 960w`}
+          // data-src={getImg(600)}
+          // data-srcset={`${getImg(1200)} 600w, ${getImg(1600)} 960w`}
+          data-src={'/static/images/brand/taxonomy.png'}
           variants={varFadeInUp}
           className={clsx(classes.heroImg, 'lazyload')}
         />

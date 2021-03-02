@@ -108,9 +108,9 @@ function HugePackElements({ className }) {
     ? variantScreenRight
     : variantScreenRightMobile;
 
-  const getImg = (width, index) =>
-    `${BASE_IMG}w_${width}/v1611472901/upload_minimal/home/screen_${theme.palette.mode === 'light' ? 'light' : 'dark'
-    }_${index + 1}.png`;
+  const getImg = (width, index) => `/static/images/brand/screen_light_${index !== 2 ? index : 0}A.png`
+  // `${BASE_IMG}w_${width}/v1611472901/upload_minimal/home/screen_${theme.palette.mode === 'light' ? 'light' : 'dark'
+  // }_${index + 1}.png`;
 
   return (
     <div className={clsx(classes.root, className)}>
