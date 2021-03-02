@@ -132,7 +132,9 @@ function RegisterView() {
         //     console.log('FAILED...', error);
         //   });
 
+
         // setRegisteredForBeta(true)
+
 
         if (isMountedRef.current) {
           setSubmitting(false);
