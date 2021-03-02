@@ -1,6 +1,5 @@
 import React from 'react';
 import Page from 'components/Page';
-import ListElements from './ListFile';
 import HugePackElements from './HugePackElements';
 import { makeStyles } from '@material-ui/core/styles';
 import BetaInfo from './BetaInfo';
@@ -17,12 +16,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LandingPageView() {
+export default function AboutPageView() {
   const classes = useStyles();
 
   return (
     <Page title="ProcessLenz | Home" id="move_top" className={classes.root}>
-
       <div className={classes.content}>
         <HugePackElements />
         <BetaInfo />
@@ -30,5 +28,3 @@ function LandingPageView() {
     </Page>
   );
 }
-
-export default LandingPageView;

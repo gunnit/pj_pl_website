@@ -70,6 +70,20 @@ export default function ProcessDashboardView() {
         return <LoadingScreen />
     }
 
+
+    // if (true) {
+    //     return (
+    //         <Container maxWidth="xl">
+    //             <Grid container spacing={3}>
+    //                 <Grid item xs={12} md={12} lg={12}>
+    //                     <WelcomeBetaUser displayName={displayName} />
+    //                 </Grid>
+    //             </Grid>
+    //         </Container>
+    //     )
+    // }
+
+
     // When the user has no processes
     if (!dashboard.processes.length) {
         return (
