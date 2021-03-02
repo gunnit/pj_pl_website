@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function IdeaSideContent({ processDetails }) {
+export default function IdeaSideContent({ processDetails, setStage }) {
 
     const classes = useStyles()
 
@@ -33,10 +33,16 @@ export default function IdeaSideContent({ processDetails }) {
 
     const moveStage = async (currentStage, futureStage) => {
         try {
+
+
+            let storedProcessId;
+            if (!currentProcessId) {
+                storedProcessId = localStorage.getItem('currentProcessId')
+            }
             const token = await firebase.auth().currentUser.getIdToken(true);
 
             // currentProcessId will be the ID of the process that was clicked on
-            await fetch(`${apiBaseUrl}/change_status/${currentProcessId}`, {
+            await fetch(`${apiBaseUrl}/change_status/${currentProcessId || storedProcessId}`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                     pipeline_status: futureStage
@@ -58,7 +64,7 @@ export default function IdeaSideContent({ processDetails }) {
             // // Redirect to process detail page
             // history.push(PATH_APP.processes.details)
             setOpenDialog(false)
-
+            setStage('Pipeline')
         } catch (e) {
             console.error(e)
         }

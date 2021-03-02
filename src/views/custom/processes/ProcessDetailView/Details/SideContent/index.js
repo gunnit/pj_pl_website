@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function SideContent({ processDetails, stage }) {
+export default function SideContent({ processDetails, stage, setStage }) {
 
     const classes = useStyles()
 
@@ -27,7 +27,7 @@ export default function SideContent({ processDetails, stage }) {
 
     if (stage === 'Idea') {
         return (
-            <IdeaSideContent processDetails={processDetails} />
+            <IdeaSideContent processDetails={processDetails} setStage={setStage} />
         )
     }
 
