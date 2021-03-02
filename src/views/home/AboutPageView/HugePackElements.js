@@ -12,6 +12,7 @@ import {
 } from 'components/Animate';
 import { alpha, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Button, Box, Grid, Container, Typography } from '@material-ui/core';
+import { motion } from 'framer-motion';
 
 // ----------------------------------------------------------------------
 
@@ -109,16 +110,16 @@ function HugePackElements({ className }) {
     : variantScreenRightMobile;
 
 
-  const indexConverter = index => {
-    if (index === 0) {
-      return 1
-    } else if (index === 1) {
-      return 0
-    } else if (index === 2) {
-      return 1
-    }
-  }
-  const getImg = (width, index) => `/static/images/brand/screen_light_${indexConverter(index)}A.png`
+  // const indexConverter = index => {
+  //   if (index === 0) {
+  //     return 1
+  //   } else if (index === 1) {
+  //     return 0
+  //   } else if (index === 2) {
+  //     return 1
+  //   }
+  // }
+  // const getImg = (width, index) => `/static/images/brand/screen_light_${indexConverter(index)}A.png`
   // `${BASE_IMG}w_${width}/v1611472901/upload_minimal/home/screen_${theme.palette.mode === 'light' ? 'light' : 'dark'
   // }_${index + 1}.png`;
 
@@ -165,7 +166,7 @@ function HugePackElements({ className }) {
             </div>
           </Grid>
 
-          <Grid item xs={12} md={8} lg={7} className={classes.screens}>
+          {/* <Grid item xs={12} md={8} lg={7} className={classes.screens}>
             {[...Array(3)].map((screen, index) => (
               <MotionInView
                 key={index}
@@ -191,6 +192,18 @@ function HugePackElements({ className }) {
                 />
               </MotionInView>
             ))}
+          </Grid> */}
+          <Grid item md={8} lg={7}>
+            <motion.img
+              alt="product"
+              data-sizes="auto"
+              // data-src={getImg(600)}
+              // data-srcset={`${getImg(1200)} 600w, ${getImg(1600)} 960w`}
+              data-src={'/static/images/brand/ffff.png'}
+              data-srcset={'/static/images/brand/ffff.png'}
+              variants={varFadeInUp}
+              className={clsx(classes.heroImg, 'lazyload')}
+            />
           </Grid>
         </Grid>
       </Container>
