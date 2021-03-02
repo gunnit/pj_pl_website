@@ -13,7 +13,7 @@ const CARDS = [
         icon: '/static/images/icons/ic_sketch.svg',
         title: 'Full Access',
         description:
-            'Enjoy the program and use all its capabilities to the fullest. Find out how it will help your company grow.'
+            'Enjoy the program and use all of its capabilities to the fullest. Find out how it will help your company grow.'
     },
     {
         icon: '/static/images/icons/ic_dashboard.svg',

@@ -148,7 +148,7 @@ function HugePackElements({ className }) {
 
               <MotionInView variants={textAnimate}>
                 <Typography color="textSecondary">
-                  ProcessLenz is excited to announce a new software that will simplify adopting and scaling digital automation. Designed to identify the best processes for your digital transformation journey at the early stages, our program allows you to save time and money, and generate real-time reporting for automation management and governance board meetings in just a few clicks. Do you want to eliminate the endless hours spent on preparing comprehensive presentations and reports and avoid making costly mistakes with the push of a button? Then, join our FREE private BETA now.
+                  ProcessLenz is excited to announce a new software that will simplify adopting and scaling digital automation. Designed to identify the best processes for your digital transformation journey at the early stages, our application allows you to save time and money while generating real-time reporting for automation management and governance board meetings - all in just a few clicks. Do you want to eliminate the endless hours spent on preparing comprehensive presentations and reports and avoid making costly mistakes with the push of a button? Then, join our FREE private BETA now.
                 </Typography>
               </MotionInView>
 

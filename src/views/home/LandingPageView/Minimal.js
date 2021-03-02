@@ -25,7 +25,7 @@ const CARDS = [
     icon: '/static/images/icons/ic_design.svg',
     title: 'Find new processes',
     description:
-      'Use our taxonomy of thousands of processes enhanced by NLP to help you find your next candidates for you automation journey'
+      'Use our taxonomy of thousands of processes enhanced by NLP to help you find your next candidate for you automation journey'
   }
 ];
 
