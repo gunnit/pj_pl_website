@@ -23,6 +23,7 @@ import CostAssessmentView from 'views/custom/processes/CostAssessmentView';
 import CategoryView from 'views/custom/discovery/CategoryView';
 import GroupView from 'views/custom/discovery/GroupView';
 import ObjectivesView from 'views/custom/user/ObjectivesView';
+import SettingsView from 'views/custom/user/SettingsView';
 
 // ----------------------------------------------------------------------
 
@@ -153,10 +154,17 @@ const AppRoutes = {
       path: PATH_APP.discovery.group,
       component: GroupView
     },
+
+    // User
     {
       exact: true,
       path: PATH_APP.user.objectives,
       component: ObjectivesView
+    },
+    {
+      exact: true,
+      path: PATH_APP.user.settings,
+      component: SettingsView
     },
 
     {

@@ -17,7 +17,9 @@ import roundVerifiedUser from '@iconify-icons/ic/round-verified-user';
 import clockFill from '@iconify-icons/eva/clock-fill';
 import roundVerified from '@iconify-icons/ic/round-verified';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
-
+import calendarCursor from '@iconify-icons/mdi/calendar-cursor';
+import databaseCog from '@iconify-icons/mdi/database-cog';
+import fileDocumentMultiple from '@iconify-icons/mdi/file-document-multiple';
 
 // ----------------------------------------------------------------------
 
@@ -100,17 +102,17 @@ export default function ProcessDescription({
         {
             title: 'Date Created',
             description: date_created,
-            icon: roundVerified
+            icon: calendarCursor
         },
         {
             title: 'Test Environment Available',
             description: test_env_available,
-            icon: clockFill
+            icon: databaseCog
         },
         {
             title: 'Documentation Available',
             description: process_documentation_available,
-            icon: roundVerifiedUser
+            icon: fileDocumentMultiple
         }
     ];
 

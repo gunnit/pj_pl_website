@@ -72,6 +72,7 @@ export const PATH_APP = {
   },
   user: {
     objectives: path(ROOTS.app, '/user/objectives'),
+    settings: path(ROOTS.app, '/user/settings'),
   }
 };
 

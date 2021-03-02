@@ -9,6 +9,7 @@ import PopoverMenu from 'components/PopoverMenu';
 import useIsMountedRef from 'hooks/useIsMountedRef';
 import homeFill from '@iconify-icons/eva/home-fill';
 import personFill from '@iconify-icons/eva/person-fill';
+import settingsFill from '@iconify-icons/eva/settings-fill';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography } from '@material-ui/core';
@@ -27,6 +28,11 @@ const MENU_OPTIONS = [
     label: 'Objectives',
     icon: personFill,
     linkTo: PATH_APP.user.objectives
+  },
+  {
+    label: 'Settings',
+    icon: settingsFill,
+    linkTo: PATH_APP.user.settings
   },
 ];
 

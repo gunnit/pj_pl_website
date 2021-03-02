@@ -65,7 +65,7 @@ function RegisterForm({ formik }) {
           }
         />
         <Box sx={{ mb: 3 }} />
-        <TextField
+        {/* <TextField
           fullWidth
           type={showPassword ? 'text' : 'password'}
           label="Password"
@@ -90,7 +90,7 @@ function RegisterForm({ formik }) {
             (touched.password && errors.password) ||
             passwordError(errors.afterSubmit).helperText
           }
-        />
+        /> */}
         <Box sx={{ mt: 3 }}>
           <LoadingButton
             fullWidth
