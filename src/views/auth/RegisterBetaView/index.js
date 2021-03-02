@@ -136,7 +136,6 @@ function RegisterView() {
           first_name: values.firstName,
           last_name: values.lastName,
           email: values.email,
-          password: values.password,
         },
           emailUserId)
           .then(function (response) {
