@@ -26,12 +26,10 @@ export default function BubbleChart({ data, className, ...other }) {
   const { setCurrentProcessId } = useContext(Context)
 
 
-
-
   const chartData = data.map((process, i) => {
     return {
       name: process.process_name,
-      data: [[process.average_automation_score,
+      data: [[parseFloat(process.average_automation_score),
       process.processassumptions.total_net_benefit,
       process.processobjectives.total_alignment_score_coverted + 5]]
     }
@@ -42,8 +40,8 @@ export default function BubbleChart({ data, className, ...other }) {
   const chartOptions = {
     colors: [
       theme.palette.primary.main,
-      theme.palette.primary.light,
-      theme.palette.primary.dark,
+      // theme.palette.primary.light,
+      // theme.palette.primary.dark,
     ],
 
 
@@ -105,7 +103,7 @@ export default function BubbleChart({ data, className, ...other }) {
         show: true,
         // offsetX: 50,
       },
-      tickAmount: 5,
+      tickAmount: 1,
     },
 
     yaxis: {
@@ -147,7 +145,7 @@ export default function BubbleChart({ data, className, ...other }) {
       show: false,
     },
   }
-
+  console.log(chartData)
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <CardHeader title="Process Heat Map" subheader="Overview of all of your processes" />

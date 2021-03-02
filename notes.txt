@@ -1,6 +1,6 @@
 Things to add:
 
-Bulk insert when user signs up 
+Processes don't have their objectives saved, they have the alignment scores saved for each category. So updating the company objectives is a problem.
 
 Change allowed origins before deploying
 
@@ -16,11 +16,17 @@ Debug don't run with debug turned on in production, allowed hosts?
 
 Breadcrumbs need to look like they're working better. That whole page should probably have a loading screen
 
+List of processes number not showing up
+
 Supercharge automation thing doesn't look right because of background color above it
 
 Taxonomy picture cards all end up having the same picture
 
+Place to view alignment on process detail page?
+
 Optimize queries
+
+Can't read tooltip on bubble chart when the dot is too far to the side
 
 Donut chart is confusing when there are negative numbers
 
