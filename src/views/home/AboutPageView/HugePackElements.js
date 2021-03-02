@@ -66,7 +66,12 @@ const useStyles = makeStyles(theme => ({
       bottom: 40,
       transform: 'translateX(32%)'
     }
+  },
+  heroImg: {
+    marginTop: 50,
+    marginLeft: 50
   }
+
 }));
 
 const variantScreenLeftMoblie = {
