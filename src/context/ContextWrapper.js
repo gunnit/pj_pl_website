@@ -10,6 +10,7 @@ export default function ContextWrapper({ children }) {
     const [token, setToken] = useState(null)
     const [currentTaxonomy, setCurrentTaxonomy] = useState(null)
     const [taxonomyGroupId, setTaxonomyGroupId] = useState(null)
+    // const [access, setAccess] = useState(null)
 
     return (
         <Context.Provider value={{
@@ -20,6 +21,7 @@ export default function ContextWrapper({ children }) {
             token, setToken,
             currentTaxonomy, setCurrentTaxonomy,
             taxonomyGroupId, setTaxonomyGroupId,
+            // access, setAccess,
         }}>
             {children}
         </Context.Provider>

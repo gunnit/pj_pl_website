@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import { PATH_PAGE } from 'routes/paths';
 import LoadingScreen from 'components/LoadingScreen';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
-
 // ----------------------------------------------------------------------
 
 AuthProtect.propTypes = {
@@ -14,7 +13,7 @@ AuthProtect.propTypes = {
 
 function AuthProtect({ children }) {
   const { auth } = useSelector(state => state.firebase);
-  console.log(auth)
+
   if (!isLoaded(auth)) {
     return <LoadingScreen />;
   }

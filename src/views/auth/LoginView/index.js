@@ -152,11 +152,11 @@ function LoginView() {
             </Typography>
           </Box>
 
-          <SocialLogin firebase={firebase} />
+          {/* <SocialLogin firebase={firebase} />
 
           <Divider className={classes.divider}>
 
-          </Divider>
+          </Divider> */}
 
 
           <LoginForm formik={formik} />
