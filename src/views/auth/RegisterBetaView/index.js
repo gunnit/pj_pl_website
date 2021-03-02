@@ -124,7 +124,7 @@ function RegisterView() {
           message: 'Check this out!'
         };
 
-        await emailjs.send('service_w75i4b9', 'template_tmf77hr', templateParams,
+        await emailjs.send('service_9ryhkik', 'template_tmf77hr', templateParams,
           emailUserId)
 
         setRegisteredForBeta(true)
