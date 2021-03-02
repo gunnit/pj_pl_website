@@ -514,13 +514,14 @@ export default function CostAssessmentView() {
                                             color='secondary'
                                         >
                                             Back
-                    </Button>
+                                        </Button>
                                         {activeStep !== steps.length - 1
                                             ? <Button
                                                 disabled={pending}
                                                 variant="contained"
                                                 onClick={handleNext}
                                                 className={classes.button}
+                                                color='secondary'
                                             >
                                                 Next
                                                 </Button>
@@ -529,6 +530,7 @@ export default function CostAssessmentView() {
                                                 variant="contained"
                                                 onClick={handleNext}
                                                 pendingPosition="center"
+                                                color='secondary'
                                             // startIcon={<AlarmIcon />}
                                             >
                                                 Save

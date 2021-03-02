@@ -109,10 +109,6 @@ Message on loading screen?
 
 Can you fill out the cost form and still have it not show up?
 
-total_alignment_score_coverted needs to be replaced
-
-See if anything else needs to be changed
-
 Subgroup and question and maybe answer orders
 
 Order scores by question ID
