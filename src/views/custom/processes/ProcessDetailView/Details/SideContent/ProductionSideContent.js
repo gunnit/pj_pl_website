@@ -15,6 +15,7 @@ import GenericBoxInfoDetails from '../GenericBoxInfoDetails';
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        backgroundColor: theme.palette.primary.lighter,
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(3),

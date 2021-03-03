@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Scrollbars from 'components/Scrollbars';
+import { fNumber } from 'utils/formatNumber';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -104,7 +105,7 @@ export default function RecentProcesses({ processes }) {
                   </TableCell>
                   <TableCell align="right">
                     <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : "error"}>
-                      {total_net_benefit}
+                      {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
                     </MLabel>
                   </TableCell>
                   {/* Display business unit and/or business function depending on if they're there */}

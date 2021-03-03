@@ -41,13 +41,14 @@ export default function PipelineSideContent({ processDetails }) {
                             Next step:
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
-                            Take the automation potential assessment to get the process automation score. This score will tell you the potential for automation of the process.
+                            Take the automation potential assessment to get the process automation score. 
+                            This score will tell you the potential for automation of the process.
                     </Typography>
                     </Box>
                     <Box
                         component="img"
-                        alt="welcome"
-                        src={''}
+                        alt="Move process to pipeline."
+                        src={'/static/images/process/undraw_personal_settings_kihd.svg'}
                         sx={{
                             p: 2,
                             height: 205,

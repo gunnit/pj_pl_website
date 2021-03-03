@@ -84,8 +84,8 @@ export default function IdeaSideContent({ processDetails, setStage }) {
                     </Box>
                     <Box
                         component="img"
-                        alt="welcome"
-                        src={''}
+                        alt="Move to pipeline"
+                        src={'/static/images/process/undraw_maker_launch_crhe.svg'}
                         sx={{
                             p: 2,
                             height: 205,

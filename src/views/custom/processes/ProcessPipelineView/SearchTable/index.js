@@ -356,7 +356,7 @@ export default function DevelopmentTable({ processes }) {
                         padding="none"
                       >
                         {/* >= 20 means suggested to move to development, >= 10 means evaluate before moving to development, otherwise not suggested */}
-                        {final_process_score >= 20 ? 'Move' : final_process_score >= 10 ? 'Evaluate' : 'Not suggested'}
+                        {final_process_score >= 11 ? 'Move' : final_process_score >= 6 ? 'Evaluate' : 'Not suggested'}
                       </TableCell>
                       <TableCell align="left">{process_name}</TableCell>
                       <TableCell align="center">

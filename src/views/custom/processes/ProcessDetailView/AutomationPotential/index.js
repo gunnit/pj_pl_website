@@ -30,8 +30,8 @@ export default function AutomationPotential({ processDetails }) {
             <Card className={classes.root}>
                 <Box
                     component="img"
-                    alt="welcome"
-                    src={''}
+                    alt="ProcessLenz: Complete the process automation potential assessment"
+                    src={'/static/images/process/undraw_personal_settings_kihd.svg'}
                     sx={{
                         p: 2,
                         height: 205,

@@ -23,8 +23,8 @@ export default function TakeCostAssessment() {
         <Card className={classes.root}>
             <Box
                 component="img"
-                alt="welcome"
-                src={''}
+                alt="Add your current and future costs to see a breakdown and comparison of your costs and savings."
+                src={'/static/images/process/undraw_personal_finance_tqcd.svg'}
                 sx={{
                     p: 2,
                     height: 205,
