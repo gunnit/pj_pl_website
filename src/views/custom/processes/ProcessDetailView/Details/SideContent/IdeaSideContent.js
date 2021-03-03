@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         padding: theme.spacing(3),
     },
+    pipelineButton: {
+        backgroundColor: theme.palette.error.light
+    }
 }));
 
 
@@ -69,6 +72,8 @@ export default function IdeaSideContent({ processDetails, setStage }) {
             console.error(e)
         }
     }
+
+
 
     return (
         <>

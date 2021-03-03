@@ -152,7 +152,7 @@ function DarkMode({ className }) {
                 sx={{ color: 'common.white', mb: 5 }}
               >
                 <Typography>
-                  Accelerate your team’s ability to automate at scale and create value from day one. ProcessLenz gives you back hours per week by automating your stakeholder reporting such as executive dashboards and presentations. The best automation teams deliver quality automations, quickly!
+                  Start fast with minimal effort. ProcessLenz allows you to reduce time and resources spent on completing stakeholder reports such as executive dashboards and presentations by automating the repetitive processes.
                 </Typography>
               </MotionInView>
 

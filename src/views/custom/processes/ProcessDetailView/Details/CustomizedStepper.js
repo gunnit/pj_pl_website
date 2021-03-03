@@ -68,29 +68,31 @@ QontoStepIcon.propTypes = {
   completed: PropTypes.bool
 };
 
-const ColorlibConnector = withStyles({
-  alternativeLabel: {
-    top: 22
-  },
-  active: {
-    '& $line': {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)'
-    }
-  },
-  completed: {
-    '& $line': {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)'
-    }
-  },
-  line: {
-    height: 3,
-    border: 0,
-    backgroundColor: '#eaeaf0',
-    borderRadius: 1
-  }
-})(StepConnector);
+
+
+// const ColorlibConnector = withStyles(theme => ({
+//   alternativeLabel: {
+//     top: 22
+//   },
+//   active: {
+//     '& $line': {
+//       backgroundImage:
+//         `linear-gradient( 95deg,${theme.palette.error.light} 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)`
+//     }
+//   },
+//   completed: {
+//     '& $line': {
+//       backgroundImage:
+//         `linear-gradient( 95deg,rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)`
+//     }
+//   },
+//   line: {
+//     height: 3,
+//     border: 0,
+//     backgroundColor: '#eaeaf0',
+//     borderRadius: 1
+//   }
+// }))(StepConnector);
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
@@ -185,6 +187,32 @@ export default function CustomizedStepper({
   className,
   ...other
 }) {
+
+
+  const ColorlibConnector = withStyles(theme => ({
+    alternativeLabel: {
+      top: 22
+    },
+    active: {
+      '& $line': {
+        backgroundImage:
+          `linear-gradient( 95deg,${theme.palette.error.light} 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)`
+      }
+    },
+    completed: {
+      '& $line': {
+        backgroundImage:
+          `linear-gradient( 95deg,rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)`
+      }
+    },
+    line: {
+      height: 3,
+      border: 0,
+      backgroundColor: '#eaeaf0',
+      borderRadius: 1
+    }
+  }))(StepConnector);
+
 
   const classes = useStyles();
 
