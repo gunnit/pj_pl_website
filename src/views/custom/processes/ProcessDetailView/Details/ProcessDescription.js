@@ -20,6 +20,7 @@ import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import calendarCursor from '@iconify-icons/mdi/calendar-cursor';
 import databaseCog from '@iconify-icons/mdi/database-cog';
 import fileDocumentMultiple from '@iconify-icons/mdi/file-document-multiple';
+import { fDate } from 'utils/formatTime';
 
 // ----------------------------------------------------------------------
 
@@ -101,7 +102,7 @@ export default function ProcessDescription({
     const BOTTOM = [
         {
             title: 'Date Created',
-            description: date_created,
+            description: fDate(date_created),
             icon: calendarCursor
         },
         {
@@ -202,9 +203,9 @@ export default function ProcessDescription({
                                 textAlign: 'center'
                             }}
                         >
-                            {/* <div className={classes.icon}>
+                            <div className={classes.icon}>
                                 <Icon icon={item.icon} width={36} height={36} />
-                            </div> */}
+                            </div>
                             <Typography variant="subtitle1" gutterBottom color='textSecondary'>
                                 {item.title}
                             </Typography>
