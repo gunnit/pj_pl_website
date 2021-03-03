@@ -60,7 +60,7 @@ function GenericBoxInfoDetails({ className, numberOfItems, infoType, mainNumber,
                 </Typography>
                 <Typography variant="h3" gutterBottom>
                     {/* {mainInfo} */}
-                    {fShortenNumber(mainNumber)}
+                    {infoType !== 'Savings Goal' ? fShortenNumber(mainNumber) : `$${fShortenNumber(mainNumber)}`}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="span">
                     {secondaryText}

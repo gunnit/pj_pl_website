@@ -15,7 +15,7 @@ import GenericBoxInfoDetails from '../GenericBoxInfoDetails';
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
-        backgroundColor: theme.palette.primary.lighter,
+        // backgroundColor: theme.palette.primary.lighter,
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(3),
@@ -31,28 +31,31 @@ export default function ProductionSideContent({ processDetails }) {
     if (!processDetails.scores.length) {
 
         return (
-            <Grid item xs={12} md={12} lg={12}>
-                <Card className={classes.root}>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Typography variant="h6" gutterBottom>
-                            Next step:
+            <>
+                <Grid item xs={12} md={12} lg={12}>
+                    <Card className={classes.root}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Typography variant="h6" gutterBottom>
+                                Next step:
                         </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            Take the automation potential assessment to get the process automation score. This score will tell you the potential for automation of the process.
+                            <Typography variant="subtitle1" color="textSecondary">
+                                Take the automation potential assessment to get the process automation score. This score will tell you the potential for automation of the process.
                     </Typography>
-                    </Box>
-                    <Box
-                        component="img"
-                        alt="welcome"
-                        src={''}
-                        sx={{
-                            p: 2,
-                            height: 205,
-                            margin: { xs: 'auto', md: 'inherit' }
-                        }}
-                    />
-                    <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
-                </Card>
+                        </Box>
+                        <Box
+                            component="img"
+                            alt="welcome"
+                            src={'/static/images/process/undraw_personal_settings_kihd.svg'}
+                            sx={{
+                                p: 2,
+                                height: 205,
+                                margin: { xs: 'auto', md: 'inherit' }
+                            }}
+                        />
+                        <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Take Assessment</Button>
+                    </Card>
+
+                </Grid>
                 <Grid item xs={12} md={12} lg={12}>
                     <GenericBoxInfoDetails
                         infoType={'Savings Goal'}
@@ -60,7 +63,7 @@ export default function ProductionSideContent({ processDetails }) {
                         secondaryText={'per year'}
                     />
                 </Grid>
-            </Grid>
+            </>
         )
     }
 
