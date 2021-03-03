@@ -1,3 +1,7 @@
 .apexcharts-marker:hover {
     cursor: pointer;
 }
+
+.apexcharts-xaxis-label {
+    color: black;
+}

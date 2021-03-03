@@ -10,9 +10,21 @@ import { PATH_APP } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
+  },
+  xAxisLabel: {
+    display: 'flex',
+    justifyContent: 'center',
+    position: 'relative',
+    top: -20
+  },
+  yAxisLabel: {
+    position: 'absolute',
+    transform: 'rotate(-90deg)',
+    top: '50%',
+    left: 0
   }
 }));
 
@@ -100,7 +112,8 @@ export default function BubbleChart({ data, className, ...other }) {
 
       labels: {
         show: true,
-        // offsetX: 50,
+        // categories: ['Automation Potential'],
+
       },
       tickAmount: 1,
       // type: 'numeric',
@@ -145,18 +158,21 @@ export default function BubbleChart({ data, className, ...other }) {
     legend: {
       show: false,
     },
+
   }
 
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <CardHeader title="Process Heat Map" subheader="Overview of all of your processes" />
-      <Box sx={{ mt: 3, mx: 3 }}>
+      <Typography variant='subtitle2' color='textSecondary' className={classes.yAxisLabel}>Savings</Typography>
+      <Box sx={{ mt: 3, ml: 5, mr: 3 }}>
         <ReactApexChart
           type="bubble"
           height={364}
           series={chartData}
           options={chartOptions}
         />
+        <Typography variant='subtitle2' color='textSecondary' className={classes.xAxisLabel}>Automation Potential</Typography>
       </Box>
     </Card>
   );
