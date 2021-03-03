@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function IdeasPerFunction({ data }) {
+export default function IdeasPerFunction({ data, production }) {
   const theme = useTheme()
   const classes = useStyles()
 
@@ -78,7 +78,7 @@ export default function IdeasPerFunction({ data }) {
 
   return (
     <Card>
-      <CardHeader title="Number of Submitted Ideas per Function" />
+      <CardHeader title={production ? "Processes in Production by Function" : "Number of Submitted Ideas per Function"} />
       <CardContent>
         <ReactApexChart
           type="bar"

@@ -9,7 +9,7 @@ import Page from 'components/Page';
 import BreakEvenChart from './BreakEvenChart';
 import ThreeYearProjectionsTable from './ThreeYearProjectionsTable';
 import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
-import IdeasPerFunction from './IdeasPerFunction';
+import IdeasPerFunction from '../IdeasPerFunction';
 import NoProcesses from '../NoProcesses';
 import rocketIcon from '@iconify-icons/fxemoji/rocket';
 import Context from 'context/Context';
@@ -127,6 +127,7 @@ function ProcessProductionView() {
                                     production.count_function_processes_other,
                                     production.count_function_processes_notanswered,
                                 ]}
+                                production={true}
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
