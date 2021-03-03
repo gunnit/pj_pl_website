@@ -93,9 +93,40 @@ const AppRoutes = {
     },
     {
       exact: true,
+      path: PATH_APP.coe.technology,
+      component: lazy(() => import('../views/custom/coe/ComingSoonView'))
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.control,
+      component: lazy(() => import('../views/custom/coe/ComingSoonView'))
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.discover,
+      component: lazy(() => import('../views/custom/coe/ComingSoonView'))
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.deliver,
+      component: lazy(() => import('../views/custom/coe/ComingSoonView'))
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.service,
+      component: lazy(() => import('../views/custom/coe/ComingSoonView'))
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.people,
+      component: lazy(() => import('../views/custom/coe/ComingSoonView'))
+    },
+    {
+      exact: true,
       path: PATH_APP.root,
       component: () => <Redirect to={PATH_APP.main.root} />
     },
+
 
     // Discovery
 

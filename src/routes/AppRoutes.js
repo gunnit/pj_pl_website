@@ -24,6 +24,7 @@ import CategoryView from 'views/custom/discovery/CategoryView';
 import GroupView from 'views/custom/discovery/GroupView';
 import ObjectivesView from 'views/custom/user/ObjectivesView';
 import SettingsView from 'views/custom/user/SettingsView';
+import ComingSoonView from 'views/errors/ComingSoonView';
 
 // ----------------------------------------------------------------------
 
@@ -109,23 +110,64 @@ const AppRoutes = {
     {
       exact: true,
       path: PATH_APP.coe.vision,
-      component: VisionView
+      component: ComingSoonView
     },
+    // {
+    //   exact: true,
+    //   path: PATH_APP.coe.assessment,
+    //   component: AssessmentView
+    // },
+    // {
+    //   exact: true,
+    //   path: PATH_APP.coe.assessmentList,
+    //   component: AssessmentListView
+    // },
     {
       exact: true,
       path: PATH_APP.coe.assessment,
-      component: AssessmentView
+      component: ComingSoonView
     },
     {
       exact: true,
       path: PATH_APP.coe.assessmentList,
-      component: AssessmentListView
+      component: ComingSoonView
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.technology,
+      component: ComingSoonView
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.control,
+      component: ComingSoonView
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.discover,
+      component: ComingSoonView
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.deliver,
+      component: ComingSoonView
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.service,
+      component: ComingSoonView
+    },
+    {
+      exact: true,
+      path: PATH_APP.coe.people,
+      component: ComingSoonView
     },
     {
       exact: true,
       path: PATH_APP.root,
       component: () => <Redirect to={PATH_APP.main.root} />
     },
+
 
     // Discovery
 
