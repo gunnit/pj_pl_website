@@ -112,12 +112,11 @@ export default function BubbleChart({ data, className, ...other }) {
 
       labels: {
         show: true,
-        // categories: ['Automation Potential'],
-
       },
       tickAmount: 1,
-      // type: 'numeric',
-      // categories: ['Automation Potential']
+      tooltip: {
+        enabled: false
+      }
     },
 
     yaxis: {
@@ -129,7 +128,7 @@ export default function BubbleChart({ data, className, ...other }) {
 
     tooltip: {
       x: {
-        show: false,
+        show: true,
         formatter: function (w) {
           if (!w && w !== 0) {
             return 'Automation Potential: Not completed'
