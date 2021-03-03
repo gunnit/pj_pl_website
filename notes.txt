@@ -12,7 +12,7 @@ Needs to run faster where possible
 
 Needs to have analytics
 
-Debug don't run with debug turned on in production, allowed hosts?
+How to handle deleting a process
 
 Breadcrumbs need to look like they're working better. That whole page should probably have a loading screen
 

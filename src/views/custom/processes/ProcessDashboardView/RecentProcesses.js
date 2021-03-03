@@ -91,7 +91,7 @@ export default function RecentProcesses({ processes }) {
               }, i) => (
                 <TableRow key={`${process_name}${i}`} className={classes.hideLastBorder}>
                   <TableCell component="th" scope="row">
-                    {process_name}
+                    <b>{process_name}</b>
                   </TableCell>
                   <TableCell align="right">
                     <MLabel variant="filled" color={total_alignment_score_coverted > 0 ? "info" : "default"}>
@@ -144,8 +144,6 @@ export default function RecentProcesses({ processes }) {
           </RouterLink>
         ))}
       </Menu>
-
-
 
     </Card>
   );

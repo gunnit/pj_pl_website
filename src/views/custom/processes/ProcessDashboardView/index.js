@@ -245,7 +245,7 @@ export default function ProcessDashboardView() {
                             title={'Govern the pipeline'}
                             description={'Assess and select processes to build a sustainable automation pipeline and implement governance for a secured and digital workforce.'}
                             imagePath={'/static/images/process/undraw_Booking_re_gw4j.svg'}
-                            clickPath={''}
+                            clickPath={PATH_APP.processes.list}
                         />
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} >

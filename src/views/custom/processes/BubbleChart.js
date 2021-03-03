@@ -97,13 +97,14 @@ export default function BubbleChart({ data, className, ...other }) {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { show: false },
-      // categories: ['Automation Potential'],
 
       labels: {
         show: true,
         // offsetX: 50,
       },
       tickAmount: 1,
+      // type: 'numeric',
+      // categories: ['Automation Potential']
     },
 
     yaxis: {
@@ -145,7 +146,7 @@ export default function BubbleChart({ data, className, ...other }) {
       show: false,
     },
   }
-  console.log(chartData)
+
   return (
     <Card className={clsx(classes.root, className)} {...other}>
       <CardHeader title="Process Heat Map" subheader="Overview of all of your processes" />
