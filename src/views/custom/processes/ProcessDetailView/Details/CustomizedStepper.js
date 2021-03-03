@@ -267,7 +267,7 @@ export default function CustomizedStepper({
           <>
             <DialogTitle id="simple-dialog-title">Move {process_name} into {openDialog} phase?</DialogTitle>
             <Button onClick={() => moveStage(pipeline, openDialog)}>Yes</Button>
-            <Button color='error'>Cancel</Button>
+            <Button color='error' onClick={() => setOpenDialog(false)}>Cancel</Button>
           </>}
       </Dialog>
 

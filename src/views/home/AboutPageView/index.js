@@ -3,6 +3,8 @@ import Page from 'components/Page';
 import HugePackElements from './HugePackElements';
 import { makeStyles } from '@material-ui/core/styles';
 import BetaInfo from './BetaInfo';
+import Footer from './Footer';
+
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +26,7 @@ export default function AboutPageView() {
       <div className={classes.content}>
         <HugePackElements />
         <BetaInfo />
+        <Footer />
       </div>
     </Page>
   );

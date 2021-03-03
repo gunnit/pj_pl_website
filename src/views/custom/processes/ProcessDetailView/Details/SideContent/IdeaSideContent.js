@@ -101,7 +101,7 @@ export default function IdeaSideContent({ processDetails, setStage }) {
                     <>
                         <DialogTitle id="simple-dialog-title">Move {processDetails.process.process_name} into Pipeline phase?</DialogTitle>
                         <Button onClick={() => moveStage('Idea', 'Pipeline')}>Yes</Button>
-                        <Button color='error'>Cancel</Button>
+                        <Button color='error' onClick={() => setOpenDialog(false)}>Cancel</Button>
                     </>}
             </Dialog>
         </>

@@ -7,9 +7,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import LoadingScreen from 'components/LoadingScreen';
 import { useSnackbar } from 'notistack';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -36,7 +33,11 @@ import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
 import Page500View from 'views/errors/Page500View';
-
+import accountSearch from '@iconify-icons/mdi/account-search';
+import clipboardTextSearch from '@iconify-icons/mdi/clipboard-text-search';
+import briefcaseSearch from '@iconify-icons/mdi/briefcase-search';
+import databaseSearch from '@iconify-icons/mdi/database-search';
+import { Icon } from '@iconify/react';
 // ----------------------------------------------------------------------
 
 
@@ -162,10 +163,10 @@ function ColorlibStepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
-    4: <VideoLabelIcon />
+    1: <Icon icon={databaseSearch} height={24} width={24} />,
+    2: <Icon icon={clipboardTextSearch} height={24} width={24} />,
+    3: <Icon icon={accountSearch} height={24} width={24} />,
+    4: <Icon icon={briefcaseSearch} height={24} width={24} />,
   };
   return (
     <div

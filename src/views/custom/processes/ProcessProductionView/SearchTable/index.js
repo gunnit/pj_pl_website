@@ -416,7 +416,7 @@ export default function ProductionTable({ processes }) {
           <>
             <DialogTitle id="simple-dialog-title">Move {openDialog.name} {openDialog.forward ? 'into' : 'back to'} {openDialog.nextStage} phase?</DialogTitle>
             <Button onClick={() => moveStage(openDialog.currentStage, openDialog.nextStage)}>Yes</Button>
-            <Button color='error'>Cancel</Button>
+            <Button color='error' onClick={() => setOpenDialog(false)}>Cancel</Button>
           </>}
       </Dialog>
     </Card>
