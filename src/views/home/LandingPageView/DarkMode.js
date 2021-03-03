@@ -153,9 +153,7 @@ function DarkMode({ className }) {
                 sx={{ color: 'common.white', mb: 5 }}
               >
                 <Typography>
-                  Start fast with minimal effort.
-                  You can upload your processes via Excel or API or share a form with your colleagues to complete the process they want to automate.
-                  Forget about using supporting tools not built for this task.
+                  Accelerate your team’s ability to automate at scale and create value from day one. ProcessLenz gives you back hours per week by automating your stakeholder reporting such as executive dashboards and presentations. The best automation teams deliver quality automations, quickly!
                 </Typography>
               </MotionInView>
 
