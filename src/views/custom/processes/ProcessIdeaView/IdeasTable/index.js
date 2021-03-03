@@ -424,18 +424,11 @@ export default function IdeasTable({ processes }) {
           <>
             <DialogTitle id="simple-dialog-title">Move {openDialogName} into Pipeline phase?</DialogTitle>
             <Button onClick={moveToPipelineClick}>Yes</Button>
-            <Button color='error'>Cancel</Button>
+            <Button color='error' onClick={() => setOpenDialogName(false)}>Cancel</Button>
           </>}
       </Dialog>
 
-      {/* <Dialog open={!!confirmDelete} onClose={() => handleCloseDialog()}>
-        {confirmDelete &&
-          <>
-            <DialogTitle id="simple-dialog-title">Are you sure you want to delete {confirmDelete.name} </DialogTitle>
-            <Button onClick={confirmDeleteClick}>Yes</Button>
-            <Button color='error'>Cancel</Button>
-          </>}
-      </Dialog> */}
+
     </>
   );
 }

@@ -9,9 +9,6 @@ import clsx from 'clsx';
 import Check from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
 import NewProcessFormDetails from './NewProcessFormDetails';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import { useSnackbar } from 'notistack';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
@@ -35,7 +32,11 @@ import { PATH_APP } from 'routes/paths';
 import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 import { LoadingButton } from '@material-ui/lab';
-
+import accountSearch from '@iconify-icons/mdi/account-search';
+import clipboardTextSearch from '@iconify-icons/mdi/clipboard-text-search';
+import briefcaseSearch from '@iconify-icons/mdi/briefcase-search';
+import databaseSearch from '@iconify-icons/mdi/database-search';
+import { Icon } from '@iconify/react';
 // ----------------------------------------------------------------------
 
 // const FILE_SIZE = 3145728; // bytes
@@ -160,10 +161,10 @@ function ColorlibStepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
-    4: <VideoLabelIcon />
+    1: <Icon icon={databaseSearch} height={24} width={24} />,
+    2: <Icon icon={clipboardTextSearch} height={24} width={24} />,
+    3: <Icon icon={accountSearch} height={24} width={24} />,
+    4: <Icon icon={briefcaseSearch} height={24} width={24} />,
   };
   return (
     <div
@@ -495,21 +496,21 @@ export default function NewProcessView() {
                   <Typography variant="h5" gutterBottom>
                     A few simple reminders:
                 </Typography>
-                <Box
-                  component="img"
-                  alt="reminders-image"
-                  src={'/static/images/process/undraw_Detailed_information_re_qmuc.svg'}
-                  sx={{
-                    p: 2,
-                    height: 205,
-                    margin: { xs: 'auto', md: 'inherit' }
-                  }}
-                />
+                  <Box
+                    component="img"
+                    alt="reminders-image"
+                    src={'/static/images/process/undraw_Detailed_information_re_qmuc.svg'}
+                    sx={{
+                      p: 2,
+                      height: 205,
+                      margin: { xs: 'auto', md: 'inherit' }
+                    }}
+                  />
                   <Typography variant="subtitle1" color='textSecondary'>
                     This is the process form, your starting point for creating a new process. The process is connected to all of the criteria of the process that make it unique. A process can have many different parameters. For now, let's focus on setting up the basic information. None of the fields are mandatory - input what you know and feel, but the more information you can collect the better results you will get. Have fun!
                   </Typography>
                 </Box>
-                
+
               </Card>
             </>}
         </Dialog>
