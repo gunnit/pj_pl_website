@@ -1,12 +1,12 @@
 Things to add:
 
-Processes don't have their objectives saved, they have the alignment scores saved for each category. So updating the company objectives is a problem.
-
-Change allowed origins before deploying
+Change allowed origins before deploying. This seems to be fine.
 
 What properties are being calculated every time something is retrieved that could be done once and saved?
 
 Cost calculations need to be correct
+
+Under construction image
 
 Needs to run faster where possible
 

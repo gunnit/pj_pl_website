@@ -82,7 +82,7 @@ function GenericBoxInfo({
                 </Typography>
 
                 <div className={classes.trending}>
-                    <div
+                    {/* <div
                         className={clsx(classes.trendingIcon, {
                             [classes.isTrendingDown]: secondaryNumber < 0
                         })}
@@ -92,10 +92,9 @@ function GenericBoxInfo({
                             height={16}
                             icon={secondaryNumber >= 0 ? trendingUpFill : trendingDownFill}
                         />
-                    </div>
+                    </div> */}
                     <Typography variant="subtitle2" component="span">
-                        {secondaryNumber > 0 && '+'}
-                        {secondaryNumber}
+                        &nbsp;{secondaryNumber}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="span">
                         &nbsp;processes
