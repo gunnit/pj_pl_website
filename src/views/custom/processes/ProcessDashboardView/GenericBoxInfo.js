@@ -1,11 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 import { Icon } from '@iconify/react';
-import ideaIcon from '@iconify-icons/el/idea';
 import { fNumber } from 'utils/formatNumber';
-import trendingUpFill from '@iconify-icons/eva/trending-up-fill';
-import trendingDownFill from '@iconify-icons/eva/trending-down-fill';
-import { useTheme, alpha, makeStyles } from '@material-ui/core/styles';
+import { alpha, makeStyles } from '@material-ui/core/styles';
 import { Box, Card, Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------------

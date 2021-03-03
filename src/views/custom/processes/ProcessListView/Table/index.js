@@ -12,7 +12,7 @@ import SearchNotFound from 'components/SearchNotFound';
 import { Link as RouterLink } from 'react-router-dom';
 import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   Box,
   Card,
@@ -20,76 +20,89 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  Container,
   IconButton,
   TableContainer,
   TablePagination,
-  Menu,
-  MenuItem,
   Dialog,
   Typography,
-  Button
+  Button,
+  Tooltip
 } from '@material-ui/core';
 import { MLabel } from '../../../../../@material-extend';
 import Context from 'context/Context';
 import PageviewIcon from '@material-ui/icons/Pageview';
-
-
+import ideaIcon from '@iconify-icons/el/idea';
+import rocket11 from '@iconify-icons/maki/rocket-11';
+import gearsIcon from '@iconify-icons/whh/gears';
+import raceflagIcon from '@iconify-icons/whh/raceflag';
+import Zoom from '@material-ui/core/Zoom';
 
 const TABLE_HEAD = [
+  {
+    id: ''
+  },
   {
     id: 'process_name',
     numeric: false,
     disablePadding: true,
-    label: 'Name'
+    label: 'Name',
+    alignRight: false
   },
   {
     id: 'total_net_benefit', // process_net_benefit?
     numeric: true,
     disablePadding: false,
-    label: 'Priority'
+    label: 'Priority',
+    alignRight: true
   },
   {
     id: 'total_alignment_score_coverted',
     numeric: true,
     disablePadding: false,
-    label: 'Alignment'
+    label: 'Alignment',
+    alignRight: true
   },
   {
     id: 'process_score',
     numeric: true,
     disablePadding: false,
-    label: 'Automation Score'
+    label: 'Automation Score',
+    alignRight: true
   },
   {
     id: 'current_process_cost_calc',
     numeric: true,
     disablePadding: false,
-    label: 'Cost Without Automation'
+    label: 'Cost Without Automation',
+    alignRight: true
   },
   {
     id: 'tot_future_process_cost',
     numeric: true,
     disablePadding: false,
-    label: 'Cost With Automation'
+    label: 'Cost With Automation',
+    alignRight: true
   },
   {
     id: 'one_year_savings',
     numeric: true,
     disablePadding: false,
-    label: '1-year savings'
+    label: '1-year savings',
+    alignRight: true
   },
   {
     id: '3-year savings', // ?
     numeric: true,
     disablePadding: false,
-    label: '3-year savings'
+    label: '3-year savings',
+    alignRight: true
   },
   {
     id: 'date_created',
     numeric: true,
     disablePadding: false,
-    label: 'Date Created'
+    label: 'Date Created',
+    alignRight: true
   },
   {
     id: ''
@@ -150,12 +163,20 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     padding: theme.spacing(3),
   },
+  icon: {
+    height: 24,
+    width: 24,
+    margin: 10,
+    marginLeft: 0
+  }
 }));
 
 // ----------------------------------------------------------------------
 
+
 export default function ProcessTable({ processes, handleDeleteProcess, pipelineFilter }) {
   const classes = useStyles();
+  const theme = useTheme()
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -166,6 +187,34 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
   const [openDialog, setOpenDialog] = useState(false);
 
   const { setCurrentProcessId } = useContext(Context)
+
+
+
+  function getIcon(pipeline) {
+    if (pipeline === 'Idea') {
+      return (
+        <Icon icon={ideaIcon} className={classes.icon} color={theme.palette.info.light} />
+      )
+    }
+
+    if (pipeline === 'Pipeline') {
+      return (
+        <Icon icon={rocket11} className={classes.icon} color={theme.palette.error.light} />
+      )
+    }
+
+    if (pipeline === 'Development') {
+      return (
+        <Icon icon={gearsIcon} className={classes.icon} color={theme.palette.warning.light} />
+      )
+    }
+
+    if (pipeline === 'Production') {
+      return (
+        <Icon icon={raceflagIcon} className={classes.icon} color={theme.palette.primary.light} />
+      )
+    }
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -276,6 +325,7 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(({
                     id,
+                    pipline: pipeline,
                     process_name,
                     total_alignment_score_coverted,
                     process_score: automationScore,
@@ -299,6 +349,7 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
                         aria-checked={isItemSelected}
                         className={classes.row}
                       >
+                        <Tooltip title={pipeline} placement='left'><TableCell align="right">{getIcon(pipeline)}</TableCell></Tooltip>
                         <TableCell
                           component="th"
                           id={labelId}
@@ -320,14 +371,14 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
                           {current_process_cost_calc >= 0 ? `$${fNumber(current_process_cost_calc)}` : `-$${fNumber(-current_process_cost_calc)}`}
                         </TableCell>
                         <TableCell align="right">
-                        {tot_future_process_cost >= 0 ? `$${fNumber(tot_future_process_cost)}` : `-$${fNumber(-tot_future_process_cost)}`}
+                          {tot_future_process_cost >= 0 ? `$${fNumber(tot_future_process_cost)}` : `-$${fNumber(-tot_future_process_cost)}`}
                         </TableCell>
                         <TableCell align="right">
-                        {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
+                          {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
                         </TableCell>
                         <TableCell align="right">
                           <MLabel variant="filled">
-                          {threeYearSavings}                            
+                            {threeYearSavings}
                           </MLabel>
                         </TableCell>
                         <TableCell align="right">{fDate(date_created)}</TableCell>
