@@ -141,7 +141,7 @@ function NavBar({ isOpenNav, onCloseNav }) {
   const renderContent = (
     <Scrollbars>
       <Box sx={{ px: 2.5, py: 3 }}>
-        <RouterLink to="/">
+        <RouterLink to={PATH_APP.processes.dashboard}>
           <Logo />
         </RouterLink>
       </Box>
