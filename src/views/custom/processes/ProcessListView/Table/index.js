@@ -3,6 +3,7 @@ import { filter } from 'lodash';
 import HeadTable from './HeadTable';
 import { Icon } from '@iconify/react';
 import Page from 'components/Page';
+import { fNumber } from 'utils/formatNumber';
 import ToolbarTable from './ToolbarTable';
 import { PATH_APP } from 'routes/paths';
 import React, { useState, useContext } from 'react';
@@ -309,16 +310,24 @@ export default function ProcessTable({ processes, handleDeleteProcess, pipelineF
                         <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
                         <TableCell align="right">
                           <MLabel variant="filled" color="info">
-                            {total_alignment_score_coverted || 'Not completed'}
+                            {total_alignment_score_coverted}%
                           </MLabel>
                         </TableCell>
-                        <TableCell align="right">{automationScore || 'Not completed'}</TableCell>
-                        <TableCell align="right">{current_process_cost_calc || 'Not completed'}</TableCell>
-                        <TableCell align="right">{tot_future_process_cost || 'Not completed'}</TableCell>
-                        <TableCell align="right">{total_net_benefit || 'Not completed'}</TableCell>
                         <TableCell align="right">
-                          <MLabel variant="filled" color={threeYearSavings > 0 ? "primary" : "error"}>
-                            {threeYearSavings || 'Not completed'}
+                          {automationScore || 'Not completed'}
+                        </TableCell>
+                        <TableCell align="right">
+                          {current_process_cost_calc >= 0 ? `$${fNumber(current_process_cost_calc)}` : `-$${fNumber(-current_process_cost_calc)}`}
+                        </TableCell>
+                        <TableCell align="right">
+                        {tot_future_process_cost >= 0 ? `$${fNumber(tot_future_process_cost)}` : `-$${fNumber(-tot_future_process_cost)}`}
+                        </TableCell>
+                        <TableCell align="right">
+                        {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
+                        </TableCell>
+                        <TableCell align="right">
+                          <MLabel variant="filled">
+                          {threeYearSavings}                            
                           </MLabel>
                         </TableCell>
                         <TableCell align="right">{fDate(date_created)}</TableCell>

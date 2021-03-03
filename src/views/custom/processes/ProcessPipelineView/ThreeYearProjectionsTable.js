@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { fNumber } from 'utils/formatNumber';
 import {
   Box,
   Table,
@@ -72,17 +73,17 @@ export default function ThreeYearProjectionsTable({
                   <>
                     <TableCell align="right">
                       <MLabel variant="filled" color={row.yearOne > 0 ? "primary" : "error"}>
-                        {row.yearOne}
+                      {row.yearOne >= 0 ? `$${fNumber(row.yearOne)}` : `-$${fNumber(-row.yearOne)}`}
                       </MLabel>
                     </TableCell>
                     <TableCell align="right">
                       <MLabel variant="filled" color={row.yearTwo > 0 ? "primary" : "error"}>
-                        {row.yearTwo}
+                      {row.yearTwo >= 0 ? `$${fNumber(row.yearTwo)}` : `-$${fNumber(-row.yearTwo)}`}
                       </MLabel>
                     </TableCell>
                     <TableCell align="right">
                       <MLabel variant="filled" color={row.yearThree > 0 ? "primary" : "error"}>
-                        {row.yearThree}
+                      {row.yearThree >= 0 ? `$${fNumber(row.yearThree)}` : `-$${fNumber(-row.yearThree)}`}
                       </MLabel>
                     </TableCell>
                   </>
