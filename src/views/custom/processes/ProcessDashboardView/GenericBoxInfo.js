@@ -46,6 +46,9 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         right: theme.spacing(3),
         // color: theme.palette.common.white
+    },
+    bottomPart: {
+        fontSize: 16
     }
 }));
 
@@ -70,7 +73,7 @@ function GenericBoxInfo({
     return (
         <Card className={clsx(classes.root, className)} {...other}>
             <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="subtitle2" gutterBottom>
+                <Typography variant="subtitle2" gutterBottom className={classes.bottomPart}>
                     {infoType}
                 </Typography>
                 <Typography variant="h3">
@@ -93,10 +96,10 @@ function GenericBoxInfo({
                             icon={secondaryNumber >= 0 ? trendingUpFill : trendingDownFill}
                         />
                     </div> */}
-                    <Typography variant="subtitle2" component="span">
+                    <Typography variant="subtitle2" component="span" className={classes.bottomPart}>
                         &nbsp;{secondaryNumber}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="span">
+                    <Typography variant="body2" color="textSecondary" component="span" className={classes.bottomPart}>
                         &nbsp;processes
                     </Typography>
                 </div>

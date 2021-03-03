@@ -117,7 +117,7 @@ export default function BubbleChart({ data, className, ...other }) {
       x: {
         show: false,
         formatter: function (w) {
-          if (w === null) {
+          if (!w && w !== 0) {
             return 'Automation Potential: Not completed'
           }
           return `Automation Potential: ${w}`
