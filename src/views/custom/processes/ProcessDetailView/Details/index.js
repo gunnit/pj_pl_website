@@ -66,7 +66,8 @@ export default function Details({ processDetails, setProcessDetails, stage, setS
                         />
                     </Grid>
                 </Grid>
-                <Grid item container spacing={3} xs={12} sm={4} md={4} lg={4} alignContent='flex-start'>
+                {/* Making lg 4 makes it not fit at 80% zoom on my screen and I have no idea why */}
+                <Grid item container spacing={3} xs={12} sm={4} md={4} lg={3.9999} alignContent='flex-start'>
                     <SideContent processDetails={processDetails} stage={stage} setStage={setStage} />
                 </Grid>
             </Grid>
