@@ -135,10 +135,10 @@ export default [
             title: 'process taxonomy',
             href: PATH_APP.discovery.taxonomy
           },
-          {
-            title: 'process search',
-            href: PATH_APP.discovery.processSearch
-          },
+          // {
+          //   title: 'process search',
+          //   href: PATH_APP.discovery.processSearch
+          // },
         ]
       }
     ]

@@ -4,7 +4,7 @@ import Logo from 'components/Logo';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Typography, Container } from '@material-ui/core';
-
+import { PATH_APP } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -58,12 +58,12 @@ function Page500View() {
           />
 
           <Button
-            to="/"
+            to={PATH_APP.processes.dashboard}
             size="large"
             variant="contained"
             component={RouterLink}
           >
-            Go to Home
+            Go to Dashboard
           </Button>
         </Box>
       </Container>

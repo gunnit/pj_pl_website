@@ -100,7 +100,7 @@ function TaxonomyView() {
                             imagePath={'/static/images/taxonomy/undraw_Business_plan_re_0v81.svg'}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                    {/* <Grid item xs={12} sm={6} md={4} lg={3}>
                         <GenericBoxInfo
                             description={'Search all Processes'}
                             imagePath={'/static/images/taxonomy/undraw_clean_up_ucm0.svg'}
@@ -117,7 +117,7 @@ function TaxonomyView() {
                             description={'View only Processes'}
                             imagePath={'/static/images/taxonomy/undraw_career_development_oqcb.svg'}
                         />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Container>
         </Page>
