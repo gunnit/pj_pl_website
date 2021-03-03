@@ -10,6 +10,7 @@ import { visuallyHidden } from '@material-ui/utils';
 import { PATH_APP } from 'routes/paths';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
+import { fNumber } from 'utils/formatNumber';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Scrollbars from 'components/Scrollbars';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
@@ -327,7 +328,7 @@ export default function IdeasTable({ processes }) {
                           scope="row"
                           padding="none"
                         >
-                          {initial_process_score >= 8 ? 'Suggested' : initial_process_score >= 5 ? 'Evaluate before moving' : 'Not suggested'}
+                          {initial_process_score >= 8 ? 'Suggested' : initial_process_score >= 6 ? 'Evaluate before moving' : 'Not suggested'}
                         </TableCell>
 
                         <TableCell align="left">{process_name || ''}</TableCell>
@@ -341,8 +342,8 @@ export default function IdeasTable({ processes }) {
                         <TableCell align="left">{process_critical || 'Not completed'}</TableCell>
                         <TableCell align="left">
                           {process_objective
-                            ? <MLabel variant="filled" color={process_objective > 0 ? "primary" : "error"}>
-                              {process_objective}
+                            ? <MLabel variant="filled" color="default">
+                              {process_objective >= 0 ? `$${fNumber(process_objective)}` : `-$${fNumber(-process_objective)}`}
                             </MLabel>
                             : 'Not completed'}
                         </TableCell>

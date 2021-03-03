@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useContext } from 'react';
 import { visuallyHidden } from '@material-ui/utils';
 import { PATH_APP } from 'routes/paths';
+import { fNumber } from 'utils/formatNumber';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import SearchNotFound from 'components/SearchNotFound';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -329,11 +330,15 @@ export default function ProductionTable({ processes }) {
                           {process_score}
                         </MLabel>
                       </TableCell>
-                      <TableCell align="right">{total_current_process_cost}</TableCell>
-                      <TableCell align="right">{total_future_cost}</TableCell>
+                      <TableCell align="right">
+                        {total_current_process_cost >= 0 ? `$${fNumber(total_current_process_cost)}` : `-$${fNumber(-total_current_process_cost)}`}
+                      </TableCell>
+                      <TableCell align="right">
+                        {total_future_cost >= 0 ? `$${fNumber(total_future_cost)}` : `-$${fNumber(-total_future_cost)}`}
+                      </TableCell>
                       <TableCell align="right">
                         <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : total_net_benefit < 0 ? "error" : "warning"}>
-                          {total_net_benefit}
+                        {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
                         </MLabel>
                       </TableCell>
                       {/* If both business unit and process function, hyphenate, otherwise display one or the other */}

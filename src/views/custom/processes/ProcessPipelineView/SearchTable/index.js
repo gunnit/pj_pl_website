@@ -2,6 +2,7 @@ import 'firebase/auth';
 import firebase from 'firebase/app';
 import { filter } from 'lodash';
 import HeadTable from './HeadTable';
+import { fNumber } from 'utils/formatNumber';
 import ToolbarTable from './ToolbarTable';
 import { Icon } from '@iconify/react';
 import React, { useState, useContext } from 'react';
@@ -360,15 +361,19 @@ export default function DevelopmentTable({ processes }) {
                       <TableCell align="left">{process_name}</TableCell>
                       <TableCell align="center">
                         <MLabel variant="filled" color="info">
-                          {total_alignment_score_coverted}
+                          {total_alignment_score_coverted}%
                         </MLabel>
                       </TableCell>
                       <TableCell align="left">{process_score === 0 ? 'Not completed' : process_score}</TableCell>
-                      <TableCell align="left">{current_process_cost_calc}</TableCell>
-                      <TableCell align="left">{tot_future_process_cost}</TableCell>
+                      <TableCell align="left">
+                        {current_process_cost_calc >= 0 ? `$${fNumber(current_process_cost_calc)}` : `-$${fNumber(-current_process_cost_calc)}`}
+                      </TableCell>
+                      <TableCell align="left">
+                        {tot_future_process_cost >= 0 ? `$${fNumber(tot_future_process_cost)}` : `-$${fNumber(-tot_future_process_cost)}`}
+                      </TableCell>
                       <TableCell align="center">
                         <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : "error"}>
-                          {total_net_benefit}
+                          {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
                         </MLabel>
                       </TableCell>
                       {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
