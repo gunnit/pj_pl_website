@@ -84,7 +84,6 @@ function RegisterView() {
     email: Yup.string()
       .email('Email must be a valid email address')
       .required('Email is required'),
-    password: Yup.string().required('Password is required')
   });
 
   const formik = useFormik({
@@ -92,7 +91,6 @@ function RegisterView() {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
