@@ -70,6 +70,23 @@ export default function ProcessNameCard({ stage, process_name, process_L2_proces
     buttonColor = 'primary'
   }
 
+  let imageSrc;
+  if (stage === 'Idea') {
+    imageSrc = '/static/images/process/undraw_new_ideas_jdea.svg'
+  }
+  if (stage === 'Pipeline') {
+    imageSrc = '/static/images/process/undraw_maker_launch_crhe.svg'
+  }
+
+  if (stage === 'Development') {
+    imageSrc = '/static/images/process/undraw_in_progress_ql66.svg'
+  }
+
+  if (stage === 'Production') {
+    imageSrc = '/static/images/process/undraw_personal_finance_tqcd.svg'
+  }
+
+
   return (
     <Card className={clsx(classes.root, className)} {...other} style={{ backgroundColor }}>
       <CardContent className={classes.content}>
@@ -95,7 +112,7 @@ export default function ProcessNameCard({ stage, process_name, process_L2_proces
       <Box
         component="img"
         alt="welcome"
-        src="/static/images/process/undraw_new_ideas_jdea.svg"
+        src={imageSrc}
         sx={{
           p: 2,
           height: 280,
