@@ -17,7 +17,7 @@ import {
   Typography,
   ListSubheader
 } from '@material-ui/core';
-
+import { PATH_APP } from 'routes/paths';
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -149,7 +149,7 @@ function NavBar({ isOpenNav, onCloseNav }) {
       <Link
         underline="none"
         component={RouterLink}
-        to={'/'}
+        to={PATH_APP.user.objectives}
       >
         <div className={classes.account}>
           <MyAvatar />
