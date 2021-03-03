@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Card, Typography, Container, Grid, Button } from '@material-ui/core';
 import CustomizedStepper from './CustomizedStepper';
 import ProcessNameCard from './ProcessNameCard';
@@ -22,9 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Details({ processDetails, setProcessDetails, stage, setStage }) {
 
-    const classes = useStyles()
 
-    // Need this to be a hook so it can be updated when the stage changes without having to reload the whole page
 
 
     return (
@@ -42,6 +40,7 @@ export default function Details({ processDetails, setProcessDetails, stage, setS
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <ProcessNameCard
+                            stage={stage}
                             process_name={processDetails.process.process_name}
                             process_L2_process_name={processDetails.process.process_L2_process_name}
                             process_L3_process_name={processDetails.process.process_L3_process_name}

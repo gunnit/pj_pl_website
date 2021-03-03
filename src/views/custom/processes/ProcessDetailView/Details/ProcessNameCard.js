@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Card, CardContent, Button } from '@material-ui/core';
 
 // ----------------------------------------------------------------------
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: 'none',
     textAlign: 'center',
-    backgroundColor: theme.palette.primary.lighter,
+    // backgroundColor: theme.palette.primary.lighter,
     [theme.breakpoints.up('md')]: {
       display: 'flex',
       textAlign: 'left',
@@ -32,11 +32,46 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function ProcessNameCard({ process_name, process_L2_process_name, process_l3_process_name, className, ...other }) {
+export default function ProcessNameCard({ stage, process_name, process_L2_process_name, process_l3_process_name, className, ...other }) {
   const classes = useStyles();
 
+  const theme = useTheme()
+
+  let backgroundColor;
+  if (stage === 'Idea') {
+    backgroundColor = theme.palette.info.lighter
+  }
+  if (stage === 'Pipeline') {
+    backgroundColor = theme.palette.error.lighter
+  }
+
+  if (stage === 'Development') {
+    backgroundColor = theme.palette.warning.lighter
+
+  }
+
+  if (stage === 'Production') {
+    backgroundColor = theme.palette.primary.lighter
+  }
+
+  let buttonColor;
+  if (stage === 'Idea') {
+    buttonColor = 'info'
+  }
+  if (stage === 'Pipeline') {
+    buttonColor = 'error'
+  }
+
+  if (stage === 'Development') {
+    buttonColor = 'warning'
+  }
+
+  if (stage === 'Production') {
+    buttonColor = 'primary'
+  }
+
   return (
-    <Card className={clsx(classes.root, className)} {...other}>
+    <Card className={clsx(classes.root, className)} {...other} style={{ backgroundColor }}>
       <CardContent className={classes.content}>
         <Box component="h4" sx={{ pb: 1, typography: 'h4', color: 'grey.800' }}>
           {process_name}
@@ -50,7 +85,10 @@ export default function ProcessNameCard({ process_name, process_L2_process_name,
           <br />
           {process_l3_process_name}
         </Box>
-        <Button variant='contained'>View as PDF</Button>
+        <Button
+          variant='contained'
+          color={buttonColor}
+        >View as PDF</Button>
       </CardContent>
 
 

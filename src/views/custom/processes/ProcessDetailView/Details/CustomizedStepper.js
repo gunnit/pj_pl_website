@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import Check from '@material-ui/icons/Check';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   Step,
   Stepper,
@@ -94,57 +94,30 @@ QontoStepIcon.propTypes = {
 //   }
 // }))(StepConnector);
 
-const useColorlibStepIconStyles = makeStyles({
-  root: {
-    zIndex: 1,
-    width: 50,
-    height: 50,
-    color: '#fff',
-    display: 'flex',
-    borderRadius: '50%',
-    alignItems: 'center',
-    backgroundColor: '#ccc',
-    justifyContent: 'center'
-  },
-  active: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)',
-    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)'
-  },
-  completed: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)'
-  }
-});
+// const useColorlibStepIconStyles = makeStyles({
+//   root: {
+//     zIndex: 1,
+//     width: 50,
+//     height: 50,
+//     color: '#fff',
+//     display: 'flex',
+//     borderRadius: '50%',
+//     alignItems: 'center',
+//     backgroundColor: '#ccc',
+//     justifyContent: 'center'
+//   },
+//   active: {
+//     backgroundImage:
+//       'linear-gradient( 136deg, rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)',
+//     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)'
+//   },
+//   completed: {
+//     backgroundImage:
+//       'linear-gradient( 136deg, rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)'
+//   }
+// });
 
-function ColorlibStepIcon(props) {
-  const classes = useColorlibStepIconStyles();
-  const { active, completed } = props;
 
-  const icons = {
-    1: <Icon icon={ideaIcon} />,
-    2: <Icon icon={rocket11} />,
-    3: <Icon icon={gearsIcon} />,
-    4: <Icon icon={raceflagIcon} />
-  };
-
-  return (
-    <div
-      className={clsx(classes.root, {
-        [classes.active]: active,
-        [classes.completed]: completed
-      })}
-    >
-      {icons[String(props.icon)]}
-    </div>
-  );
-}
-
-ColorlibStepIcon.propTypes = {
-  active: PropTypes.bool,
-  completed: PropTypes.bool,
-  icon: PropTypes.node
-};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -188,21 +161,38 @@ export default function CustomizedStepper({
   ...other
 }) {
 
+  const theme = useTheme()
 
-  const ColorlibConnector = withStyles(theme => ({
+  let backgroundColor;
+  if (stage === 'Idea') {
+    backgroundColor = theme.palette.info.light
+
+  }
+  if (stage === 'Pipeline') {
+    backgroundColor = theme.palette.error.light
+  }
+
+  if (stage === 'Development') {
+    backgroundColor = theme.palette.warning.light
+
+  }
+
+  if (stage === 'Production') {
+    backgroundColor = theme.palette.primary.light
+  }
+
+  const ColorlibConnector = withStyles({
     alternativeLabel: {
       top: 22
     },
     active: {
       '& $line': {
-        backgroundImage:
-          `linear-gradient( 95deg,${theme.palette.error.light} 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)`
+        backgroundColor
       }
     },
     completed: {
       '& $line': {
-        backgroundImage:
-          `linear-gradient( 95deg,rgb(91, 229, 132) 0%,rgb(0, 171, 85) 50%,rgb(0, 123, 85) 100%)`
+        backgroundColor
       }
     },
     line: {
@@ -211,8 +201,51 @@ export default function CustomizedStepper({
       backgroundColor: '#eaeaf0',
       borderRadius: 1
     }
-  }))(StepConnector);
+  })(StepConnector);
 
+  const useColorlibStepIconStyles = makeStyles({
+    root: {
+      zIndex: 1,
+      width: 50,
+      height: 50,
+      color: '#fff',
+      display: 'flex',
+      borderRadius: '50%',
+      alignItems: 'center',
+      backgroundColor: '#ccc',
+      justifyContent: 'center'
+    },
+    active: {
+      backgroundColor,
+      boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)'
+    },
+    completed: {
+      backgroundColor,
+    }
+  });
+
+  function ColorlibStepIcon(props) {
+    const classes = useColorlibStepIconStyles();
+    const { active, completed } = props;
+
+    const icons = {
+      1: <Icon icon={ideaIcon} />,
+      2: <Icon icon={rocket11} />,
+      3: <Icon icon={gearsIcon} />,
+      4: <Icon icon={raceflagIcon} />
+    };
+
+    return (
+      <div
+        className={clsx(classes.root, {
+          [classes.active]: active,
+          [classes.completed]: completed
+        })}
+      >
+        {icons[String(props.icon)]}
+      </div>
+    );
+  }
 
   const classes = useStyles();
 
