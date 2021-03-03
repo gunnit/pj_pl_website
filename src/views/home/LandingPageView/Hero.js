@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { BASE_IMG } from 'utils/getImages';
-import { PATH_APP, PATH_PAGE } from 'routes/paths';
+import { PATH_PAGE } from 'routes/paths';
 import flashFill from '@iconify-icons/eva/flash-fill';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -14,7 +14,7 @@ import {
   varFadeInRight
 } from 'components/Animate';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Box, Link, Container, Typography } from '@material-ui/core';
+import { Button, Box, Container, Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------------
 

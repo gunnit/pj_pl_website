@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { makeStyles, alpha } from '@material-ui/core/styles';
-import { MCircularProgress } from '@material-extend';
 import { Box } from '@material-ui/core';
 // ----------------------------------------------------------------------
 

@@ -430,7 +430,8 @@ export default function DevelopmentTable({ processes }) {
       >
         {[{ text: 'View details', path: PATH_APP.processes.details },
         { text: 'Update', path: PATH_APP.processes.update },
-        { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+          // { text: 'Delete', path: PATH_APP.processes.details }
+        ].map(option => (
           <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
             <MenuItem key={option.text} onClick={handleClose}>
               {option.text}

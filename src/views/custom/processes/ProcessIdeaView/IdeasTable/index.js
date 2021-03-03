@@ -399,7 +399,8 @@ export default function IdeasTable({ processes }) {
         >
           {[{ text: 'View details', path: PATH_APP.processes.details },
           { text: 'Update', path: PATH_APP.processes.update },
-          { text: 'Delete', path: '' }].map(option => (
+            // { text: 'Delete', path: '' }
+          ].map(option => (
             <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
               <MenuItem key={option.text} onClick={handleClose}>
                 {option.text}
@@ -428,6 +429,27 @@ export default function IdeasTable({ processes }) {
             <Button color='error' onClick={() => setOpenDialogName(false)}>Cancel</Button>
           </>}
       </Dialog>
+
+      {/* <Dialog open={openDeleteDialog} onClose={() => setOpenDialog(false)}>
+        {openDialog
+          && <>
+            <Card className={classes.dialog}>
+              <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h5" gutterBottom className={classes.centerText}>
+                  Are you sure you want to delete this process?
+                    </Typography>
+                <Typography gutterBottom variant="subtitle1" color='textSecondary' className={classes.centerText}>
+                  Deleting this process will result in permanently removing all data associated with this process.
+                    </Typography>
+              </Box>
+
+              <Button onClick={() => {
+                handleDeleteProcess()
+                setOpenDialog(false)
+              }} variant='contained' color='error'>Permanently Delete</Button>
+            </Card>
+          </>}
+      </Dialog> */}
 
 
     </>

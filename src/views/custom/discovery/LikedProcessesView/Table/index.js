@@ -324,26 +324,7 @@ export default function GlossaryTable({ glossary }) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-      {/* <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-          {openDialog
-            && <>
-              <Card className={classes.dialog}>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h5" gutterBottom className={classes.centerText}>
-                    Are you sure you want to delete this process?
-                    </Typography>
-                  <Typography gutterBottom variant="subtitle1" color='textSecondary' className={classes.centerText}>
-                    Deleting this process will result in permanently removing all data associated with this process.
-                    </Typography>
-                </Box>
 
-                <Button onClick={() => {
-                  handleDeleteProcess()
-                  setOpenDialog(false)
-                }} variant='contained'>Permanently Delete</Button>
-              </Card>
-            </>}
-        </Dialog> */}
 
 
     </Card >

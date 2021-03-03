@@ -51,6 +51,31 @@ function ProcessIdeaView() {
 
     }, [ideas, userId])
 
+
+    // const handleDeleteProcess = async () => {
+
+    //     const token = await firebase.auth().currentUser.getIdToken(true);
+
+    //     const res = await fetch(`${apiBaseUrl}/delete_process/${currentProcessId}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             "Authorization": token
+    //         }
+    //     })
+    //     const { pipeline } = await res.json()
+
+    //     // Remove deleted process from state
+    //     // These names are confusing
+    //     const newProcessesArray = processes.processes.filter(process => process.id !== currentProcessId)
+    //     setProcesses({ ...processes, processes: newProcessesArray })
+
+    //     // Update number on navbar
+    //     setProcessCounts(previous => ({ ...previous, [pipeline]: previous[pipeline] - 1 }))
+
+    // }
+
+
+
     if (error) {
         return <Page500View />
     }

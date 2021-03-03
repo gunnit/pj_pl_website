@@ -9,7 +9,6 @@ import {
   MotionInView,
   varFadeInUp,
   varZoomInOut,
-  varFadeInRight
 } from 'components/Animate';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Container, Typography } from '@material-ui/core';

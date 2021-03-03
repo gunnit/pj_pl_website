@@ -1,16 +1,11 @@
-import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Form, FormikProvider } from 'formik';
-import eyeFill from '@iconify-icons/eva/eye-fill';
-import eyeOffFill from '@iconify-icons/eva/eye-off-fill';
-import { emailError, passwordError } from 'utils/firebaseShowError';
+import { emailError } from 'utils/firebaseShowError';
 import {
   Box,
   Grid,
   TextField,
-  IconButton,
-  InputAdornment
 } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 

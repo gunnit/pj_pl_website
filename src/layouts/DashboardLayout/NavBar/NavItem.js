@@ -13,7 +13,6 @@ import {
   ListItemIcon,
   ListItemText
 } from '@material-ui/core';
-import { apiBaseUrl } from 'config';
 import Context from 'context/Context';
 // ----------------------------------------------------------------------
 

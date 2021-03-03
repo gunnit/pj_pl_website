@@ -1,9 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PATH_HOME } from 'routes/paths';
-import { BASE_IMG } from 'utils/getImages';
-import { Link as RouterLink } from 'react-router-dom';
 import useBreakpoints from 'hooks/useBreakpoints';
 import {
   varFadeInUp,
@@ -11,7 +8,7 @@ import {
   varFadeInRight
 } from 'components/Animate';
 import { alpha, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Button, Box, Grid, Container, Typography } from '@material-ui/core';
+import { Grid, Container, Typography } from '@material-ui/core';
 import { motion } from 'framer-motion';
 
 // ----------------------------------------------------------------------

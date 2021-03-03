@@ -338,7 +338,7 @@ export default function ProductionTable({ processes }) {
                       </TableCell>
                       <TableCell align="right">
                         <MLabel variant="filled" color={total_net_benefit > 0 ? "primary" : total_net_benefit < 0 ? "error" : "warning"}>
-                        {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
+                          {total_net_benefit >= 0 ? `$${fNumber(total_net_benefit)}` : `-$${fNumber(-total_net_benefit)}`}
                         </MLabel>
                       </TableCell>
                       {/* If both business unit and process function, hyphenate, otherwise display one or the other */}
@@ -392,7 +392,8 @@ export default function ProductionTable({ processes }) {
       >
         {[{ text: 'View details', path: PATH_APP.processes.details },
         { text: 'Update', path: PATH_APP.processes.update },
-        { text: 'Delete', path: PATH_APP.processes.details }].map(option => (
+          // { text: 'Delete', path: PATH_APP.processes.details }
+        ].map(option => (
           <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
             <MenuItem key={option.text} onClick={handleClose}>
               {option.text}

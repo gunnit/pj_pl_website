@@ -94,8 +94,8 @@ export default function RecentProcesses({ processes }) {
                     {process_name}
                   </TableCell>
                   <TableCell align="right">
-                  <MLabel variant="filled" color={total_alignment_score_coverted > 0 ? "info" : "default"}>
-                    {total_alignment_score_coverted}%
+                    <MLabel variant="filled" color={total_alignment_score_coverted > 0 ? "info" : "default"}>
+                      {total_alignment_score_coverted}%
                     </MLabel>
                   </TableCell>
                   <TableCell align="right">
@@ -135,7 +135,8 @@ export default function RecentProcesses({ processes }) {
       >
         {[{ text: 'View details', path: PATH_APP.processes.details },
         { text: 'Update', path: PATH_APP.processes.update },
-        { text: 'Delete', path: '' }].map(option => (
+          // { text: 'Delete', path: '' }
+        ].map(option => (
           <RouterLink key={option.text} to={option.path} className={classes.routerLink}>
             <MenuItem key={option.text} onClick={handleClose}>
               {option.text}
