@@ -3,7 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Card, CardContent, Button } from '@material-ui/core';
-
+import { BlobProvider, PDFDownloadLink } from '@react-pdf/renderer'
+import PDF from './PDF';
 // ----------------------------------------------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function ProcessNameCard({ stage, process_name, process_L2_process_name, process_l3_process_name, className, ...other }) {
+export default function ProcessNameCard({ processDetails, stage, process_name, process_L2_process_name, process_l3_process_name, className, ...other }) {
   const classes = useStyles();
 
   const theme = useTheme()
@@ -102,10 +103,19 @@ export default function ProcessNameCard({ stage, process_name, process_L2_proces
           <br />
           {process_l3_process_name}
         </Box>
-        <Button
-          variant='contained'
-          color={buttonColor}
-        >View as PDF</Button>
+        <BlobProvider document={<PDF processDetails={processDetails} />}>
+          {({ url }) => (
+            <Button
+              variant='contained'
+              color={buttonColor}
+              href={url}
+              target='_blank' rel="noopener noreferrer"
+            >
+              View as PDF
+            </Button>
+          )}
+        </BlobProvider>
+
       </CardContent>
 
 

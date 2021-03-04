@@ -40,6 +40,7 @@ export default function Details({ processDetails, setProcessDetails, stage, setS
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <ProcessNameCard
+                            processDetails={processDetails}
                             stage={stage}
                             process_name={processDetails.process.process_name}
                             process_L2_process_name={processDetails.process.process_L2_process_name}
