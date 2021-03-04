@@ -26,6 +26,8 @@ Place to view alignment on process detail page?
 
 Optimize queries
 
+Automation assessment saving takes a long time
+
 Can't read tooltip on bubble chart when the dot is too far to the side
 
 Bubble chart tooltip make easier to read, maybe customize

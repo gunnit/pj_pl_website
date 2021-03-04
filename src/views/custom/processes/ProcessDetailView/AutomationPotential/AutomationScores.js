@@ -129,6 +129,7 @@ export default function AutomationScores({ scores, average_scores_per_subgroup }
                             </AccordionSummary>
                             <AccordionDetails>
                                 <div className={classes.container}>
+                                    {/* There are 3 maps because there has to be 3 columns for the layout */}
                                     <div className={classes.first}>
                                         {scoresGroupedBySubgroup[subgroup].map(score => {
                                             // needs the title of the question
