@@ -28,29 +28,33 @@ function GenericBoxInfo({ className, title, description, imagePath, clickPath, .
 
 
     return (
-        <ButtonAnimate className={classes.buttonAnimate}>
-            <Card className={clsx(classes.root, className)} {...other} component={RouterLink} to={clickPath}>
-                {/* <CardHeader title={title} /> */}
-                <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" gutterBottom>
-                        {title}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        {description}
-                    </Typography>
-                </Box>
-                <Box
-                    component="img"
-                    alt="welcome"
-                    src={imagePath}
-                    sx={{
-                        p: 2,
-                        height: 205,
-                        margin: { xs: 'auto', md: 'inherit' }
-                    }}
-                />
-            </Card>
-        </ButtonAnimate>
+        // <ButtonAnimate className={classes.buttonAnimate}>
+        <Card className={clsx(classes.root, className)}
+            {...other}
+        //   component={RouterLink}
+        //    to={clickPath}
+        >
+            {/* <CardHeader title={title} /> */}
+            <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" gutterBottom>
+                    {title}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                    {description}
+                </Typography>
+            </Box>
+            <Box
+                component="img"
+                alt="welcome"
+                src={imagePath}
+                sx={{
+                    p: 2,
+                    height: 205,
+                    margin: { xs: 'auto', md: 'inherit' }
+                }}
+            />
+        </Card>
+        // </ButtonAnimate>
     );
 }
 
