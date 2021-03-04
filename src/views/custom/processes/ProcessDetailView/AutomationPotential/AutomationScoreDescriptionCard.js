@@ -21,7 +21,11 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    top: {
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
 }));
 
 function AutomationScoreDescriptionCard({ processDetails, average_automation_score }) {
@@ -32,11 +36,16 @@ function AutomationScoreDescriptionCard({ processDetails, average_automation_sco
         return (
             <Card>
                 <CardHeader title={
-                    <>
-                        <Typography variant='subtitle2'>Automation Score</Typography>
-                        <Typography variant='h3'>{average_automation_score}</Typography>
-                        <MLabel color='error'>Low</MLabel>
-                    </>
+                    <div className={classes.top}>
+                        <div className={classes.topLeft}>
+                            <Typography variant='subtitle2'>Automation Score</Typography>
+                            <Typography variant='h3'>{average_automation_score}</Typography>
+                            <MLabel color='error'>Low</MLabel>
+                        </div>
+                        <div className={classes.topRight}>
+                            <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Update Assessment</Button>
+                        </div>
+                    </div>
                 } />
 
                 <CardContent className={classes.content}>
@@ -46,7 +55,6 @@ function AutomationScoreDescriptionCard({ processDetails, average_automation_sco
                         The automation project is required as part of a large scale organizational change. The process has un unclear problem solution and complex team structure.
                         This is a low impact high effort and high complexity project that should be automated only with special care.
                 </Typography>
-                    <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Update Assessment</Button>
                 </CardContent>
 
             </Card>
@@ -55,11 +63,16 @@ function AutomationScoreDescriptionCard({ processDetails, average_automation_sco
         return (
             <Card>
                 <CardHeader title={
-                    <>
-                        <Typography variant='subtitle2'>Automation Score</Typography>
-                        <Typography variant='h3'>{average_automation_score}</Typography>
-                        <MLabel color='warning'>Medium</MLabel>
-                    </>
+                    <div className={classes.top}>
+                        <div className={classes.topLeft}>
+                            <Typography variant='subtitle2'>Automation Score</Typography>
+                            <Typography variant='h3'>{average_automation_score}</Typography>
+                            <MLabel color='error'>Low</MLabel>
+                        </div>
+                        <div className={classes.topRight}>
+                            <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Update Assessment</Button>
+                        </div>
+                    </div>
                 } />
 
                 <CardContent className={classes.content}>
@@ -69,7 +82,6 @@ function AutomationScoreDescriptionCard({ processDetails, average_automation_sco
                This is a medium impact medium effort process considered as a "Long Term Improvement" and therefore we recommend you to"Check for other processes before automating this process"
                Project automation time should be no longer than 4-6 weeks with a a mixed team of 2-4 automation specialists.
                 </Typography>
-                    <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Update Assessment</Button>
                 </CardContent>
 
             </Card>
@@ -78,11 +90,16 @@ function AutomationScoreDescriptionCard({ processDetails, average_automation_sco
         return (
             <Card>
                 <CardHeader title={
-                    <>
-                        <Typography variant='subtitle2'>Automation Score</Typography>
-                        <Typography variant='h3'>{average_automation_score}</Typography>
-                        <MLabel color='success'>High</MLabel>
-                    </>
+                    <div className={classes.top}>
+                        <div className={classes.topLeft}>
+                            <Typography variant='subtitle2'>Automation Score</Typography>
+                            <Typography variant='h3'>{average_automation_score}</Typography>
+                            <MLabel color='error'>Low</MLabel>
+                        </div>
+                        <div className={classes.topRight}>
+                            <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Update Assessment</Button>
+                        </div>
+                    </div>
                 } />
 
                 <CardContent className={classes.content}>
@@ -92,7 +109,6 @@ function AutomationScoreDescriptionCard({ processDetails, average_automation_sco
                This is a high impact and low effort proceess which is an ideal candidate for automation.
                Project automation time should be no longer than 3-4 weeks with a mixed team of 1-3 automation specialists.
                 </Typography>
-                    <Button variant='contained' color='inherit' to={PATH_APP.processes.automationAssessment} component={RouterLink}>Update Assessment</Button>
                 </CardContent>
 
             </Card>
