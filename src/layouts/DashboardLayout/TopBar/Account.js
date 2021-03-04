@@ -75,7 +75,7 @@ function Account() {
   const { auth, profile } = useSelector(state => state.firebase);
   const displayName = auth.displayName || profile.displayName || '';
 
-  const { setUserId, setProcessCounts } = useContext(Context)
+  const { setUserId, setUserEmail, setProcessCounts } = useContext(Context)
 
   const handleOpen = () => {
     setOpen(true);
@@ -88,6 +88,7 @@ function Account() {
     try {
       await firebase.logout();
       setUserId(null)
+      setUserEmail(null)
       setProcessCounts({})
       localStorage.removeItem('currentProcessId')
       if (isMountedRef.current) {

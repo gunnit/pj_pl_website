@@ -65,26 +65,26 @@ function RegisterForm({ formik }) {
           type={showPassword ? 'text' : 'password'}
           label="Password"
           {...getFieldProps('password')}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <IconButton
-                  edge="end"
-                  onClick={() => setShowPassword(prev => !prev)}
-                >
-                  <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-          error={
-            Boolean(touched.password && errors.password) ||
-            passwordError(errors.afterSubmit).error
-          }
-          helperText={
-            (touched.password && errors.password) ||
-            passwordError(errors.afterSubmit).helperText
-          }
+        InputProps={{
+          endAdornment: (
+            <InputAdornment>
+              <IconButton
+                edge="end"
+                onClick={() => setShowPassword(prev => !prev)}
+              >
+                <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+        error={
+          Boolean(touched.password && errors.password) ||
+          passwordError(errors.afterSubmit).error
+        }
+        helperText={
+          (touched.password && errors.password) ||
+          passwordError(errors.afterSubmit).helperText
+        }
         /> */}
         <Box sx={{ mt: 3 }}>
           <LoadingButton

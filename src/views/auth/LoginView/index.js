@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Yup from 'yup';
 import Section from './Section';
 import { useFormik } from 'formik';
@@ -25,6 +25,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { MIconButton } from '@material-extend';
+import Context from 'context/Context';
 
 // ----------------------------------------------------------------------
 
@@ -70,7 +71,7 @@ function LoginView() {
   const firebase = useFirebase();
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
+  const { setUserEmail } = useContext(Context);
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email('Email must be a valid email address')
@@ -91,6 +92,7 @@ function LoginView() {
           email: values.email,
           password: values.password
         });
+
         enqueueSnackbar('Login success', {
           variant: 'success',
           action: key => (

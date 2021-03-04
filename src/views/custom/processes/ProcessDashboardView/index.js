@@ -52,6 +52,8 @@ export default function ProcessDashboardView() {
                             'Authorization': token
                         }
                     })
+
+
                     setDashboard(await res.json())
                 } catch (e) {
                     setError(true)
@@ -64,6 +66,7 @@ export default function ProcessDashboardView() {
     if (error) {
         return <Page500View />
     }
+
 
     if (!dashboard) {
         return <LoadingScreen />
