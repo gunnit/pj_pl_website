@@ -55,8 +55,6 @@ function GenericInfoBoxCostsComparison({ className, numberOfItems, infoType, mai
         <Card className={clsx(classes.root, className)} {...other}>
             <Box sx={{ flexGrow: 1 }}>
                 <Typography variant="subtitle2" gutterBottom>
-                    {/* {numberOfItems !== 1 ? `${numberOfItems} ${infoType}` : `${numberOfItems} ${infoType.slice(0, infoType.length - 1)}`} */}
-                    {/* {`${infoType}: ${numberOfItems}`} */}
                     {infoType}
                 </Typography>
                 <Typography variant="h3" gutterBottom>

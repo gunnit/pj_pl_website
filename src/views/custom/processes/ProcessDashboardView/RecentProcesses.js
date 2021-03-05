@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Scrollbars from 'components/Scrollbars';
 import { fNumber } from 'utils/formatNumber';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   Box,
   Table,
@@ -15,6 +15,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Tooltip,
 } from '@material-ui/core';
 import { MLabel } from '../../../../@material-extend';
 import { Icon } from '@iconify/react';
@@ -22,6 +23,10 @@ import Context from 'context/Context';
 import moreVerticalFill from '@iconify-icons/eva/more-vertical-fill';
 import { PATH_APP } from 'routes/paths';
 import { Link as RouterLink } from 'react-router-dom';
+import ideaIcon from '@iconify-icons/el/idea';
+import rocket11 from '@iconify-icons/maki/rocket-11';
+import gearsIcon from '@iconify-icons/whh/gears';
+import raceflagIcon from '@iconify-icons/whh/raceflag';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +35,12 @@ const useStyles = makeStyles({
   root: {},
   routerLink: {
     textDecoration: 'none'
+  },
+  icon: {
+    height: 24,
+    width: 24,
+    margin: 10,
+    marginLeft: 0
   }
 });
 
@@ -37,7 +48,7 @@ const useStyles = makeStyles({
 
 export default function RecentProcesses({ processes }) {
   const classes = useStyles();
-
+  const theme = useTheme()
   const { setCurrentProcessId } = useContext(Context)
 
   const [isOpen, setOpen] = useState(null);
@@ -55,6 +66,33 @@ export default function RecentProcesses({ processes }) {
     setOpen(null);
   };
 
+  function getIcon(pipeline) {
+    if (pipeline === 'Idea') {
+      return (
+        <Icon icon={ideaIcon} className={classes.icon} color={theme.palette.info.light} />
+      )
+    }
+
+    if (pipeline === 'Pipeline') {
+      return (
+        <Icon icon={rocket11} className={classes.icon} color={theme.palette.error.light} />
+      )
+    }
+
+    if (pipeline === 'Development') {
+      return (
+        <Icon icon={gearsIcon} className={classes.icon} color={theme.palette.warning.light} />
+      )
+    }
+
+    if (pipeline === 'Production') {
+      return (
+        <Icon icon={raceflagIcon} className={classes.icon} color={theme.palette.primary.light} />
+      )
+    }
+  }
+
+
   return (
     <Card>
       <CardHeader title="Recently Created Processes" />
@@ -67,6 +105,7 @@ export default function RecentProcesses({ processes }) {
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell />
                 <TableCell>Process Name</TableCell>
                 <TableCell align="right">Objective Alignment</TableCell>
                 <TableCell align="right">Automation Score</TableCell>
@@ -78,6 +117,7 @@ export default function RecentProcesses({ processes }) {
             <TableBody>
               {processes.map(({
                 id,
+                pipline: pipeline,
                 process_name,
                 processobjectives: {
                   total_alignment_score_coverted
@@ -90,6 +130,7 @@ export default function RecentProcesses({ processes }) {
                 function: businessFunction,
               }, i) => (
                 <TableRow key={`${process_name}${i}`} className={classes.hideLastBorder}>
+                  <Tooltip title={pipeline} placement='left'><TableCell align="right">{getIcon(pipeline)}</TableCell></Tooltip>
                   <TableCell component="th" scope="row">
                     <b>{process_name}</b>
                   </TableCell>

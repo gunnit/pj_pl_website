@@ -35,7 +35,6 @@ import ideaIcon from '@iconify-icons/el/idea';
 import rocket11 from '@iconify-icons/maki/rocket-11';
 import gearsIcon from '@iconify-icons/whh/gears';
 import raceflagIcon from '@iconify-icons/whh/raceflag';
-import Zoom from '@material-ui/core/Zoom';
 
 const TABLE_HEAD = [
   {
