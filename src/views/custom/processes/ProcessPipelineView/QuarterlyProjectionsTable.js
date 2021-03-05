@@ -127,9 +127,6 @@ export default function QuarterlyCashFlow({ data: {
                           <TableCell key={`${cell}${i}`}
                           // align={column.align}
                           >
-                            {/* {column.format && typeof value === 'number'
-                                                            ? column.format(value)
-                                                            : value} */}
                             {cell}
                           </TableCell>
                         );

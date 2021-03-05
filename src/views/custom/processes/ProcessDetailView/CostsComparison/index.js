@@ -36,10 +36,10 @@ function CostsComparison({ processDetails }) {
     return (
         <Container maxWidth="xl">
             <Grid container spacing={3}>
-                <Grid item lg={6}>
+                <Grid item xs={12} sm={12} md={12} lg={6}>
                     <CostWithoutAutomation data={processDetails.assumptions} />
                 </Grid>
-                <Grid item lg={6}>
+                <Grid item xs={12} sm={12} md={12} lg={6}>
                     <CostWithAutomation data={processDetails.assumptions} />
                 </Grid>
                 <Grid item lg={6}>
@@ -72,7 +72,7 @@ function CostsComparison({ processDetails }) {
                 <Grid item lg={3}>
                     <GenericBoxInfoDevelopment infoType={'Development Costs (One Time)'} />
                 </Grid>
-                <Grid item lg={12}>
+                <Grid item md={12} lg={12}>
                     <CostsComparisonColumns assumptions={processDetails.assumptions} />
                 </Grid>
                 <Grid item lg={6}>

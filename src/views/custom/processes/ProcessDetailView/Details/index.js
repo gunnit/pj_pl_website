@@ -8,6 +8,7 @@ import ProcessDescription from './ProcessDescription';
 import { Link as RouterLink } from 'react-router-dom';
 import { PATH_APP } from 'routes/paths';
 import SideContent from './SideContent';
+import BottomContent from './BottomContent';
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,6 +66,9 @@ export default function Details({ processDetails, setProcessDetails, stage, setS
                             process_documentation_available={processDetails.process.process_documentation_available}
                         />
                     </Grid>
+                    {processDetails.process.pipline === 'Pipeline' && <Grid item md={12} lg={12}>
+                        <BottomContent processDetails={processDetails} />
+                    </Grid>}
                 </Grid>
                 {/* Making lg 4 makes it not fit at 80% zoom on my screen and I have no idea why */}
                 <Grid item container spacing={3} xs={12} sm={4} md={4} lg={3.9999} alignContent='flex-start'>
