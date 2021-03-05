@@ -88,7 +88,6 @@ export default function QuarterlyCashFlow({ data: {
     const classes = useStyles();
 
 
-
     const costWithoutAutomationRow = [
         q1_with_no_auto_y1,
         q2_with_no_auto_y1,
@@ -99,6 +98,13 @@ export default function QuarterlyCashFlow({ data: {
         q3_with_no_auto_y2,
         q4_with_no_auto_y2,
     ]
+    // .map(number => {
+    //     if (parseFloat(number) < 0) {
+    //         return `-$${parseFloat(-number)}`
+    //     } else {
+    //         return `$${number}`
+    //     }
+    // })
 
     const costWithAutomationRow = [
         q1_with_auto_y1,

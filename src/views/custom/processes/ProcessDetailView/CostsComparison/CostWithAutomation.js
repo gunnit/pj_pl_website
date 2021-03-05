@@ -48,6 +48,11 @@ export default function CostWithoutAutomation({ data: {
             categories: [
                 'Current Process'
             ]
+        },
+        yaxis: {
+            labels: {
+                // formatter: value => parseFloat(value).toFixed(2)
+            }
         }
     });
 

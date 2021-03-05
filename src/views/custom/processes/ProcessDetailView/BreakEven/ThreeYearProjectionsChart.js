@@ -27,7 +27,6 @@ export default function ThreeYearProjectionsChart({
 }) {
 
 
-
   const chartData = [
     {
       name: 'Cost Without Automation',
@@ -42,7 +41,7 @@ export default function ThreeYearProjectionsChart({
     {
       name: 'Savings',
       type: 'line',
-      data: [y1_savings_total, y2_savings_total, y3_savings_total]
+      data: [parseFloat(y1_savings_total), parseFloat(y2_savings_total), parseFloat(y3_savings_total)]
     }
   ];
 
@@ -64,7 +63,7 @@ export default function ThreeYearProjectionsChart({
       y: {
         formatter: function (y) {
           if (typeof y !== 'undefined') {
-            return y.toFixed(0) + ' points';
+            return y >= 0 ? '$' + y.toFixed(2) : '-$' + -y.toFixed(2);
           }
           return y;
         }
