@@ -11,7 +11,7 @@ import { Grid, Card, Container, Typography } from '@material-ui/core';
 const CARDS = [
   {
     icon: '/static/images/icons/ic_sketch.svg',
-    title: 'Govern your CoE',
+    title: 'Govern your RPA CoE',
     description:
       'Perform a detailed assessment on your CoE to understand what needs improvement and use our guidelines on what to improve'
   },
@@ -25,7 +25,7 @@ const CARDS = [
     icon: '/static/images/icons/ic_design.svg',
     title: 'Find new processes',
     description:
-      'Use our taxonomy of thousands of processes enhanced by NLP to help you find your next candidate for you automation journey'
+      'Use our taxonomy of thousands of processes enhanced by NLP to help you find your next candidate for your automation journey'
   }
 ];
 

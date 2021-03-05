@@ -12,6 +12,10 @@ import InfoBoxWithTitleAndNumber from '../InfoBoxWithTitleAndNumber';
 import IdeasPerFunction from '../IdeasPerFunction';
 import NoProcesses from '../NoProcesses';
 import rocketIcon from '@iconify-icons/fxemoji/rocket';
+import bxCodeBlock from '@iconify-icons/bx/bx-code-block';
+import edgeDevice from '@iconify-icons/carbon/edge-device';
+import rackServerSolidBadged from '@iconify-icons/clarity/rack-server-solid-badged';
+import windowDevTools24Filled from '@iconify-icons/fluent/window-dev-tools-24-filled';
 import Context from 'context/Context';
 import { apiBaseUrl } from 'config';
 import Page500View from 'views/errors/Page500View';
@@ -77,32 +81,33 @@ function ProcessProductionView() {
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Development Cost'}
                                 mainNumber={production.total_development_cost}
-                                backgroundColor={theme.palette.secondary.lighter}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.primary.dark}
+                                icon={bxCodeBlock}
+                                
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Maintenance Cost'}
                                 mainNumber={production.total_maintenance_cost}
-                                backgroundColor={theme.palette.secondary.lighter}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.primary.dark}
+                                icon={windowDevTools24Filled}
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total License Cost'}
                                 mainNumber={production.total_licence_cost}
-                                backgroundColor={theme.palette.secondary.lighter}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.primary.dark}
+                                icon={edgeDevice}
                             />
                         </Grid>
                         <Grid item xs={12} lg={3}>
                             <InfoBoxWithTitleAndNumber
                                 infoType={'Total Infrastructure Cost'}
                                 mainNumber={production.total_infrastructure_cost}
-                                backgroundColor={theme.palette.secondary.lighter}
-                                icon={rocketIcon}
+                                backgroundColor={theme.palette.primary.dark}
+                                icon={rackServerSolidBadged}
                             />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
