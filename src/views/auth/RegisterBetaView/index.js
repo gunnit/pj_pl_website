@@ -22,7 +22,6 @@ import {
   Typography
 } from '@material-ui/core';
 import { MIconButton } from '@material-extend';
-import emailjs from 'emailjs-com';
 import { emailUserId } from 'config';
 // ----------------------------------------------------------------------
 
@@ -116,32 +115,6 @@ function RegisterView() {
         //     </MIconButton>
         //   )
         // });
-
-        const templateParams = {
-          to_email: values.email,
-          to_name: `${values.firstName} ${values.lastName}`,
-        };
-
-        emailjs.send('service_9ryhkik', 'template_5mc5atj', templateParams,
-          emailUserId)
-          .then(function (response) {
-            // console.log('SUCCESS!', response.status, response.text);
-          }, function (error) {
-            console.log('FAILED...', error);
-          });
-
-        emailjs.send('service_9ryhkik', 'template_tmf77hr', {
-          first_name: values.firstName,
-          last_name: values.lastName,
-          email: values.email,
-        },
-          emailUserId)
-          .then(function (response) {
-            // console.log('SUCCESS!', response.status, response.text);
-          }, function (error) {
-            console.log('FAILED...', error);
-          });
-
 
         setRegisteredForBeta(true)
 

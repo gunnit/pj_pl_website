@@ -69,39 +69,6 @@ function FirebaseProvider({ children }) {
     Initialise();
   }, [profile]);
 
-  useEffect(() => {
-    // If user email from Firebase has been stored in the context, check for user in database using that email
-    if (userEmail) {
-
-
-      (async () => {
-
-        const token = await firebase.auth().currentUser.getIdToken(true);
-
-        const res = await fetch(`${apiBaseUrl}/register/`, {
-          method: 'POST',
-          body: JSON.stringify({
-            // add name
-            email: userEmail,
-          }),
-          headers: {
-            "Content-Type": 'application/json',
-            "Authorization": token
-          }
-        })
-        const { id, process_counts } = await res.json()
-
-        // userId in context will be used for future user database relationships
-        setUserId(id)
-
-        // processCounts in context will be used to display the numbers on the navbar
-        setProcessCounts(process_counts)
-
-
-      })()
-
-    }
-  }, [userEmail])
 
   return (
     <ReactReduxFirebaseProvider {...rrfProps}>
